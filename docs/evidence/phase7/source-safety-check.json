@@ -1,0 +1,62 @@
+{
+  "at": "2026-09-07T00:59:31.173271+00:00",
+  "awsOperationsPerformed": false,
+  "cloudEvidence": "Previously executed; user reports AWS off during final closure",
+  "filesChecked": {
+    "pedidos360-backend": 323,
+    "pedidos360-frontend": 35
+  },
+  "findings": [],
+  "brokenLocalMarkdownLinks": [],
+  "cssSha256": "ad493558ad25d8e428fcb7732646307727c8bceb358118688cf2b08a4bce24cc",
+  "deployedArtifactHashesMatchLocalBuild": {
+    "catalog-service.jar": "e67336fe90d1e2d5bbc920ed7e09a68625d63d3de3f7981ea399ff551682d3f6",
+    "orders-service.jar": "5ac85d65fbf89846be6795b969e711faca0ba44c82459b38579868694cc40acc",
+    "bff.jar": "d30c1bba5f3f9202534037212a0cf29492dc101130cbf3ff904ce6f1b60217ee"
+  },
+  "javaTestReportsFromVerifiedBuild": [
+    {
+      "name": "cl.duoc.pedidos360.bff.BffContractTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "cl.duoc.pedidos360.catalog.CatalogIntegrationTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "cl.duoc.pedidos360.orders.OrderDomainTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "cl.duoc.pedidos360.orders.OrdersIntegrationTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ],
+  "foreignDockerIdsAndStatesMatch": true,
+  "pythonBashJsonSyntax": "passed",
+  "gitDiffWhitespace": "passed",
+  "note": "Reads versionable files and existing build/evidence locally. No secret values or new AWS requests.",
+  "stagedAudit": {
+    "at": "2026-09-07T01:05:01.094535+00:00",
+    "files": {
+      "pedidos360-backend": 324,
+      "pedidos360-frontend": 35
+    },
+    "findings": [],
+    "frontendVisualCommitPreserved": "a620005cb828b07bd945afbc7c624e99f71400e4",
+    "cssNotModifiedInStagedDiff": true,
+    "whitespacePolicy": "Original CLI/HTTP evidence spacing preserved via scoped docs/evidence/** attribute; normal source/documentation checks enabled."
+  }
+}

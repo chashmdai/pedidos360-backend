@@ -1,0 +1,7 @@
+{
+  "appId": "{{APP_CLIENT_ID}}",
+  "tags": [
+    "Project=Pedidos360",
+    "Course=DSY1107"
+  ]
+}

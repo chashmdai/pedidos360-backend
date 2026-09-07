@@ -1,0 +1,12 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#appRoleAssignments/$entity",
+  "appRoleId": "f3e611c1-d961-4826-988f-8390258993ad",
+  "createdDateTime": "2026-09-05T23:11:07.0583695Z",
+  "deletedDateTime": null,
+  "id": "66Z1wyq49kSr4P4y15AcPkDkIAJwTlVKj4WrgqrK82c",
+  "principalDisplayName": "BENJAMIN TORREJON SOTO",
+  "principalId": "c375a6eb-b82a-44f6-abe0-fe32d7901c3e",
+  "principalType": "User",
+  "resourceDisplayName": "pedidos360-betorrejons-api",
+  "resourceId": "6a0b43df-3afe-4b55-adac-e62ea93494ff"
+}

@@ -1,0 +1,14 @@
+[05/Sep/2026:19:55:07 -0400] GET /actuator/health 200 359317
+[05/Sep/2026:20:03:35 -0400] GET /api/v1/productos 200 2781993
+[05/Sep/2026:20:03:36 -0400] GET /api/v1/productos 200 40165
+[06/Sep/2026:01:23:11 -0300] GET /actuator/health 200 638028
+[06/Sep/2026:01:31:26 -0300] GET /api/v1/productos 200 2776154
+[06/Sep/2026:01:31:26 -0300] GET /api/v1/productos 200 22734
+[06/Sep/2026:01:31:36 -0300] GET /api/v1/productos/10000000-0000-0000-0000-000000000001 200 108683
+[06/Sep/2026:01:31:36 -0300] GET /api/v1/productos/10000000-0000-0000-0000-000000000002 200 29078
+[06/Sep/2026:01:37:12 -0300] GET /actuator/health 200 549465
+[06/Sep/2026:06:25:44 -0300] GET /actuator/health 200 515795
+[06/Sep/2026:06:31:30 -0300] GET /actuator/health 200 13397
+[06/Sep/2026:06:31:31 -0300] GET /api/v1/productos 401 55001
+[06/Sep/2026:06:31:31 -0300] GET /api/v1/productos 401 122776
+[06/Sep/2026:06:31:32 -0300] GET /api/v1/productos 401 1002899

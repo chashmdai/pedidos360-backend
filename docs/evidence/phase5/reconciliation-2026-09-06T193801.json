@@ -1,0 +1,1311 @@
+{
+  "at": "2026-09-06T19:38:01.986989+00:00",
+  "identity": {
+    "UserId": "AROAQBMUWETSUWMBK4NYT:user3301432=BENJAMIN__TORREJON",
+    "Account": "002996184293",
+    "Arn": "arn:aws:sts::002996184293:assumed-role/voclabs/user3301432=BENJAMIN__TORREJON"
+  },
+  "resources": {
+    "vpc": {
+      "Vpcs": [
+        {
+          "OwnerId": "002996184293",
+          "InstanceTenancy": "default",
+          "CidrBlockAssociationSet": [
+            {
+              "AssociationId": "vpc-cidr-assoc-0e3ed9c5296bfb54b",
+              "CidrBlock": "10.36.0.0/16",
+              "CidrBlockState": {
+                "State": "associated"
+              }
+            }
+          ],
+          "IsDefault": false,
+          "Tags": [
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Name",
+              "Value": "pedidos360-vpc"
+            },
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            },
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            }
+          ],
+          "BlockPublicAccessStates": {
+            "InternetGatewayBlockMode": "off"
+          },
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "State": "available",
+          "CidrBlock": "10.36.0.0/16",
+          "DhcpOptionsId": "dopt-095ad786b217e710e"
+        }
+      ]
+    },
+    "subnets": {
+      "Subnets": [
+        {
+          "AvailabilityZoneId": "use1-az1",
+          "MapCustomerOwnedIpOnLaunch": false,
+          "OwnerId": "002996184293",
+          "AssignIpv6AddressOnCreation": false,
+          "Ipv6CidrBlockAssociationSet": [],
+          "Tags": [
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            },
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            },
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Name",
+              "Value": "pedidos360-public-b"
+            }
+          ],
+          "SubnetArn": "arn:aws:ec2:us-east-1:002996184293:subnet/subnet-0b8924c3bd1c798f9",
+          "EnableDns64": false,
+          "Ipv6Native": false,
+          "PrivateDnsNameOptionsOnLaunch": {
+            "HostnameType": "ip-name",
+            "EnableResourceNameDnsARecord": false,
+            "EnableResourceNameDnsAAAARecord": false
+          },
+          "BlockPublicAccessStates": {
+            "InternetGatewayBlockMode": "off"
+          },
+          "SubnetId": "subnet-0b8924c3bd1c798f9",
+          "State": "available",
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "CidrBlock": "10.36.0.0/24",
+          "AvailableIpAddressCount": 250,
+          "AvailabilityZone": "us-east-1b",
+          "DefaultForAz": false,
+          "MapPublicIpOnLaunch": false
+        },
+        {
+          "AvailabilityZoneId": "use1-az2",
+          "MapCustomerOwnedIpOnLaunch": false,
+          "OwnerId": "002996184293",
+          "AssignIpv6AddressOnCreation": false,
+          "Ipv6CidrBlockAssociationSet": [],
+          "Tags": [
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            },
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            },
+            {
+              "Key": "Name",
+              "Value": "pedidos360-private-c"
+            }
+          ],
+          "SubnetArn": "arn:aws:ec2:us-east-1:002996184293:subnet/subnet-02369ed19f07cb095",
+          "EnableDns64": false,
+          "Ipv6Native": false,
+          "PrivateDnsNameOptionsOnLaunch": {
+            "HostnameType": "ip-name",
+            "EnableResourceNameDnsARecord": false,
+            "EnableResourceNameDnsAAAARecord": false
+          },
+          "BlockPublicAccessStates": {
+            "InternetGatewayBlockMode": "off"
+          },
+          "SubnetId": "subnet-02369ed19f07cb095",
+          "State": "available",
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "CidrBlock": "10.36.20.0/24",
+          "AvailableIpAddressCount": 249,
+          "AvailabilityZone": "us-east-1c",
+          "DefaultForAz": false,
+          "MapPublicIpOnLaunch": false
+        },
+        {
+          "AvailabilityZoneId": "use1-az1",
+          "MapCustomerOwnedIpOnLaunch": false,
+          "OwnerId": "002996184293",
+          "AssignIpv6AddressOnCreation": false,
+          "Ipv6CidrBlockAssociationSet": [],
+          "Tags": [
+            {
+              "Key": "Name",
+              "Value": "pedidos360-private-b"
+            },
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            },
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            }
+          ],
+          "SubnetArn": "arn:aws:ec2:us-east-1:002996184293:subnet/subnet-0dea49f3ca0b4d90c",
+          "EnableDns64": false,
+          "Ipv6Native": false,
+          "PrivateDnsNameOptionsOnLaunch": {
+            "HostnameType": "ip-name",
+            "EnableResourceNameDnsARecord": false,
+            "EnableResourceNameDnsAAAARecord": false
+          },
+          "BlockPublicAccessStates": {
+            "InternetGatewayBlockMode": "off"
+          },
+          "SubnetId": "subnet-0dea49f3ca0b4d90c",
+          "State": "available",
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "CidrBlock": "10.36.10.0/24",
+          "AvailableIpAddressCount": 248,
+          "AvailabilityZone": "us-east-1b",
+          "DefaultForAz": false,
+          "MapPublicIpOnLaunch": false
+        }
+      ]
+    },
+    "igw": {
+      "InternetGateways": [
+        {
+          "Attachments": [
+            {
+              "State": "available",
+              "VpcId": "vpc-06151b6c4ebba3edb"
+            }
+          ],
+          "InternetGatewayId": "igw-0bf3599d3f38660e3",
+          "OwnerId": "002996184293",
+          "Tags": [
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            },
+            {
+              "Key": "Name",
+              "Value": "pedidos360-igw"
+            },
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            }
+          ]
+        }
+      ]
+    },
+    "route-tables": {
+      "RouteTables": [
+        {
+          "Associations": [
+            {
+              "Main": false,
+              "RouteTableAssociationId": "rtbassoc-0877d28a3496cdff1",
+              "RouteTableId": "rtb-0599571e09413ef9d",
+              "SubnetId": "subnet-02369ed19f07cb095",
+              "AssociationState": {
+                "State": "associated"
+              }
+            },
+            {
+              "Main": false,
+              "RouteTableAssociationId": "rtbassoc-0b5c6cb0c4d78aeb2",
+              "RouteTableId": "rtb-0599571e09413ef9d",
+              "SubnetId": "subnet-0dea49f3ca0b4d90c",
+              "AssociationState": {
+                "State": "associated"
+              }
+            }
+          ],
+          "PropagatingVgws": [],
+          "RouteTableId": "rtb-0599571e09413ef9d",
+          "Routes": [
+            {
+              "DestinationCidrBlock": "10.36.0.0/16",
+              "GatewayId": "local",
+              "Origin": "CreateRouteTable",
+              "State": "active"
+            }
+          ],
+          "Tags": [
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Name",
+              "Value": "pedidos360-private-rt"
+            },
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            },
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            }
+          ],
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "OwnerId": "002996184293"
+        },
+        {
+          "Associations": [
+            {
+              "Main": false,
+              "RouteTableAssociationId": "rtbassoc-0d5e683255a6585e2",
+              "RouteTableId": "rtb-00299397b08b5b2e5",
+              "SubnetId": "subnet-0b8924c3bd1c798f9",
+              "AssociationState": {
+                "State": "associated"
+              }
+            }
+          ],
+          "PropagatingVgws": [],
+          "RouteTableId": "rtb-00299397b08b5b2e5",
+          "Routes": [
+            {
+              "DestinationCidrBlock": "10.36.0.0/16",
+              "GatewayId": "local",
+              "Origin": "CreateRouteTable",
+              "State": "active"
+            },
+            {
+              "DestinationCidrBlock": "0.0.0.0/0",
+              "GatewayId": "igw-0bf3599d3f38660e3",
+              "Origin": "CreateRoute",
+              "State": "active"
+            }
+          ],
+          "Tags": [
+            {
+              "Key": "Name",
+              "Value": "pedidos360-public-rt"
+            },
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            },
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            }
+          ],
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "OwnerId": "002996184293"
+        }
+      ]
+    },
+    "security-groups": {
+      "SecurityGroups": [
+        {
+          "GroupId": "sg-03f6cf26c9842a760",
+          "IpPermissionsEgress": [],
+          "Tags": [
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            },
+            {
+              "Key": "Name",
+              "Value": "pedidos360-db-sg"
+            },
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            }
+          ],
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "SecurityGroupArn": "arn:aws:ec2:us-east-1:002996184293:security-group/sg-03f6cf26c9842a760",
+          "OwnerId": "002996184293",
+          "GroupName": "pedidos360-db-sg",
+          "Description": "Pedidos360 db dedicated security boundary",
+          "IpPermissions": [
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 3306,
+              "ToPort": 3306,
+              "UserIdGroupPairs": [
+                {
+                  "UserId": "002996184293",
+                  "GroupId": "sg-07b4bb5c29cd90bf1"
+                }
+              ],
+              "IpRanges": [],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ]
+        },
+        {
+          "GroupId": "sg-0ed4ad80911b5283f",
+          "IpPermissionsEgress": [
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 80,
+              "ToPort": 80,
+              "UserIdGroupPairs": [
+                {
+                  "UserId": "002996184293",
+                  "GroupId": "sg-03780b62c8cf4c511"
+                }
+              ],
+              "IpRanges": [],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ],
+          "Tags": [
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            },
+            {
+              "Key": "Name",
+              "Value": "pedidos360-vpclink-sg"
+            },
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            },
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            }
+          ],
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "SecurityGroupArn": "arn:aws:ec2:us-east-1:002996184293:security-group/sg-0ed4ad80911b5283f",
+          "OwnerId": "002996184293",
+          "GroupName": "pedidos360-vpclink-sg",
+          "Description": "Pedidos360 vpclink dedicated security boundary",
+          "IpPermissions": []
+        },
+        {
+          "GroupId": "sg-03780b62c8cf4c511",
+          "IpPermissionsEgress": [
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 8180,
+              "ToPort": 8180,
+              "UserIdGroupPairs": [
+                {
+                  "UserId": "002996184293",
+                  "GroupId": "sg-07b4bb5c29cd90bf1"
+                }
+              ],
+              "IpRanges": [],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ],
+          "Tags": [
+            {
+              "Key": "Name",
+              "Value": "pedidos360-alb-sg"
+            },
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            },
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            }
+          ],
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "SecurityGroupArn": "arn:aws:ec2:us-east-1:002996184293:security-group/sg-03780b62c8cf4c511",
+          "OwnerId": "002996184293",
+          "GroupName": "pedidos360-alb-sg",
+          "Description": "Pedidos360 alb dedicated security boundary",
+          "IpPermissions": [
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 80,
+              "ToPort": 80,
+              "UserIdGroupPairs": [
+                {
+                  "UserId": "002996184293",
+                  "GroupId": "sg-0ed4ad80911b5283f"
+                }
+              ],
+              "IpRanges": [],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ]
+        },
+        {
+          "GroupId": "sg-07b4bb5c29cd90bf1",
+          "IpPermissionsEgress": [
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 3306,
+              "ToPort": 3306,
+              "UserIdGroupPairs": [
+                {
+                  "UserId": "002996184293",
+                  "GroupId": "sg-03f6cf26c9842a760"
+                }
+              ],
+              "IpRanges": [],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            },
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 443,
+              "ToPort": 443,
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "Description": "HTTPS Entra SSM and packages",
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ],
+          "Tags": [
+            {
+              "Key": "Name",
+              "Value": "pedidos360-app-sg"
+            },
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            },
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            }
+          ],
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "SecurityGroupArn": "arn:aws:ec2:us-east-1:002996184293:security-group/sg-07b4bb5c29cd90bf1",
+          "OwnerId": "002996184293",
+          "GroupName": "pedidos360-app-sg",
+          "Description": "Pedidos360 app dedicated security boundary",
+          "IpPermissions": [
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 8180,
+              "ToPort": 8180,
+              "UserIdGroupPairs": [
+                {
+                  "UserId": "002996184293",
+                  "GroupId": "sg-03780b62c8cf4c511"
+                }
+              ],
+              "IpRanges": [],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            },
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 22,
+              "ToPort": 22,
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "Description": "Pedidos360 temporary operator deployment",
+                  "CidrIp": "191.112.183.22/32"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ]
+        }
+      ]
+    },
+    "ec2": {
+      "Reservations": [
+        {
+          "ReservationId": "r-06019ca742dfb185d",
+          "OwnerId": "002996184293",
+          "Groups": [],
+          "Instances": [
+            {
+              "Architecture": "x86_64",
+              "BlockDeviceMappings": [
+                {
+                  "DeviceName": "/dev/sda1",
+                  "Ebs": {
+                    "AttachTime": "2026-09-06T15:12:00+00:00",
+                    "DeleteOnTermination": true,
+                    "Status": "attached",
+                    "VolumeId": "vol-0230164d41b34f412",
+                    "EbsCardIndex": 0
+                  }
+                }
+              ],
+              "ClientToken": "pedidos360-002996184293-20260906-app-v1",
+              "EbsOptimized": false,
+              "EnaSupport": true,
+              "Hypervisor": "xen",
+              "IamInstanceProfile": {
+                "Arn": "arn:aws:iam::002996184293:instance-profile/LabInstanceProfile",
+                "Id": "AIPAQBMUWETST6EDN5SWH"
+              },
+              "NetworkInterfaces": [
+                {
+                  "Association": {
+                    "IpOwnerId": "amazon",
+                    "PublicDnsName": "ec2-32-197-50-51.compute-1.amazonaws.com",
+                    "PublicIp": "32.197.50.51"
+                  },
+                  "Attachment": {
+                    "AttachTime": "2026-09-06T15:11:59+00:00",
+                    "AttachmentId": "eni-attach-0b2ec01641085a875",
+                    "DeleteOnTermination": true,
+                    "DeviceIndex": 0,
+                    "Status": "attached",
+                    "NetworkCardIndex": 0
+                  },
+                  "Description": "",
+                  "Groups": [
+                    {
+                      "GroupId": "sg-07b4bb5c29cd90bf1",
+                      "GroupName": "pedidos360-app-sg"
+                    }
+                  ],
+                  "Ipv6Addresses": [],
+                  "MacAddress": "02:98:fe:a6:cd:ab",
+                  "NetworkInterfaceId": "eni-014613dddf7bb1e8e",
+                  "OwnerId": "002996184293",
+                  "PrivateDnsName": "ip-10-36-0-38.ec2.internal",
+                  "PrivateIpAddress": "10.36.0.38",
+                  "PrivateIpAddresses": [
+                    {
+                      "Association": {
+                        "IpOwnerId": "amazon",
+                        "PublicDnsName": "ec2-32-197-50-51.compute-1.amazonaws.com",
+                        "PublicIp": "32.197.50.51"
+                      },
+                      "Primary": true,
+                      "PrivateDnsName": "ip-10-36-0-38.ec2.internal",
+                      "PrivateIpAddress": "10.36.0.38"
+                    }
+                  ],
+                  "SourceDestCheck": true,
+                  "Status": "in-use",
+                  "SubnetId": "subnet-0b8924c3bd1c798f9",
+                  "VpcId": "vpc-06151b6c4ebba3edb",
+                  "InterfaceType": "interface",
+                  "Operator": {
+                    "Managed": false
+                  }
+                }
+              ],
+              "RootDeviceName": "/dev/sda1",
+              "RootDeviceType": "ebs",
+              "SecurityGroups": [
+                {
+                  "GroupId": "sg-07b4bb5c29cd90bf1",
+                  "GroupName": "pedidos360-app-sg"
+                }
+              ],
+              "SourceDestCheck": true,
+              "Tags": [
+                {
+                  "Key": "Project",
+                  "Value": "Pedidos360"
+                },
+                {
+                  "Key": "Course",
+                  "Value": "DSY1107"
+                },
+                {
+                  "Key": "Environment",
+                  "Value": "lab"
+                },
+                {
+                  "Key": "Name",
+                  "Value": "pedidos360-app"
+                }
+              ],
+              "VirtualizationType": "hvm",
+              "CpuOptions": {
+                "CoreCount": 1,
+                "ThreadsPerCore": 2
+              },
+              "CapacityReservationSpecification": {
+                "CapacityReservationPreference": "open"
+              },
+              "HibernationOptions": {
+                "Configured": false
+              },
+              "MetadataOptions": {
+                "State": "applied",
+                "HttpTokens": "required",
+                "HttpPutResponseHopLimit": 1,
+                "HttpEndpoint": "enabled",
+                "HttpProtocolIpv6": "disabled",
+                "InstanceMetadataTags": "disabled"
+              },
+              "EnclaveOptions": {
+                "Enabled": false
+              },
+              "BootMode": "uefi-preferred",
+              "PlatformDetails": "Linux/UNIX",
+              "UsageOperation": "RunInstances",
+              "UsageOperationUpdateTime": "2026-09-06T15:11:59+00:00",
+              "PrivateDnsNameOptions": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+              },
+              "MaintenanceOptions": {
+                "AutoRecovery": "default",
+                "RebootMigration": "default"
+              },
+              "CurrentInstanceBootMode": "uefi",
+              "NetworkPerformanceOptions": {
+                "BandwidthWeighting": "default"
+              },
+              "Operator": {
+                "Managed": false,
+                "HiddenByDefault": false
+              },
+              "SecondaryInterfaces": [],
+              "InstanceId": "i-0818fdfafcfb7cb31",
+              "ImageId": "ami-025d99823a4caad37",
+              "State": {
+                "Code": 16,
+                "Name": "running"
+              },
+              "PrivateDnsName": "ip-10-36-0-38.ec2.internal",
+              "PublicDnsName": "ec2-32-197-50-51.compute-1.amazonaws.com",
+              "StateTransitionReason": "",
+              "KeyName": "pedidos360-deploy",
+              "AmiLaunchIndex": 0,
+              "ProductCodes": [],
+              "InstanceType": "t3.medium",
+              "LaunchTime": "2026-09-06T19:33:22+00:00",
+              "Placement": {
+                "AvailabilityZoneId": "use1-az1",
+                "GroupName": "",
+                "Tenancy": "default",
+                "AvailabilityZone": "us-east-1b"
+              },
+              "Monitoring": {
+                "State": "disabled"
+              },
+              "SubnetId": "subnet-0b8924c3bd1c798f9",
+              "VpcId": "vpc-06151b6c4ebba3edb",
+              "PrivateIpAddress": "10.36.0.38",
+              "PublicIpAddress": "32.197.50.51"
+            }
+          ]
+        }
+      ]
+    },
+    "key": {
+      "KeyPairs": [
+        {
+          "KeyPairId": "key-05ea707e36f5064ae",
+          "KeyType": "ed25519",
+          "Tags": [
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            },
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            },
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Name",
+              "Value": "pedidos360-deploy"
+            }
+          ],
+          "CreateTime": "2026-09-06T15:11:52.868000+00:00",
+          "KeyName": "pedidos360-deploy",
+          "KeyFingerprint": "nQD6cfJctav8grk2hMAEh64Z2uOFd9B9joL7nF6VqqA="
+        }
+      ]
+    },
+    "rds": {
+      "DBInstances": [
+        {
+          "DBInstanceIdentifier": "pedidos360-mysql",
+          "DBInstanceClass": "db.t3.micro",
+          "Engine": "mysql",
+          "DBInstanceStatus": "available",
+          "MasterUsername": "pedidos360_master",
+          "Endpoint": {
+            "Address": "pedidos360-mysql.cm0hfwnpocww.us-east-1.rds.amazonaws.com",
+            "Port": 3306,
+            "HostedZoneId": "Z2R2ITUGPM61AM"
+          },
+          "AllocatedStorage": 20,
+          "InstanceCreateTime": "2026-09-06T15:14:14.416000+00:00",
+          "PreferredBackupWindow": "10:05-10:35",
+          "BackupRetentionPeriod": 1,
+          "DBSecurityGroups": [],
+          "VpcSecurityGroups": [
+            {
+              "VpcSecurityGroupId": "sg-03f6cf26c9842a760",
+              "Status": "active"
+            }
+          ],
+          "DBParameterGroups": [
+            {
+              "DBParameterGroupName": "pedidos360-mysql84",
+              "ParameterApplyStatus": "in-sync"
+            }
+          ],
+          "AvailabilityZone": "us-east-1b",
+          "DBSubnetGroup": {
+            "DBSubnetGroupName": "pedidos360-db-subnets",
+            "DBSubnetGroupDescription": "Pedidos360 private database subnets",
+            "VpcId": "vpc-06151b6c4ebba3edb",
+            "SubnetGroupStatus": "Complete",
+            "Subnets": [
+              {
+                "SubnetIdentifier": "subnet-02369ed19f07cb095",
+                "SubnetAvailabilityZone": {
+                  "Name": "us-east-1c"
+                },
+                "SubnetOutpost": {},
+                "SubnetStatus": "Active"
+              },
+              {
+                "SubnetIdentifier": "subnet-0dea49f3ca0b4d90c",
+                "SubnetAvailabilityZone": {
+                  "Name": "us-east-1b"
+                },
+                "SubnetOutpost": {},
+                "SubnetStatus": "Active"
+              }
+            ]
+          },
+          "PreferredMaintenanceWindow": "tue:07:04-tue:07:34",
+          "UpgradeRolloutOrder": "second",
+          "PendingModifiedValues": {},
+          "LatestRestorableTime": "2026-09-06T19:32:16+00:00",
+          "MultiAZ": false,
+          "EngineVersion": "8.4.11",
+          "AutoMinorVersionUpgrade": false,
+          "ReadReplicaDBInstanceIdentifiers": [],
+          "LicenseModel": "general-public-license",
+          "Iops": 3000,
+          "StorageThroughput": 125,
+          "OptionGroupMemberships": [
+            {
+              "OptionGroupName": "default:mysql-8-4",
+              "Status": "in-sync"
+            }
+          ],
+          "PubliclyAccessible": false,
+          "StorageType": "gp3",
+          "DbInstancePort": 0,
+          "StorageEncrypted": true,
+          "KmsKeyId": "arn:aws:kms:us-east-1:002996184293:key/55007c03-6db4-4a73-b9cb-f3be4a0a9796",
+          "DbiResourceId": "db-S77CCLPJVDPKQ4LZZEFSWFH2TQ",
+          "CACertificateIdentifier": "rds-ca-rsa2048-g1",
+          "DomainMemberships": [],
+          "CopyTagsToSnapshot": true,
+          "MonitoringInterval": 0,
+          "DBInstanceArn": "arn:aws:rds:us-east-1:002996184293:db:pedidos360-mysql",
+          "IAMDatabaseAuthenticationEnabled": false,
+          "DatabaseInsightsMode": "standard",
+          "PerformanceInsightsEnabled": false,
+          "DeletionProtection": true,
+          "AssociatedRoles": [],
+          "TagList": [
+            {
+              "Key": "Project",
+              "Value": "Pedidos360"
+            },
+            {
+              "Key": "Environment",
+              "Value": "lab"
+            },
+            {
+              "Key": "Course",
+              "Value": "DSY1107"
+            },
+            {
+              "Key": "Name",
+              "Value": "pedidos360-mysql"
+            }
+          ],
+          "CustomerOwnedIpEnabled": false,
+          "NetworkType": "IPV4",
+          "ActivityStreamStatus": "stopped",
+          "BackupTarget": "region",
+          "CertificateDetails": {
+            "CAIdentifier": "rds-ca-rsa2048-g1",
+            "ValidTill": "2027-09-06T15:12:13+00:00"
+          },
+          "DedicatedLogVolume": false,
+          "IsStorageConfigUpgradeAvailable": false,
+          "EngineLifecycleSupport": "open-source-rds-extended-support"
+        }
+      ]
+    },
+    "db-subnets": {
+      "DBSubnetGroups": [
+        {
+          "DBSubnetGroupName": "pedidos360-db-subnets",
+          "DBSubnetGroupDescription": "Pedidos360 private database subnets",
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "SubnetGroupStatus": "Complete",
+          "Subnets": [
+            {
+              "SubnetIdentifier": "subnet-02369ed19f07cb095",
+              "SubnetAvailabilityZone": {
+                "Name": "us-east-1c"
+              },
+              "SubnetOutpost": {},
+              "SubnetStatus": "Active"
+            },
+            {
+              "SubnetIdentifier": "subnet-0dea49f3ca0b4d90c",
+              "SubnetAvailabilityZone": {
+                "Name": "us-east-1b"
+              },
+              "SubnetOutpost": {},
+              "SubnetStatus": "Active"
+            }
+          ],
+          "DBSubnetGroupArn": "arn:aws:rds:us-east-1:002996184293:subgrp:pedidos360-db-subnets",
+          "SupportedNetworkTypes": [
+            "IPV4"
+          ]
+        }
+      ]
+    },
+    "db-parameters": {
+      "Parameters": [
+        {
+          "ParameterName": "require_secure_transport",
+          "ParameterValue": "1",
+          "Description": "Whether client connections to the server are required to use some form of secure transport.",
+          "Source": "user",
+          "ApplyType": "dynamic",
+          "DataType": "boolean",
+          "AllowedValues": "0,1",
+          "IsModifiable": true,
+          "ApplyMethod": "immediate"
+        }
+      ]
+    },
+    "alb": {
+      "LoadBalancers": [
+        {
+          "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:002996184293:loadbalancer/app/pedidos360-internal-alb/03e15310cdcb53b8",
+          "DNSName": "internal-pedidos360-internal-alb-1031985351.us-east-1.elb.amazonaws.com",
+          "CanonicalHostedZoneId": "Z35SXDOTRQ7X7K",
+          "CreatedTime": "2026-09-06T15:12:06.535000+00:00",
+          "LoadBalancerName": "pedidos360-internal-alb",
+          "Scheme": "internal",
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "State": {
+            "Code": "active"
+          },
+          "Type": "application",
+          "AvailabilityZones": [
+            {
+              "ZoneName": "us-east-1c",
+              "SubnetId": "subnet-02369ed19f07cb095",
+              "LoadBalancerAddresses": []
+            },
+            {
+              "ZoneName": "us-east-1b",
+              "SubnetId": "subnet-0dea49f3ca0b4d90c",
+              "LoadBalancerAddresses": []
+            }
+          ],
+          "SecurityGroups": [
+            "sg-03780b62c8cf4c511"
+          ],
+          "IpAddressType": "ipv4",
+          "EnablePrefixForIpv6SourceNat": "off"
+        }
+      ]
+    },
+    "target-group": {
+      "TargetGroups": [
+        {
+          "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:002996184293:targetgroup/pedidos360-bff-tg/b68a365621579350",
+          "TargetGroupName": "pedidos360-bff-tg",
+          "Protocol": "HTTP",
+          "Port": 8180,
+          "VpcId": "vpc-06151b6c4ebba3edb",
+          "HealthCheckProtocol": "HTTP",
+          "HealthCheckPort": "traffic-port",
+          "HealthCheckEnabled": true,
+          "HealthCheckIntervalSeconds": 30,
+          "HealthCheckTimeoutSeconds": 5,
+          "HealthyThresholdCount": 2,
+          "UnhealthyThresholdCount": 3,
+          "HealthCheckPath": "/actuator/health",
+          "Matcher": {
+            "HttpCode": "200"
+          },
+          "LoadBalancerArns": [
+            "arn:aws:elasticloadbalancing:us-east-1:002996184293:loadbalancer/app/pedidos360-internal-alb/03e15310cdcb53b8"
+          ],
+          "TargetType": "instance",
+          "ProtocolVersion": "HTTP1",
+          "IpAddressType": "ipv4"
+        }
+      ]
+    },
+    "listener": {
+      "Listeners": [
+        {
+          "ListenerArn": "arn:aws:elasticloadbalancing:us-east-1:002996184293:listener/app/pedidos360-internal-alb/03e15310cdcb53b8/12cc3ae0a7cfec33",
+          "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:002996184293:loadbalancer/app/pedidos360-internal-alb/03e15310cdcb53b8",
+          "Port": 80,
+          "Protocol": "HTTP",
+          "DefaultActions": [
+            {
+              "Type": "forward",
+              "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:002996184293:targetgroup/pedidos360-bff-tg/b68a365621579350",
+              "ForwardConfig": {
+                "TargetGroups": [
+                  {
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:002996184293:targetgroup/pedidos360-bff-tg/b68a365621579350",
+                    "Weight": 1
+                  }
+                ],
+                "TargetGroupStickinessConfig": {
+                  "Enabled": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "vpclink": {
+      "CreatedDate": "2026-09-06T15:12:17+00:00",
+      "Name": "pedidos360-vpclink",
+      "SecurityGroupIds": [
+        "sg-0ed4ad80911b5283f"
+      ],
+      "SubnetIds": [
+        "subnet-0dea49f3ca0b4d90c",
+        "subnet-02369ed19f07cb095"
+      ],
+      "Tags": {
+        "Course": "DSY1107",
+        "Project": "Pedidos360",
+        "Environment": "lab"
+      },
+      "VpcLinkId": "2dh4hv",
+      "VpcLinkStatus": "AVAILABLE",
+      "VpcLinkStatusMessage": "VPC link is ready to route traffic",
+      "VpcLinkVersion": "V2"
+    },
+    "api": {
+      "ApiEndpoint": "https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com",
+      "ApiId": "7k2zyh0t0d",
+      "ApiKeySelectionExpression": "$request.header.x-api-key",
+      "CorsConfiguration": {
+        "AllowCredentials": false,
+        "AllowHeaders": [
+          "authorization",
+          "content-type"
+        ],
+        "AllowMethods": [
+          "GET",
+          "POST",
+          "OPTIONS"
+        ],
+        "AllowOrigins": [
+          "http://localhost:5173",
+          "http://127.0.0.1:5173"
+        ],
+        "ExposeHeaders": [
+          "location"
+        ],
+        "MaxAge": 300
+      },
+      "CreatedDate": "2026-09-06T15:12:19+00:00",
+      "Description": "Pedidos360 BFF with Microsoft Entra JWT",
+      "DisableExecuteApiEndpoint": false,
+      "IpAddressType": "ipv4",
+      "Name": "pedidos360-http-api",
+      "ProtocolType": "HTTP",
+      "RouteSelectionExpression": "$request.method $request.path",
+      "Tags": {
+        "Course": "DSY1107",
+        "Project": "Pedidos360",
+        "Environment": "lab"
+      }
+    },
+    "authorizer": {
+      "AuthorizerId": "b8vlwv",
+      "AuthorizerType": "JWT",
+      "IdentitySource": [
+        "$request.header.Authorization"
+      ],
+      "JwtConfiguration": {
+        "Audience": [
+          "114f7b58-b207-4d46-9d6e-f491c3a0c0e0"
+        ],
+        "Issuer": "https://login.microsoftonline.com/72fd0b5a-8a6a-4cff-89f6-bde961f7e250/v2.0"
+      },
+      "Name": "pedidos360-entra-jwt"
+    },
+    "integration": {
+      "ConnectionId": "2dh4hv",
+      "ConnectionType": "VPC_LINK",
+      "IntegrationId": "19mlbdh",
+      "IntegrationMethod": "ANY",
+      "IntegrationType": "HTTP_PROXY",
+      "IntegrationUri": "arn:aws:elasticloadbalancing:us-east-1:002996184293:listener/app/pedidos360-internal-alb/03e15310cdcb53b8/12cc3ae0a7cfec33",
+      "PayloadFormatVersion": "1.0",
+      "RequestParameters": {
+        "overwrite:path": "$request.path"
+      },
+      "TimeoutInMillis": 30000
+    },
+    "routes": {
+      "Items": [
+        {
+          "ApiKeyRequired": false,
+          "AuthorizationScopes": [
+            "Orders.Read"
+          ],
+          "AuthorizationType": "JWT",
+          "AuthorizerId": "b8vlwv",
+          "RouteId": "2mdxsyl",
+          "RouteKey": "GET /api/v1/pedidos/{id}",
+          "Target": "integrations/19mlbdh"
+        },
+        {
+          "ApiKeyRequired": false,
+          "AuthorizationScopes": [
+            "Catalog.Read"
+          ],
+          "AuthorizationType": "JWT",
+          "AuthorizerId": "b8vlwv",
+          "RouteId": "34yqqk4",
+          "RouteKey": "GET /api/v1/productos/{id}",
+          "Target": "integrations/19mlbdh"
+        },
+        {
+          "ApiKeyRequired": false,
+          "AuthorizationScopes": [
+            "Orders.Read"
+          ],
+          "AuthorizationType": "JWT",
+          "AuthorizerId": "b8vlwv",
+          "RouteId": "8w206b3",
+          "RouteKey": "GET /api/v1/admin/pedidos",
+          "Target": "integrations/19mlbdh"
+        },
+        {
+          "ApiKeyRequired": false,
+          "AuthorizationScopes": [
+            "Catalog.Read",
+            "Orders.Read",
+            "Orders.Create"
+          ],
+          "AuthorizationType": "JWT",
+          "AuthorizerId": "b8vlwv",
+          "RouteId": "ahxzj2g",
+          "RouteKey": "GET /api/v1/me",
+          "Target": "integrations/19mlbdh"
+        },
+        {
+          "ApiKeyRequired": false,
+          "AuthorizationScopes": [
+            "Orders.Create"
+          ],
+          "AuthorizationType": "JWT",
+          "AuthorizerId": "b8vlwv",
+          "RouteId": "b5qfy2l",
+          "RouteKey": "POST /api/v1/pedidos",
+          "Target": "integrations/19mlbdh"
+        },
+        {
+          "ApiKeyRequired": false,
+          "AuthorizationScopes": [
+            "Catalog.Read"
+          ],
+          "AuthorizationType": "JWT",
+          "AuthorizerId": "b8vlwv",
+          "RouteId": "m7dyekr",
+          "RouteKey": "GET /api/v1/productos",
+          "Target": "integrations/19mlbdh"
+        },
+        {
+          "ApiKeyRequired": false,
+          "AuthorizationScopes": [
+            "Orders.Read"
+          ],
+          "AuthorizationType": "JWT",
+          "AuthorizerId": "b8vlwv",
+          "RouteId": "u1vafa1",
+          "RouteKey": "GET /api/v1/pedidos",
+          "Target": "integrations/19mlbdh"
+        }
+      ]
+    },
+    "stage": {
+      "AccessLogSettings": {
+        "DestinationArn": "arn:aws:logs:us-east-1:002996184293:log-group:/pedidos360/api-gateway",
+        "Format": "{\"requestId\":\"$context.requestId\",\"routeKey\":\"$context.routeKey\",\"status\":\"$context.status\",\"latency\":\"$context.responseLatency\"}"
+      },
+      "AutoDeploy": true,
+      "CreatedDate": "2026-09-06T15:12:48+00:00",
+      "DefaultRouteSettings": {
+        "DetailedMetricsEnabled": false,
+        "ThrottlingBurstLimit": 10,
+        "ThrottlingRateLimit": 5.0
+      },
+      "DeploymentId": "3hz66y",
+      "LastDeploymentStatusMessage": "Successfully deployed stage with deployment ID '3hz66y'",
+      "LastUpdatedDate": "2026-09-06T15:12:50+00:00",
+      "RouteSettings": {},
+      "StageName": "$default",
+      "StageVariables": {},
+      "Tags": {
+        "Course": "DSY1107",
+        "Project": "Pedidos360",
+        "Environment": "lab"
+      }
+    },
+    "logs": {
+      "logGroups": [
+        {
+          "logGroupName": "/pedidos360/api-gateway",
+          "creationTime": 1788707563310,
+          "retentionInDays": 7,
+          "metricFilterCount": 0,
+          "arn": "arn:aws:logs:us-east-1:002996184293:log-group:/pedidos360/api-gateway:*",
+          "storedBytes": 0,
+          "logGroupClass": "STANDARD",
+          "logGroupArn": "arn:aws:logs:us-east-1:002996184293:log-group:/pedidos360/api-gateway",
+          "deletionProtectionEnabled": false,
+          "bearerTokenAuthenticationEnabled": false
+        }
+      ]
+    },
+    "foreign-default-sg": {
+      "SecurityGroups": [
+        {
+          "GroupId": "sg-0c05d09127edbca62",
+          "IpPermissionsEgress": [
+            {
+              "IpProtocol": "-1",
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ],
+          "VpcId": "vpc-0401f641dc32f155c",
+          "SecurityGroupArn": "arn:aws:ec2:us-east-1:002996184293:security-group/sg-0c05d09127edbca62",
+          "OwnerId": "002996184293",
+          "GroupName": "default",
+          "Description": "default VPC security group",
+          "IpPermissions": [
+            {
+              "IpProtocol": "-1",
+              "UserIdGroupPairs": [
+                {
+                  "UserId": "002996184293",
+                  "GroupId": "sg-0c05d09127edbca62"
+                }
+              ],
+              "IpRanges": [],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ]
+        }
+      ]
+    },
+    "foreign-default-routes": {
+      "RouteTables": [
+        {
+          "Associations": [
+            {
+              "Main": true,
+              "RouteTableAssociationId": "rtbassoc-099c431b0ec0fd5d2",
+              "RouteTableId": "rtb-008a0df04df9688a0",
+              "AssociationState": {
+                "State": "associated"
+              }
+            }
+          ],
+          "PropagatingVgws": [],
+          "RouteTableId": "rtb-008a0df04df9688a0",
+          "Routes": [
+            {
+              "DestinationCidrBlock": "172.31.0.0/16",
+              "GatewayId": "local",
+              "Origin": "CreateRouteTable",
+              "State": "active"
+            },
+            {
+              "DestinationCidrBlock": "0.0.0.0/0",
+              "GatewayId": "igw-01985017855f30de0",
+              "Origin": "CreateRoute",
+              "State": "active"
+            }
+          ],
+          "Tags": [],
+          "VpcId": "vpc-0401f641dc32f155c",
+          "OwnerId": "002996184293"
+        }
+      ]
+    }
+  },
+  "errors": {},
+  "defaultRulesUnchanged": true,
+  "sameSevenRouteIds": true
+}

@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T09:57:43.3817327Z",
+  "command": [
+    "aws",
+    "apigatewayv2",
+    "get-vpc-links",
+    "--region",
+    "us-east-1",
+    "--query",
+    "Items[].{Id:VpcLinkId,Name:Name,Status:VpcLinkStatus,Subnets:SubnetIds,Groups:SecurityGroupIds,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

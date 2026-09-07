@@ -1,0 +1,22 @@
+{
+  "CommandId": "c3ff32ae-c62b-4f62-aeae-350d29d8c3cb",
+  "InstanceId": "i-0818fdfafcfb7cb31",
+  "Comment": "Pedidos360 read-only confirmation of browser order in RDS and HTTP access logs",
+  "DocumentName": "AWS-RunShellScript",
+  "DocumentVersion": "$DEFAULT",
+  "PluginName": "aws:runShellScript",
+  "ResponseCode": 0,
+  "ExecutionStartDateTime": "2026-09-06T19:55:52.312Z",
+  "ExecutionElapsedTime": "PT0.103S",
+  "ExecutionEndDateTime": "2026-09-06T19:55:52.312Z",
+  "Status": "Success",
+  "StatusDetails": "Success",
+  "StandardOutputContent": "{\n  \"at\": \"2026-09-06T19:55:52.403569+00:00\",\n  \"release\": \"20260906T151739Z\",\n  \"order\": {\n    \"id\": \"9f82f14f-7f81-4f6a-a346-2add0865fe7f\",\n    \"items\": [\n      {\n        \"name\": \"Caf\\u00e9 de especialidad\",\n        \"price\": 8990.0,\n        \"currency\": \"CLP\",\n        \"quantity\": 2,\n        \"productId\": \"10000000-0000-0000-0000-000000000001\"\n      },\n      {\n        \"name\": \"Taza de cer\\u00e1mica\",\n        \"price\": 12990.0,\n        \"currency\": \"CLP\",\n        \"quantity\": 1,\n        \"productId\": \"10000000-0000-0000-0000-000000000002\"\n      }\n    ],\n    \"owner\": \"c375a6eb-b82a-44f6-abe0-fe32d7901c3e\",\n    \"total\": 30970.0,\n    \"status\": \"REGISTERED\",\n    \"tenant\": \"72fd0b5a-8a6a-4cff-89f6-bde961f7e250\",\n    \"createdAt\": \"2026-09-06 19:49:22.193934\"\n  },\n  \"accessLogs\": {\n    \"bff\": [\n      \"[06/Sep/2026:19:43:54 +0000] GET /api/v1/me 200 733193\",\n      \"[06/Sep/2026:19:43:54 +0000] GET /api/v1/me 200 12625\",\n      \"[06/Sep/2026:19:45:09 +0000] GET /api/v1/admin/pedidos 403 40901\",\n      \"[06/Sep/2026:19:45:50 +0000] GET /api/v1/productos 200 1282777\",\n      \"[06/Sep/2026:19:45:51 +0000] GET /api/v1/productos 200 47111\",\n      \"[06/Sep/2026:19:47:46 +0000] GET /api/v1/productos 200 33218\",\n      \"[06/Sep/2026:19:47:47 +0000] GET /api/v1/productos 200 38749\",\n      \"[06/Sep/2026:19:49:22 +0000] POST /api/v1/pedidos 201 1347138\",\n      \"[06/Sep/2026:19:49:23 +0000] GET /api/v1/pedidos 200 663815\",\n      \"[06/Sep/2026:19:49:24 +0000] GET /api/v1/pedidos 200 39121\",\n      \"[06/Sep/2026:19:50:38 +0000] GET /api/v1/pedidos 200 56408\",\n      \"[06/Sep/2026:19:51:35 +0000] GET /api/v1/me 200 10876\",\n      \"[06/Sep/2026:19:51:35 +0000] GET /api/v1/me 200 9643\",\n      \"[06/Sep/2026:19:52:57 +0000] GET /api/v1/me 200 8173\",\n      \"[06/Sep/2026:19:53:53 +0000] GET /api/v1/admin/pedidos 403 5131\"\n    ],\n    \"catalog\": [\n      \"[06/Sep/2026:19:45:50 +0000] GET /api/v1/productos 200 1147365\",\n      \"[06/Sep/2026:19:45:51 +0000] GET /api/v1/productos 200 32169\",\n      \"[06/Sep/2026:19:47:46 +0000] GET /api/v1/productos 200 17745\",\n      \"[06/Sep/2026:19:47:47 +0000] GET /api/v1/productos 200 26576\",\n      \"[06/Sep/2026:19:49:22 +0000] GET /api/v1/productos/10000000-0000-0000-0000-000000000001 200 42333\",\n      \"[06/Sep/2026:19:49:22 +0000] GET /api/v1/productos/10000000-0000-0000-0000-000000000002 200 22079\"\n    ],\n    \"orders\": [\n      \"[06/Sep/2026:19:49:22 +0000] POST /api/v1/pedidos 201 1023235\",\n      \"[06/Sep/2026:19:49:23 +0000] GET /api/v1/pedidos 200 652517\",\n      \"[06/Sep/2026:19:49:24 +0000] GET /api/v1/pedidos 200 26982\",\n      \"[06/Sep/2026:19:50:38 +0000] GET /api/v1/pedidos 200 37901\"\n    ]\n  },\n  \"note\": \"Direct TLS SQL read of the browser-created test order; HTTP access logs omit query, headers and body.\"\n}\n",
+  "StandardOutputUrl": "",
+  "StandardErrorContent": "",
+  "StandardErrorUrl": "",
+  "CloudWatchOutputConfig": {
+    "CloudWatchLogGroupName": "",
+    "CloudWatchOutputEnabled": false
+  }
+}

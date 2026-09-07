@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "foreign_containers_preserved": 6,
+  "foreign_container_names": [
+    "/nexbyte-local-web-1",
+    "/nexbyte-local-contact-api-1",
+    "/siger-app-1",
+    "/siger-migrate-1",
+    "/siger-provision-runtime-user-1",
+    "/siger-db-1"
+  ],
+  "foreign_images_preserved": 14,
+  "foreign_volumes_preserved": 3,
+  "foreign_networks_preserved": 8,
+  "test_resources_remaining": 0,
+  "new_volumes": [
+    "pedidos360-mysql-data"
+  ],
+  "new_networks": [
+    "5ce92062e9e74c2a12b130d1650f018d762a114c114a586a29e14aec12473b08 pedidos360-network"
+  ]
+}

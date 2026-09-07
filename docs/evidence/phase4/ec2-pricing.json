@@ -1,0 +1,24 @@
+{
+  "at": "2026-09-06T14:37:22.1199340Z",
+  "command": [
+    "aws",
+    "pricing",
+    "get-products",
+    "--service-code",
+    "AmazonEC2",
+    "--region",
+    "us-east-1",
+    "--filters",
+    "Type=TERM_MATCH,Field=instanceType,Value=t3.medium",
+    "Type=TERM_MATCH,Field=location,Value=US East (N. Virginia)",
+    "Type=TERM_MATCH,Field=operatingSystem,Value=Linux",
+    "Type=TERM_MATCH,Field=tenancy,Value=Shared",
+    "Type=TERM_MATCH,Field=preInstalledSw,Value=NA",
+    "Type=TERM_MATCH,Field=capacitystatus,Value=Used",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 254,
+  "output": "\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the GetProducts operation: User: arn:aws:sts::002996184293:assumed-role/voclabs/user3301432=BENJAMIN__TORREJON is not authorized to perform: pricing:GetProducts because no identity-based policy allows the pricing:GetProducts action"
+}

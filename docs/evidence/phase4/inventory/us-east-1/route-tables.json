@@ -1,0 +1,48 @@
+{
+  "at": "2026-09-06T09:57:10.5274699Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-route-tables",
+    "--region",
+    "us-east-1",
+    "--query",
+    "RouteTables[].{Id:RouteTableId,Vpc:VpcId,Routes:Routes,Associations:Associations,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [
+    {
+      "Id": "rtb-008a0df04df9688a0",
+      "Vpc": "vpc-0401f641dc32f155c",
+      "Routes": [
+        {
+          "DestinationCidrBlock": "172.31.0.0/16",
+          "GatewayId": "local",
+          "Origin": "CreateRouteTable",
+          "State": "active"
+        },
+        {
+          "DestinationCidrBlock": "0.0.0.0/0",
+          "GatewayId": "igw-01985017855f30de0",
+          "Origin": "CreateRoute",
+          "State": "active"
+        }
+      ],
+      "Associations": [
+        {
+          "Main": true,
+          "RouteTableAssociationId": "rtbassoc-099c431b0ec0fd5d2",
+          "RouteTableId": "rtb-008a0df04df9688a0",
+          "AssociationState": {
+            "State": "associated"
+          }
+        }
+      ],
+      "Tags": []
+    }
+  ],
+  "error": null
+}

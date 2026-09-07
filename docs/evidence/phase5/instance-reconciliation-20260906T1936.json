@@ -1,0 +1,105 @@
+{
+  "hostKey": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFsBKslQ2fD5h9ucya7VJjAeviv+KIL2EoIh9k6hxfiK root@ip-10-36-0-38",
+  "bootstrapComplete": true,
+  "releaseVerification": null,
+  "currentRelease": "/opt/pedidos360/releases/20260906T151739Z",
+  "services": {
+    "catalog": {
+      "environmentPresent": true,
+      "state": {
+        "exitCode": 0,
+        "stdout": "Result=exit-code\nExecMainStatus=200\nLoadState=loaded\nActiveState=failed\nSubState=failed\nActiveEnterTimestamp=Sun 2026-09-06 19:34:16 UTC\n",
+        "stderr": ""
+      },
+      "recentJournal": {
+        "exitCode": 0,
+        "stdout": "Sep 06 15:19:24 ip-10-36-0-38 (java)[2203]: pedidos360-catalog.service: Changing to the requested working directory failed: Permission denied\nSep 06 15:19:24 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 15:19:24 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Failed with result 'exit-code'.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Scheduled restart job, restart counter is at 5.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Start request repeated too quickly.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Failed with result 'exit-code'.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: Failed to start pedidos360-catalog.service - Pedidos360 catalog.\n-- Boot ca4e5a73ebb747b5a42df0513557a7db --\nSep 06 19:33:35 ip-10-36-0-38 systemd[1]: Started pedidos360-catalog.service - Pedidos360 catalog.\nSep 06 19:33:35 ip-10-36-0-38 (java)[535]: pedidos360-catalog.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:33:36 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:33:36 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Failed with result 'exit-code'.\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Scheduled restart job, restart counter is at 1.\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: Started pedidos360-catalog.service - Pedidos360 catalog.\nSep 06 19:33:46 ip-10-36-0-38 (java)[869]: pedidos360-catalog.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Failed with result 'exit-code'.\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Scheduled restart job, restart counter is at 2.\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: Started pedidos360-catalog.service - Pedidos360 catalog.\nSep 06 19:33:56 ip-10-36-0-38 (java)[884]: pedidos360-catalog.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Failed with result 'exit-code'.\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Scheduled restart job, restart counter is at 3.\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: Started pedidos360-catalog.service - Pedidos360 catalog.\nSep 06 19:34:06 ip-10-36-0-38 (java)[902]: pedidos360-catalog.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Failed with result 'exit-code'.\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Scheduled restart job, restart counter is at 4.\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: Started pedidos360-catalog.service - Pedidos360 catalog.\nSep 06 19:34:16 ip-10-36-0-38 (java)[920]: pedidos360-catalog.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Failed with result 'exit-code'.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Scheduled restart job, restart counter is at 5.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Start request repeated too quickly.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: pedidos360-catalog.service: Failed with result 'exit-code'.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: Failed to start pedidos360-catalog.service - Pedidos360 catalog.\n",
+        "stderr": ""
+      }
+    },
+    "orders": {
+      "environmentPresent": true,
+      "state": {
+        "exitCode": 0,
+        "stdout": "Result=exit-code\nExecMainStatus=200\nLoadState=loaded\nActiveState=failed\nSubState=failed\nActiveEnterTimestamp=Sun 2026-09-06 19:34:16 UTC\n",
+        "stderr": ""
+      },
+      "recentJournal": {
+        "exitCode": 0,
+        "stdout": "Sep 06 15:19:24 ip-10-36-0-38 (java)[2208]: pedidos360-orders.service: Changing to the requested working directory failed: Permission denied\nSep 06 15:19:24 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 15:19:24 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Failed with result 'exit-code'.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Scheduled restart job, restart counter is at 5.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Start request repeated too quickly.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Failed with result 'exit-code'.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: Failed to start pedidos360-orders.service - Pedidos360 orders.\n-- Boot ca4e5a73ebb747b5a42df0513557a7db --\nSep 06 19:33:35 ip-10-36-0-38 systemd[1]: Started pedidos360-orders.service - Pedidos360 orders.\nSep 06 19:33:35 ip-10-36-0-38 (java)[536]: pedidos360-orders.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:33:36 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:33:36 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Failed with result 'exit-code'.\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Scheduled restart job, restart counter is at 1.\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: Started pedidos360-orders.service - Pedidos360 orders.\nSep 06 19:33:46 ip-10-36-0-38 (java)[870]: pedidos360-orders.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Failed with result 'exit-code'.\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Scheduled restart job, restart counter is at 2.\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: Started pedidos360-orders.service - Pedidos360 orders.\nSep 06 19:33:56 ip-10-36-0-38 (java)[885]: pedidos360-orders.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Failed with result 'exit-code'.\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Scheduled restart job, restart counter is at 3.\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: Started pedidos360-orders.service - Pedidos360 orders.\nSep 06 19:34:06 ip-10-36-0-38 (java)[903]: pedidos360-orders.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Failed with result 'exit-code'.\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Scheduled restart job, restart counter is at 4.\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: Started pedidos360-orders.service - Pedidos360 orders.\nSep 06 19:34:16 ip-10-36-0-38 (java)[921]: pedidos360-orders.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Failed with result 'exit-code'.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Scheduled restart job, restart counter is at 5.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Start request repeated too quickly.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: pedidos360-orders.service: Failed with result 'exit-code'.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: Failed to start pedidos360-orders.service - Pedidos360 orders.\n",
+        "stderr": ""
+      }
+    },
+    "bff": {
+      "environmentPresent": true,
+      "state": {
+        "exitCode": 0,
+        "stdout": "Result=exit-code\nExecMainStatus=200\nLoadState=loaded\nActiveState=failed\nSubState=failed\nActiveEnterTimestamp=Sun 2026-09-06 19:34:16 UTC\n",
+        "stderr": ""
+      },
+      "recentJournal": {
+        "exitCode": 0,
+        "stdout": "Sep 06 15:19:24 ip-10-36-0-38 (java)[2207]: pedidos360-bff.service: Changing to the requested working directory failed: Permission denied\nSep 06 15:19:24 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 15:19:24 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Failed with result 'exit-code'.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Scheduled restart job, restart counter is at 5.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Start request repeated too quickly.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Failed with result 'exit-code'.\nSep 06 15:19:34 ip-10-36-0-38 systemd[1]: Failed to start pedidos360-bff.service - Pedidos360 bff.\n-- Boot ca4e5a73ebb747b5a42df0513557a7db --\nSep 06 19:33:35 ip-10-36-0-38 systemd[1]: Started pedidos360-bff.service - Pedidos360 bff.\nSep 06 19:33:35 ip-10-36-0-38 (java)[532]: pedidos360-bff.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:33:35 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:33:35 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Failed with result 'exit-code'.\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Scheduled restart job, restart counter is at 1.\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: Started pedidos360-bff.service - Pedidos360 bff.\nSep 06 19:33:46 ip-10-36-0-38 (java)[868]: pedidos360-bff.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:33:46 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Failed with result 'exit-code'.\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Scheduled restart job, restart counter is at 2.\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: Started pedidos360-bff.service - Pedidos360 bff.\nSep 06 19:33:56 ip-10-36-0-38 (java)[883]: pedidos360-bff.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:33:56 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Failed with result 'exit-code'.\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Scheduled restart job, restart counter is at 3.\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: Started pedidos360-bff.service - Pedidos360 bff.\nSep 06 19:34:06 ip-10-36-0-38 (java)[901]: pedidos360-bff.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:34:06 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Failed with result 'exit-code'.\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Scheduled restart job, restart counter is at 4.\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: Started pedidos360-bff.service - Pedidos360 bff.\nSep 06 19:34:16 ip-10-36-0-38 (java)[919]: pedidos360-bff.service: Changing to the requested working directory failed: Permission denied\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Main process exited, code=exited, status=200/CHDIR\nSep 06 19:34:16 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Failed with result 'exit-code'.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Scheduled restart job, restart counter is at 5.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Start request repeated too quickly.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: pedidos360-bff.service: Failed with result 'exit-code'.\nSep 06 19:34:27 ip-10-36-0-38 systemd[1]: Failed to start pedidos360-bff.service - Pedidos360 bff.\n",
+        "stderr": ""
+      }
+    }
+  },
+  "health": {
+    "catalog": {
+      "error": "<urlopen error [Errno 111] Connection refused>"
+    },
+    "orders": {
+      "error": "<urlopen error [Errno 111] Connection refused>"
+    },
+    "bff": {
+      "error": "<urlopen error [Errno 111] Connection refused>"
+    }
+  },
+  "installedArtifacts": {
+    "orders-service.jar": "5ac85d65fbf89846be6795b969e711faca0ba44c82459b38579868694cc40acc",
+    "bff.jar": "d30c1bba5f3f9202534037212a0cf29492dc101130cbf3ff904ce6f1b60217ee",
+    "catalog-service.jar": "e67336fe90d1e2d5bbc920ed7e09a68625d63d3de3f7981ea399ff551682d3f6"
+  },
+  "staging": [
+    {
+      "release": "20260906T151739Z",
+      "files": [
+        {
+          "name": "orders-service.jar",
+          "bytes": 62268166
+        },
+        {
+          "name": "install-release.py",
+          "bytes": 9642
+        },
+        {
+          "name": "bff.jar",
+          "bytes": 28900771
+        },
+        {
+          "name": "deployment.json",
+          "bytes": 756
+        },
+        {
+          "name": "catalog-service.jar",
+          "bytes": 62244718
+        },
+        {
+          "name": "secrets.json",
+          "bytes": 324
+        }
+      ]
+    }
+  ],
+  "java": {
+    "exitCode": 0,
+    "stdout": "openjdk 25.0.4.1 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-25.0.4.1+1 (build 25.0.4.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-25.0.4.1+1 (build 25.0.4.1+1-LTS, mixed mode, sharing)\n",
+    "stderr": ""
+  },
+  "listeners": {
+    "exitCode": 0,
+    "stdout": "State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\nLISTEN 0      4096      127.0.0.54:53        0.0.0.0:*          \nLISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*          \nLISTEN 0      4096         0.0.0.0:22        0.0.0.0:*          \nLISTEN 0      4096            [::]:22           [::]:*          \n",
+    "stderr": ""
+  },
+  "installerRunning": []
+}

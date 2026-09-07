@@ -1,0 +1,22 @@
+{
+  "CommandId": "44ae9f43-8c69-4d6d-b619-8e2201013dd2",
+  "InstanceId": "i-0818fdfafcfb7cb31",
+  "Comment": "Pedidos360 actual cloud processes reject absent and malformed JWT independently of Gateway",
+  "DocumentName": "AWS-RunShellScript",
+  "DocumentVersion": "$DEFAULT",
+  "PluginName": "aws:runShellScript",
+  "ResponseCode": 0,
+  "ExecutionStartDateTime": "2026-09-06T19:57:59.173Z",
+  "ExecutionElapsedTime": "PT0.255S",
+  "ExecutionEndDateTime": "2026-09-06T19:57:59.173Z",
+  "Status": "Success",
+  "StatusDetails": "Success",
+  "StandardOutputContent": "{\n  \"passed\": 10,\n  \"checks\": [\n    {\n      \"port\": 8180,\n      \"path\": \"/api/v1/me\",\n      \"case\": \"no_token\",\n      \"status\": 401\n    },\n    {\n      \"port\": 8180,\n      \"path\": \"/api/v1/me\",\n      \"case\": \"malformed_token\",\n      \"status\": 401\n    },\n    {\n      \"port\": 8180,\n      \"path\": \"/api/v1/admin/pedidos\",\n      \"case\": \"no_token\",\n      \"status\": 401\n    },\n    {\n      \"port\": 8180,\n      \"path\": \"/api/v1/admin/pedidos\",\n      \"case\": \"malformed_token\",\n      \"status\": 401\n    },\n    {\n      \"port\": 8181,\n      \"path\": \"/api/v1/productos\",\n      \"case\": \"no_token\",\n      \"status\": 401\n    },\n    {\n      \"port\": 8181,\n      \"path\": \"/api/v1/productos\",\n      \"case\": \"malformed_token\",\n      \"status\": 401\n    },\n    {\n      \"port\": 8182,\n      \"path\": \"/api/v1/pedidos\",\n      \"case\": \"no_token\",\n      \"status\": 401\n    },\n    {\n      \"port\": 8182,\n      \"path\": \"/api/v1/pedidos\",\n      \"case\": \"malformed_token\",\n      \"status\": 401\n    },\n    {\n      \"port\": 8182,\n      \"path\": \"/api/v1/admin/pedidos\",\n      \"case\": \"no_token\",\n      \"status\": 401\n    },\n    {\n      \"port\": 8182,\n      \"path\": \"/api/v1/admin/pedidos\",\n      \"case\": \"malformed_token\",\n      \"status\": 401\n    }\n  ]\n}\n",
+  "StandardOutputUrl": "",
+  "StandardErrorContent": "",
+  "StandardErrorUrl": "",
+  "CloudWatchOutputConfig": {
+    "CloudWatchLogGroupName": "",
+    "CloudWatchOutputEnabled": false
+  }
+}

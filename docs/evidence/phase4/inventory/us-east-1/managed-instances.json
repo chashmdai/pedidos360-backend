@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T09:57:59.4602105Z",
+  "command": [
+    "aws",
+    "ssm",
+    "describe-instance-information",
+    "--region",
+    "us-east-1",
+    "--query",
+    "InstanceInformationList[].{Id:InstanceId,Status:PingStatus,Platform:PlatformName,Version:PlatformVersion}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

@@ -1,0 +1,31 @@
+{
+  "at": "2026-09-06T09:57:56.6006853Z",
+  "command": [
+    "aws",
+    "cloudformation",
+    "describe-stacks",
+    "--region",
+    "us-east-1",
+    "--query",
+    "Stacks[].{Name:StackName,Id:StackId,Status:StackStatus,Created:CreationTime,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [
+    {
+      "Name": "c225479a5690755l16596670t1w002996184293",
+      "Id": "arn:aws:cloudformation:us-east-1:002996184293:stack/c225479a5690755l16596670t1w002996184293/f36e03b0-a92a-11f1-be2e-0e3248467101",
+      "Status": "CREATE_COMPLETE",
+      "Created": "2026-09-05T09:08:56.346-04:00",
+      "Tags": [
+        {
+          "Key": "cloudlab",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        }
+      ]
+    }
+  ],
+  "error": null
+}

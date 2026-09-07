@@ -1,0 +1,19 @@
+{
+  "at": "2026-09-06T14:38:53.0909699Z",
+  "command": [
+    "aws",
+    "ssm",
+    "get-parameter",
+    "--name",
+    "/aws/service/canonical/ubuntu/server/noble/stable/current/amd64/hvm/ebs-gp3/ami-id",
+    "--region",
+    "us-east-1",
+    "--query",
+    "Parameter.{Name:Name,Value:Value,Version:Version,Modified:LastModifiedDate}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "output": "{\n    \"Name\": \"/aws/service/canonical/ubuntu/server/noble/stable/current/amd64/hvm/ebs-gp3/ami-id\",\n    \"Value\": \"ami-025d99823a4caad37\",\n    \"Version\": 63,\n    \"Modified\": \"2026-09-04T08:19:02.340000-04:00\"\n}"
+}

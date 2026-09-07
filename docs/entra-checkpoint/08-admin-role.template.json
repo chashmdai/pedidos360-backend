@@ -1,0 +1,5 @@
+{
+  "principalId": "efdf6651-e0a8-489d-a3d5-ed93ffb883a6",
+  "resourceId": "{{API_SERVICE_PRINCIPAL_OBJECT_ID}}",
+  "appRoleId": "04b76981-53d3-4d0a-9d26-a27c7a6cc531"
+}

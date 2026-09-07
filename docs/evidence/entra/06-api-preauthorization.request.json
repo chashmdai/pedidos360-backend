@@ -1,0 +1,48 @@
+{
+  "api": {
+    "requestedAccessTokenVersion": 2,
+    "oauth2PermissionScopes": [
+      {
+        "id": "4482449c-36a1-4fee-bb8a-b02499d0bc86",
+        "value": "Catalog.Read",
+        "type": "User",
+        "isEnabled": true,
+        "adminConsentDisplayName": "Leer el catalogo de Pedidos360",
+        "adminConsentDescription": "Permite consultar los productos del catalogo de Pedidos360.",
+        "userConsentDisplayName": "Leer el catalogo de Pedidos360",
+        "userConsentDescription": "Permite consultar los productos del catalogo de Pedidos360."
+      },
+      {
+        "id": "11266639-2c90-4510-b7a3-a6189bc33bc1",
+        "value": "Orders.Read",
+        "type": "User",
+        "isEnabled": true,
+        "adminConsentDisplayName": "Leer pedidos de Pedidos360",
+        "adminConsentDescription": "Permite consultar pedidos propios. Las consultas generales requieren ademas el rol Admin.",
+        "userConsentDisplayName": "Leer pedidos de Pedidos360",
+        "userConsentDescription": "Permite consultar pedidos propios. Las consultas generales requieren ademas el rol Admin."
+      },
+      {
+        "id": "ce8aff5b-d18b-48a5-8fc8-e82ca0922515",
+        "value": "Orders.Create",
+        "type": "User",
+        "isEnabled": true,
+        "adminConsentDisplayName": "Registrar pedidos de Pedidos360",
+        "adminConsentDescription": "Permite registrar solicitudes de pedido en nombre del usuario autenticado.",
+        "userConsentDisplayName": "Registrar pedidos de Pedidos360",
+        "userConsentDescription": "Permite registrar solicitudes de pedido en nombre del usuario autenticado."
+      }
+    ],
+    "preAuthorizedApplications": [
+      {
+        "appId": "b4ede06a-cde3-4982-8b79-56fab7264fdd",
+        "delegatedPermissionIds": [
+          "4482449c-36a1-4fee-bb8a-b02499d0bc86",
+          "11266639-2c90-4510-b7a3-a6189bc33bc1",
+          "ce8aff5b-d18b-48a5-8fc8-e82ca0922515"
+        ]
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,11 @@
+$ bash scripts/mysql.sh ps
+NAME               IMAGE                                                                                  COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+pedidos360-mysql   mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb   "docker-entrypoint.s…"   mysql     36 minutes ago   Up 36 minutes (healthy)   33060/tcp, 127.0.0.1:13306->3306/tcp
+
+$ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+NAMES                         STATUS                       PORTS
+pedidos360-mysql              Up 36 minutes (healthy)      33060/tcp, 127.0.0.1:13306->3306/tcp
+nexbyte-local-web-1           Up About an hour (healthy)   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+nexbyte-local-contact-api-1   Up About an hour (healthy)   3000/tcp
+siger-app-1                   Up About an hour (healthy)   8080/tcp, 127.0.0.1:8443->8443/tcp
+siger-db-1                    Up About an hour (healthy)   3306/tcp, 33060/tcp

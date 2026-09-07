@@ -1,0 +1,29 @@
+{
+  "at": "2026-09-06T14:35:00.3434847Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-internet-gateways",
+    "--region",
+    "us-west-2",
+    "--query",
+    "InternetGateways[].{Id:InternetGatewayId,Attachments:Attachments,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [
+    {
+      "Id": "igw-0601b8f8377dc61f7",
+      "Attachments": [
+        {
+          "State": "available",
+          "VpcId": "vpc-06ae700022d76672e"
+        }
+      ],
+      "Tags": []
+    }
+  ],
+  "error": null
+}

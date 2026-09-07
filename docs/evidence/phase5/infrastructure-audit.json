@@ -1,0 +1,175 @@
+{
+  "at": "2026-09-06T19:49:01.326228+00:00",
+  "source": "reconciliation-2026-09-06T193801.json",
+  "checks": [
+    {
+      "check": "dedicated VPC CIDR",
+      "passed": true
+    },
+    {
+      "check": "subnet CIDRs",
+      "passed": true
+    },
+    {
+      "check": "RDS size/version",
+      "passed": true
+    },
+    {
+      "check": "RDS isolation/encryption/protection",
+      "passed": true
+    },
+    {
+      "check": "RDS mandatory TLS",
+      "passed": true
+    },
+    {
+      "check": "EC2 size and IMDSv2",
+      "passed": true
+    },
+    {
+      "check": "existing lab profile association only",
+      "passed": true
+    },
+    {
+      "check": "own EBS 20GiB encrypted gp3",
+      "passed": true
+    },
+    {
+      "check": "EC2 standard CPU credits",
+      "passed": true
+    },
+    {
+      "check": "ALB internal",
+      "passed": true
+    },
+    {
+      "check": "integration private/path mapping",
+      "passed": true
+    },
+    {
+      "check": "JWT issuer/audience",
+      "passed": true
+    },
+    {
+      "check": "all 7 business routes require JWT",
+      "passed": true
+    },
+    {
+      "check": "create uses Orders.Create",
+      "passed": true
+    },
+    {
+      "check": "CORS exact origins",
+      "passed": true
+    },
+    {
+      "check": "throttle 5/10",
+      "passed": true
+    },
+    {
+      "check": "logs 7 days",
+      "passed": true
+    },
+    {
+      "check": "App ingress only ALB 8180",
+      "passed": true
+    },
+    {
+      "check": "default SG and routing preserved",
+      "passed": true
+    },
+    {
+      "check": "EC2 application/admin/DB ports unreachable from operator after SSH closure",
+      "passed": true
+    }
+  ],
+  "volumes": {
+    "Volumes": [
+      {
+        "AvailabilityZoneId": "use1-az1",
+        "Iops": 3000,
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "Pedidos360"
+          },
+          {
+            "Key": "Environment",
+            "Value": "lab"
+          },
+          {
+            "Key": "Course",
+            "Value": "DSY1107"
+          },
+          {
+            "Key": "Name",
+            "Value": "pedidos360-app-root"
+          }
+        ],
+        "VolumeType": "gp3",
+        "MultiAttachEnabled": false,
+        "Throughput": 125,
+        "Operator": {
+          "Managed": false,
+          "HiddenByDefault": false
+        },
+        "VolumeId": "vol-0230164d41b34f412",
+        "Size": 20,
+        "SnapshotId": "snap-061b4b6a8efb44d83",
+        "AvailabilityZone": "us-east-1b",
+        "State": "in-use",
+        "CreateTime": "2026-09-06T15:12:00.645000+00:00",
+        "Attachments": [
+          {
+            "DeleteOnTermination": true,
+            "EbsCardIndex": 0,
+            "VolumeId": "vol-0230164d41b34f412",
+            "InstanceId": "i-0818fdfafcfb7cb31",
+            "Device": "/dev/sda1",
+            "State": "attached",
+            "AttachTime": "2026-09-06T15:12:00+00:00"
+          }
+        ],
+        "Encrypted": true,
+        "KmsKeyId": "arn:aws:kms:us-east-1:002996184293:key/1a0510f1-14bd-4a58-a9f3-8f881c8f8397"
+      }
+    ]
+  },
+  "credits": {
+    "InstanceCreditSpecifications": [
+      {
+        "InstanceId": "i-0818fdfafcfb7cb31",
+        "CpuCredits": "standard"
+      }
+    ]
+  },
+  "publicIp": "32.197.50.51",
+  "externalTcpProbes": [
+    {
+      "port": 22,
+      "reachable": false,
+      "result": "timed out"
+    },
+    {
+      "port": 8180,
+      "reachable": false,
+      "result": "timed out"
+    },
+    {
+      "port": 8181,
+      "reachable": false,
+      "result": "timed out"
+    },
+    {
+      "port": 8182,
+      "reachable": false,
+      "result": "timed out"
+    },
+    {
+      "port": 3306,
+      "reachable": false,
+      "result": "timed out"
+    }
+  ],
+  "passed": 20
+}

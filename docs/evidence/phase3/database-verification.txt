@@ -1,0 +1,31 @@
+8.4.11
+catalog	1	create products	1
+catalog	2	demo products	1
+orders	1	create orders	1
+{
+  "result": "PASS",
+  "checks": [
+    {
+      "user": "pedidos360_catalog_app",
+      "own_schema": "PASS",
+      "other_schema": "DENIED (1142)",
+      "application_ddl": "DENIED (1142)"
+    },
+    {
+      "user": "pedidos360_catalog_migration",
+      "own_schema": "PASS",
+      "other_schema": "DENIED (1142)"
+    },
+    {
+      "user": "pedidos360_orders_app",
+      "own_schema": "PASS",
+      "other_schema": "DENIED (1142)",
+      "application_ddl": "DENIED (1142)"
+    },
+    {
+      "user": "pedidos360_orders_migration",
+      "own_schema": "PASS",
+      "other_schema": "DENIED (1142)"
+    }
+  ]
+}

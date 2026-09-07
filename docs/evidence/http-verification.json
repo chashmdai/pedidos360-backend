@@ -1,0 +1,126 @@
+{
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "actuator health",
+      "port": 8180,
+      "status": 200
+    },
+    {
+      "check": "actuator health",
+      "port": 8181,
+      "status": 200
+    },
+    {
+      "check": "actuator health",
+      "port": 8182,
+      "status": 200
+    },
+    {
+      "check": "Catalog direct",
+      "port": 8181,
+      "status": 200
+    },
+    {
+      "check": "Catalog through BFF",
+      "port": 8180,
+      "status": 200
+    },
+    {
+      "check": "missing token",
+      "port": 8180,
+      "status": 401
+    },
+    {
+      "check": "missing scope",
+      "port": 8180,
+      "status": 403
+    },
+    {
+      "check": "wrong audience",
+      "port": 8180,
+      "status": 401
+    },
+    {
+      "check": "wrong issuer",
+      "port": 8180,
+      "status": 401
+    },
+    {
+      "check": "expired token",
+      "port": 8180,
+      "status": 401
+    },
+    {
+      "check": "invalid signature",
+      "port": 8180,
+      "status": 401
+    },
+    {
+      "check": "missing token",
+      "port": 8181,
+      "status": 401
+    },
+    {
+      "check": "missing scope",
+      "port": 8181,
+      "status": 403
+    },
+    {
+      "check": "wrong audience",
+      "port": 8181,
+      "status": 401
+    },
+    {
+      "check": "wrong issuer",
+      "port": 8181,
+      "status": 401
+    },
+    {
+      "check": "expired token",
+      "port": 8181,
+      "status": 401
+    },
+    {
+      "check": "invalid signature",
+      "port": 8181,
+      "status": 401
+    },
+    {
+      "check": "multitem order through BFF",
+      "port": 8180,
+      "status": 201
+    },
+    {
+      "check": "persisted order direct",
+      "port": 8182,
+      "status": 200
+    },
+    {
+      "check": "persisted order through BFF",
+      "port": 8180,
+      "status": 200
+    },
+    {
+      "check": "other owner cannot read order",
+      "port": 8180,
+      "status": 404
+    },
+    {
+      "check": "create requires catalog scope",
+      "port": 8180,
+      "status": 403
+    },
+    {
+      "check": "invalid body",
+      "port": 8180,
+      "status": 400
+    }
+  ],
+  "created_order": {
+    "id": "9c799d4b-7b46-4d6a-80d2-3da6e33c1dd4",
+    "items": 2,
+    "total": 30970.0,
+    "currency": "CLP"
+  }
+}

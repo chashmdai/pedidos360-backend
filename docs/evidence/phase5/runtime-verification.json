@@ -1,0 +1,78 @@
+{
+  "at": "2026-09-06T19:40:43.242741+00:00",
+  "release": "20260906T151739Z",
+  "health": {
+    "bff": {
+      "status": 200,
+      "body": {
+        "groups": [
+          "liveness",
+          "readiness"
+        ],
+        "status": "UP"
+      }
+    },
+    "catalog": {
+      "status": 200,
+      "body": {
+        "groups": [
+          "liveness",
+          "readiness"
+        ],
+        "status": "UP"
+      }
+    },
+    "orders": {
+      "status": 200,
+      "body": {
+        "groups": [
+          "liveness",
+          "readiness"
+        ],
+        "status": "UP"
+      }
+    }
+  },
+  "database": {
+    "catalog": {
+      "tlsAndMigrations": {
+        "exitCode": 0,
+        "stdout": "Variable_name\tValue\nSsl_cipher\tTLS_AES_256_GCM_SHA384\n@@version\t@@require_secure_transport\n8.4.11\t1\nversion\tdescription\tsuccess\n1\tcreate products\t1\n2\tdemo products\t1\nrows_count\n2\n",
+        "stderr": ""
+      },
+      "crossSchemaDenied": {
+        "exitCode": 1,
+        "stdout": "",
+        "stderr": "ERROR 1142 (42000) at line 1: SELECT command denied to user 'pedidos360_catalog_app'@'10.36.0.38' for table 'purchase_orders'\n"
+      },
+      "ddlDenied": {
+        "exitCode": 1,
+        "stdout": "",
+        "stderr": "ERROR 1142 (42000) at line 1: CREATE command denied to user 'pedidos360_catalog_app'@'10.36.0.38' for table 'pedidos360_privilege_probe'\n"
+      }
+    },
+    "orders": {
+      "tlsAndMigrations": {
+        "exitCode": 0,
+        "stdout": "Variable_name\tValue\nSsl_cipher\tTLS_AES_256_GCM_SHA384\n@@version\t@@require_secure_transport\n8.4.11\t1\nversion\tdescription\tsuccess\n1\tcreate orders\t1\nrows_count\n0\n",
+        "stderr": ""
+      },
+      "crossSchemaDenied": {
+        "exitCode": 1,
+        "stdout": "",
+        "stderr": "ERROR 1142 (42000) at line 1: SELECT command denied to user 'pedidos360_orders_app'@'10.36.0.38' for table 'products'\n"
+      },
+      "ddlDenied": {
+        "exitCode": 1,
+        "stdout": "",
+        "stderr": "ERROR 1142 (42000) at line 1: CREATE command denied to user 'pedidos360_orders_app'@'10.36.0.38' for table 'pedidos360_privilege_probe'\n"
+      }
+    }
+  },
+  "artifacts": {
+    "catalog-service.jar": "e67336fe90d1e2d5bbc920ed7e09a68625d63d3de3f7981ea399ff551682d3f6",
+    "orders-service.jar": "5ac85d65fbf89846be6795b969e711faca0ba44c82459b38579868694cc40acc",
+    "bff.jar": "d30c1bba5f3f9202534037212a0cf29492dc101130cbf3ff904ce6f1b60217ee"
+  },
+  "listeners": "State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\nLISTEN 0      4096      127.0.0.54:53        0.0.0.0:*          \nLISTEN 0      100          0.0.0.0:8180      0.0.0.0:*          \nLISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*          \nLISTEN 0      100        127.0.0.1:8182      0.0.0.0:*          \nLISTEN 0      100        127.0.0.1:8181      0.0.0.0:*          \nLISTEN 0      4096         0.0.0.0:22        0.0.0.0:*          \nLISTEN 0      4096            [::]:22           [::]:*          \n"
+}

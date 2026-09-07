@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T09:57:35.8461592Z",
+  "command": [
+    "aws",
+    "rds",
+    "describe-db-subnet-groups",
+    "--region",
+    "us-east-1",
+    "--query",
+    "DBSubnetGroups[].{Name:DBSubnetGroupName,Vpc:VpcId,Status:SubnetGroupStatus,Subnets:Subnets}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

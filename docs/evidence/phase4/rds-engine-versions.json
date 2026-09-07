@@ -1,0 +1,19 @@
+{
+  "at": "2026-09-06T14:36:30.8257574Z",
+  "command": [
+    "aws",
+    "rds",
+    "describe-db-engine-versions",
+    "--engine",
+    "mysql",
+    "--region",
+    "us-east-1",
+    "--query",
+    "DBEngineVersions[?starts_with(EngineVersion, '8.4')].{Version:EngineVersion,Family:DBParameterGroupFamily,Status:Status}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "output": "[\n    {\n        \"Version\": \"8.4.5\",\n        \"Family\": \"mysql8.4\",\n        \"Status\": \"available\"\n    },\n    {\n        \"Version\": \"8.4.6\",\n        \"Family\": \"mysql8.4\",\n        \"Status\": \"available\"\n    },\n    {\n        \"Version\": \"8.4.7\",\n        \"Family\": \"mysql8.4\",\n        \"Status\": \"available\"\n    },\n    {\n        \"Version\": \"8.4.8\",\n        \"Family\": \"mysql8.4\",\n        \"Status\": \"available\"\n    },\n    {\n        \"Version\": \"8.4.9\",\n        \"Family\": \"mysql8.4\",\n        \"Status\": \"available\"\n    },\n    {\n        \"Version\": \"8.4.10\",\n        \"Family\": \"mysql8.4\",\n        \"Status\": \"available\"\n    },\n    {\n        \"Version\": \"8.4.11\",\n        \"Family\": \"mysql8.4\",\n        \"Status\": \"available\"\n    }\n]"
+}

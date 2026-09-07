@@ -1,0 +1,300 @@
+{
+  "at": "2026-09-06T19:55:57.334813+00:00",
+  "events": [
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723694929,
+      "message": "{\"requestId\":\"DSs9agJ9oAMEJ0w=\",\"routeKey\":\"GET /api/v1/productos\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723733643,
+      "eventId": "39889871351185851889447038025840193274999233104164356096"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723695574,
+      "message": "{\"requestId\":\"DSs9gg9bIAMEJIA=\",\"routeKey\":\"GET /api/v1/productos\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723739068,
+      "eventId": "39889871365569832542499289958689335052305053872026353664"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723696270,
+      "message": "{\"requestId\":\"DSs9ngWZIAMEMMw=\",\"routeKey\":\"GET /api/v1/productos/{id}\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723722463,
+      "eventId": "39889871381091151200676603645124036120798628583570079744"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723696918,
+      "message": "{\"requestId\":\"DSs9ujwoIAMEMaw=\",\"routeKey\":\"GET /api/v1/productos/{id}\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723729033,
+      "eventId": "39889871395542034089324447448781885966190339078702694400"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723697564,
+      "message": "{\"requestId\":\"DSs90gr5oAMEMlg=\",\"routeKey\":\"GET /api/v1/pedidos\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723739802,
+      "eventId": "39889871409948315487575230011232681984147526320936321024"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723698208,
+      "message": "{\"requestId\":\"DSs97inPoAMEcKg=\",\"routeKey\":\"GET /api/v1/pedidos\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723743471,
+      "eventId": "39889871424309995395428951318817478707369145880035852288"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723698847,
+      "message": "{\"requestId\":\"DSs-BhRuoAMEc8g=\",\"routeKey\":\"GET /api/v1/pedidos/{id}\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723731732,
+      "eventId": "39889871438560171577290019492066981865010760947341852672"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723699490,
+      "message": "{\"requestId\":\"DSs-HirZoAMEYYw=\",\"routeKey\":\"GET /api/v1/pedidos/{id}\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723723541,
+      "eventId": "39889871452899550739945210162172490228947430075383545856"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723700135,
+      "message": "{\"requestId\":\"DSs-OhHKIAMEYpw=\",\"routeKey\":\"POST /api/v1/pedidos\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723748710,
+      "eventId": "39889871467283531392997462118890177033303601629727162368"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723700779,
+      "message": "{\"requestId\":\"DSs-UhzVIAMEJ4g=\",\"routeKey\":\"POST /api/v1/pedidos\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723731587,
+      "eventId": "39889871481645211300851183401338544343235969364211859456"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723701422,
+      "message": "{\"requestId\":\"DSs-bjCoIAMEJxg=\",\"routeKey\":\"GET /api/v1/me\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723732221,
+      "eventId": "39889871495984590463506374082112734001610170170696073216"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723702068,
+      "message": "{\"requestId\":\"DSs-hgNIoAMEJVQ=\",\"routeKey\":\"GET /api/v1/me\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723734346,
+      "eventId": "39889871510390871861757156634113960248500117945568919552"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723702740,
+      "message": "{\"requestId\":\"DSs-ohiDoAMEbsw=\",\"routeKey\":\"GET /api/v1/admin/pedidos\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723730299,
+      "eventId": "39889871525376972635169735380333249825520254286968651776"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723703384,
+      "message": "{\"requestId\":\"DSs-uj5yIAMEc9w=\",\"routeKey\":\"GET /api/v1/admin/pedidos\",\"status\":\"401\",\"latency\":\"0\"}",
+      "ingestionTime": 1788723732773,
+      "eventId": "39889871539738652543023456686473269325455467670522298368"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723704205,
+      "message": "{\"requestId\":\"DSs-3illoAMEckw=\",\"routeKey\":\"GET /api/v1/me\",\"status\":\"401\",\"latency\":\"75\"}",
+      "ingestionTime": 1788723735958,
+      "eventId": "39889871558047564351017098289524452287159776885253406720"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723705566,
+      "message": "{\"requestId\":\"DSs_EgHRoAMEcsQ=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"4\"}",
+      "ingestionTime": 1788723729567,
+      "eventId": "39889871588398878566217276377427929855371337063105822720"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723706214,
+      "message": "{\"requestId\":\"DSs_LjUtIAMEJSw=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"5\"}",
+      "ingestionTime": 1788723747513,
+      "eventId": "39889871602849761454865120194838640114981987672563056640"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-41",
+      "timestamp": 1788723706858,
+      "message": "{\"requestId\":\"DSs_RiznoAMEMZg=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"4\"}",
+      "ingestionTime": 1788723729886,
+      "eventId": "39889871617211441362718841476678193967734574958124204032"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-43",
+      "timestamp": 1788723833307,
+      "message": "{\"requestId\":\"DStTCh3EoAMEbCg=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"4\"}",
+      "ingestionTime": 1788723868659,
+      "eventId": "39889874437118370971717607268494507414517671171846897664"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-43",
+      "timestamp": 1788723833308,
+      "message": "{\"requestId\":\"DStTChq1IAMEbug=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"5\"}",
+      "ingestionTime": 1788723868264,
+      "eventId": "39889874437140671716916137891158201731629409891018342400"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-43",
+      "timestamp": 1788723833449,
+      "message": "{\"requestId\":\"DStTDh3cIAMEbCg=\",\"routeKey\":\"GET /api/v1/me\",\"status\":\"200\",\"latency\":\"817\"}",
+      "ingestionTime": 1788723868659,
+      "eventId": "39889874440285076789908955754592579409233738505696116737"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-43",
+      "timestamp": 1788723834392,
+      "message": "{\"requestId\":\"DStTMjb3IAMEVbg=\",\"routeKey\":\"GET /api/v1/me\",\"status\":\"200\",\"latency\":\"399\"}",
+      "ingestionTime": 1788723861652,
+      "eventId": "39889874461314679512123333368589436480433027823059533824"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-45",
+      "timestamp": 1788723909281,
+      "message": "{\"requestId\":\"DSte5ht_oAMEVcQ=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"5\"}",
+      "ingestionTime": 1788723951985,
+      "eventId": "39889876131395186684883169924263768508493020365250166784"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-45",
+      "timestamp": 1788723909421,
+      "message": "{\"requestId\":\"DSte7iJkoAMEbmQ=\",\"routeKey\":\"GET /api/v1/admin/pedidos\",\"status\":\"403\",\"latency\":\"382\"}",
+      "ingestionTime": 1788723951674,
+      "eventId": "39889876134517291012677457163703047433290297297728569344"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-45",
+      "timestamp": 1788723949017,
+      "message": "{\"requestId\":\"DStlHg79IAMEVkw=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"3\"}",
+      "ingestionTime": 1788723964774,
+      "eventId": "39889877017537597893696011091787920900293006373075091456"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-45",
+      "timestamp": 1788723949017,
+      "message": "{\"requestId\":\"DStlHhiOIAMEVUQ=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"8\"}",
+      "ingestionTime": 1788723976970,
+      "eventId": "39889877017537597893696011106532185561720644744897363968"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-45",
+      "timestamp": 1788723949188,
+      "message": "{\"requestId\":\"DStlIiBzIAMEVwA=\",\"routeKey\":\"GET /api/v1/productos\",\"status\":\"200\",\"latency\":\"1355\"}",
+      "ingestionTime": 1788723979058,
+      "eventId": "39889877021351025322644747666259252768669855205022236672"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-45",
+      "timestamp": 1788723950677,
+      "message": "{\"requestId\":\"DStlXjepIAMEb6A=\",\"routeKey\":\"GET /api/v1/productos\",\"status\":\"200\",\"latency\":\"534\"}",
+      "ingestionTime": 1788723977374,
+      "eventId": "39889877054556834923256845521969842966478907498636247040"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-47",
+      "timestamp": 1788724066486,
+      "message": "{\"requestId\":\"DSt3dhVYoAMEVEw=\",\"routeKey\":\"GET /api/v1/productos\",\"status\":\"200\",\"latency\":\"369\"}",
+      "ingestionTime": 1788724084174,
+      "eventId": "39889879637183835619889781049193052510910594833709268992"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-47",
+      "timestamp": 1788724067062,
+      "message": "{\"requestId\":\"DSt3jgM8oAMEbxg=\",\"routeKey\":\"GET /api/v1/productos\",\"status\":\"200\",\"latency\":\"108\"}",
+      "ingestionTime": 1788724087495,
+      "eventId": "39889879650029064854243419982732882368951402082548121600"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-49",
+      "timestamp": 1788724160845,
+      "message": "{\"requestId\":\"DSuGNiv5oAMEbqw=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"9\"}",
+      "ingestionTime": 1788724210018,
+      "eventId": "39889881741459851808040850213498073886897002322349326336"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-49",
+      "timestamp": 1788724160991,
+      "message": "{\"requestId\":\"DSuGOj0OIAMEbQA=\",\"routeKey\":\"POST /api/v1/pedidos\",\"status\":\"201\",\"latency\":\"1432\"}",
+      "ingestionTime": 1788724198137,
+      "eventId": "39889881744715760607026321177798900508555883194412040192"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-49",
+      "timestamp": 1788724162603,
+      "message": "{\"requestId\":\"DSuGfhQ4oAMEbJQ=\",\"routeKey\":\"GET /api/v1/pedidos\",\"status\":\"200\",\"latency\":\"1018\"}",
+      "ingestionTime": 1788724207159,
+      "eventId": "39889881780664561867057685692861301991362776666683604992"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-49",
+      "timestamp": 1788724163759,
+      "message": "{\"requestId\":\"DSuGqilzoAMEb8Q=\",\"routeKey\":\"GET /api/v1/pedidos\",\"status\":\"200\",\"latency\":\"374\"}",
+      "ingestionTime": 1788724191664,
+      "eventId": "39889881806444223316559086025744374528813148710246219776"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-50",
+      "timestamp": 1788724237879,
+      "message": "{\"requestId\":\"DSuSPhR0oAMEVYw=\",\"routeKey\":\"GET /api/v1/pedidos\",\"status\":\"200\",\"latency\":\"142\"}",
+      "ingestionTime": 1788724268566,
+      "eventId": "39889883459375457431648873369340650915988019926326444032"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-51",
+      "timestamp": 1788724295115,
+      "message": "{\"requestId\":\"DSubMhkOoAMEbug=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"5\"}",
+      "ingestionTime": 1788724318786,
+      "eventId": "39889884735780909614747619558991678738918354791883079680"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-51",
+      "timestamp": 1788724295115,
+      "message": "{\"requestId\":\"DSubMg0tIAMEbgg=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"4\"}",
+      "ingestionTime": 1788724328930,
+      "eventId": "39889884735780909614747619571254900454526060795733606400"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-51",
+      "timestamp": 1788724295248,
+      "message": "{\"requestId\":\"DSubNio3IAMEV0A=\",\"routeKey\":\"GET /api/v1/me\",\"status\":\"200\",\"latency\":\"52\"}",
+      "ingestionTime": 1788724341302,
+      "eventId": "39889884738746908726152192464035958618324591309565591552"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-51",
+      "timestamp": 1788724295437,
+      "message": "{\"requestId\":\"DSubPhhSoAMEbdQ=\",\"routeKey\":\"GET /api/v1/me\",\"status\":\"200\",\"latency\":\"127\"}",
+      "ingestionTime": 1788724318744,
+      "eventId": "39889884742961749568674480210515325495742904462723842048"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-52",
+      "timestamp": 1788724377161,
+      "message": "{\"requestId\":\"DSuoAj1LoAMEbQw=\",\"routeKey\":\"GET /api/v1/me\",\"status\":\"200\",\"latency\":\"69\"}",
+      "ingestionTime": 1788724414608,
+      "eventId": "39889886565467850173391125945272648537899283676555771904"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-53",
+      "timestamp": 1788724432817,
+      "message": "{\"requestId\":\"DSuwtjPyIAMEVOg=\",\"routeKey\":\"-\",\"status\":\"204\",\"latency\":\"4\"}",
+      "ingestionTime": 1788724471135,
+      "eventId": "39889887806638124942811487578921406632320307921113448448"
+    },
+    {
+      "logStreamName": "7k2zyh0t0d_.default-2026-09-06-19-53",
+      "timestamp": 1788724432955,
+      "message": "{\"requestId\":\"DSuwuiLiIAMEbqw=\",\"routeKey\":\"GET /api/v1/admin/pedidos\",\"status\":\"403\",\"latency\":\"147\"}",
+      "ingestionTime": 1788724455340,
+      "eventId": "39889887809715627780208713553358330057748481857360625664"
+    }
+  ],
+  "searchedLogStreams": []
+}

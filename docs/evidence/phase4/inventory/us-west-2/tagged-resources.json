@@ -1,0 +1,27 @@
+{
+  "at": "2026-09-06T14:35:57.7608311Z",
+  "command": [
+    "aws",
+    "resourcegroupstaggingapi",
+    "get-resources",
+    "--region",
+    "us-west-2",
+    "--query",
+    "ResourceTagMappingList",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [
+    {
+      "ResourceARN": "arn:aws:events:us-west-2:002996184293:rule/voc-ec2-cw-rule",
+      "Tags": []
+    },
+    {
+      "ResourceARN": "arn:aws:events:us-west-2:002996184293:rule/voc-codebuild-cw-rule",
+      "Tags": []
+    }
+  ],
+  "error": null
+}

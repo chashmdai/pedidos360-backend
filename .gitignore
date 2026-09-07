@@ -1,0 +1,17 @@
+target/
+.env
+.env.*
+!.env.example
+*.log
+*.pem
+*.key
+.secrets/
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+secrets.json
+*-password
+pedidos360-deploy
+known_hosts
+*.cnf

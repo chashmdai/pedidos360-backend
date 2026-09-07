@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T09:57:54.5867631Z",
+  "command": [
+    "aws",
+    "servicediscovery",
+    "list-services",
+    "--region",
+    "us-east-1",
+    "--query",
+    "Services[].{Id:Id,Name:Name,Arn:Arn,Instances:InstanceCount}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 254,
+  "response": null,
+  "error": "\r\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the ListServices operation: User: arn:aws:sts::002996184293:assumed-role/voclabs/user3301432=BENJAMIN__TORREJON is not authorized to perform: servicediscovery:ListServices on resource: arn:aws:servicediscovery:us-east-1:002996184293:*/* because no identity-based policy allows the servicediscovery:ListServices action\r\n"
+}

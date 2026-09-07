@@ -1,0 +1,20 @@
+{
+  "at": "2026-09-06T09:57:37.9902514Z",
+  "command": [
+    "aws",
+    "rds",
+    "describe-db-snapshots",
+    "--snapshot-type",
+    "manual",
+    "--region",
+    "us-east-1",
+    "--query",
+    "DBSnapshots[].{Id:DBSnapshotIdentifier,DB:DBInstanceIdentifier,Engine:Engine,Status:Status,Tags:TagList}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

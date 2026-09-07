@@ -1,0 +1,17 @@
+{
+  "at": "2026-09-06T14:36:41.0742707Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-availability-zones",
+    "--region",
+    "us-east-1",
+    "--query",
+    "AvailabilityZones[].{Name:ZoneName,Id:ZoneId,State:State,OptIn:OptInStatus}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "output": "[\n    {\n        \"Name\": \"us-east-1a\",\n        \"Id\": \"use1-az6\",\n        \"State\": \"available\",\n        \"OptIn\": \"opt-in-not-required\"\n    },\n    {\n        \"Name\": \"us-east-1b\",\n        \"Id\": \"use1-az1\",\n        \"State\": \"available\",\n        \"OptIn\": \"opt-in-not-required\"\n    },\n    {\n        \"Name\": \"us-east-1c\",\n        \"Id\": \"use1-az2\",\n        \"State\": \"available\",\n        \"OptIn\": \"opt-in-not-required\"\n    },\n    {\n        \"Name\": \"us-east-1d\",\n        \"Id\": \"use1-az4\",\n        \"State\": \"available\",\n        \"OptIn\": \"opt-in-not-required\"\n    },\n    {\n        \"Name\": \"us-east-1e\",\n        \"Id\": \"use1-az3\",\n        \"State\": \"available\",\n        \"OptIn\": \"opt-in-not-required\"\n    },\n    {\n        \"Name\": \"us-east-1f\",\n        \"Id\": \"use1-az5\",\n        \"State\": \"available\",\n        \"OptIn\": \"opt-in-not-required\"\n    }\n]"
+}

@@ -1,0 +1,61 @@
+{
+  "at": "2026-09-06T09:32:44.725446+00:00",
+  "containers": [
+    {
+      "id": "c12b9777c0797df2eff8fd78ee0ff4d0a8ac5807d98fa4ac1c6799976068779c",
+      "name": "pedidos360-mysql",
+      "image": "mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb",
+      "state": "running",
+      "startedAt": "2026-09-06T09:25:03.0163442Z",
+      "health": "healthy"
+    },
+    {
+      "id": "65c0c7cf19dacb899a55e001fc9f10b41f90a3a7de77de472bda59c78705fb58",
+      "name": "nexbyte-local-web-1",
+      "image": "nexbyte-local-web",
+      "state": "running",
+      "startedAt": "2026-09-06T09:25:03.0052467Z",
+      "health": "healthy"
+    },
+    {
+      "id": "0c8dfe1c29162860d831d94cacb7e58b9b227abaa70821e95b5203d4ec4ba2ba",
+      "name": "nexbyte-local-contact-api-1",
+      "image": "nexbyte-local-contact-api",
+      "state": "running",
+      "startedAt": "2026-09-06T09:25:02.9850329Z",
+      "health": "healthy"
+    },
+    {
+      "id": "cdc18802d01fd2fefa5c69233b594c4787cad3178127c47345be245bd87476c4",
+      "name": "siger-app-1",
+      "image": "siger-app",
+      "state": "running",
+      "startedAt": "2026-09-06T09:25:02.9896016Z",
+      "health": "healthy"
+    },
+    {
+      "id": "14d87878deb00b49ae37936240a761605839ee364ddd9d1b14b150d826d9e467",
+      "name": "siger-migrate-1",
+      "image": "siger-app",
+      "state": "exited",
+      "startedAt": "2026-08-14T13:20:24.414483405Z",
+      "health": null
+    },
+    {
+      "id": "11655c3d41a85fa5d3604aaed96337a47548afc0f71216ac99ec56b3c6299198",
+      "name": "siger-provision-runtime-user-1",
+      "image": "mysql:8.4@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb",
+      "state": "exited",
+      "startedAt": "2026-08-14T13:20:27.590419426Z",
+      "health": null
+    },
+    {
+      "id": "87fe59d9d14fbeff08b01f765753c7a95a6459a226a48106cbf5bb952c083b18",
+      "name": "siger-db-1",
+      "image": "mysql:8.4@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb",
+      "state": "running",
+      "startedAt": "2026-09-06T09:25:03.0096287Z",
+      "health": "healthy"
+    }
+  ]
+}

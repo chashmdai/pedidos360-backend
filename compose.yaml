@@ -1,0 +1,51 @@
+name: pedidos360
+services:
+  mysql:
+    image: mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb
+    container_name: pedidos360-mysql
+    labels:
+      Project: Pedidos360
+    ports:
+      - "127.0.0.1:13306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root
+    secrets:
+      - mysql_root
+      - catalog_app
+      - catalog_migration
+      - orders_app
+      - orders_migration
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./docker/mysql/init-databases.sh:/docker-entrypoint-initdb.d/10-pedidos360.sh:ro
+    networks:
+      - database
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=\"$$(cat /run/secrets/mysql_root)\" mysql -uroot -Nse 'SELECT 1' >/dev/null"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 30s
+    mem_limit: 768m
+    restart: unless-stopped
+secrets:
+  mysql_root:
+    file: ${PEDIDOS360_CONFIG_DIR:?Run scripts/setup-local.sh first}/mysql-root-password
+  catalog_app:
+    file: ${PEDIDOS360_CONFIG_DIR}/catalog-app-password
+  catalog_migration:
+    file: ${PEDIDOS360_CONFIG_DIR}/catalog-migration-password
+  orders_app:
+    file: ${PEDIDOS360_CONFIG_DIR}/orders-app-password
+  orders_migration:
+    file: ${PEDIDOS360_CONFIG_DIR}/orders-migration-password
+volumes:
+  mysql-data:
+    name: pedidos360-mysql-data
+    labels:
+      Project: Pedidos360
+networks:
+  database:
+    name: pedidos360-network
+    labels:
+      Project: Pedidos360

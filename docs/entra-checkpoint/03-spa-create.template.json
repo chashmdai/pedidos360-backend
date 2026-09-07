@@ -1,0 +1,39 @@
+{
+  "displayName": "pedidos360-betorrejons-frontend",
+  "signInAudience": "AzureADMyOrg",
+  "tags": [
+    "Project=Pedidos360",
+    "Course=DSY1107"
+  ],
+  "spa": {
+    "redirectUris": [
+      "http://localhost:5173/",
+      "http://127.0.0.1:5173/"
+    ]
+  },
+  "web": {
+    "implicitGrantSettings": {
+      "enableAccessTokenIssuance": false,
+      "enableIdTokenIssuance": false
+    }
+  },
+  "requiredResourceAccess": [
+    {
+      "resourceAppId": "{{API_CLIENT_ID}}",
+      "resourceAccess": [
+        {
+          "id": "4482449c-36a1-4fee-bb8a-b02499d0bc86",
+          "type": "Scope"
+        },
+        {
+          "id": "11266639-2c90-4510-b7a3-a6189bc33bc1",
+          "type": "Scope"
+        },
+        {
+          "id": "ce8aff5b-d18b-48a5-8fc8-e82ca0922515",
+          "type": "Scope"
+        }
+      ]
+    }
+  ]
+}

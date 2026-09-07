@@ -1,0 +1,423 @@
+{
+  "at": "2026-09-06T09:35:33.317570+00:00",
+  "mode": "local_fixture",
+  "note": "Test RSA signer, not Microsoft identity. Runs only against local Pedidos360 ports.",
+  "result": "PASS",
+  "passed": 51,
+  "checks": [
+    {
+      "check": "actuator health",
+      "port": 8180,
+      "method": "GET",
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "actuator health",
+      "port": 8181,
+      "method": "GET",
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "actuator health",
+      "port": 8182,
+      "method": "GET",
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "local fixture identity",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/me",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "Catalog direct",
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "Catalog through BFF",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "missing token",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "missing scope",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "check": "wrong audience",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "wrong issuer",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "expired token",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "invalid signature",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "missing token",
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "missing scope",
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "check": "wrong audience",
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "wrong issuer",
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "expired token",
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "invalid signature",
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "missing token",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "missing scope",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "check": "wrong audience",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "wrong issuer",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "expired token",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "invalid signature",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "check": "multitem order through BFF",
+      "port": 8180,
+      "method": "POST",
+      "path": "/api/v1/pedidos",
+      "expected": 201,
+      "actual": 201
+    },
+    {
+      "check": "persisted order direct",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos/5ca7c75c-09cb-45fc-9f6d-d6b121d77a6e",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "persisted order through BFF",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/pedidos/5ca7c75c-09cb-45fc-9f6d-d6b121d77a6e",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "other owner cannot read order",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/pedidos/5ca7c75c-09cb-45fc-9f6d-d6b121d77a6e",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "list owns persisted order",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "create requires catalog scope",
+      "port": 8180,
+      "method": "POST",
+      "path": "/api/v1/pedidos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "check": "create requires orders scope",
+      "port": 8180,
+      "method": "POST",
+      "path": "/api/v1/pedidos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "check": "invalid body",
+      "port": 8180,
+      "method": "POST",
+      "path": "/api/v1/pedidos",
+      "expected": 400,
+      "actual": 400
+    },
+    {
+      "check": "User cannot administer",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "check": "Admin still requires read scope",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "check": "Admin and read scope can administer",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "Admin own list does not include another owner's order",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "Admin own endpoint preserves ownership",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/pedidos/5ca7c75c-09cb-45fc-9f6d-d6b121d77a6e",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "other owner cannot read order",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos/5ca7c75c-09cb-45fc-9f6d-d6b121d77a6e",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "list owns persisted order",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "create requires catalog scope",
+      "port": 8182,
+      "method": "POST",
+      "path": "/api/v1/pedidos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "check": "create requires orders scope",
+      "port": 8182,
+      "method": "POST",
+      "path": "/api/v1/pedidos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "check": "invalid body",
+      "port": 8182,
+      "method": "POST",
+      "path": "/api/v1/pedidos",
+      "expected": 400,
+      "actual": 400
+    },
+    {
+      "check": "User cannot administer",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "check": "Admin still requires read scope",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "check": "Admin and read scope can administer",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "Admin own list does not include another owner's order",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "Admin own endpoint preserves ownership",
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos/5ca7c75c-09cb-45fc-9f6d-d6b121d77a6e",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "catalog product by id",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/productos/10000000-0000-0000-0000-000000000001",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "unknown catalog product",
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/productos/00000000-0000-0000-0000-000000000000",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "catalog product by id",
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos/10000000-0000-0000-0000-000000000001",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "check": "unknown catalog product",
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos/00000000-0000-0000-0000-000000000000",
+      "expected": 404,
+      "actual": 404
+    }
+  ],
+  "created_order": {
+    "id": "5ca7c75c-09cb-45fc-9f6d-d6b121d77a6e",
+    "items": 2,
+    "total": 30970.0,
+    "currency": "CLP"
+  }
+}

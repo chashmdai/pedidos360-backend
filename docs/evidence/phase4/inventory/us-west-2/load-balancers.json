@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T14:35:37.4461320Z",
+  "command": [
+    "aws",
+    "elbv2",
+    "describe-load-balancers",
+    "--region",
+    "us-west-2",
+    "--query",
+    "LoadBalancers[].{Name:LoadBalancerName,Arn:LoadBalancerArn,Type:Type,Scheme:Scheme,Vpc:VpcId,State:State,AZs:AvailabilityZones}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

@@ -1,0 +1,160 @@
+{
+  "at": "2026-09-06T19:41:47.016645+00:00",
+  "endpoint": "https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com",
+  "checks": [
+    {
+      "case": "no_token",
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs9agJ9oAMEJ0w="
+    },
+    {
+      "case": "malformed_token",
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs9gg9bIAMEJIA="
+    },
+    {
+      "case": "no_token",
+      "method": "GET",
+      "path": "/api/v1/productos/1",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs9ngWZIAMEMMw="
+    },
+    {
+      "case": "malformed_token",
+      "method": "GET",
+      "path": "/api/v1/productos/1",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs9ujwoIAMEMaw="
+    },
+    {
+      "case": "no_token",
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs90gr5oAMEMlg="
+    },
+    {
+      "case": "malformed_token",
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs97inPoAMEcKg="
+    },
+    {
+      "case": "no_token",
+      "method": "GET",
+      "path": "/api/v1/pedidos/00000000-0000-0000-0000-000000000000",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs-BhRuoAMEc8g="
+    },
+    {
+      "case": "malformed_token",
+      "method": "GET",
+      "path": "/api/v1/pedidos/00000000-0000-0000-0000-000000000000",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs-HirZoAMEYYw="
+    },
+    {
+      "case": "no_token",
+      "method": "POST",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs-OhHKIAMEYpw="
+    },
+    {
+      "case": "malformed_token",
+      "method": "POST",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs-UhzVIAMEJ4g="
+    },
+    {
+      "case": "no_token",
+      "method": "GET",
+      "path": "/api/v1/me",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs-bjCoIAMEJxg="
+    },
+    {
+      "case": "malformed_token",
+      "method": "GET",
+      "path": "/api/v1/me",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs-hgNIoAMEJVQ="
+    },
+    {
+      "case": "no_token",
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs-ohiDoAMEbsw="
+    },
+    {
+      "case": "malformed_token",
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs-uj5yIAMEc9w="
+    },
+    {
+      "case": "local_fixture_rejected",
+      "method": "GET",
+      "path": "/api/v1/me",
+      "expected": 401,
+      "status": 401,
+      "requestId": "DSs-3illoAMEckw="
+    },
+    {
+      "case": "actuator_not_exposed",
+      "method": "GET",
+      "path": "/actuator/health",
+      "expected": 404,
+      "status": 404,
+      "requestId": "DSs--iVCIAMEcow="
+    },
+    {
+      "case": "allowed_preflight",
+      "method": "OPTIONS",
+      "path": "/api/v1/pedidos",
+      "expected": 204,
+      "status": 204,
+      "requestId": "DSs_EgHRoAMEcsQ="
+    },
+    {
+      "case": "allowed_preflight",
+      "method": "OPTIONS",
+      "path": "/api/v1/pedidos",
+      "expected": 204,
+      "status": 204,
+      "requestId": "DSs_LjUtIAMEJSw="
+    },
+    {
+      "case": "untrusted_origin_no_cors_permission",
+      "method": "OPTIONS",
+      "path": "/api/v1/pedidos",
+      "expected": 204,
+      "status": 204,
+      "requestId": "DSs_RiznoAMEMZg="
+    }
+  ],
+  "passed": 19,
+  "note": "Negative and CORS requests executed over verified HTTPS. No valid Microsoft token used here; real browser tests are recorded separately."
+}

@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.cmd text eol=crlf
+# Preserve original spacing in captured CLI/HTTP evidence; source checks stay enabled.
+docs/evidence/** -whitespace

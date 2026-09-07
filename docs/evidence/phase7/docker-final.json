@@ -1,0 +1,152 @@
+{
+  "at": "2026-09-06T19:59:08.944785+00:00",
+  "containers": [
+    {
+      "Command": "\"docker-entrypoint.s\u2026\"",
+      "CreatedAt": "2026-09-05 13:32:10 -0400 -04",
+      "HealthStatus": "healthy",
+      "ID": "c12b9777c079",
+      "Image": "mysql:8.4.11",
+      "Labels": "Project=Pedidos360,com.docker.compose.config-hash=aa600e7a015e19d87acf5fe3e5a5bd8f9e12d34c1c42e00bae7f06615c278a16,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:1d6b6a8fcee8ff758ff151d017f5203cd06792a0e698f0a593c9dfcb14609cf0,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/compose.yaml,com.docker.compose.project.working_dir=/mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend,com.docker.compose.project=pedidos360,com.docker.compose.service=mysql,com.docker.compose.version=5.4.0",
+      "LocalVolumes": "1",
+      "Mounts": "/home/nitro/.c\u2026,/home/nitro/.c\u2026,/home/nitro/.c\u2026,/home/nitro/.c\u2026,pedidos360-mys\u2026,/mnt/c/Users/B\u2026,/home/nitro/.c\u2026",
+      "Names": "pedidos360-mysql",
+      "Networks": "pedidos360-network",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "33060/tcp, 127.0.0.1:13306->3306/tcp",
+      "RunningFor": "26 hours ago",
+      "Size": "41kB (virtual 868MB)",
+      "State": "running",
+      "Status": "Up 16 minutes (healthy)"
+    },
+    {
+      "Command": "\"/docker-entrypoint.\u2026\"",
+      "CreatedAt": "2026-08-15 23:19:40 -0400 -04",
+      "HealthStatus": "healthy",
+      "ID": "65c0c7cf19da",
+      "Image": "nexbyte-local-web",
+      "Labels": "com.docker.compose.config-hash=c336ad7b95a4d45a4a640453b43f4573af21af9377c2fb65e139bfba54131e74,com.docker.compose.container-number=1,com.docker.compose.depends_on=contact-api:service_healthy:false,com.docker.compose.image=sha256:eaf2f14b73b08901ec5af2ddf3e9883872c709499b8697fe6fc34bb70d1b2839,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/mnt/c/Users/Benja/Documents/nexbyte_work_package/compose.yaml,com.docker.compose.project.working_dir=/mnt/c/Users/Benja/Documents/nexbyte_work_package,com.docker.compose.project=nexbyte-local,com.docker.compose.replace=web-1,com.docker.compose.service=web,com.docker.compose.version=5.4.0,maintainer=NGINX Docker Maintainers <docker-maint@nginx.com>,org.opencontainers.image.created=2026-08-10T01:36:24.233Z,org.opencontainers.image.description=Static Nexbyte MPA served directly by unprivileged Nginx,org.opencontainers.image.licenses=Proprietary,org.opencontainers.image.revision=e26803b6ff7ca01455284231c59f20cb5e3ae82e,org.opencontainers.image.source=local-workspace,org.opencontainers.image.title=Nexbyte web,org.opencontainers.image.url=https://github.com/nginx/docker-nginx-unprivileged,org.opencontainers.image.version=1.31.3-alpine",
+      "LocalVolumes": "0",
+      "Mounts": "",
+      "Names": "nexbyte-local-web-1",
+      "Networks": "nexbyte-local_backend,nexbyte-local_frontend",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp",
+      "RunningFor": "3 weeks ago",
+      "Size": "8.19kB (virtual 62.4MB)",
+      "State": "running",
+      "Status": "Up 16 minutes (healthy)"
+    },
+    {
+      "Command": "\"docker-entrypoint.s\u2026\"",
+      "CreatedAt": "2026-08-15 23:18:23 -0400 -04",
+      "HealthStatus": "healthy",
+      "ID": "0c8dfe1c2916",
+      "Image": "nexbyte-local-contact-api",
+      "Labels": "com.docker.compose.config-hash=5ffd5d2dd88f2e824e2420f47af3db071072525d68615380383b793e7ca83565,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:0379bacdee84821fdd1919f2905796939626ba86052230a80175b4bd566ac066,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/mnt/c/Users/Benja/Documents/nexbyte_work_package/compose.yaml,com.docker.compose.project.working_dir=/mnt/c/Users/Benja/Documents/nexbyte_work_package,com.docker.compose.project=nexbyte-local,com.docker.compose.replace=contact-api-1,com.docker.compose.service=contact-api,com.docker.compose.version=5.4.0",
+      "LocalVolumes": "0",
+      "Mounts": "",
+      "Names": "nexbyte-local-contact-api-1",
+      "Networks": "nexbyte-local_backend,nexbyte-local_egress",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "3000/tcp",
+      "RunningFor": "3 weeks ago",
+      "Size": "16.4kB (virtual 249MB)",
+      "State": "running",
+      "Status": "Up 16 minutes (healthy)"
+    },
+    {
+      "Command": "\"dotnet Siger.Web.dll\"",
+      "CreatedAt": "2026-08-11 03:04:57 -0400 -04",
+      "HealthStatus": "healthy",
+      "ID": "cdc18802d01f",
+      "Image": "a6b226059b06",
+      "Labels": "com.docker.compose.config-hash=516346d02d18fc0e50925f2b47b090bddc31a8bb3f66b6ce11e9e3bc6abcbe85,com.docker.compose.container-number=1,com.docker.compose.depends_on=provision-runtime-user:service_completed_successfully:false,com.docker.compose.image=sha256:e350ab149066184777e0386575e2461b27f57647ba702d61a84a320f9f1bdb6f,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/home/nitro/code/siger/compose.yaml,com.docker.compose.project.working_dir=/home/nitro/code/siger,com.docker.compose.project=siger,com.docker.compose.replace=app-1,com.docker.compose.service=app,com.docker.compose.version=5.4.0,org.opencontainers.image.version=24.04",
+      "LocalVolumes": "0",
+      "Mounts": "/home/nitro/co\u2026,/home/nitro/co\u2026",
+      "Names": "siger-app-1",
+      "Networks": "siger_backend,siger_frontend",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "8080/tcp, 127.0.0.1:8443->8443/tcp",
+      "RunningFor": "3 weeks ago",
+      "Size": "28.7kB (virtual 274MB)",
+      "State": "running",
+      "Status": "Up 16 minutes (healthy)"
+    },
+    {
+      "Command": "\"dotnet Siger.Web.dl\u2026\"",
+      "CreatedAt": "2026-08-11 03:04:57 -0400 -04",
+      "HealthStatus": "none",
+      "ID": "14d87878deb0",
+      "Image": "a6b226059b06",
+      "Labels": "com.docker.compose.config-hash=79e96c281dc6e99ecaac5efd0d2db2f7fdd4c59f0f351ce86918bc551a3e29c0,com.docker.compose.container-number=1,com.docker.compose.depends_on=db:service_healthy:false,com.docker.compose.image=sha256:e350ab149066184777e0386575e2461b27f57647ba702d61a84a320f9f1bdb6f,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/home/nitro/code/siger/compose.yaml,com.docker.compose.project.working_dir=/home/nitro/code/siger,com.docker.compose.project=siger,com.docker.compose.replace=migrate-1,com.docker.compose.service=migrate,com.docker.compose.version=5.4.0,org.opencontainers.image.version=24.04",
+      "LocalVolumes": "0",
+      "Mounts": "",
+      "Names": "siger-migrate-1",
+      "Networks": "siger_backend",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "",
+      "RunningFor": "3 weeks ago",
+      "Size": "4.1kB (virtual 274MB)",
+      "State": "exited",
+      "Status": "Exited (0) 3 weeks ago"
+    },
+    {
+      "Command": "\"docker-entrypoint.s\u2026\"",
+      "CreatedAt": "2026-08-11 01:31:59 -0400 -04",
+      "HealthStatus": "none",
+      "ID": "11655c3d41a8",
+      "Image": "mysql:8.4",
+      "Labels": "com.docker.compose.config-hash=30a6c653f05f5e3cfc0f8e103e73c09b1da769e8fe3b6aab95374610451bf8ab,com.docker.compose.container-number=1,com.docker.compose.depends_on=migrate:service_completed_successfully:false,com.docker.compose.image=sha256:1d6b6a8fcee8ff758ff151d017f5203cd06792a0e698f0a593c9dfcb14609cf0,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/home/nitro/code/siger/compose.yaml,com.docker.compose.project.working_dir=/home/nitro/code/siger,com.docker.compose.project=siger,com.docker.compose.service=provision-runtime-user,com.docker.compose.version=5.4.0",
+      "LocalVolumes": "1",
+      "Mounts": "/home/nitro/co\u2026,faa6a76789fa77\u2026",
+      "Names": "siger-provision-runtime-user-1",
+      "Networks": "siger_backend",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "",
+      "RunningFor": "3 weeks ago",
+      "Size": "8.19kB (virtual 868MB)",
+      "State": "exited",
+      "Status": "Exited (0) 3 weeks ago"
+    },
+    {
+      "Command": "\"docker-entrypoint.s\u2026\"",
+      "CreatedAt": "2026-08-11 01:31:58 -0400 -04",
+      "HealthStatus": "healthy",
+      "ID": "87fe59d9d14f",
+      "Image": "mysql:8.4",
+      "Labels": "com.docker.compose.config-hash=9323742dbc773239f2692568bc023586906e37fb6a3cc8110e519d0065e87bec,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:1d6b6a8fcee8ff758ff151d017f5203cd06792a0e698f0a593c9dfcb14609cf0,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/home/nitro/code/siger/compose.yaml,com.docker.compose.project.working_dir=/home/nitro/code/siger,com.docker.compose.project=siger,com.docker.compose.service=db,com.docker.compose.version=5.4.0",
+      "LocalVolumes": "1",
+      "Mounts": "siger_mysql_da\u2026",
+      "Names": "siger-db-1",
+      "Networks": "siger_backend",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "3306/tcp, 33060/tcp",
+      "RunningFor": "3 weeks ago",
+      "Size": "32.8kB (virtual 868MB)",
+      "State": "running",
+      "Status": "Up 16 minutes (healthy)"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "passed": 10,
+  "checks": [
+    {
+      "port": 8180,
+      "path": "/api/v1/me",
+      "case": "no_token",
+      "status": 401
+    },
+    {
+      "port": 8180,
+      "path": "/api/v1/me",
+      "case": "malformed_token",
+      "status": 401
+    },
+    {
+      "port": 8180,
+      "path": "/api/v1/admin/pedidos",
+      "case": "no_token",
+      "status": 401
+    },
+    {
+      "port": 8180,
+      "path": "/api/v1/admin/pedidos",
+      "case": "malformed_token",
+      "status": 401
+    },
+    {
+      "port": 8181,
+      "path": "/api/v1/productos",
+      "case": "no_token",
+      "status": 401
+    },
+    {
+      "port": 8181,
+      "path": "/api/v1/productos",
+      "case": "malformed_token",
+      "status": 401
+    },
+    {
+      "port": 8182,
+      "path": "/api/v1/pedidos",
+      "case": "no_token",
+      "status": 401
+    },
+    {
+      "port": 8182,
+      "path": "/api/v1/pedidos",
+      "case": "malformed_token",
+      "status": 401
+    },
+    {
+      "port": 8182,
+      "path": "/api/v1/admin/pedidos",
+      "case": "no_token",
+      "status": 401
+    },
+    {
+      "port": 8182,
+      "path": "/api/v1/admin/pedidos",
+      "case": "malformed_token",
+      "status": 401
+    }
+  ]
+}

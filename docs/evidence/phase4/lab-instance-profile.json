@@ -1,0 +1,17 @@
+{
+  "at": "2026-09-06T14:36:44.0964442Z",
+  "command": [
+    "aws",
+    "iam",
+    "get-instance-profile",
+    "--instance-profile-name",
+    "LabInstanceProfile",
+    "--query",
+    "InstanceProfile.{Name:InstanceProfileName,Arn:Arn,Roles:Roles[].{Name:RoleName,Arn:Arn},Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "output": "{\n    \"Name\": \"LabInstanceProfile\",\n    \"Arn\": \"arn:aws:iam::002996184293:instance-profile/LabInstanceProfile\",\n    \"Roles\": [\n        {\n            \"Name\": \"LabRole\",\n            \"Arn\": \"arn:aws:iam::002996184293:role/LabRole\"\n        }\n    ],\n    \"Tags\": []\n}"
+}

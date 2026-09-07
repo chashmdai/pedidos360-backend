@@ -1,0 +1,36 @@
+{
+  "source_and_config_not_newer_than_tested_jars": true,
+  "last_maven_clean_verify": "2026-09-06T01:36:41-03:00",
+  "log": "../phase2/maven-verify.txt",
+  "note": "No Java source or configuration changes in Phase 3; passing full verification reused, not claimed as rerun.",
+  "suites": [
+    {
+      "name": "cl.duoc.pedidos360.catalog.CatalogIntegrationTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "cl.duoc.pedidos360.orders.OrderDomainTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "cl.duoc.pedidos360.orders.OrdersIntegrationTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "cl.duoc.pedidos360.bff.BffContractTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ]
+}

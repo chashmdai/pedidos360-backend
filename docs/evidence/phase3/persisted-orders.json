@@ -1,0 +1,42 @@
+{
+  "at": "2026-09-06T09:41:52.339700+00:00",
+  "mysql_read_after_process_restart": true,
+  "orders": [
+    {
+      "id": "4a53bd04-49d2-44d5-80a2-d2a46974337a",
+      "tenant": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+      "owner": "c375a6eb-b82a-44f6-abe0-fe32d7901c3e",
+      "items": "2",
+      "total": "30970.00",
+      "minCurrency": "CLP",
+      "maxCurrency": "CLP"
+    },
+    {
+      "id": "5ca7c75c-09cb-45fc-9f6d-d6b121d77a6e",
+      "tenant": "local-development",
+      "owner": "phase1-verification",
+      "items": "2",
+      "total": "30970.00",
+      "minCurrency": "CLP",
+      "maxCurrency": "CLP"
+    },
+    {
+      "id": "91cea5f7-685e-4f35-a2ac-2845c2a15f63",
+      "tenant": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+      "owner": "c375a6eb-b82a-44f6-abe0-fe32d7901c3e",
+      "items": "2",
+      "total": "30970.00",
+      "minCurrency": "CLP",
+      "maxCurrency": "CLP"
+    },
+    {
+      "id": "aa976352-bd6f-4dfd-b7e1-6380a27d0e9b",
+      "tenant": "local-development",
+      "owner": "demo-user",
+      "items": "2",
+      "total": "30970.00",
+      "minCurrency": "CLP",
+      "maxCurrency": "CLP"
+    }
+  ]
+}

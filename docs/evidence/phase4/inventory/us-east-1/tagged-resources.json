@@ -1,0 +1,217 @@
+{
+  "at": "2026-09-06T09:58:02.3750136Z",
+  "command": [
+    "aws",
+    "resourcegroupstaggingapi",
+    "get-resources",
+    "--region",
+    "us-east-1",
+    "--query",
+    "ResourceTagMappingList",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [
+    {
+      "ResourceARN": "arn:aws:elasticbeanstalk:us-east-1:002996184293:configurationtemplate/c65742a1274066l2960540t1w002996184293-sampleApplication-RDN10PR4TSQH/c6574-sampl-1EIUCD3MNDFFF",
+      "Tags": []
+    },
+    {
+      "ResourceARN": "arn:aws:lambda:us-east-1:002996184293:function:RedshiftOverwatch",
+      "Tags": [
+        {
+          "Key": "aws:cloudformation:stack-name",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:stack-id",
+          "Value": "arn:aws:cloudformation:us-east-1:002996184293:stack/c225479a5690755l16596670t1w002996184293/f36e03b0-a92a-11f1-be2e-0e3248467101"
+        },
+        {
+          "Key": "cloudlab",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:logical-id",
+          "Value": "RedshiftOverwatch"
+        }
+      ]
+    },
+    {
+      "ResourceARN": "arn:aws:lambda:us-east-1:002996184293:function:MainMonitoringFunction",
+      "Tags": [
+        {
+          "Key": "aws:cloudformation:stack-name",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:stack-id",
+          "Value": "arn:aws:cloudformation:us-east-1:002996184293:stack/c225479a5690755l16596670t1w002996184293/f36e03b0-a92a-11f1-be2e-0e3248467101"
+        },
+        {
+          "Key": "cloudlab",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:logical-id",
+          "Value": "MainMonitoringFunction"
+        }
+      ]
+    },
+    {
+      "ResourceARN": "arn:aws:events:us-east-1:002996184293:rule/voc-ec2-cw-rule",
+      "Tags": []
+    },
+    {
+      "ResourceARN": "arn:aws:events:us-east-1:002996184293:rule/voc-codebuild-cw-rule",
+      "Tags": []
+    },
+    {
+      "ResourceARN": "arn:aws:sns:us-east-1:002996184293:RedshiftSNS",
+      "Tags": [
+        {
+          "Key": "aws:cloudformation:stack-name",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:stack-id",
+          "Value": "arn:aws:cloudformation:us-east-1:002996184293:stack/c225479a5690755l16596670t1w002996184293/f36e03b0-a92a-11f1-be2e-0e3248467101"
+        },
+        {
+          "Key": "cloudlab",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:logical-id",
+          "Value": "RedshiftSNS"
+        }
+      ]
+    },
+    {
+      "ResourceARN": "arn:aws:lambda:us-east-1:002996184293:function:ModLabRole",
+      "Tags": [
+        {
+          "Key": "aws:cloudformation:stack-name",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:stack-id",
+          "Value": "arn:aws:cloudformation:us-east-1:002996184293:stack/c225479a5690755l16596670t1w002996184293/f36e03b0-a92a-11f1-be2e-0e3248467101"
+        },
+        {
+          "Key": "cloudlab",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:logical-id",
+          "Value": "ModLabRole"
+        }
+      ]
+    },
+    {
+      "ResourceARN": "arn:aws:events:us-east-1:002996184293:rule/MonitoringRule",
+      "Tags": [
+        {
+          "Key": "aws:cloudformation:stack-name",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:stack-id",
+          "Value": "arn:aws:cloudformation:us-east-1:002996184293:stack/c225479a5690755l16596670t1w002996184293/f36e03b0-a92a-11f1-be2e-0e3248467101"
+        },
+        {
+          "Key": "cloudlab",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:logical-id",
+          "Value": "EventRule"
+        }
+      ]
+    },
+    {
+      "ResourceARN": "arn:aws:lambda:us-east-1:002996184293:function:RoleCreationFunction",
+      "Tags": [
+        {
+          "Key": "aws:cloudformation:stack-name",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:stack-id",
+          "Value": "arn:aws:cloudformation:us-east-1:002996184293:stack/c225479a5690755l16596670t1w002996184293/f36e03b0-a92a-11f1-be2e-0e3248467101"
+        },
+        {
+          "Key": "cloudlab",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:logical-id",
+          "Value": "RoleCreationFunction"
+        }
+      ]
+    },
+    {
+      "ResourceARN": "arn:aws:redshift:us-east-1:002996184293:eventsubscription:event-subscription-78",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "Redshift_monitor"
+        }
+      ]
+    },
+    {
+      "ResourceARN": "arn:aws:events:us-east-1:002996184293:rule/resourceFunctionRule",
+      "Tags": [
+        {
+          "Key": "aws:cloudformation:stack-name",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:stack-id",
+          "Value": "arn:aws:cloudformation:us-east-1:002996184293:stack/c225479a5690755l16596670t1w002996184293/f36e03b0-a92a-11f1-be2e-0e3248467101"
+        },
+        {
+          "Key": "cloudlab",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:logical-id",
+          "Value": "resourceFunctionRule"
+        }
+      ]
+    },
+    {
+      "ResourceARN": "arn:aws:cloudformation:us-east-1:002996184293:stack/c225479a5690755l16596670t1w002996184293/f36e03b0-a92a-11f1-be2e-0e3248467101",
+      "Tags": [
+        {
+          "Key": "cloudlab",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        }
+      ]
+    },
+    {
+      "ResourceARN": "arn:aws:lambda:us-east-1:002996184293:function:RedshiftEventSubscription",
+      "Tags": [
+        {
+          "Key": "aws:cloudformation:stack-name",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:stack-id",
+          "Value": "arn:aws:cloudformation:us-east-1:002996184293:stack/c225479a5690755l16596670t1w002996184293/f36e03b0-a92a-11f1-be2e-0e3248467101"
+        },
+        {
+          "Key": "cloudlab",
+          "Value": "c225479a5690755l16596670t1w002996184293"
+        },
+        {
+          "Key": "aws:cloudformation:logical-id",
+          "Value": "RedshiftEventSubscription"
+        }
+      ]
+    }
+  ],
+  "error": null
+}

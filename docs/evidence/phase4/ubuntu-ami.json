@@ -1,0 +1,6 @@
+{
+  "at": "2026-09-06T14:38:56.3989773Z",
+  "exitCode": 0,
+  "imageId": "ami-025d99823a4caad37",
+  "output": "[\n    {\n        \"Id\": \"ami-025d99823a4caad37\",\n        \"Owner\": \"099720109477\",\n        \"Name\": \"ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20260904\",\n        \"Architecture\": \"x86_64\",\n        \"State\": \"available\",\n        \"Created\": \"2026-09-04T11:46:14.000Z\",\n        \"Root\": \"ebs\",\n        \"Devices\": [\n            {\n                \"Ebs\": {\n                    \"DeleteOnTermination\": true,\n                    \"SnapshotId\": \"snap-061b4b6a8efb44d83\",\n                    \"VolumeSize\": 8,\n                    \"VolumeType\": \"gp3\",\n                    \"Encrypted\": false\n                },\n                \"DeviceName\": \"/dev/sda1\"\n            },\n            {\n                \"DeviceName\": \"/dev/sdb\",\n                \"VirtualName\": \"ephemeral0\"\n            },\n            {\n                \"DeviceName\": \"/dev/sdc\",\n                \"VirtualName\": \"ephemeral1\"\n            }\n        ]\n    }\n]"
+}
