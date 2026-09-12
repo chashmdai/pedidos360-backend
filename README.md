@@ -6,6 +6,8 @@ Para demostrar el backend AWS existente, ejecutar `bash scripts/dev.sh start clo
 
 [Entrega y evidencias](docs/ENTREGA.md). Al cerrar la revisión el usuario informó que AWS está apagado; las pruebas cloud documentadas corresponden a su ejecución anterior.
 
+Para reanudar una nueva sesión del laboratorio, seguir [Arrancar Pedidos360 después de renovar AWS](docs/ARRANQUE_LABORATORIO.md). La guía cubre la actualización de las tres credenciales temporales, reconciliación, inicio condicional de EC2/RDS, health checks y arranque de la SPA.
+
 ## Arranque local
 
 Mantener `pedidos360-backend` y `pedidos360-frontend` como carpetas hermanas. Los comandos siguientes se ejecutan desde este repositorio, en una terminal WSL con el toolchain Linux disponible:

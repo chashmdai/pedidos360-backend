@@ -4,6 +4,8 @@ FASE 2 y FASE 3 verifican el runtime local en WSL2. FASE 5 desplegó EC2, RDS y 
 
 **Estado al cerrar la entrega:** el usuario informó que AWS está apagado. FASE 7 usa las evidencias fechadas ya obtenidas; no se realizaron consultas ni pruebas AWS posteriores a ese aviso. Los estados healthy/available que aparecen en los informes son observaciones previas, no una afirmación de disponibilidad actual. No se infiere que los recursos hayan sido eliminados.
 
+Para una sesión nueva del laboratorio, consultar la guía operativa [ARRANQUE_LABORATORIO.md](ARRANQUE_LABORATORIO.md), que comienza con la renovación de las tres credenciales temporales y evita repetir etapas de creación.
+
 ## Entorno local reproducible
 
 Mantener los dos repositorios como carpetas hermanas y una terminal WSL abierta. Desde `pedidos360-backend`, con Java 25, Maven Linux, Node 24 y Docker Linux:
