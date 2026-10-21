@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-parent</artifactId><version>4.1.1</version><relativePath/></parent>
+  <groupId>cl.duoc.pedidos360</groupId><artifactId>pedidos360-backend</artifactId><version>0.1.0-SNAPSHOT</version><packaging>pom</packaging>
+  <name>Pedidos360 backend</name>
+  <modules><module>messaging-support</module><module>catalog-service</module><module>orders-service</module><module>bff</module><module>receipts-service</module><module>rabbit-admin-service</module></modules>
+  <properties><java.version>25</java.version></properties>
+  <dependencies>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-webmvc</artifactId></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-validation</artifactId></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-security-oauth2-resource-server</artifactId></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-actuator</artifactId></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-test</artifactId><scope>test</scope></dependency>
+  </dependencies>
+  <build><plugins>
+    <plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId>
+      <configuration>
+        <argLine>--enable-native-access=ALL-UNNAMED -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar</argLine>
+        <environmentVariables><TESTCONTAINERS_RYUK_DISABLED>true</TESTCONTAINERS_RYUK_DISABLED></environmentVariables>
+      </configuration>
+    </plugin>
+  </plugins></build>
+  <profiles>
+    <profile>
+      <id>native-wsl-output</id>
+      <activation><property><name>pedidos.build.root</name></property></activation>
+      <build><directory>${pedidos.build.root}/${project.artifactId}</directory></build>
+    </profile>
+  </profiles>
+</project>

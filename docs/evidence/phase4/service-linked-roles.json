@@ -1,0 +1,5 @@
+{
+  "at": "2026-09-06T14:42:04.4650189Z",
+  "exitCode": 0,
+  "output": "[\n    {\n        \"Name\": \"AWSServiceRoleForAPIGateway\",\n        \"Arn\": \"arn:aws:iam::002996184293:role/aws-service-role/ops.apigateway.amazonaws.com/AWSServiceRoleForAPIGateway\",\n        \"Path\": \"/aws-service-role/ops.apigateway.amazonaws.com/\"\n    },\n    {\n        \"Name\": \"AWSServiceRoleForElasticLoadBalancing\",\n        \"Arn\": \"arn:aws:iam::002996184293:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing\",\n        \"Path\": \"/aws-service-role/elasticloadbalancing.amazonaws.com/\"\n    },\n    {\n        \"Name\": \"AWSServiceRoleForRDS\",\n        \"Arn\": \"arn:aws:iam::002996184293:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS\",\n        \"Path\": \"/aws-service-role/rds.amazonaws.com/\"\n    }\n]"
+}

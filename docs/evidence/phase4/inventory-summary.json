@@ -1,0 +1,402 @@
+[
+  {
+    "region": "us-east-1",
+    "name": "addresses",
+    "at": "2026-09-06T09:57:26.2978415Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "cloudmap-namespaces",
+    "at": "2026-09-06T09:57:52.3112339Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "cloudmap-services",
+    "at": "2026-09-06T09:57:54.5867631Z",
+    "exitCode": 254,
+    "count": null,
+    "error": "\r\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the ListServices operation: User: arn:aws:sts::002996184293:assumed-role/voclabs/user3301432=BENJAMIN__TORREJON is not authorized to perform: servicediscovery:ListServices on resource: arn:aws:servicediscovery:us-east-1:002996184293:*/* because no identity-based policy allows the servicediscovery:ListServices action\r\n"
+  },
+  {
+    "region": "us-east-1",
+    "name": "http-apis",
+    "at": "2026-09-06T09:57:40.2167844Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "instances",
+    "at": "2026-09-06T09:57:21.7539643Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "internet-gateways",
+    "at": "2026-09-06T09:57:15.1084108Z",
+    "exitCode": 0,
+    "count": 1,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "key-pairs",
+    "at": "2026-09-06T09:57:28.5153368Z",
+    "exitCode": 0,
+    "count": 1,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "load-balancers",
+    "at": "2026-09-06T09:57:47.5676667Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "managed-instances",
+    "at": "2026-09-06T09:57:59.4602105Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "nat-gateways",
+    "at": "2026-09-06T09:57:17.3356198Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "rds-clusters",
+    "at": "2026-09-06T09:57:33.739999Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "rds-instances",
+    "at": "2026-09-06T09:57:30.7205166Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "rds-snapshots",
+    "at": "2026-09-06T09:57:37.9902514Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "rds-subnet-groups",
+    "at": "2026-09-06T09:57:35.8461592Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "rest-apis",
+    "at": "2026-09-06T09:57:45.562036Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "route-tables",
+    "at": "2026-09-06T09:57:10.5274699Z",
+    "exitCode": 0,
+    "count": 1,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "security-groups",
+    "at": "2026-09-06T09:57:12.7728862Z",
+    "exitCode": 0,
+    "count": 1,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "stacks",
+    "at": "2026-09-06T09:57:56.6006853Z",
+    "exitCode": 0,
+    "count": 1,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "subnets",
+    "at": "2026-09-06T09:57:08.235542Z",
+    "exitCode": 0,
+    "count": 6,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "tagged-resources",
+    "at": "2026-09-06T09:58:02.3750136Z",
+    "exitCode": 0,
+    "count": 13,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "target-groups",
+    "at": "2026-09-06T09:57:50.3643935Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "volumes",
+    "at": "2026-09-06T09:57:24.0395055Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "vpc-endpoints",
+    "at": "2026-09-06T09:57:19.5494438Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "vpc-links-v2",
+    "at": "2026-09-06T09:57:43.3817327Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-east-1",
+    "name": "vpcs",
+    "at": "2026-09-06T09:57:05.0122514Z",
+    "exitCode": 0,
+    "count": 1,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "addresses",
+    "at": "2026-09-06T14:35:13.4721191Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "cloudmap-namespaces",
+    "at": "2026-09-06T14:35:44.9339548Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "cloudmap-services",
+    "at": "2026-09-06T14:35:47.7627084Z",
+    "exitCode": 254,
+    "count": null,
+    "error": "\r\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the ListServices operation: User: arn:aws:sts::002996184293:assumed-role/voclabs/user3301432=BENJAMIN__TORREJON is not authorized to perform: servicediscovery:ListServices on resource: arn:aws:servicediscovery:us-west-2:002996184293:*/* because no identity-based policy allows the servicediscovery:ListServices action\r\n"
+  },
+  {
+    "region": "us-west-2",
+    "name": "http-apis",
+    "at": "2026-09-06T14:35:29.5579903Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "instances",
+    "at": "2026-09-06T14:35:08.238219Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "internet-gateways",
+    "at": "2026-09-06T14:35:00.3434847Z",
+    "exitCode": 0,
+    "count": 1,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "key-pairs",
+    "at": "2026-09-06T14:35:16.072467Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "load-balancers",
+    "at": "2026-09-06T14:35:37.446132Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "managed-instances",
+    "at": "2026-09-06T14:35:53.9784997Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "nat-gateways",
+    "at": "2026-09-06T14:35:03.0194579Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "rds-clusters",
+    "at": "2026-09-06T14:35:22.2408886Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "rds-instances",
+    "at": "2026-09-06T14:35:18.5425501Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "rds-snapshots",
+    "at": "2026-09-06T14:35:27.0182332Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "rds-subnet-groups",
+    "at": "2026-09-06T14:35:24.7659468Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "rest-apis",
+    "at": "2026-09-06T14:35:34.9474177Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "route-tables",
+    "at": "2026-09-06T14:34:53.919248Z",
+    "exitCode": 0,
+    "count": 1,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "security-groups",
+    "at": "2026-09-06T14:34:56.5666872Z",
+    "exitCode": 0,
+    "count": 1,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "stacks",
+    "at": "2026-09-06T14:35:50.2191828Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "subnets",
+    "at": "2026-09-06T14:34:51.2183371Z",
+    "exitCode": 0,
+    "count": 4,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "tagged-resources",
+    "at": "2026-09-06T14:35:57.7608311Z",
+    "exitCode": 0,
+    "count": 2,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "target-groups",
+    "at": "2026-09-06T14:35:41.4993741Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "volumes",
+    "at": "2026-09-06T14:35:10.741478Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "vpc-endpoints",
+    "at": "2026-09-06T14:35:05.6042104Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "vpc-links-v2",
+    "at": "2026-09-06T14:35:32.2675368Z",
+    "exitCode": 0,
+    "count": 0,
+    "error": null
+  },
+  {
+    "region": "us-west-2",
+    "name": "vpcs",
+    "at": "2026-09-06T14:34:47.2713146Z",
+    "exitCode": 0,
+    "count": 1,
+    "error": null
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "tenantId": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+  "apiClientId": "114f7b58-b207-4d46-9d6e-f491c3a0c0e0",
+  "spaClientId": "b4ede06a-cde3-4982-8b79-56fab7264fdd",
+  "scopes": ["Catalog.Read", "Orders.Read", "Orders.Create"]
+}

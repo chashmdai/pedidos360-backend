@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T09:45:14.775820+00:00",
+  "git_diff_check": "PASS",
+  "files_scanned": {
+    "pedidos360-backend": 161,
+    "pedidos360-frontend": 33
+  },
+  "high_confidence_secret_patterns": [
+    "private_key",
+    "jwt",
+    "aws_access_id"
+  ],
+  "known_local_secret_values_compared": 5,
+  "matches": 0,
+  "fixture_port_8190_closed": true,
+  "frontend_css_asset_unchanged": true,
+  "note": "Pattern and known-value scan of eligible repository files, not an absolute proof of absence of every possible secret."
+}

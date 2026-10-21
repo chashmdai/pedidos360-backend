@@ -1,0 +1,9 @@
+{
+  "API destinataria (audience)": "114f7b58-b207-4d46-9d6e-f491c3a0c0e0",
+  "Cliente autorizado": "b4ede06a-cde3-4982-8b79-56fab7264fdd",
+  "Emisor": "https://login.microsoftonline.com/72fd0b5a-8a6a-4cff-89f6-bde961f7e250/v2.0",
+  "Permisos de la API": "Catalog.Read · Orders.Create · Orders.Read",
+  "Versión de token": "2.0",
+  "role": "User",
+  "Última adquisición": "Adquisición silenciosa · desde caché MSAL"
+}

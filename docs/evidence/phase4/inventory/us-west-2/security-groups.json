@@ -1,0 +1,53 @@
+{
+  "at": "2026-09-06T14:34:56.5666872Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-security-groups",
+    "--region",
+    "us-west-2",
+    "--query",
+    "SecurityGroups[].{Id:GroupId,Vpc:VpcId,Name:GroupName,Description:Description,Ingress:IpPermissions,Egress:IpPermissionsEgress,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [
+    {
+      "Id": "sg-02a3466c7fa6f0bee",
+      "Vpc": "vpc-06ae700022d76672e",
+      "Name": "default",
+      "Description": "default VPC security group",
+      "Ingress": [
+        {
+          "IpProtocol": "-1",
+          "UserIdGroupPairs": [
+            {
+              "UserId": "002996184293",
+              "GroupId": "sg-02a3466c7fa6f0bee"
+            }
+          ],
+          "IpRanges": [],
+          "Ipv6Ranges": [],
+          "PrefixListIds": []
+        }
+      ],
+      "Egress": [
+        {
+          "IpProtocol": "-1",
+          "UserIdGroupPairs": [],
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": []
+        }
+      ],
+      "Tags": null
+    }
+  ],
+  "error": null
+}

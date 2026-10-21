@@ -1,0 +1,7 @@
+identity: RUNNING port=8190 mode=local
+catalog-service: RUNNING port=19181 mode=local
+orders-service: RUNNING port=19182 mode=local
+bff: RUNNING port=19180 mode=local
+receipts-service: RUNNING port=19183 mode=local
+rabbit-admin-service: RUNNING port=19184 mode=local
+frontend: RUNNING port=5173 mode=local

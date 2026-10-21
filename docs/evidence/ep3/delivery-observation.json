@@ -1,0 +1,11 @@
+{
+  "orderId": "664d2a0e-31bb-464c-bf6f-7ce434b6ec98",
+  "eventId": "abf09157-56cf-449a-a52c-14daa541eb90",
+  "states": [
+    "Ready",
+    "Unacked during retry",
+    "ACK after storage"
+  ],
+  "temporaryRetryDelayMs": 5000,
+  "restoredRetryDelayMs": 1000
+}

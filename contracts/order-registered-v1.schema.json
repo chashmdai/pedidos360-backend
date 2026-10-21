@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pedidos360:order-registered:v1",
+  "title": "OrderRegisteredV1",
+  "description": "Technical transport contract, without access tokens, user identity or shared domain entities.",
+  "type": "object",
+  "required": ["schemaVersion", "eventId", "orderId", "tenantId", "occurredAt", "total", "currency", "itemCount"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "eventId": {"type": "string", "format": "uuid"},
+    "orderId": {"type": "string", "format": "uuid"},
+    "tenantId": {"type": "string", "minLength": 1, "maxLength": 100},
+    "occurredAt": {"type": "string", "format": "date-time"},
+    "total": {"type": "number", "minimum": 0, "multipleOf": 0.01},
+    "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "itemCount": {"type": "integer", "minimum": 1, "maximum": 50}
+  }
+}

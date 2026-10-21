@@ -1,0 +1,59 @@
+{
+  "at": "2026-09-06T14:34:51.2183371Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-subnets",
+    "--region",
+    "us-west-2",
+    "--query",
+    "Subnets[].{Id:SubnetId,Vpc:VpcId,AZ:AvailabilityZone,Cidr:CidrBlock,Default:DefaultForAz,PublicIp:MapPublicIpOnLaunch,Available:AvailableIpAddressCount,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [
+    {
+      "Id": "subnet-038196ca645d800ba",
+      "Vpc": "vpc-06ae700022d76672e",
+      "AZ": "us-west-2c",
+      "Cidr": "172.31.0.0/20",
+      "Default": true,
+      "PublicIp": true,
+      "Available": 4091,
+      "Tags": null
+    },
+    {
+      "Id": "subnet-0d9153ab8b0ddedc7",
+      "Vpc": "vpc-06ae700022d76672e",
+      "AZ": "us-west-2a",
+      "Cidr": "172.31.16.0/20",
+      "Default": true,
+      "PublicIp": true,
+      "Available": 4091,
+      "Tags": null
+    },
+    {
+      "Id": "subnet-041f0dc965ec87e13",
+      "Vpc": "vpc-06ae700022d76672e",
+      "AZ": "us-west-2b",
+      "Cidr": "172.31.32.0/20",
+      "Default": true,
+      "PublicIp": true,
+      "Available": 4091,
+      "Tags": null
+    },
+    {
+      "Id": "subnet-0ed196300cb0cd212",
+      "Vpc": "vpc-06ae700022d76672e",
+      "AZ": "us-west-2d",
+      "Cidr": "172.31.48.0/20",
+      "Default": true,
+      "PublicIp": true,
+      "Available": 4091,
+      "Tags": null
+    }
+  ],
+  "error": null
+}

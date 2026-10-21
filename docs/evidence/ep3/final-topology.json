@@ -1,0 +1,314 @@
+{
+  "queues": [
+    {
+      "arguments": {
+        "x-queue-type": "classic"
+      },
+      "auto_delete": false,
+      "consumer_capacity": 0,
+      "consumer_utilisation": 0,
+      "consumers": 0,
+      "durable": true,
+      "effective_policy_definition": {},
+      "exclusive": false,
+      "internal": false,
+      "internal_owner": false,
+      "memory": 88968,
+      "message_bytes": 2036,
+      "message_bytes_paged_out": 0,
+      "message_bytes_persistent": 2036,
+      "message_bytes_ram": 2036,
+      "message_bytes_ready": 2036,
+      "message_bytes_unacknowledged": 0,
+      "message_stats": {
+        "ack": 0,
+        "ack_details": {
+          "rate": 0.0
+        },
+        "deliver": 0,
+        "deliver_details": {
+          "rate": 0.0
+        },
+        "deliver_get": 33,
+        "deliver_get_details": {
+          "rate": 0.0
+        },
+        "deliver_no_ack": 0,
+        "deliver_no_ack_details": {
+          "rate": 0.0
+        },
+        "get": 33,
+        "get_details": {
+          "rate": 0.0
+        },
+        "get_empty": 2,
+        "get_empty_details": {
+          "rate": 0.0
+        },
+        "get_no_ack": 0,
+        "get_no_ack_details": {
+          "rate": 0.0
+        },
+        "redeliver": 32,
+        "redeliver_details": {
+          "rate": 0.0
+        }
+      },
+      "messages": 12,
+      "messages_details": {
+        "rate": 0.0
+      },
+      "messages_paged_out": 0,
+      "messages_persistent": 12,
+      "messages_ram": 12,
+      "messages_ready": 12,
+      "messages_ready_details": {
+        "rate": 0.0
+      },
+      "messages_ready_ram": 12,
+      "messages_unacknowledged": 0,
+      "messages_unacknowledged_details": {
+        "rate": 0.0
+      },
+      "messages_unacknowledged_ram": 0,
+      "name": "pedidos360.receipts.failed.v1",
+      "node": "rabbit@pedidos360-ep3-rabbitmq",
+      "reductions": 51079,
+      "reductions_details": {
+        "rate": 0.0
+      },
+      "state": "running",
+      "storage_version": 2,
+      "type": "classic",
+      "vhost": "pedidos360-ep3"
+    },
+    {
+      "arguments": {
+        "x-dead-letter-exchange": "pedidos360.receipts.errors.v1",
+        "x-dead-letter-routing-key": "receipt.failed.v1",
+        "x-queue-type": "classic"
+      },
+      "auto_delete": false,
+      "consumer_capacity": 1.0,
+      "consumer_utilisation": 1.0,
+      "consumers": 1,
+      "durable": true,
+      "effective_policy_definition": {},
+      "exclusive": false,
+      "internal": false,
+      "internal_owner": false,
+      "memory": 22056,
+      "message_bytes": 0,
+      "message_bytes_paged_out": 0,
+      "message_bytes_persistent": 0,
+      "message_bytes_ram": 0,
+      "message_bytes_ready": 0,
+      "message_bytes_unacknowledged": 0,
+      "message_stats": {
+        "ack": 4,
+        "ack_details": {
+          "rate": 0.0
+        },
+        "deliver": 4,
+        "deliver_details": {
+          "rate": 0.0
+        },
+        "deliver_get": 4,
+        "deliver_get_details": {
+          "rate": 0.0
+        },
+        "deliver_no_ack": 0,
+        "deliver_no_ack_details": {
+          "rate": 0.0
+        },
+        "get": 0,
+        "get_details": {
+          "rate": 0.0
+        },
+        "get_empty": 0,
+        "get_empty_details": {
+          "rate": 0.0
+        },
+        "get_no_ack": 0,
+        "get_no_ack_details": {
+          "rate": 0.0
+        },
+        "publish": 4,
+        "publish_details": {
+          "rate": 0.0
+        },
+        "redeliver": 0,
+        "redeliver_details": {
+          "rate": 0.0
+        }
+      },
+      "messages": 0,
+      "messages_details": {
+        "rate": 0.0
+      },
+      "messages_paged_out": 0,
+      "messages_persistent": 0,
+      "messages_ram": 0,
+      "messages_ready": 0,
+      "messages_ready_details": {
+        "rate": 0.0
+      },
+      "messages_ready_ram": 0,
+      "messages_unacknowledged": 0,
+      "messages_unacknowledged_details": {
+        "rate": 0.0
+      },
+      "messages_unacknowledged_ram": 0,
+      "name": "pedidos360.receipts.order-registered.v1",
+      "node": "rabbit@pedidos360-ep3-rabbitmq",
+      "reductions": 33493,
+      "reductions_details": {
+        "rate": 0.0
+      },
+      "state": "running",
+      "storage_version": 2,
+      "type": "classic",
+      "vhost": "pedidos360-ep3"
+    }
+  ],
+  "exchanges": [
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "name": "",
+      "type": "direct",
+      "user_who_performed_action": "rmq-internal",
+      "vhost": "pedidos360-ep3"
+    },
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "name": "amq.direct",
+      "type": "direct",
+      "user_who_performed_action": "rmq-internal",
+      "vhost": "pedidos360-ep3"
+    },
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "name": "amq.fanout",
+      "type": "fanout",
+      "user_who_performed_action": "rmq-internal",
+      "vhost": "pedidos360-ep3"
+    },
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "name": "amq.headers",
+      "type": "headers",
+      "user_who_performed_action": "rmq-internal",
+      "vhost": "pedidos360-ep3"
+    },
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "name": "amq.match",
+      "type": "headers",
+      "user_who_performed_action": "rmq-internal",
+      "vhost": "pedidos360-ep3"
+    },
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "internal": true,
+      "name": "amq.rabbitmq.trace",
+      "type": "topic",
+      "user_who_performed_action": "rmq-internal",
+      "vhost": "pedidos360-ep3"
+    },
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "name": "amq.topic",
+      "type": "topic",
+      "user_who_performed_action": "rmq-internal",
+      "vhost": "pedidos360-ep3"
+    },
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "message_stats": {
+        "publish_in": 4,
+        "publish_in_details": {
+          "rate": 0.0
+        },
+        "publish_out": 4,
+        "publish_out_details": {
+          "rate": 0.0
+        }
+      },
+      "name": "pedidos360.orders.events.v1",
+      "type": "direct",
+      "user_who_performed_action": "pedidos360_ep3_consumer",
+      "vhost": "pedidos360-ep3"
+    },
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "name": "pedidos360.receipts.errors.v1",
+      "type": "direct",
+      "user_who_performed_action": "pedidos360_ep3_consumer",
+      "vhost": "pedidos360-ep3"
+    }
+  ],
+  "bindings": [
+    {
+      "source": "",
+      "vhost": "pedidos360-ep3",
+      "destination": "pedidos360.receipts.failed.v1",
+      "destination_type": "queue",
+      "routing_key": "pedidos360.receipts.failed.v1",
+      "arguments": {},
+      "properties_key": "pedidos360.receipts.failed.v1"
+    },
+    {
+      "source": "",
+      "vhost": "pedidos360-ep3",
+      "destination": "pedidos360.receipts.order-registered.v1",
+      "destination_type": "queue",
+      "routing_key": "pedidos360.receipts.order-registered.v1",
+      "arguments": {},
+      "properties_key": "pedidos360.receipts.order-registered.v1"
+    },
+    {
+      "source": "pedidos360.orders.events.v1",
+      "vhost": "pedidos360-ep3",
+      "destination": "pedidos360.receipts.order-registered.v1",
+      "destination_type": "queue",
+      "routing_key": "order.registered.v1",
+      "arguments": {},
+      "properties_key": "order.registered.v1"
+    },
+    {
+      "source": "pedidos360.receipts.errors.v1",
+      "vhost": "pedidos360-ep3",
+      "destination": "pedidos360.receipts.failed.v1",
+      "destination_type": "queue",
+      "routing_key": "receipt.failed.v1",
+      "arguments": {},
+      "properties_key": "receipt.failed.v1"
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Pedidos360 backend                                                 [pom]
+[INFO] messaging-support                                                  [jar]
+[INFO] catalog-service                                                    [jar]
+[INFO] orders-service                                                     [jar]
+[INFO] bff                                                                [jar]
+[INFO] receipts-service                                                   [jar]
+[INFO] rabbit-admin-service                                               [jar]
+[INFO] 
+[INFO] ---------------< cl.duoc.pedidos360:pedidos360-backend >----------------
+[INFO] Building Pedidos360 backend 0.1.0-SNAPSHOT                         [1/7]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ pedidos360-backend ---
+[INFO] 
+[INFO] ----------------< cl.duoc.pedidos360:messaging-support >----------------
+[INFO] Building messaging-support 0.1.0-SNAPSHOT                          [2/7]
+[INFO]   from messaging-support/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ messaging-support ---
+[INFO] Copying 0 resource from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/messaging-support/classes
+[INFO] Copying 1 resource from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/messaging-support/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ messaging-support ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/messaging-support/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ messaging-support ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/messaging-support/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ messaging-support ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ messaging-support ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ messaging-support ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/messaging-support/messaging-support-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ messaging-support ---
+[INFO] 
+[INFO] -----------------< cl.duoc.pedidos360:catalog-service >-----------------
+[INFO] Building catalog-service 0.1.0-SNAPSHOT                            [3/7]
+[INFO]   from catalog-service/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ catalog-service ---
+[INFO] Copying 4 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/catalog-service/classes
+[INFO] Copying 2 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/catalog-service/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ catalog-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 11 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/catalog-service/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ catalog-service ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ catalog-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/catalog-service/test-classes
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service/src/test/java/cl/duoc/pedidos360/catalog/CatalogIntegrationTest.java: /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service/src/test/java/cl/duoc/pedidos360/catalog/CatalogIntegrationTest.java uses or overrides a deprecated API.
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service/src/test/java/cl/duoc/pedidos360/catalog/CatalogIntegrationTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ catalog-service ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ catalog-service ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/catalog-service/catalog-service-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ catalog-service ---
+[INFO] Replacing main artifact /home/codex/.cache/pedidos360-ep3/build/catalog-service/catalog-service-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /home/codex/.cache/pedidos360-ep3/build/catalog-service/catalog-service-0.1.0-SNAPSHOT.jar.original
+[INFO] 
+[INFO] -----------------< cl.duoc.pedidos360:orders-service >------------------
+[INFO] Building orders-service 0.1.0-SNAPSHOT                             [4/7]
+[INFO]   from orders-service/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ orders-service ---
+[INFO] Copying 4 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/orders-service/classes
+[INFO] Copying 2 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/orders-service/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ orders-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 22 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/orders-service/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ orders-service ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/orders-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ orders-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/orders-service/test-classes
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/orders-service/src/test/java/cl/duoc/pedidos360/orders/OrdersIntegrationTest.java: /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/orders-service/src/test/java/cl/duoc/pedidos360/orders/OrdersIntegrationTest.java uses or overrides a deprecated API.
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/orders-service/src/test/java/cl/duoc/pedidos360/orders/OrdersIntegrationTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ orders-service ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ orders-service ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/orders-service/orders-service-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ orders-service ---
+[INFO] Replacing main artifact /home/codex/.cache/pedidos360-ep3/build/orders-service/orders-service-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /home/codex/.cache/pedidos360-ep3/build/orders-service/orders-service-0.1.0-SNAPSHOT.jar.original
+[INFO] 
+[INFO] -----------------------< cl.duoc.pedidos360:bff >-----------------------
+[INFO] Building bff 0.1.0-SNAPSHOT                                        [5/7]
+[INFO]   from bff/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ bff ---
+[INFO] Copying 3 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/bff/classes
+[INFO] Copying 0 resource from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/bff/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ bff ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 5 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/bff/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ bff ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/bff/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ bff ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/bff/test-classes
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/bff/src/test/java/cl/duoc/pedidos360/bff/BffContractTest.java: /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/bff/src/test/java/cl/duoc/pedidos360/bff/BffContractTest.java uses or overrides a deprecated API.
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/bff/src/test/java/cl/duoc/pedidos360/bff/BffContractTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ bff ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ bff ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/bff/bff-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ bff ---
+[INFO] Replacing main artifact /home/codex/.cache/pedidos360-ep3/build/bff/bff-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /home/codex/.cache/pedidos360-ep3/build/bff/bff-0.1.0-SNAPSHOT.jar.original
+[INFO] 
+[INFO] ----------------< cl.duoc.pedidos360:receipts-service >-----------------
+[INFO] Building receipts-service 0.1.0-SNAPSHOT                           [6/7]
+[INFO]   from receipts-service/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers-rabbitmq/2.0.5/testcontainers-rabbitmq-2.0.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers-rabbitmq/2.0.5/testcontainers-rabbitmq-2.0.5.pom (1.5 kB at 2.7 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers-rabbitmq/2.0.5/testcontainers-rabbitmq-2.0.5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers-rabbitmq/2.0.5/testcontainers-rabbitmq-2.0.5.jar (11 kB at 178 kB/s)
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ receipts-service ---
+[INFO] Copying 2 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/receipts-service/classes
+[INFO] Copying 0 resource from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/receipts-service/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ receipts-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/receipts-service/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ receipts-service ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/receipts-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ receipts-service ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ receipts-service ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ receipts-service ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/receipts-service/receipts-service-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ receipts-service ---
+[INFO] Replacing main artifact /home/codex/.cache/pedidos360-ep3/build/receipts-service/receipts-service-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /home/codex/.cache/pedidos360-ep3/build/receipts-service/receipts-service-0.1.0-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --------------< cl.duoc.pedidos360:rabbit-admin-service >---------------
+[INFO] Building rabbit-admin-service 0.1.0-SNAPSHOT                       [7/7]
+[INFO]   from rabbit-admin-service/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ rabbit-admin-service ---
+[INFO] Copying 2 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/classes
+[INFO] Copying 0 resource from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ rabbit-admin-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ rabbit-admin-service ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/rabbit-admin-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ rabbit-admin-service ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ rabbit-admin-service ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ rabbit-admin-service ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/rabbit-admin-service-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ rabbit-admin-service ---
+[INFO] Replacing main artifact /home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/rabbit-admin-service-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/rabbit-admin-service-0.1.0-SNAPSHOT.jar.original
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Pedidos360 backend 0.1.0-SNAPSHOT:
+[INFO] 
+[INFO] Pedidos360 backend ................................. SUCCESS [  1.700 s]
+[INFO] messaging-support .................................. SUCCESS [  4.398 s]
+[INFO] catalog-service .................................... SUCCESS [  8.046 s]
+[INFO] orders-service ..................................... SUCCESS [  8.530 s]
+[INFO] bff ................................................ SUCCESS [  3.485 s]
+[INFO] receipts-service ................................... SUCCESS [  3.416 s]
+[INFO] rabbit-admin-service ............................... SUCCESS [  1.843 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  32.554 s
+[INFO] Finished at: 2026-10-20T21:57:23-03:00
+[INFO] ------------------------------------------------------------------------

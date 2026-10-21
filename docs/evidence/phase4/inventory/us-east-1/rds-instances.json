@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T09:57:30.7205166Z",
+  "command": [
+    "aws",
+    "rds",
+    "describe-db-instances",
+    "--region",
+    "us-east-1",
+    "--query",
+    "DBInstances[].{Id:DBInstanceIdentifier,Arn:DBInstanceArn,Engine:Engine,Version:EngineVersion,Class:DBInstanceClass,Status:DBInstanceStatus,Public:PubliclyAccessible,Encrypted:StorageEncrypted,MultiAZ:MultiAZ,SubnetGroup:DBSubnetGroup,Groups:VpcSecurityGroups,Tags:TagList}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

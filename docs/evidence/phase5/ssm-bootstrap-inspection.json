@@ -1,0 +1,22 @@
+{
+  "CommandId": "8f3a3771-ff28-473c-a22b-c2590cf17f1b",
+  "InstanceId": "i-0818fdfafcfb7cb31",
+  "Comment": "Pedidos360 own EC2 bootstrap and SSH host public key verification",
+  "DocumentName": "AWS-RunShellScript",
+  "DocumentVersion": "$DEFAULT",
+  "PluginName": "aws:runShellScript",
+  "ResponseCode": 0,
+  "ExecutionStartDateTime": "2026-09-06T15:15:41.038Z",
+  "ExecutionElapsedTime": "PT0.04S",
+  "ExecutionEndDateTime": "2026-09-06T15:15:41.038Z",
+  "Status": "Success",
+  "StatusDetails": "Success",
+  "StandardOutputContent": "{\"hostKey\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFsBKslQ2fD5h9ucya7VJjAeviv+KIL2EoIh9k6hxfiK root@ip-10-36-0-38\", \"bootstrapComplete\": true, \"javaInstalled\": true}\n",
+  "StandardOutputUrl": "",
+  "StandardErrorContent": "",
+  "StandardErrorUrl": "",
+  "CloudWatchOutputConfig": {
+    "CloudWatchLogGroupName": "",
+    "CloudWatchOutputEnabled": false
+  }
+}

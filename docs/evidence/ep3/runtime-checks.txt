@@ -1,0 +1,16 @@
+PASS T03 health of five Spring services and isolated broker
+PASS T05 explicit application and DLQ topology
+PASS T11 JWT required and Admin AND Orders.Read enforced
+PASS T06 signed JWT business order -> transactional outbox -> broker -> durable receipt -> ACK
+PASS T12 order snapshot contract, owner isolation and previous authorization preserved
+PASS T06 identical redelivery is idempotent and ACKed
+PASS T07 malformed event NACK without requeue -> native DLX -> DLQ
+PASS T08 real temporary filesystem failure recovers within three attempts
+PASS T08 exhausted storage failure NACKs once after exactly three attempts
+PASS T07 conflicting duplicate rejected without replacing stored receipt
+PASS T09/T10 administrator creates, queries and deletes sandbox queue/exchange/binding; correct 201/200/204/400/403/404/409; nonempty data protected
+PASS T10 management failure is HTTP 503, never a false success
+PASS T13 broker outage does not prevent 201 or persistence; outbox stays pending
+PASS T13 same broker container/volume recovers pending publication and retains DLQ
+PASS T12 all preexisting orders/lines unchanged and Catalog rows unchanged
+All EP3 runtime checks passed: 15

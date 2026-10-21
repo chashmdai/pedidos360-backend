@@ -1,0 +1,88 @@
+NAME                      IMAGE                                                                                               COMMAND                  SERVICE    CREATED          STATUS                   PORTS
+pedidos360-ep3-rabbitmq   rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be   "/bin/sh /opt/pedido…"   rabbitmq   27 minutes ago   Up 7 minutes (healthy)   4369/tcp, 5671/tcp, 127.0.0.1:5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 127.0.0.1:15672->15672/tcp
+Cluster status of node rabbit@pedidos360-ep3-rabbitmq ...
+Basics
+
+Cluster name: rabbit@pedidos360-ep3-rabbitmq
+Total CPU cores available cluster-wide: 8
+
+Cluster Tags
+
+(none)
+
+Disk Nodes
+
+rabbit@pedidos360-ep3-rabbitmq
+
+Running Nodes
+
+rabbit@pedidos360-ep3-rabbitmq
+
+Versions
+
+rabbit@pedidos360-ep3-rabbitmq: RabbitMQ 4.2.9 on Erlang 27.3.4.19
+
+CPU Cores
+
+Node: rabbit@pedidos360-ep3-rabbitmq, available CPU cores: 8
+
+Maintenance status
+
+Node: rabbit@pedidos360-ep3-rabbitmq, status: not under maintenance
+
+Alarms
+
+(none)
+
+Network Partitions
+
+(none)
+
+Listeners
+
+Node: rabbit@pedidos360-ep3-rabbitmq, interface: [::], port: 15672, protocol: http, purpose: HTTP API
+Node: rabbit@pedidos360-ep3-rabbitmq, interface: [::], port: 15692, protocol: http/prometheus, purpose: Prometheus exporter API over HTTP
+Node: rabbit@pedidos360-ep3-rabbitmq, interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication
+Node: rabbit@pedidos360-ep3-rabbitmq, interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
+
+Feature flags
+
+Flag: classic_mirrored_queue_version, state: enabled
+Flag: classic_queue_type_delivery_support, state: enabled
+Flag: detailed_queues_endpoint, state: enabled
+Flag: direct_exchange_routing_v2, state: enabled
+Flag: drop_unroutable_metric, state: enabled
+Flag: empty_basic_get_metric, state: enabled
+Flag: feature_flags_v2, state: enabled
+Flag: implicit_default_bindings, state: enabled
+Flag: khepri_db, state: enabled
+Flag: listener_records_in_ets, state: enabled
+Flag: maintenance_mode_status, state: enabled
+Flag: message_containers, state: enabled
+Flag: message_containers_deaths_v2, state: enabled
+Flag: quorum_queue, state: enabled
+Flag: quorum_queue_non_voters, state: enabled
+Flag: rabbit_exchange_type_local_random, state: enabled
+Flag: rabbitmq_4.0.0, state: enabled
+Flag: rabbitmq_4.1.0, state: enabled
+Flag: rabbitmq_4.2.0, state: enabled
+Flag: restart_streams, state: enabled
+Flag: stream_filtering, state: enabled
+Flag: stream_queue, state: enabled
+Flag: stream_sac_coordinator_unblock_group, state: enabled
+Flag: stream_single_active_consumer, state: enabled
+Flag: stream_update_config_command, state: enabled
+Flag: tracking_records_in_ets, state: enabled
+Flag: user_limits, state: enabled
+Flag: virtual_host_metadata, state: enabled
+Timeout: 60.0 seconds ...
+Listing queues for vhost pedidos360-ep3 ...
+name	type	messages_ready	messages_unacknowledged	consumers	durable	arguments
+pedidos360.receipts.failed.v1	classic	9	0	0	true	[{"x-queue-type","classic"}]
+pedidos360.receipts.order-registered.v1	classic	0	0	1	true	[{"x-dead-letter-exchange","pedidos360.receipts.errors.v1"},{"x-dead-letter-routing-key","receipt.failed.v1"},{"x-queue-type","classic"}]
+Listing bindings for vhost pedidos360-ep3...
+source_name	destination_name	routing_key
+	pedidos360.receipts.failed.v1	pedidos360.receipts.failed.v1
+	pedidos360.receipts.order-registered.v1	pedidos360.receipts.order-registered.v1
+pedidos360.orders.events.v1	pedidos360.receipts.order-registered.v1	order.registered.v1
+pedidos360.receipts.errors.v1	pedidos360.receipts.failed.v1	receipt.failed.v1

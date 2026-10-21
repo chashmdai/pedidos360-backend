@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T14:35:41.4993741Z",
+  "command": [
+    "aws",
+    "elbv2",
+    "describe-target-groups",
+    "--region",
+    "us-west-2",
+    "--query",
+    "TargetGroups[].{Name:TargetGroupName,Arn:TargetGroupArn,Protocol:Protocol,Port:Port,Vpc:VpcId,TargetType:TargetType}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

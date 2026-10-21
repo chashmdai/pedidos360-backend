@@ -1,0 +1,200 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-20T22:41:43.020-03:00  INFO 118341 --- [receipts-service] [           main] c.d.p.receipts.ReceiptsApplication       : Starting ReceiptsApplication v0.1.0-SNAPSHOT using Java 25.0.4.1 with PID 118341 (/home/codex/.cache/pedidos360-ep3/build/receipts-service/receipts-service-0.1.0-SNAPSHOT.jar started by codex in /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend)
+2026-10-20T22:41:43.033-03:00  INFO 118341 --- [receipts-service] [           main] c.d.p.receipts.ReceiptsApplication       : The following 2 profiles are active: "local", "ep3"
+2026-10-20T22:41:49.390-03:00  INFO 118341 --- [receipts-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 19183 (http)
+2026-10-20T22:41:49.514-03:00  INFO 118341 --- [receipts-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-20T22:41:49.514-03:00  INFO 118341 --- [receipts-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-20T22:41:49.689-03:00  INFO 118341 --- [receipts-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 6417 ms
+2026-10-20T22:41:56.793-03:00  INFO 118341 --- [receipts-service] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-20T22:41:57.137-03:00  INFO 118341 --- [receipts-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 19183 (http) with context path '/'
+2026-10-20T22:41:57.147-03:00  INFO 118341 --- [receipts-service] [           main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5672]
+2026-10-20T22:41:57.297-03:00  INFO 118341 --- [receipts-service] [           main] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#288728e:0/SimpleConnection@31b741e2 [delegate=amqp://pedidos360_ep3_consumer@127.0.0.1:5672/pedidos360-ep3, localPort=60664]
+2026-10-20T22:41:57.532-03:00  INFO 118341 --- [receipts-service] [           main] c.d.p.receipts.ReceiptsApplication       : Started ReceiptsApplication in 17.097 seconds (process running for 19.451)
+2026-10-20T22:41:57.828-03:00  INFO 118341 --- [receipts-service] [.1-19183-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-20T22:41:57.831-03:00  INFO 118341 --- [receipts-service] [.1-19183-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-20T22:41:57.834-03:00  INFO 118341 --- [receipts-service] [.1-19183-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-10-20T22:42:06.974-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : ACK eventId=6de5a7cd-a3a8-41bc-8fe1-da04f716334a orderId=1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79 result=RECEIPT_STORED attempt=1 redelivered=false
+2026-10-20T22:42:07.412-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : ACK eventId=6de5a7cd-a3a8-41bc-8fe1-da04f716334a orderId=1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79 result=DUPLICATE attempt=1 redelivered=false
+2026-10-20T22:42:07.677-03:00  WARN 118341 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : NACK_DLQ eventId=29f4b7a8-62bb-4b97-9132-dcaa09832062 reason=INVALID_CONTRACT deliveryTag=3
+2026-10-20T22:42:07.945-03:00  WARN 118341 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : RETRY eventId=b77087b0-6131-4631-b93c-acf9e22c2831 orderId=1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79 reason=STORAGE_UNAVAILABLE attempt=1 max=3
+2026-10-20T22:42:08.958-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : ACK eventId=b77087b0-6131-4631-b93c-acf9e22c2831 orderId=1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79 result=RECEIPT_STORED attempt=2 redelivered=false
+2026-10-20T22:42:09.206-03:00  WARN 118341 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : RETRY eventId=56a4c5b7-4493-4ebb-9c50-77590d0f5d7a orderId=1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79 reason=STORAGE_UNAVAILABLE attempt=1 max=3
+2026-10-20T22:42:10.207-03:00  WARN 118341 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : RETRY eventId=56a4c5b7-4493-4ebb-9c50-77590d0f5d7a orderId=1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79 reason=STORAGE_UNAVAILABLE attempt=2 max=3
+2026-10-20T22:42:11.208-03:00  WARN 118341 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : NACK_DLQ eventId=56a4c5b7-4493-4ebb-9c50-77590d0f5d7a orderId=1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79 reason=RETRY_EXHAUSTED attempts=3
+2026-10-20T22:42:11.263-03:00  WARN 118341 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : NACK_DLQ eventId=6de5a7cd-a3a8-41bc-8fe1-da04f716334a orderId=1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79 reason=PERMANENT_PROCESSING_ERROR
+2026-10-20T22:42:14.264-03:00  WARN 118341 --- [receipts-service] [eceipt-orders-1] o.s.a.r.l.SimpleMessageListenerContainer : Consumer raised exception, processing can restart if the connection factory supports it
+
+com.rabbitmq.client.ShutdownSignalException: connection error; protocol method: #method<connection.close>(reply-code=320, reply-text=CONNECTION_FORCED - broker forced connection closure with reason 'shutdown', class-id=0, method-id=0)
+	at com.rabbitmq.client.impl.AMQConnection.startShutdown(AMQConnection.java:1014) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection.shutdown(AMQConnection.java:1004) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection.handleConnectionClose(AMQConnection.java:942) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection.processControlCommand(AMQConnection.java:897) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection$1.processAsync(AMQConnection.java:276) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:193) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:125) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:748) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection.access$400(AMQConnection.java:49) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:695) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-10-20T22:42:14.269-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-1] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@7d3c22a5: tags=[[amq.ctag-UveQM-ZyqFSNG7z8Uw_KdQ]], channel=Cached Rabbit Channel: PublisherCallbackChannelImpl: AMQChannel(amqp://pedidos360_ep3_consumer@127.0.0.1:5672/pedidos360-ep3,1), conn: Proxy@44aed6a4 Shared Rabbit Connection: SimpleConnection@31b741e2 [delegate=amqp://pedidos360_ep3_consumer@127.0.0.1:5672/pedidos360-ep3, localPort=60664], acknowledgeMode=MANUAL local queue size=0
+2026-10-20T22:42:14.272-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-2] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5672]
+2026-10-20T22:42:14.274-03:00  WARN 118341 --- [receipts-service] [ 127.0.0.1:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occurred (Exception message: Connection reset)
+2026-10-20T22:42:14.278-03:00 ERROR 118341 --- [receipts-service] [eceipt-orders-2] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+
+org.springframework.amqp.AmqpIOException: java.io.IOException
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:69) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:629) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:746) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:256) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2239) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2211) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2191) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:472) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:456) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1978) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1941) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1602) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1400) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+Caused by: java.io.IOException
+	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:140) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:136) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:414) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1357) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1297) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:676) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:644) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:590) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	... 12 common frames omitted
+Caused by: com.rabbitmq.client.ShutdownSignalException: connection error
+	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:552) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:341) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	... 17 common frames omitted
+Caused by: java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:316) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:354) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:798) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.implRead(Socket.java:974) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:964) ~[na:na]
+	at java.base/java.io.BufferedInputStream.fill(BufferedInputStream.java:289) ~[na:na]
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:308) ~[na:na]
+	at java.base/java.io.DataInputStream.readUnsignedByte(DataInputStream.java:300) ~[na:na]
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:92) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:199) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:694) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	... 1 common frames omitted
+
+2026-10-20T22:42:14.280-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-2] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5672]
+2026-10-20T22:42:14.282-03:00  WARN 118341 --- [receipts-service] [ 127.0.0.1:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occurred (Exception message: Connection reset)
+2026-10-20T22:42:19.285-03:00  WARN 118341 --- [receipts-service] [eceipt-orders-2] o.s.a.r.l.SimpleMessageListenerContainer : Consumer raised exception, processing can restart if the connection factory supports it
+
+org.springframework.amqp.AmqpIOException: java.io.IOException
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:69) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:629) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:746) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:256) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils$RabbitResourceFactory.createConnection(ConnectionFactoryUtils.java:330) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.doGetTransactionalResourceHolder(ConnectionFactoryUtils.java:139) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.getTransactionalResourceHolder(ConnectionFactoryUtils.java:100) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.getTransactionalResourceHolder(ConnectionFactoryUtils.java:83) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.start(BlockingQueueConsumer.java:630) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1603) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1400) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+Caused by: java.io.IOException
+	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:140) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:136) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:414) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1357) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1297) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:676) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:644) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:590) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	... 10 common frames omitted
+Caused by: com.rabbitmq.client.ShutdownSignalException: connection error
+	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:552) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:341) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	... 15 common frames omitted
+Caused by: java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:316) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:354) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:798) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.implRead(Socket.java:974) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:964) ~[na:na]
+	at java.base/java.io.BufferedInputStream.fill(BufferedInputStream.java:289) ~[na:na]
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:308) ~[na:na]
+	at java.base/java.io.DataInputStream.readUnsignedByte(DataInputStream.java:300) ~[na:na]
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:92) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:199) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:694) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	... 1 common frames omitted
+
+2026-10-20T22:42:19.287-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-2] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@4e6c40fb: tags=[[]], channel=null, acknowledgeMode=MANUAL local queue size=0
+2026-10-20T22:42:19.288-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-3] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5672]
+2026-10-20T22:42:19.289-03:00  WARN 118341 --- [receipts-service] [ 127.0.0.1:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occurred (Exception message: Connection reset)
+2026-10-20T22:42:19.290-03:00 ERROR 118341 --- [receipts-service] [eceipt-orders-3] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2026-10-20T22:42:19.290-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-3] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5672]
+2026-10-20T22:42:19.292-03:00  WARN 118341 --- [receipts-service] [ 127.0.0.1:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occurred (Exception message: Connection reset)
+2026-10-20T22:42:24.296-03:00  WARN 118341 --- [receipts-service] [eceipt-orders-3] o.s.a.r.l.SimpleMessageListenerContainer : Consumer raised exception, processing can restart if the connection factory supports it
+
+org.springframework.amqp.AmqpIOException: java.io.IOException
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:69) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:629) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:746) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:256) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils$RabbitResourceFactory.createConnection(ConnectionFactoryUtils.java:330) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.doGetTransactionalResourceHolder(ConnectionFactoryUtils.java:139) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.getTransactionalResourceHolder(ConnectionFactoryUtils.java:100) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.getTransactionalResourceHolder(ConnectionFactoryUtils.java:83) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.start(BlockingQueueConsumer.java:630) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1603) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1400) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+Caused by: java.io.IOException
+	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:140) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:136) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:414) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1357) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1297) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:676) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:644) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:590) ~[spring-rabbit-4.1.1.jar!/:4.1.1]
+	... 10 common frames omitted
+Caused by: com.rabbitmq.client.ShutdownSignalException: connection error
+	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:552) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:341) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	... 15 common frames omitted
+Caused by: java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:316) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:354) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:798) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.implRead(Socket.java:974) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:964) ~[na:na]
+	at java.base/java.io.BufferedInputStream.fill(BufferedInputStream.java:289) ~[na:na]
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:308) ~[na:na]
+	at java.base/java.io.DataInputStream.readUnsignedByte(DataInputStream.java:300) ~[na:na]
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:92) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:199) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:694) ~[amqp-client-5.30.0.jar!/:5.30.0]
+	... 1 common frames omitted
+
+2026-10-20T22:42:24.297-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-3] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@52008db9: tags=[[]], channel=null, acknowledgeMode=MANUAL local queue size=0
+2026-10-20T22:42:24.299-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-4] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5672]
+2026-10-20T22:42:24.303-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-4] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#288728e:5/SimpleConnection@2987e17c [delegate=amqp://pedidos360_ep3_consumer@127.0.0.1:5672/pedidos360-ep3, localPort=36432]
+2026-10-20T22:42:24.338-03:00  INFO 118341 --- [receipts-service] [eceipt-orders-4] c.d.p.r.infrastructure.ReceiptListener   : ACK eventId=7a1576a3-b1a3-4d5f-aae9-91fc90b71a57 orderId=9f9b3686-7044-48ad-9fef-5caae09dad6c result=RECEIPT_STORED attempt=1 redelivered=false

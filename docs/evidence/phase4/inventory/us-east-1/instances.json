@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T09:57:21.7539643Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-instances",
+    "--region",
+    "us-east-1",
+    "--query",
+    "Reservations[].Instances[].{Id:InstanceId,State:State.Name,Type:InstanceType,Image:ImageId,Vpc:VpcId,Subnet:SubnetId,PrivateIp:PrivateIpAddress,PublicIp:PublicIpAddress,Profile:IamInstanceProfile.Arn,Key:KeyName,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

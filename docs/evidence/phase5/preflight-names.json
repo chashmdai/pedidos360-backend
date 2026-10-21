@@ -1,0 +1,39 @@
+{
+  "at": "2026-09-06T15:05:19.663776+00:00",
+  "results": {
+    "vpcs": {
+      "Vpcs": []
+    },
+    "keys": {
+      "KeyPairs": [
+        {
+          "KeyPairId": "key-0427d1808819d43a2",
+          "KeyType": "rsa",
+          "Tags": [],
+          "CreateTime": "2026-09-05T13:08:55.590000+00:00",
+          "KeyName": "vockey",
+          "KeyFingerprint": "97:a6:79:b7:97:be:29:02:f8:7c:95:8f:27:93:23:77:03:3d:09:2d"
+        }
+      ]
+    },
+    "rdsParameters": {
+      "DBParameterGroups": [
+        {
+          "DBParameterGroupName": "default.mysql8.0",
+          "DBParameterGroupFamily": "mysql8.0",
+          "Description": "Default parameter group for mysql8.0",
+          "DBParameterGroupArn": "arn:aws:rds:us-east-1:002996184293:pg:default.mysql8.0"
+        }
+      ]
+    },
+    "rdsSubnets": {
+      "DBSubnetGroups": []
+    },
+    "vpcLinks": {
+      "Items": []
+    },
+    "logs": {
+      "logGroups": []
+    }
+  }
+}

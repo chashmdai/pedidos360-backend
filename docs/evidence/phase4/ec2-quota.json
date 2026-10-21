@@ -1,0 +1,5 @@
+{
+  "at": "2026-09-06T14:39:17.2865865Z",
+  "exitCode": 0,
+  "output": "[\n    {\n        \"Name\": \"Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances\",\n        \"Code\": \"L-1216C47A\",\n        \"Value\": 256.0\n    }\n]"
+}

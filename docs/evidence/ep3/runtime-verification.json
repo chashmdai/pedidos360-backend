@@ -1,0 +1,497 @@
+{
+  "run": "2e38883a",
+  "at": "2026-10-21T01:42:03.999782+00:00",
+  "mode": "LOCAL_SIGNED_FIXTURE_NOT_ENTRA",
+  "checks": [
+    {
+      "name": "T03 health of five Spring services and isolated broker",
+      "status": "passed",
+      "node": "4.2.9"
+    },
+    {
+      "name": "T05 explicit application and DLQ topology",
+      "status": "passed",
+      "topology": {
+        "exchange": "pedidos360.orders.events.v1",
+        "routing-key": "order.registered.v1",
+        "queue": "pedidos360.receipts.order-registered.v1",
+        "dead-exchange": "pedidos360.receipts.errors.v1",
+        "dead-routing-key": "receipt.failed.v1",
+        "dead-queue": "pedidos360.receipts.failed.v1"
+      }
+    },
+    {
+      "name": "T11 JWT required and Admin AND Orders.Read enforced",
+      "status": "passed",
+      "unauthenticated": 401,
+      "user": 403,
+      "adminWithoutScope": 403
+    },
+    {
+      "name": "T06 signed JWT business order -> transactional outbox -> broker -> durable receipt -> ACK",
+      "status": "passed",
+      "orderId": "1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79",
+      "eventId": "6de5a7cd-a3a8-41bc-8fe1-da04f716334a",
+      "total": 30970
+    },
+    {
+      "name": "T12 order snapshot contract, owner isolation and previous authorization preserved",
+      "status": "passed"
+    },
+    {
+      "name": "T06 identical redelivery is idempotent and ACKed",
+      "status": "passed",
+      "eventId": "6de5a7cd-a3a8-41bc-8fe1-da04f716334a"
+    },
+    {
+      "name": "T07 malformed event NACK without requeue -> native DLX -> DLQ",
+      "status": "passed",
+      "eventId": "29f4b7a8-62bb-4b97-9132-dcaa09832062",
+      "xDeath": [
+        {
+          "count": 1,
+          "exchange": "pedidos360.orders.events.v1",
+          "queue": "pedidos360.receipts.order-registered.v1",
+          "reason": "rejected",
+          "routing-keys": [
+            "order.registered.v1"
+          ],
+          "time": 1792546927
+        }
+      ]
+    },
+    {
+      "name": "T08 real temporary filesystem failure recovers within three attempts",
+      "status": "passed",
+      "eventId": "b77087b0-6131-4631-b93c-acf9e22c2831"
+    },
+    {
+      "name": "T08 exhausted storage failure NACKs once after exactly three attempts",
+      "status": "passed",
+      "eventId": "56a4c5b7-4493-4ebb-9c50-77590d0f5d7a"
+    },
+    {
+      "name": "T07 conflicting duplicate rejected without replacing stored receipt",
+      "status": "passed"
+    },
+    {
+      "name": "T09/T10 administrator creates, queries and deletes sandbox queue/exchange/binding; correct 201/200/204/400/403/404/409; nonempty data protected",
+      "status": "passed"
+    },
+    {
+      "name": "T10 management failure is HTTP 503, never a false success",
+      "status": "passed"
+    },
+    {
+      "name": "T13 broker outage does not prevent 201 or persistence; outbox stays pending",
+      "status": "passed",
+      "orderId": "9f9b3686-7044-48ad-9fef-5caae09dad6c"
+    },
+    {
+      "name": "T13 same broker container/volume recovers pending publication and retains DLQ",
+      "status": "passed",
+      "eventId": "7a1576a3-b1a3-4d5f-aae9-91fc90b71a57"
+    },
+    {
+      "name": "T12 all preexisting orders/lines unchanged and Catalog rows unchanged",
+      "status": "passed",
+      "preexistingOrders": 15
+    }
+  ],
+  "httpTrace": [
+    {
+      "method": "GET",
+      "port": 19180,
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "GET",
+      "port": 19181,
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "GET",
+      "port": 19182,
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "GET",
+      "port": 19183,
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "GET",
+      "port": 19184,
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "GET",
+      "port": 19180,
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "method": "GET",
+      "port": 19180,
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "method": "GET",
+      "port": 19181,
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "method": "GET",
+      "port": 19181,
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "method": "GET",
+      "port": 19182,
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "method": "GET",
+      "port": 19182,
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "method": "GET",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.lab.none",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "method": "GET",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.lab.none",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "method": "GET",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.lab.none",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "method": "GET",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.lab.none",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "method": "GET",
+      "port": 19183,
+      "path": "/api/v1/admin/receipts",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "method": "GET",
+      "port": 19180,
+      "path": "/api/v1/productos",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "POST",
+      "port": 19180,
+      "path": "/api/v1/pedidos",
+      "expected": 201,
+      "actual": 201
+    },
+    {
+      "method": "GET",
+      "port": 19183,
+      "path": "/api/v1/admin/receipts",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "GET",
+      "port": 19180,
+      "path": "/api/v1/pedidos/1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "GET",
+      "port": 19180,
+      "path": "/api/v1/pedidos/1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "method": "GET",
+      "port": 19180,
+      "path": "/api/v1/admin/pedidos",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues",
+      "expected": 201,
+      "actual": 201
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/exchanges",
+      "expected": 201,
+      "actual": 201
+    },
+    {
+      "method": "GET",
+      "port": 19184,
+      "path": "/api/v1/rabbit/exchanges/pedidos360.lab.ep3-2e38883a.events",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues",
+      "expected": 409,
+      "actual": 409
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/exchanges",
+      "expected": 409,
+      "actual": 409
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues",
+      "expected": 400,
+      "actual": 400
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues",
+      "expected": 400,
+      "actual": 400
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues",
+      "expected": 400,
+      "actual": 400
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/exchanges",
+      "expected": 400,
+      "actual": 400
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/bindings",
+      "expected": 400,
+      "actual": 400
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/bindings",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "method": "GET",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.lab.ep3-2e38883a.missing",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "method": "DELETE",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.receipts.order-registered.v1",
+      "expected": 403,
+      "actual": 403
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/bindings",
+      "expected": 201,
+      "actual": 201
+    },
+    {
+      "method": "POST",
+      "port": 19184,
+      "path": "/api/v1/rabbit/bindings",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "GET",
+      "port": 19184,
+      "path": "/api/v1/rabbit/bindings/pedidos360.lab.ep3-2e38883a.events/pedidos360.lab.ep3-2e38883a.queue",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "method": "DELETE",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.lab.ep3-2e38883a.queue",
+      "expected": 409,
+      "actual": 409
+    },
+    {
+      "method": "DELETE",
+      "port": 19184,
+      "path": "/api/v1/rabbit/bindings",
+      "expected": 204,
+      "actual": 204
+    },
+    {
+      "method": "DELETE",
+      "port": 19184,
+      "path": "/api/v1/rabbit/bindings",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "method": "DELETE",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.lab.ep3-2e38883a.queue",
+      "expected": 204,
+      "actual": 204
+    },
+    {
+      "method": "DELETE",
+      "port": 19184,
+      "path": "/api/v1/rabbit/exchanges/pedidos360.lab.ep3-2e38883a.events",
+      "expected": 204,
+      "actual": 204
+    },
+    {
+      "method": "GET",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.lab.ep3-2e38883a.queue",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "method": "GET",
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.lab.ep3-2e38883a.offline",
+      "expected": 503,
+      "actual": 503
+    },
+    {
+      "method": "POST",
+      "port": 19180,
+      "path": "/api/v1/pedidos",
+      "expected": 201,
+      "actual": 201
+    },
+    {
+      "method": "GET",
+      "port": 19180,
+      "path": "/api/v1/pedidos/9f9b3686-7044-48ad-9fef-5caae09dad6c",
+      "expected": 200,
+      "actual": 200
+    }
+  ],
+  "businessOrder": {
+    "id": "1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79",
+    "estado": "REGISTERED",
+    "fechaCreacion": "2026-10-21T01:42:06.035302Z",
+    "items": [
+      {
+        "productoId": "10000000-0000-0000-0000-000000000001",
+        "nombre": "Caf\u00e9 de especialidad",
+        "precioUnitario": 8990.0,
+        "cantidad": 2,
+        "subtotal": 17980.0
+      },
+      {
+        "productoId": "10000000-0000-0000-0000-000000000002",
+        "nombre": "Taza de cer\u00e1mica",
+        "precioUnitario": 12990.0,
+        "cantidad": 1,
+        "subtotal": 12990.0
+      }
+    ],
+    "total": 30970.0,
+    "moneda": "CLP"
+  },
+  "businessReceipt": {
+    "schemaVersion": 1,
+    "eventId": "6de5a7cd-a3a8-41bc-8fe1-da04f716334a",
+    "orderId": "1e6fd18c-fc0d-4a4c-aca6-12f6265f7b79",
+    "tenantId": "local-development",
+    "occurredAt": "2026-10-21T01:42:06.035302Z",
+    "total": 30970.0,
+    "currency": "CLP",
+    "itemCount": 2
+  },
+  "orderDuringBrokerOutage": {
+    "id": "9f9b3686-7044-48ad-9fef-5caae09dad6c",
+    "estado": "REGISTERED",
+    "fechaCreacion": "2026-10-21T01:42:15.056656Z",
+    "items": [
+      {
+        "productoId": "10000000-0000-0000-0000-000000000001",
+        "nombre": "Caf\u00e9 de especialidad",
+        "precioUnitario": 8990.0,
+        "cantidad": 2,
+        "subtotal": 17980.0
+      },
+      {
+        "productoId": "10000000-0000-0000-0000-000000000002",
+        "nombre": "Taza de cer\u00e1mica",
+        "precioUnitario": 12990.0,
+        "cantidad": 1,
+        "subtotal": 12990.0
+      }
+    ],
+    "total": 30970.0,
+    "moneda": "CLP"
+  },
+  "passed": 15,
+  "complete": true
+}

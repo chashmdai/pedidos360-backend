@@ -1,0 +1,185 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Pedidos360 backend                                                 [pom]
+[INFO] messaging-support                                                  [jar]
+[INFO] catalog-service                                                    [jar]
+[INFO] orders-service                                                     [jar]
+[INFO] bff                                                                [jar]
+[INFO] receipts-service                                                   [jar]
+[INFO] rabbit-admin-service                                               [jar]
+[INFO] 
+[INFO] ---------------< cl.duoc.pedidos360:pedidos360-backend >----------------
+[INFO] Building Pedidos360 backend 0.1.0-SNAPSHOT                         [1/7]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-security-oauth2-resource-server/4.1.1/spring-boot-starter-security-oauth2-resource-server-4.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-security-oauth2-resource-server/4.1.1/spring-boot-starter-security-oauth2-resource-server-4.1.1.pom (2.6 kB at 3.0 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-security-oauth2-resource-server/4.1.1/spring-boot-security-oauth2-resource-server-4.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-security-oauth2-resource-server/4.1.1/spring-boot-security-oauth2-resource-server-4.1.1.pom (2.7 kB at 67 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-jose/7.1.1/spring-security-oauth2-jose-7.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-jose/7.1.1/spring-security-oauth2-jose-7.1.1.pom (2.7 kB at 55 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-core/7.1.1/spring-security-oauth2-core-7.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-core/7.1.1/spring-security-oauth2-core-7.1.1.pom (2.5 kB at 59 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/nimbusds/nimbus-jose-jwt/10.9.1/nimbus-jose-jwt-10.9.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/nimbusds/nimbus-jose-jwt/10.9.1/nimbus-jose-jwt-10.9.1.pom (14 kB at 303 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-resource-server/7.1.1/spring-security-oauth2-resource-server-7.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-resource-server/7.1.1/spring-security-oauth2-resource-server-7.1.1.pom (2.7 kB at 55 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-security-oauth2-resource-server/4.1.1/spring-boot-starter-security-oauth2-resource-server-4.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-security-oauth2-resource-server/4.1.1/spring-boot-starter-security-oauth2-resource-server-4.1.1.jar (4.8 kB at 100 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-security-oauth2-resource-server/4.1.1/spring-boot-security-oauth2-resource-server-4.1.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-jose/7.1.1/spring-security-oauth2-jose-7.1.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-core/7.1.1/spring-security-oauth2-core-7.1.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/nimbusds/nimbus-jose-jwt/10.9.1/nimbus-jose-jwt-10.9.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-resource-server/7.1.1/spring-security-oauth2-resource-server-7.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-security-oauth2-resource-server/4.1.1/spring-boot-security-oauth2-resource-server-4.1.1.jar (63 kB at 802 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-core/7.1.1/spring-security-oauth2-core-7.1.1.jar (127 kB at 981 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-jose/7.1.1/spring-security-oauth2-jose-7.1.1.jar (152 kB at 924 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-oauth2-resource-server/7.1.1/spring-security-oauth2-resource-server-7.1.1.jar (153 kB at 936 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/nimbusds/nimbus-jose-jwt/10.9.1/nimbus-jose-jwt-10.9.1.jar (814 kB at 3.6 MB/s)
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ pedidos360-backend ---
+[INFO] 
+[INFO] ----------------< cl.duoc.pedidos360:messaging-support >----------------
+[INFO] Building messaging-support 0.1.0-SNAPSHOT                          [2/7]
+[INFO]   from messaging-support/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-amqp/4.1.1/spring-boot-starter-amqp-4.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-amqp/4.1.1/spring-boot-starter-amqp-4.1.1.pom (2.3 kB at 52 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-amqp/4.1.1/spring-boot-amqp-4.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-amqp/4.1.1/spring-boot-amqp-4.1.1.pom (2.6 kB at 54 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/spring-messaging/7.0.9/spring-messaging-7.0.9.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/spring-messaging/7.0.9/spring-messaging-7.0.9.pom (2.2 kB at 44 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-rabbit/4.1.1/spring-rabbit-4.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-rabbit/4.1.1/spring-rabbit-4.1.1.pom (6.6 kB at 170 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-amqp/4.1.1/spring-amqp-4.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-amqp/4.1.1/spring-amqp-4.1.1.pom (7.6 kB at 200 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.30.0/amqp-client-5.30.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.30.0/amqp-client-5.30.0.pom (30 kB at 557 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.3/junit-bom-5.14.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.3/junit-bom-5.14.3.pom (5.7 kB at 126 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.2.17.Final/netty-transport-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.2.17.Final/netty-transport-4.2.17.Final.pom (3.4 kB at 93 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.2.17.Final/netty-parent-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.2.17.Final/netty-parent-4.2.17.Final.pom (92 kB at 2.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-jdk18on-bom/1.84/bc-jdk18on-bom-1.84.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-jdk18on-bom/1.84/bc-jdk18on-bom-1.84.pom (3.1 kB at 79 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.2.17.Final/netty-common-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.2.17.Final/netty-common-4.2.17.Final.pom (12 kB at 348 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.2.17.Final/netty-buffer-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.2.17.Final/netty-buffer-4.2.17.Final.pom (5.5 kB at 142 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.2.17.Final/netty-resolver-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.2.17.Final/netty-resolver-4.2.17.Final.pom (2.7 kB at 63 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.2.17.Final/netty-codec-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.2.17.Final/netty-codec-4.2.17.Final.pom (4.9 kB at 129 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-base/4.2.17.Final/netty-codec-base-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-base/4.2.17.Final/netty-codec-base-4.2.17.Final.pom (3.6 kB at 77 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-compression/4.2.17.Final/netty-codec-compression-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-compression/4.2.17.Final/netty-codec-compression-4.2.17.Final.pom (5.9 kB at 66 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-protobuf/4.2.17.Final/netty-codec-protobuf-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-protobuf/4.2.17.Final/netty-codec-protobuf-4.2.17.Final.pom (3.9 kB at 106 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-marshalling/4.2.17.Final/netty-codec-marshalling-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-marshalling/4.2.17.Final/netty-codec-marshalling-4.2.17.Final.pom (4.4 kB at 136 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.2.17.Final/netty-handler-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.2.17.Final/netty-handler-4.2.17.Final.pom (7.0 kB at 155 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.2.17.Final/netty-transport-native-unix-common-4.2.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.2.17.Final/netty-transport-native-unix-common-4.2.17.Final.pom (34 kB at 943 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-amqp/4.1.1/spring-boot-starter-amqp-4.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-amqp/4.1.1/spring-boot-starter-amqp-4.1.1.jar (4.8 kB at 153 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-amqp/4.1.1/spring-boot-amqp-4.1.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/spring-messaging/7.0.9/spring-messaging-7.0.9.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-rabbit/4.1.1/spring-rabbit-4.1.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-amqp/4.1.1/spring-amqp-4.1.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.30.0/amqp-client-5.30.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-amqp/4.1.1/spring-boot-amqp-4.1.1.jar (102 kB at 1.6 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.2.17.Final/netty-transport-4.2.17.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-amqp/4.1.1/spring-amqp-4.1.1.jar (239 kB at 3.1 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.2.17.Final/netty-common-4.2.17.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/spring-messaging/7.0.9/spring-messaging-7.0.9.jar (614 kB at 6.3 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.2.17.Final/netty-buffer-4.2.17.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-rabbit/4.1.1/spring-rabbit-4.1.1.jar (637 kB at 5.0 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.2.17.Final/netty-resolver-4.2.17.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.30.0/amqp-client-5.30.0.jar (726 kB at 5.4 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.2.17.Final/netty-codec-4.2.17.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.2.17.Final/netty-buffer-4.2.17.Final.jar (378 kB at 2.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-base/4.2.17.Final/netty-codec-base-4.2.17.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.2.17.Final/netty-resolver-4.2.17.Final.jar (33 kB at 188 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-compression/4.2.17.Final/netty-codec-compression-4.2.17.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.2.17.Final/netty-codec-4.2.17.Final.jar (4.0 kB at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-protobuf/4.2.17.Final/netty-codec-protobuf-4.2.17.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.2.17.Final/netty-transport-4.2.17.Final.jar (550 kB at 2.5 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-base/4.2.17.Final/netty-codec-base-4.2.17.Final.jar (155 kB at 687 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-marshalling/4.2.17.Final/netty-codec-marshalling-4.2.17.Final.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.2.17.Final/netty-handler-4.2.17.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.2.17.Final/netty-common-4.2.17.Final.jar (821 kB at 3.4 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.2.17.Final/netty-transport-native-unix-common-4.2.17.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-compression/4.2.17.Final/netty-codec-compression-4.2.17.Final.jar (237 kB at 960 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-protobuf/4.2.17.Final/netty-codec-protobuf-4.2.17.Final.jar (15 kB at 58 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-marshalling/4.2.17.Final/netty-codec-marshalling-4.2.17.Final.jar (20 kB at 74 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.2.17.Final/netty-transport-native-unix-common-4.2.17.Final.jar (47 kB at 166 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.2.17.Final/netty-handler-4.2.17.Final.jar (589 kB at 1.9 MB/s)
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ messaging-support ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ messaging-support ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug parameters release 25] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ messaging-support ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/messaging-support/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ messaging-support ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ messaging-support ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ messaging-support ---
+[INFO] Building jar: /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/messaging-support/target/messaging-support-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ messaging-support ---
+[INFO] 
+[INFO] -----------------< cl.duoc.pedidos360:catalog-service >-----------------
+[INFO] Building catalog-service 0.1.0-SNAPSHOT                            [3/7]
+[INFO]   from catalog-service/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-flyway/4.1.1/spring-boot-starter-flyway-4.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-flyway/4.1.1/spring-boot-starter-flyway-4.1.1.pom (2.7 kB at 46 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-flyway/4.1.1/spring-boot-flyway-4.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-flyway/4.1.1/spring-boot-flyway-4.1.1.pom (2.4 kB at 50 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-flyway/4.1.1/spring-boot-starter-flyway-4.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-flyway/4.1.1/spring-boot-starter-flyway-4.1.1.jar (4.8 kB at 90 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-flyway/4.1.1/spring-boot-flyway-4.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-flyway/4.1.1/spring-boot-flyway-4.1.1.jar (77 kB at 1.6 MB/s)
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ catalog-service ---
+[INFO] Copying 4 resources from src/main/resources to target/classes
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Pedidos360 backend 0.1.0-SNAPSHOT:
+[INFO] 
+[INFO] Pedidos360 backend ................................. SUCCESS [  4.534 s]
+[INFO] messaging-support .................................. SUCCESS [  9.744 s]
+[INFO] catalog-service .................................... FAILURE [  0.966 s]
+[INFO] orders-service ..................................... SKIPPED
+[INFO] bff ................................................ SKIPPED
+[INFO] receipts-service ................................... SKIPPED
+[INFO] rabbit-admin-service ............................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.943 s
+[INFO] Finished at: 2026-10-20T21:55:16-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-resources-plugin:3.5.0:resources (default-resources) on project catalog-service: filtering /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service/src/main/resources/application-cloud.properties to /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service/target/classes/application-cloud.properties failed with FileSystemException: /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service/target/classes/application-cloud.properties: Operation not permitted -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :catalog-service

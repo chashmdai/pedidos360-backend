@@ -1,0 +1,106 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#applications/$entity",
+  "addIns": [],
+  "api": {
+    "acceptMappedClaims": null,
+    "knownClientApplications": [],
+    "oauth2PermissionScopes": [],
+    "preAuthorizedApplications": [],
+    "requestedAccessTokenVersion": null
+  },
+  "appId": "b4ede06a-cde3-4982-8b79-56fab7264fdd",
+  "appRoles": [],
+  "applicationTemplateId": null,
+  "certification": null,
+  "createdByAppId": "04b07795-8ddb-461a-bbee-02f9e1bf7b46",
+  "createdDateTime": "2026-09-05T23:04:25Z",
+  "defaultRedirectUri": null,
+  "deletedDateTime": null,
+  "description": null,
+  "disabledByMicrosoftStatus": null,
+  "displayName": "pedidos360-betorrejons-frontend",
+  "groupMembershipClaims": null,
+  "id": "fbfdd96f-b7f0-4fd6-8763-f698a1d5f43e",
+  "identifierUris": [],
+  "info": {
+    "logoUrl": null,
+    "marketingUrl": null,
+    "privacyStatementUrl": null,
+    "supportUrl": null,
+    "termsOfServiceUrl": null
+  },
+  "isDeviceOnlyAuthSupported": null,
+  "isDisabled": null,
+  "isFallbackPublicClient": null,
+  "keyCredentials": [],
+  "nativeAuthenticationApisEnabled": null,
+  "notes": null,
+  "optionalClaims": null,
+  "parentalControlSettings": {
+    "countriesBlockedForMinors": [],
+    "legalAgeGroupRule": "Allow"
+  },
+  "passwordCredentials": [],
+  "publicClient": {
+    "redirectUris": []
+  },
+  "publisherDomain": "duoc.cl",
+  "requestSignatureVerification": null,
+  "requiredResourceAccess": [
+    {
+      "resourceAccess": [
+        {
+          "id": "4482449c-36a1-4fee-bb8a-b02499d0bc86",
+          "type": "Scope"
+        },
+        {
+          "id": "11266639-2c90-4510-b7a3-a6189bc33bc1",
+          "type": "Scope"
+        },
+        {
+          "id": "ce8aff5b-d18b-48a5-8fc8-e82ca0922515",
+          "type": "Scope"
+        }
+      ],
+      "resourceAppId": "114f7b58-b207-4d46-9d6e-f491c3a0c0e0"
+    }
+  ],
+  "samlMetadataUrl": null,
+  "serviceManagementReference": null,
+  "servicePrincipalLockConfiguration": {
+    "allProperties": true,
+    "credentialsWithUsageSign": null,
+    "credentialsWithUsageVerify": null,
+    "identifierUris": null,
+    "isEnabled": true,
+    "tokenEncryptionKeyId": null
+  },
+  "signInAudience": "AzureADMyOrg",
+  "spa": {
+    "redirectUris": [
+      "http://127.0.0.1:5173/",
+      "http://localhost:5173/"
+    ]
+  },
+  "tags": [
+    "Course=DSY1107",
+    "Project=Pedidos360"
+  ],
+  "tokenEncryptionKeyId": null,
+  "uniqueName": null,
+  "verifiedPublisher": {
+    "addedDateTime": null,
+    "displayName": null,
+    "verifiedPublisherId": null
+  },
+  "web": {
+    "homePageUrl": null,
+    "implicitGrantSettings": {
+      "enableAccessTokenIssuance": false,
+      "enableIdTokenIssuance": false
+    },
+    "logoutUrl": null,
+    "redirectUriSettings": [],
+    "redirectUris": []
+  }
+}

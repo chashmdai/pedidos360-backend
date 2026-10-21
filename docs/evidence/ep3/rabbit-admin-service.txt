@@ -1,0 +1,22 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-20T22:41:43.619-03:00  INFO 118342 --- [rabbit-admin-service] [           main] c.d.p.r.RabbitAdminApplication           : Starting RabbitAdminApplication v0.1.0-SNAPSHOT using Java 25.0.4.1 with PID 118342 (/home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/rabbit-admin-service-0.1.0-SNAPSHOT.jar started by codex in /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend)
+2026-10-20T22:41:43.647-03:00  INFO 118342 --- [rabbit-admin-service] [           main] c.d.p.r.RabbitAdminApplication           : The following 2 profiles are active: "local", "ep3"
+2026-10-20T22:41:50.267-03:00  INFO 118342 --- [rabbit-admin-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 19184 (http)
+2026-10-20T22:41:50.346-03:00  INFO 118342 --- [rabbit-admin-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-20T22:41:50.347-03:00  INFO 118342 --- [rabbit-admin-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-20T22:41:50.489-03:00  INFO 118342 --- [rabbit-admin-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 6438 ms
+2026-10-20T22:41:56.553-03:00  INFO 118342 --- [rabbit-admin-service] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-20T22:41:56.821-03:00  INFO 118342 --- [rabbit-admin-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 19184 (http) with context path '/'
+2026-10-20T22:41:56.859-03:00  INFO 118342 --- [rabbit-admin-service] [           main] c.d.p.r.RabbitAdminApplication           : Started RabbitAdminApplication in 16.015 seconds (process running for 18.778)
+2026-10-20T22:41:57.275-03:00  INFO 118342 --- [rabbit-admin-service] [.1-19184-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-20T22:41:57.276-03:00  INFO 118342 --- [rabbit-admin-service] [.1-19184-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-20T22:41:57.283-03:00  INFO 118342 --- [rabbit-admin-service] [.1-19184-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms

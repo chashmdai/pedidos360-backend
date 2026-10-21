@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T09:57:52.3112339Z",
+  "command": [
+    "aws",
+    "servicediscovery",
+    "list-namespaces",
+    "--region",
+    "us-east-1",
+    "--query",
+    "Namespaces[].{Id:Id,Name:Name,Arn:Arn,Type:Type}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

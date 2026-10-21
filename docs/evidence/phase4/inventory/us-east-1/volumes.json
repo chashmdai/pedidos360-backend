@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T09:57:24.0395055Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-volumes",
+    "--region",
+    "us-east-1",
+    "--query",
+    "Volumes[].{Id:VolumeId,Size:Size,Type:VolumeType,State:State,Encrypted:Encrypted,Attachments:Attachments,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

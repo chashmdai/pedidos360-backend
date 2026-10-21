@@ -1,0 +1,37 @@
+{
+  "mode": "LOCAL_SIGNED_FIXTURE_NOT_ENTRA",
+  "http": 201,
+  "order": {
+    "id": "60d825ae-aadb-4789-943e-d73002f1e740",
+    "estado": "REGISTERED",
+    "fechaCreacion": "2026-10-21T01:43:01.688577Z",
+    "items": [
+      {
+        "productoId": "10000000-0000-0000-0000-000000000001",
+        "nombre": "Caf\u00e9 de especialidad",
+        "precioUnitario": 8990.0,
+        "cantidad": 2,
+        "subtotal": 17980.0
+      },
+      {
+        "productoId": "10000000-0000-0000-0000-000000000002",
+        "nombre": "Taza de cer\u00e1mica",
+        "precioUnitario": 12990.0,
+        "cantidad": 1,
+        "subtotal": 12990.0
+      }
+    ],
+    "total": 30970.0,
+    "moneda": "CLP"
+  },
+  "receipt": {
+    "schemaVersion": 1,
+    "eventId": "9524f995-d812-4752-b769-8a3e0d73d6e0",
+    "orderId": "60d825ae-aadb-4789-943e-d73002f1e740",
+    "tenantId": "local-development",
+    "occurredAt": "2026-10-21T01:43:01.688577Z",
+    "total": 30970.0,
+    "currency": "CLP",
+    "itemCount": 2
+  }
+}

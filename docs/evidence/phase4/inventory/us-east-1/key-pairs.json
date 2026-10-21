@@ -1,0 +1,25 @@
+{
+  "at": "2026-09-06T09:57:28.5153368Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-key-pairs",
+    "--region",
+    "us-east-1",
+    "--query",
+    "KeyPairs[].{Id:KeyPairId,Name:KeyName,Type:KeyType,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [
+    {
+      "Id": "key-0427d1808819d43a2",
+      "Name": "vockey",
+      "Type": "rsa",
+      "Tags": []
+    }
+  ],
+  "error": null
+}

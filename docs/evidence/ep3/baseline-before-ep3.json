@@ -1,0 +1,9 @@
+{
+  "commit": "081d663789270f3e50f1c6ebc35e8e137d3c8911",
+  "backendModules": [
+    "catalog-service",
+    "orders-service",
+    "bff"
+  ],
+  "source": "original workspace Git commit before EP3; saved before repository separation"
+}

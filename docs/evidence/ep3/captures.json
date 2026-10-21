@@ -1,0 +1,240 @@
+[
+  {
+    "file": "01-java-tests.png",
+    "source": "http://127.0.0.1:19190/java",
+    "description": "Vista explícita de archivos/resultados ejecutados; no consola simulada",
+    "at": "2026-10-21T01:42:48.852235+00:00",
+    "sha256": "968f72e463cd602508a86c605a2293e98834e3697cd9b5c8d3e6c18b0404b2f4"
+  },
+  {
+    "file": "02-react-tests-build.png",
+    "source": "http://127.0.0.1:19190/frontend",
+    "description": "Vista explícita de archivos/resultados ejecutados; no consola simulada",
+    "at": "2026-10-21T01:42:49.120520+00:00",
+    "sha256": "327b538d3ae9b66797c9100ac6d128cfc0fb639a1db1f5bdfc474e2257fffbae"
+  },
+  {
+    "file": "09-admin-http.png",
+    "source": "http://127.0.0.1:19190/admin",
+    "description": "Vista explícita de archivos/resultados ejecutados; no consola simulada",
+    "at": "2026-10-21T01:42:49.548540+00:00",
+    "sha256": "f775a16c33246d0cc87436bc04193a6916465fd194de90e48d8a79ab9ece3095"
+  },
+  {
+    "file": "07-ack-retry-nack.png",
+    "source": "http://127.0.0.1:19190/acks",
+    "description": "Vista explícita de archivos/resultados ejecutados; no consola simulada",
+    "at": "2026-10-21T01:42:49.786003+00:00",
+    "sha256": "733247736062cedec0601ccaab752fd64502aa882fc5dbb087e103b27417f4b3"
+  },
+  {
+    "file": "10-broker-recovery.png",
+    "source": "http://127.0.0.1:19190/recovery",
+    "description": "Vista explícita de archivos/resultados ejecutados; no consola simulada",
+    "at": "2026-10-21T01:42:50.063783+00:00",
+    "sha256": "f5c5b3f03356af691e39b81e3ecfcdaa1a218075954e619abe4aadd435938f72"
+  },
+  {
+    "file": "11-order-receipt.png",
+    "source": "http://127.0.0.1:19190/receipt",
+    "description": "Vista explícita de archivos/resultados ejecutados; no consola simulada",
+    "at": "2026-10-21T01:42:50.191274+00:00",
+    "sha256": "23358bbbaba00c5d6ecc4c4b8ba551bafb1d3b497f2a19c0bfd63238d462e4cb"
+  },
+  {
+    "file": "03-rabbit-overview.png",
+    "source": "http://127.0.0.1:15672/#/",
+    "description": "Broker propio operativo, un nodo",
+    "at": "2026-10-21T01:42:52.413102+00:00",
+    "sha256": "0066607018e326bea019561acf48fd695000b79e982b0cb81dd6ba420e0f68b8"
+  },
+  {
+    "file": "04-rabbit-exchanges.png",
+    "source": "http://127.0.0.1:15672/#/exchanges",
+    "description": "Pantalla real de RabbitMQ Management",
+    "at": "2026-10-21T01:42:53.734196+00:00",
+    "sha256": "e189f5d603fa57dde6c754ffdbe7e2baeabf56a10e8ef03cb832bdf663ebf1ac"
+  },
+  {
+    "file": "05-rabbit-queues.png",
+    "source": "http://127.0.0.1:15672/#/queues",
+    "description": "Pantalla real de RabbitMQ Management",
+    "at": "2026-10-21T01:42:55.092403+00:00",
+    "sha256": "0859f5ea5f4e319ac447b8a89baf51548cea9a8f70cfac0d5ee3df346432724e"
+  },
+  {
+    "file": "08-rabbit-dlq.png",
+    "source": "http://127.0.0.1:15672/#/queues/pedidos360-ep3/pedidos360.receipts.failed.v1",
+    "description": "Pantalla real de RabbitMQ Management",
+    "at": "2026-10-21T01:42:58.444171+00:00",
+    "sha256": "dab8cfa1b5af949334f4af758db55623c85e57b53115259ecd3d37962ffd1d5c"
+  },
+  {
+    "file": "12-frontend-catalog-local.png",
+    "source": "http://127.0.0.1:5173/catalogo",
+    "description": "Frontend original, sesión fixture local explícita",
+    "at": "2026-10-21T01:43:00.309026+00:00",
+    "sha256": "20ffdb3de4971ba04058cbef7b2c6a603208848f47d5e5a433fcdd41a3c58072"
+  },
+  {
+    "file": "06-frontend-order-local.png",
+    "source": "http://127.0.0.1:5173/pedidos",
+    "description": "Pedido creado en la SPA real con respuesta 201; modo local",
+    "at": "2026-10-21T01:43:02.845581+00:00",
+    "sha256": "7bbcbeefc1b45ac8113cd6bd7799ab8871491cb177271fdae090dd9cd4fa8adb"
+  },
+  {
+    "file": "13-message-ready.png",
+    "source": "http://127.0.0.1:15672/#/queues/pedidos360-ep3/pedidos360.receipts.order-registered.v1",
+    "description": "Pedido real persistido/publicado, consumidor propio temporalmente detenido: Ready",
+    "at": "2026-10-21T01:44:26.219534+00:00",
+    "sha256": "1cedd3ffd03b6166bc68754e74f42271cd8cbeb2a248d1879514b7f84e65d78e"
+  },
+  {
+    "file": "14-message-unacked.png",
+    "source": "http://127.0.0.1:15672/#/queues/pedidos360-ep3/pedidos360.receipts.order-registered.v1",
+    "description": "Entrega real Unacked durante reintento controlado; demora temporal de cinco segundos",
+    "at": "2026-10-21T01:44:40.461842+00:00",
+    "sha256": "65827fd683e1d1661655f73f186cb8594a43e91560227b67723a3e656340d65a"
+  },
+  {
+    "file": "15-message-acked.png",
+    "source": "http://127.0.0.1:15672/#/queues/pedidos360-ep3/pedidos360.receipts.order-registered.v1",
+    "description": "Almacenamiento recuperado, ACK explícito y cola sin entregas pendientes",
+    "at": "2026-10-21T01:44:50.096423+00:00",
+    "sha256": "e8a9ae0071d1c8cb925901432483863fe4e33cff3d8727fca53874e0d07f3ca1"
+  },
+  {
+    "file": "16-entra-catalog.png",
+    "source": "http://localhost:5173 (Entra real)",
+    "description": "Pantalla real mediante navegador integrado; sin credenciales ni tokens",
+    "at": "2026-10-21T01:50:47.921199+00:00",
+    "sha256": "1e7a385a34db9ff8172be496625e2207f509fc3506e17ccc56a14b9dd21b69a1"
+  },
+  {
+    "file": "17-entra-admin-403.png",
+    "source": "http://localhost:5173 (Entra real)",
+    "description": "Pantalla real mediante navegador integrado; sin credenciales ni tokens",
+    "at": "2026-10-21T01:53:39.317814+00:00",
+    "sha256": "aec404b4f1ce3812b62fc8dafdf089ea859c637a7a4c39a78dec62a7676a3cb1"
+  },
+  {
+    "file": "19-entra-order-form.png",
+    "source": "http://localhost:5173 (Entra real)",
+    "description": "Pantalla real mediante navegador integrado; sin credenciales ni tokens",
+    "at": "2026-10-21T01:54:36.757300+00:00",
+    "sha256": "d579f9264e1fc5561b22bef11dc0f69fbacf3bb575829066577e1861e42c4cd3"
+  },
+  {
+    "file": "20-entra-history-preserved.png",
+    "source": "http://localhost:5173 (Entra real)",
+    "description": "Vista real de pedidos anteriores conservados en la sesión Entra; no muestra la tarjeta del nuevo pedido",
+    "at": "2026-10-21T01:56:41.290162+00:00",
+    "sha256": "2b86e66dde4e11d9d70a69a83ffc59b2e0911619cb1f98f3fc31983cf0aeb560"
+  },
+  {
+    "file": "21-entra-logout.png",
+    "source": "http://localhost:5173 (Entra real)",
+    "description": "Pantalla real mediante navegador integrado; sin credenciales ni tokens",
+    "at": "2026-10-21T01:57:49.509300+00:00",
+    "sha256": "894aa1ffa51e747dce29ae9b5fd7cd2bc21434a103066ac8e11a351171df7861"
+  },
+  {
+    "file": "22-entra-route-protected.png",
+    "source": "http://localhost:5173 (Entra real)",
+    "description": "Pantalla real mediante navegador integrado; sin credenciales ni tokens",
+    "at": "2026-10-21T01:57:54.819568+00:00",
+    "sha256": "1d230565fe0ec0290febef3b76e14b27817b97ef8a54abcb9dd07ea7dc09e9c9"
+  },
+  {
+    "file": "05b-rabbit-bindings.png",
+    "source": "http://127.0.0.1:15672/#/queues/pedidos360-ep3/pedidos360.receipts.order-registered.v1",
+    "description": "Bindings reales expandidos; exchange y routing key de negocio",
+    "at": "2026-10-21T02:04:06.465727+00:00",
+    "sha256": "719bb2d231ae17ca20e3816e8348f9e5e1d394dd8c480271a5e0b8157825e091"
+  },
+  {
+    "file": "05c-rabbit-binding-table.png",
+    "source": "http://127.0.0.1:15672/#/queues/pedidos360-ep3/pedidos360.receipts.order-registered.v1",
+    "description": "Detalle real de la tabla de bindings; recorte nativo para legibilidad en PDF",
+    "at": "2026-10-21T02:04:06.585764+00:00",
+    "sha256": "2242d36c4da36e63a74bc90822845fe6f88d8c5bba6c19af94fe9d72a1697c5a"
+  },
+  {
+    "file": "08b-dlq-message-xdeath.png",
+    "source": "http://127.0.0.1:19190/dlq",
+    "description": "Vista de respuesta HTTP real de RabbitMQ; x-death rejected; no pantalla GUI simulada",
+    "at": "2026-10-21T02:04:07.168973+00:00",
+    "sha256": "0ae0bd2d53500b9656b7b51bfd79d4dba4279954db80901eb75763ebe2971256"
+  },
+  {
+    "file": "pdf-java.png",
+    "source": "http://127.0.0.1:19190/java",
+    "description": "Vista legible de evidencia ejecutada para PDF; no terminal simulada",
+    "at": "2026-10-21T02:13:38.720935+00:00",
+    "sha256": "21a70cc7d45d2a6923a3c1720c6f042d56893e35ad4ece199236dd436630e3f7"
+  },
+  {
+    "file": "pdf-react.png",
+    "source": "http://127.0.0.1:19190/react",
+    "description": "Vista legible de evidencia ejecutada para PDF; no terminal simulada",
+    "at": "2026-10-21T02:13:38.914339+00:00",
+    "sha256": "3cfa354ce46654bbf88e71d5fed818922db97a8896305b6836d57b1c20bbed73"
+  },
+  {
+    "file": "pdf-topology.png",
+    "source": "http://127.0.0.1:19190/topology",
+    "description": "Vista legible de evidencia ejecutada para PDF; no terminal simulada",
+    "at": "2026-10-21T02:13:39.117368+00:00",
+    "sha256": "066834d3079d56ce82ed6da61f2f3afc36c961d48e7012e978b42caa81d5a2b8"
+  },
+  {
+    "file": "pdf-flow.png",
+    "source": "http://127.0.0.1:19190/flow",
+    "description": "Vista legible de evidencia ejecutada para PDF; no terminal simulada",
+    "at": "2026-10-21T02:13:39.303288+00:00",
+    "sha256": "34abd3c8c83a36c0fad47164a1e99d7d4d99004fb0292a6a98219c92f30c88e4"
+  },
+  {
+    "file": "pdf-security.png",
+    "source": "http://127.0.0.1:19190/security",
+    "description": "Vista legible de evidencia ejecutada para PDF; no terminal simulada",
+    "at": "2026-10-21T02:13:39.498803+00:00",
+    "sha256": "b06db2d623313a441deb258623da208bec93722f825530266f8717725f18a3a1"
+  },
+  {
+    "file": "18-entra-msal-renewal.png",
+    "source": "http://127.0.0.1:19190/renewal",
+    "description": "Vista legible de evidencia ejecutada para PDF; no terminal simulada",
+    "at": "2026-10-21T02:13:39.672242+00:00",
+    "sha256": "3d250b6bb4ad4eb316d43a753ab64f300c3262420ce9a9afcd922bddb1ba30aa"
+  },
+  {
+    "file": "pdf-errors.png",
+    "source": "http://127.0.0.1:19190/errors",
+    "description": "Vista legible de evidencia ejecutada para PDF; no terminal simulada",
+    "at": "2026-10-21T02:13:39.966330+00:00",
+    "sha256": "6ec6f3e9028ba13d53e836e77628faf6c2bc55ae69f0cb4b14654bb492282805"
+  },
+  {
+    "file": "pdf-dlq.png",
+    "source": "http://127.0.0.1:19190/dlq",
+    "description": "Vista legible de evidencia ejecutada para PDF; no terminal simulada",
+    "at": "2026-10-21T02:13:40.187814+00:00",
+    "sha256": "0908bb22ab5563e3c3de13fe5a3320f1d5ce293f627e1581f52ed1240a0569ac"
+  },
+  {
+    "file": "pdf-admin.png",
+    "source": "http://127.0.0.1:19190/admin",
+    "description": "Vista legible de evidencia ejecutada para PDF; no terminal simulada",
+    "at": "2026-10-21T02:13:40.383078+00:00",
+    "sha256": "f06acede4e047ad0b6af46fb47c6617e2cff5e39d9cc49ed4a52e4f633c2f737"
+  },
+  {
+    "file": "pdf-recovery.png",
+    "source": "http://127.0.0.1:19190/recovery",
+    "description": "Vista legible de evidencia ejecutada para PDF; no terminal simulada",
+    "at": "2026-10-21T02:13:40.588482+00:00",
+    "sha256": "9c1d6b8c992498b237a97805618ed3292ea3945d76b82aeec8ef2d0139d2ed36"
+  }
+]

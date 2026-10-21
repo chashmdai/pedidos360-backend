@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-21T02:00:36.317Z",
+  "mode": "MICROSOFT_ENTRA_REAL",
+  "microsoftLogoutObserved": true,
+  "attemptedProtectedRoute": "/catalogo",
+  "finalUrl": "http://localhost:5173/",
+  "loginButtons": 2,
+  "logoutButtons": 0,
+  "screenshots": [
+    "21-entra-logout.png",
+    "22-entra-route-protected.png"
+  ]
+}

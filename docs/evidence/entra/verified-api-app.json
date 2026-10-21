@@ -1,0 +1,150 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#applications/$entity",
+  "addIns": [],
+  "api": {
+    "acceptMappedClaims": null,
+    "knownClientApplications": [],
+    "oauth2PermissionScopes": [
+      {
+        "adminConsentDescription": "Permite registrar solicitudes de pedido en nombre del usuario autenticado.",
+        "adminConsentDisplayName": "Registrar pedidos de Pedidos360",
+        "id": "ce8aff5b-d18b-48a5-8fc8-e82ca0922515",
+        "isEnabled": true,
+        "type": "User",
+        "userConsentDescription": "Permite registrar solicitudes de pedido en nombre del usuario autenticado.",
+        "userConsentDisplayName": "Registrar pedidos de Pedidos360",
+        "value": "Orders.Create"
+      },
+      {
+        "adminConsentDescription": "Permite consultar pedidos propios. Las consultas generales requieren ademas el rol Admin.",
+        "adminConsentDisplayName": "Leer pedidos de Pedidos360",
+        "id": "11266639-2c90-4510-b7a3-a6189bc33bc1",
+        "isEnabled": true,
+        "type": "User",
+        "userConsentDescription": "Permite consultar pedidos propios. Las consultas generales requieren ademas el rol Admin.",
+        "userConsentDisplayName": "Leer pedidos de Pedidos360",
+        "value": "Orders.Read"
+      },
+      {
+        "adminConsentDescription": "Permite consultar los productos del catalogo de Pedidos360.",
+        "adminConsentDisplayName": "Leer el catalogo de Pedidos360",
+        "id": "4482449c-36a1-4fee-bb8a-b02499d0bc86",
+        "isEnabled": true,
+        "type": "User",
+        "userConsentDescription": "Permite consultar los productos del catalogo de Pedidos360.",
+        "userConsentDisplayName": "Leer el catalogo de Pedidos360",
+        "value": "Catalog.Read"
+      }
+    ],
+    "preAuthorizedApplications": [
+      {
+        "appId": "b4ede06a-cde3-4982-8b79-56fab7264fdd",
+        "delegatedPermissionIds": [
+          "4482449c-36a1-4fee-bb8a-b02499d0bc86",
+          "11266639-2c90-4510-b7a3-a6189bc33bc1",
+          "ce8aff5b-d18b-48a5-8fc8-e82ca0922515"
+        ]
+      }
+    ],
+    "requestedAccessTokenVersion": 2
+  },
+  "appId": "114f7b58-b207-4d46-9d6e-f491c3a0c0e0",
+  "appRoles": [
+    {
+      "allowedMemberTypes": [
+        "User"
+      ],
+      "description": "Permite la consulta administrativa de pedidos junto con Orders.Read.",
+      "displayName": "Admin",
+      "id": "04b76981-53d3-4d0a-9d26-a27c7a6cc531",
+      "isEnabled": true,
+      "origin": "Application",
+      "value": "Admin"
+    },
+    {
+      "allowedMemberTypes": [
+        "User"
+      ],
+      "description": "Usuario de Pedidos360; los endpoints siguen exigiendo scopes y propiedad.",
+      "displayName": "User",
+      "id": "f3e611c1-d961-4826-988f-8390258993ad",
+      "isEnabled": true,
+      "origin": "Application",
+      "value": "User"
+    }
+  ],
+  "applicationTemplateId": null,
+  "certification": null,
+  "createdByAppId": "04b07795-8ddb-461a-bbee-02f9e1bf7b46",
+  "createdDateTime": "2026-09-05T23:03:42Z",
+  "defaultRedirectUri": null,
+  "deletedDateTime": null,
+  "description": null,
+  "disabledByMicrosoftStatus": null,
+  "displayName": "pedidos360-betorrejons-api",
+  "groupMembershipClaims": null,
+  "id": "2d5eacbd-f707-42cc-8c23-4f3cc021d917",
+  "identifierUris": [
+    "api://114f7b58-b207-4d46-9d6e-f491c3a0c0e0"
+  ],
+  "info": {
+    "logoUrl": null,
+    "marketingUrl": null,
+    "privacyStatementUrl": null,
+    "supportUrl": null,
+    "termsOfServiceUrl": null
+  },
+  "isDeviceOnlyAuthSupported": null,
+  "isDisabled": null,
+  "isFallbackPublicClient": null,
+  "keyCredentials": [],
+  "nativeAuthenticationApisEnabled": null,
+  "notes": null,
+  "optionalClaims": null,
+  "parentalControlSettings": {
+    "countriesBlockedForMinors": [],
+    "legalAgeGroupRule": "Allow"
+  },
+  "passwordCredentials": [],
+  "publicClient": {
+    "redirectUris": []
+  },
+  "publisherDomain": "duoc.cl",
+  "requestSignatureVerification": null,
+  "requiredResourceAccess": [],
+  "samlMetadataUrl": null,
+  "serviceManagementReference": null,
+  "servicePrincipalLockConfiguration": {
+    "allProperties": true,
+    "credentialsWithUsageSign": null,
+    "credentialsWithUsageVerify": null,
+    "identifierUris": null,
+    "isEnabled": true,
+    "tokenEncryptionKeyId": null
+  },
+  "signInAudience": "AzureADMyOrg",
+  "spa": {
+    "redirectUris": []
+  },
+  "tags": [
+    "Course=DSY1107",
+    "Project=Pedidos360"
+  ],
+  "tokenEncryptionKeyId": null,
+  "uniqueName": null,
+  "verifiedPublisher": {
+    "addedDateTime": null,
+    "displayName": null,
+    "verifiedPublisherId": null
+  },
+  "web": {
+    "homePageUrl": null,
+    "implicitGrantSettings": {
+      "enableAccessTokenIssuance": false,
+      "enableIdTokenIssuance": false
+    },
+    "logoutUrl": null,
+    "redirectUriSettings": [],
+    "redirectUris": []
+  }
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "payload_bytes": 9,
+    "redelivered": true,
+    "exchange": "pedidos360.receipts.errors.v1",
+    "routing_key": "receipt.failed.v1",
+    "message_count": 11,
+    "properties": {
+      "message_id": "b69d63ec-b95a-4fe0-93b8-37aec0c9d8af",
+      "delivery_mode": 2,
+      "headers": {
+        "x-death": [
+          {
+            "count": 1,
+            "exchange": "pedidos360.orders.events.v1",
+            "queue": "pedidos360.receipts.order-registered.v1",
+            "reason": "rejected",
+            "routing-keys": [
+              "order.registered.v1"
+            ],
+            "time": 1792544758
+          }
+        ],
+        "x-first-death-exchange": "pedidos360.orders.events.v1",
+        "x-first-death-queue": "pedidos360.receipts.order-registered.v1",
+        "x-first-death-reason": "rejected",
+        "x-last-death-exchange": "pedidos360.orders.events.v1",
+        "x-last-death-queue": "pedidos360.receipts.order-registered.v1",
+        "x-last-death-reason": "rejected"
+      },
+      "content_type": "application/json"
+    },
+    "payload": "{not-json",
+    "payload_encoding": "string"
+  }
+]

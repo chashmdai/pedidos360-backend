@@ -1,0 +1,111 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#servicePrincipals/$entity",
+  "accountEnabled": true,
+  "addIns": [],
+  "alternativeNames": [],
+  "appDescription": null,
+  "appDisplayName": "pedidos360-betorrejons-api",
+  "appId": "114f7b58-b207-4d46-9d6e-f491c3a0c0e0",
+  "appOwnerOrganizationId": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+  "appRoleAssignmentRequired": false,
+  "appRoles": [
+    {
+      "allowedMemberTypes": [
+        "User"
+      ],
+      "description": "Permite la consulta administrativa de pedidos junto con Orders.Read.",
+      "displayName": "Admin",
+      "id": "04b76981-53d3-4d0a-9d26-a27c7a6cc531",
+      "isEnabled": true,
+      "origin": "Application",
+      "value": "Admin"
+    },
+    {
+      "allowedMemberTypes": [
+        "User"
+      ],
+      "description": "Usuario de Pedidos360; los endpoints siguen exigiendo scopes y propiedad.",
+      "displayName": "User",
+      "id": "f3e611c1-d961-4826-988f-8390258993ad",
+      "isEnabled": true,
+      "origin": "Application",
+      "value": "User"
+    }
+  ],
+  "applicationTemplateId": null,
+  "createdByAppId": "04b07795-8ddb-461a-bbee-02f9e1bf7b46",
+  "createdDateTime": null,
+  "deletedDateTime": null,
+  "description": null,
+  "disabledByMicrosoftStatus": null,
+  "displayName": "pedidos360-betorrejons-api",
+  "homepage": null,
+  "id": "6a0b43df-3afe-4b55-adac-e62ea93494ff",
+  "info": {
+    "logoUrl": null,
+    "marketingUrl": null,
+    "privacyStatementUrl": null,
+    "supportUrl": null,
+    "termsOfServiceUrl": null
+  },
+  "isDisabled": null,
+  "keyCredentials": [],
+  "loginUrl": null,
+  "logoutUrl": null,
+  "notes": null,
+  "notificationEmailAddresses": [],
+  "oauth2PermissionScopes": [
+    {
+      "adminConsentDescription": "Permite registrar solicitudes de pedido en nombre del usuario autenticado.",
+      "adminConsentDisplayName": "Registrar pedidos de Pedidos360",
+      "id": "ce8aff5b-d18b-48a5-8fc8-e82ca0922515",
+      "isEnabled": true,
+      "type": "User",
+      "userConsentDescription": "Permite registrar solicitudes de pedido en nombre del usuario autenticado.",
+      "userConsentDisplayName": "Registrar pedidos de Pedidos360",
+      "value": "Orders.Create"
+    },
+    {
+      "adminConsentDescription": "Permite consultar pedidos propios. Las consultas generales requieren ademas el rol Admin.",
+      "adminConsentDisplayName": "Leer pedidos de Pedidos360",
+      "id": "11266639-2c90-4510-b7a3-a6189bc33bc1",
+      "isEnabled": true,
+      "type": "User",
+      "userConsentDescription": "Permite consultar pedidos propios. Las consultas generales requieren ademas el rol Admin.",
+      "userConsentDisplayName": "Leer pedidos de Pedidos360",
+      "value": "Orders.Read"
+    },
+    {
+      "adminConsentDescription": "Permite consultar los productos del catalogo de Pedidos360.",
+      "adminConsentDisplayName": "Leer el catalogo de Pedidos360",
+      "id": "4482449c-36a1-4fee-bb8a-b02499d0bc86",
+      "isEnabled": true,
+      "type": "User",
+      "userConsentDescription": "Permite consultar los productos del catalogo de Pedidos360.",
+      "userConsentDisplayName": "Leer el catalogo de Pedidos360",
+      "value": "Catalog.Read"
+    }
+  ],
+  "passwordCredentials": [],
+  "preferredSingleSignOnMode": null,
+  "preferredTokenSigningKeyThumbprint": null,
+  "replyUrls": [],
+  "resourceSpecificApplicationPermissions": [],
+  "samlSingleSignOnSettings": null,
+  "servicePrincipalNames": [
+    "114f7b58-b207-4d46-9d6e-f491c3a0c0e0",
+    "api://114f7b58-b207-4d46-9d6e-f491c3a0c0e0"
+  ],
+  "servicePrincipalType": "Application",
+  "signInAudience": "AzureADMyOrg",
+  "tags": [
+    "Project=Pedidos360",
+    "Course=DSY1107"
+  ],
+  "tokenEncryptionKeyId": null,
+  "verifiedPublisher": {
+    "addedDateTime": null,
+    "displayName": null,
+    "verifiedPublisherId": null
+  }
+}

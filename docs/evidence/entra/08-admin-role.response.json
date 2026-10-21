@@ -1,0 +1,12 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#appRoleAssignments/$entity",
+  "appRoleId": "04b76981-53d3-4d0a-9d26-a27c7a6cc531",
+  "createdDateTime": "2026-09-05T23:11:10.1749422Z",
+  "deletedDateTime": null,
+  "id": "UWbf76jgnUij1e2T_7iDpoWBGZA84W1AmeCjYfkd1BQ",
+  "principalDisplayName": "JAZMIN CLAUDIA ANDREA PISSANI HIDALGO",
+  "principalId": "efdf6651-e0a8-489d-a3d5-ed93ffb883a6",
+  "principalType": "User",
+  "resourceDisplayName": "pedidos360-betorrejons-api",
+  "resourceId": "6a0b43df-3afe-4b55-adac-e62ea93494ff"
+}

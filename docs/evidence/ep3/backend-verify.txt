@@ -1,0 +1,583 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Pedidos360 backend                                                 [pom]
+[INFO] messaging-support                                                  [jar]
+[INFO] catalog-service                                                    [jar]
+[INFO] orders-service                                                     [jar]
+[INFO] bff                                                                [jar]
+[INFO] receipts-service                                                   [jar]
+[INFO] rabbit-admin-service                                               [jar]
+[INFO] 
+[INFO] ---------------< cl.duoc.pedidos360:pedidos360-backend >----------------
+[INFO] Building Pedidos360 backend 0.1.0-SNAPSHOT                         [1/7]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ pedidos360-backend ---
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ pedidos360-backend ---
+[INFO] 
+[INFO] ----------------< cl.duoc.pedidos360:messaging-support >----------------
+[INFO] Building messaging-support 0.1.0-SNAPSHOT                          [2/7]
+[INFO]   from messaging-support/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ messaging-support ---
+[INFO] Deleting /home/codex/.cache/pedidos360-ep3/build/messaging-support
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ messaging-support ---
+[INFO] Copying 0 resource from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/messaging-support/classes
+[INFO] Copying 1 resource from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/messaging-support/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ messaging-support ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/messaging-support/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ messaging-support ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/messaging-support/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ messaging-support ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ messaging-support ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ messaging-support ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/messaging-support/messaging-support-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ messaging-support ---
+[INFO] 
+[INFO] -----------------< cl.duoc.pedidos360:catalog-service >-----------------
+[INFO] Building catalog-service 0.1.0-SNAPSHOT                            [3/7]
+[INFO]   from catalog-service/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ catalog-service ---
+[INFO] Deleting /home/codex/.cache/pedidos360-ep3/build/catalog-service
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ catalog-service ---
+[INFO] Copying 4 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/catalog-service/classes
+[INFO] Copying 2 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/catalog-service/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ catalog-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 11 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/catalog-service/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ catalog-service ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ catalog-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/catalog-service/test-classes
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service/src/test/java/cl/duoc/pedidos360/catalog/CatalogIntegrationTest.java: /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service/src/test/java/cl/duoc/pedidos360/catalog/CatalogIntegrationTest.java uses or overrides a deprecated API.
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service/src/test/java/cl/duoc/pedidos360/catalog/CatalogIntegrationTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ catalog-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cl.duoc.pedidos360.catalog.CatalogIntegrationTest
+22:58:36.873 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [cl.duoc.pedidos360.catalog.CatalogIntegrationTest]: CatalogIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:58:37.171 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration cl.duoc.pedidos360.catalog.CatalogApplication for test class cl.duoc.pedidos360.catalog.CatalogIntegrationTest
+22:58:37.382 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [cl.duoc.pedidos360.catalog.CatalogIntegrationTest]: CatalogIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:58:37.394 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration cl.duoc.pedidos360.catalog.CatalogApplication for test class cl.duoc.pedidos360.catalog.CatalogIntegrationTest
+22:58:37.555 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+22:58:37.559 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+22:58:37.582 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 2.0.5
+22:58:37.830 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+22:58:38.597 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+22:58:38.599 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+22:58:38.629 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.7.2
+  API Version: 1.55
+  Operating System: Ubuntu 26.04 LTS
+  Total Memory: 11961 MB
+22:58:38.631 [main] WARN org.testcontainers.utility.ResourceReaper -- 
+********************************************************************************
+Ryuk has been disabled. This can cause unexpected behavior in your environment.
+********************************************************************************
+22:58:38.635 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+22:58:38.635 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+22:58:39.063 [main] INFO tc.mysql:8.4.11@sha256:b3b90a... -- Creating container for image: mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb
+22:58:39.069 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb, configFile: /home/codex/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /home/codex/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+22:58:39.381 [main] INFO tc.mysql:8.4.11@sha256:b3b90a... -- Container mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb is starting: b281837245d50a2ae43de0c95ede24e6ac076faf6a47f7e3359b3e4cf92da6d7
+22:58:39.821 [main] INFO tc.mysql:8.4.11@sha256:b3b90a... -- Waiting for database connection to become available at jdbc:mysql://localhost:32781/pedidos360_test_catalog using query 'SELECT 1'
+22:58:55.305 [main] INFO tc.mysql:8.4.11@sha256:b3b90a... -- Container mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb started in PT16.241037838S
+22:58:55.305 [main] INFO tc.mysql:8.4.11@sha256:b3b90a... -- Container is started (JDBC URL: jdbc:mysql://localhost:32781/pedidos360_test_catalog)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-20T22:58:56.336-03:00  INFO 147705 --- [catalog-service] [           main] c.d.p.catalog.CatalogIntegrationTest     : Starting CatalogIntegrationTest using Java 25.0.4.1 with PID 147705 (started by codex in /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/catalog-service)
+2026-10-20T22:58:56.340-03:00  INFO 147705 --- [catalog-service] [           main] c.d.p.catalog.CatalogIntegrationTest     : No active profile set, falling back to 1 default profile: "default"
+2026-10-20T22:58:58.293-03:00  INFO 147705 --- [catalog-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-20T22:58:58.426-03:00  INFO 147705 --- [catalog-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 111 ms. Found 1 JPA repository interface.
+2026-10-20T22:59:00.332-03:00  INFO 147705 --- [catalog-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+2026-10-20T22:59:00.376-03:00  INFO 147705 --- [catalog-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-20T22:59:00.378-03:00  INFO 147705 --- [catalog-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-20T22:59:00.479-03:00  INFO 147705 --- [catalog-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 4076 ms
+2026-10-20T22:59:01.744-03:00  INFO 147705 --- [catalog-service] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:mysql://localhost:32781/pedidos360_test_catalog (MySQL 8.4)
+2026-10-20T22:59:01.955-03:00  INFO 147705 --- [catalog-service] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table `pedidos360_test_catalog`.`flyway_schema_history` does not exist yet
+2026-10-20T22:59:01.964-03:00  INFO 147705 --- [catalog-service] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.054s)
+2026-10-20T22:59:02.022-03:00  INFO 147705 --- [catalog-service] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table `pedidos360_test_catalog`.`flyway_schema_history` ...
+2026-10-20T22:59:02.198-03:00  INFO 147705 --- [catalog-service] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema `pedidos360_test_catalog`: << Empty Schema >>
+2026-10-20T22:59:02.219-03:00  INFO 147705 --- [catalog-service] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema `pedidos360_test_catalog` to version "1 - create products"
+2026-10-20T22:59:02.353-03:00  INFO 147705 --- [catalog-service] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema `pedidos360_test_catalog` to version "2 - demo products"
+2026-10-20T22:59:02.417-03:00  INFO 147705 --- [catalog-service] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema `pedidos360_test_catalog`, now at version v2 (execution time 00:00.091s)
+2026-10-20T22:59:02.627-03:00  INFO 147705 --- [catalog-service] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-20T22:59:02.704-03:00  INFO 147705 --- [catalog-service] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-20T22:59:03.363-03:00  INFO 147705 --- [catalog-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-20T22:59:03.410-03:00  INFO 147705 --- [catalog-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-20T22:59:03.453-03:00  INFO 147705 --- [catalog-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@a8177f6
+2026-10-20T22:59:03.454-03:00  INFO 147705 --- [catalog-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-20T22:59:03.552-03:00  INFO 147705 --- [catalog-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:32781/pedidos360_test_catalog]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.4.11
+	Default catalog/schema: pedidos360_test_catalog/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-20T22:59:05.129-03:00  INFO 147705 --- [catalog-service] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-20T22:59:05.199-03:00  INFO 147705 --- [catalog-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-20T22:59:05.338-03:00  INFO 147705 --- [catalog-service] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-20T22:59:07.858-03:00  INFO 147705 --- [catalog-service] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-20T22:59:08.108-03:00  INFO 147705 --- [catalog-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 32971 (http) with context path '/'
+2026-10-20T22:59:08.132-03:00  INFO 147705 --- [catalog-service] [           main] c.d.p.catalog.CatalogIntegrationTest     : Started CatalogIntegrationTest in 12.314 seconds (process running for 32.876)
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+2026-10-20T22:59:08.875-03:00  INFO 147705 --- [catalog-service] [1-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-20T22:59:08.876-03:00  INFO 147705 --- [catalog-service] [1-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-20T22:59:08.880-03:00  INFO 147705 --- [catalog-service] [1-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 33.87 s -- in cl.duoc.pedidos360.catalog.CatalogIntegrationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ catalog-service ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/catalog-service/catalog-service-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ catalog-service ---
+[INFO] Replacing main artifact /home/codex/.cache/pedidos360-ep3/build/catalog-service/catalog-service-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /home/codex/.cache/pedidos360-ep3/build/catalog-service/catalog-service-0.1.0-SNAPSHOT.jar.original
+[INFO] 
+[INFO] -----------------< cl.duoc.pedidos360:orders-service >------------------
+[INFO] Building orders-service 0.1.0-SNAPSHOT                             [4/7]
+[INFO]   from orders-service/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ orders-service ---
+[INFO] Deleting /home/codex/.cache/pedidos360-ep3/build/orders-service
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ orders-service ---
+[INFO] Copying 4 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/orders-service/classes
+[INFO] Copying 2 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/orders-service/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ orders-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 22 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/orders-service/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ orders-service ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/orders-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ orders-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 6 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/orders-service/test-classes
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/orders-service/src/test/java/cl/duoc/pedidos360/orders/OrdersIntegrationTest.java: /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/orders-service/src/test/java/cl/duoc/pedidos360/orders/OrdersIntegrationTest.java uses or overrides a deprecated API.
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/orders-service/src/test/java/cl/duoc/pedidos360/orders/OrdersIntegrationTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ orders-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cl.duoc.pedidos360.orders.OrderOutboxIntegrationTest
+22:59:19.700 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [cl.duoc.pedidos360.orders.OrderOutboxIntegrationTest]: OrderOutboxIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:59:19.914 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration cl.duoc.pedidos360.orders.OrdersApplication for test class cl.duoc.pedidos360.orders.OrderOutboxIntegrationTest
+22:59:20.133 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [cl.duoc.pedidos360.orders.OrderOutboxIntegrationTest]: OrderOutboxIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:59:20.137 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration cl.duoc.pedidos360.orders.OrdersApplication for test class cl.duoc.pedidos360.orders.OrderOutboxIntegrationTest
+22:59:20.333 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+22:59:20.340 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+22:59:20.359 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 2.0.5
+22:59:20.670 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+22:59:21.763 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+22:59:21.774 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+22:59:21.817 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.7.2
+  API Version: 1.55
+  Operating System: Ubuntu 26.04 LTS
+  Total Memory: 11961 MB
+22:59:21.826 [main] WARN org.testcontainers.utility.ResourceReaper -- 
+********************************************************************************
+Ryuk has been disabled. This can cause unexpected behavior in your environment.
+********************************************************************************
+22:59:21.832 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+22:59:21.833 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+22:59:22.499 [main] INFO tc.mysql:8.4.11@sha256:b3b90a... -- Creating container for image: mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb
+22:59:22.509 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb, configFile: /home/codex/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /home/codex/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+22:59:22.924 [main] INFO tc.mysql:8.4.11@sha256:b3b90a... -- Container mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb is starting: 1cea53e5050162543d87e45224889b20d267ced82ad55965568bbebec03eb180
+22:59:23.553 [main] INFO tc.mysql:8.4.11@sha256:b3b90a... -- Waiting for database connection to become available at jdbc:mysql://localhost:32782/pedidos360_test_orders using query 'SELECT 1'
+22:59:38.760 [main] INFO tc.mysql:8.4.11@sha256:b3b90a... -- Container mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb started in PT16.26053948S
+22:59:38.760 [main] INFO tc.mysql:8.4.11@sha256:b3b90a... -- Container is started (JDBC URL: jdbc:mysql://localhost:32782/pedidos360_test_orders)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-20T22:59:39.987-03:00  INFO 149260 --- [orders-service] [           main] c.d.p.orders.OrderOutboxIntegrationTest  : Starting OrderOutboxIntegrationTest using Java 25.0.4.1 with PID 149260 (started by codex in /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/orders-service)
+2026-10-20T22:59:39.991-03:00  INFO 149260 --- [orders-service] [           main] c.d.p.orders.OrderOutboxIntegrationTest  : No active profile set, falling back to 1 default profile: "default"
+2026-10-20T22:59:42.946-03:00  INFO 149260 --- [orders-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-20T22:59:43.043-03:00  INFO 149260 --- [orders-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 71 ms. Found 1 JPA repository interface.
+2026-10-20T22:59:44.556-03:00  INFO 149260 --- [orders-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+2026-10-20T22:59:44.594-03:00  INFO 149260 --- [orders-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-20T22:59:44.596-03:00  INFO 149260 --- [orders-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-20T22:59:44.657-03:00  INFO 149260 --- [orders-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 4567 ms
+2026-10-20T22:59:45.703-03:00  INFO 149260 --- [orders-service] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:mysql://localhost:32782/pedidos360_test_orders (MySQL 8.4)
+2026-10-20T22:59:45.975-03:00  INFO 149260 --- [orders-service] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table `pedidos360_test_orders`.`flyway_schema_history` does not exist yet
+2026-10-20T22:59:45.985-03:00  INFO 149260 --- [orders-service] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.073s)
+2026-10-20T22:59:46.073-03:00  INFO 149260 --- [orders-service] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table `pedidos360_test_orders`.`flyway_schema_history` ...
+2026-10-20T22:59:46.320-03:00  INFO 149260 --- [orders-service] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema `pedidos360_test_orders`: << Empty Schema >>
+2026-10-20T22:59:46.350-03:00  INFO 149260 --- [orders-service] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema `pedidos360_test_orders` to version "1 - create orders"
+2026-10-20T22:59:46.608-03:00  INFO 149260 --- [orders-service] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema `pedidos360_test_orders` to version "2 - order event outbox"
+2026-10-20T22:59:46.760-03:00  INFO 149260 --- [orders-service] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema `pedidos360_test_orders`, now at version v2 (execution time 00:00.283s)
+2026-10-20T22:59:46.981-03:00  INFO 149260 --- [orders-service] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-20T22:59:47.081-03:00  INFO 149260 --- [orders-service] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-20T22:59:47.684-03:00  INFO 149260 --- [orders-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-20T22:59:47.734-03:00  INFO 149260 --- [orders-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-20T22:59:47.784-03:00  INFO 149260 --- [orders-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@681302ad
+2026-10-20T22:59:47.789-03:00  INFO 149260 --- [orders-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-20T22:59:47.915-03:00  INFO 149260 --- [orders-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:32782/pedidos360_test_orders]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.4.11
+	Default catalog/schema: pedidos360_test_orders/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-20T22:59:49.658-03:00  INFO 149260 --- [orders-service] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-20T22:59:49.734-03:00  INFO 149260 --- [orders-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-20T22:59:50.384-03:00  INFO 149260 --- [orders-service] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-20T22:59:52.237-03:00  INFO 149260 --- [orders-service] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-20T22:59:52.344-03:00  INFO 149260 --- [orders-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 44517 (http) with context path '/'
+2026-10-20T22:59:52.361-03:00  INFO 149260 --- [orders-service] [           main] c.d.p.orders.OrderOutboxIntegrationTest  : Started OrderOutboxIntegrationTest in 13.102 seconds (process running for 34.36)
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 34.30 s -- in cl.duoc.pedidos360.orders.OrderOutboxIntegrationTest
+[INFO] Running cl.duoc.pedidos360.orders.OrdersIntegrationTest
+2026-10-20T22:59:53.713-03:00  INFO 149260 --- [orders-service] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [cl.duoc.pedidos360.orders.OrdersIntegrationTest]: OrdersIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-20T22:59:53.722-03:00  INFO 149260 --- [orders-service] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration cl.duoc.pedidos360.orders.OrdersApplication for test class cl.duoc.pedidos360.orders.OrdersIntegrationTest
+2026-10-20T22:59:53.727-03:00  INFO 149260 --- [orders-service] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [cl.duoc.pedidos360.orders.OrdersIntegrationTest]: OrdersIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-20T22:59:53.729-03:00  INFO 149260 --- [orders-service] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration cl.duoc.pedidos360.orders.OrdersApplication for test class cl.duoc.pedidos360.orders.OrdersIntegrationTest
+2026-10-20T22:59:53.732-03:00  INFO 149260 --- [orders-service] [           main] tc.mysql:8.4.11@sha256:b3b90a...         : Creating container for image: mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb
+2026-10-20T22:59:53.962-03:00  INFO 149260 --- [orders-service] [           main] tc.mysql:8.4.11@sha256:b3b90a...         : Container mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb is starting: 97e56c212d1e87dd889c35c828b46cc5323a637112b894663f44f3865706eb0f
+2026-10-20T22:59:54.366-03:00  INFO 149260 --- [orders-service] [           main] tc.mysql:8.4.11@sha256:b3b90a...         : Waiting for database connection to become available at jdbc:mysql://localhost:32783/pedidos360_test_orders using query 'SELECT 1'
+2026-10-20T23:00:06.201-03:00  INFO 149260 --- [orders-service] [           main] tc.mysql:8.4.11@sha256:b3b90a...         : Container mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb started in PT12.468216453S
+2026-10-20T23:00:06.201-03:00  INFO 149260 --- [orders-service] [           main] tc.mysql:8.4.11@sha256:b3b90a...         : Container is started (JDBC URL: jdbc:mysql://localhost:32783/pedidos360_test_orders)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-20T23:00:06.448-03:00  INFO 149260 --- [orders-service] [           main] c.d.p.orders.OrdersIntegrationTest       : Starting OrdersIntegrationTest using Java 25.0.4.1 with PID 149260 (started by codex in /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/orders-service)
+2026-10-20T23:00:06.449-03:00  INFO 149260 --- [orders-service] [           main] c.d.p.orders.OrdersIntegrationTest       : No active profile set, falling back to 1 default profile: "default"
+2026-10-20T23:00:07.030-03:00  INFO 149260 --- [orders-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-20T23:00:07.051-03:00  INFO 149260 --- [orders-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 1 JPA repository interface.
+2026-10-20T23:00:07.462-03:00  INFO 149260 --- [orders-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+2026-10-20T23:00:07.467-03:00  INFO 149260 --- [orders-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-20T23:00:07.468-03:00  INFO 149260 --- [orders-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-20T23:00:07.494-03:00  INFO 149260 --- [orders-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1039 ms
+2026-10-20T23:00:07.748-03:00  INFO 149260 --- [orders-service] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:mysql://localhost:32783/pedidos360_test_orders (MySQL 8.4)
+2026-10-20T23:00:07.809-03:00  INFO 149260 --- [orders-service] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table `pedidos360_test_orders`.`flyway_schema_history` does not exist yet
+2026-10-20T23:00:07.815-03:00  INFO 149260 --- [orders-service] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.030s)
+2026-10-20T23:00:07.878-03:00  INFO 149260 --- [orders-service] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table `pedidos360_test_orders`.`flyway_schema_history` ...
+2026-10-20T23:00:07.965-03:00  INFO 149260 --- [orders-service] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema `pedidos360_test_orders`: << Empty Schema >>
+2026-10-20T23:00:07.983-03:00  INFO 149260 --- [orders-service] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema `pedidos360_test_orders` to version "1 - create orders"
+2026-10-20T23:00:08.090-03:00  INFO 149260 --- [orders-service] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema `pedidos360_test_orders` to version "2 - order event outbox"
+2026-10-20T23:00:08.159-03:00  INFO 149260 --- [orders-service] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema `pedidos360_test_orders`, now at version v2 (execution time 00:00.112s)
+2026-10-20T23:00:08.202-03:00  INFO 149260 --- [orders-service] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-20T23:00:08.238-03:00  INFO 149260 --- [orders-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-20T23:00:08.240-03:00  INFO 149260 --- [orders-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-10-20T23:00:08.269-03:00  INFO 149260 --- [orders-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a00440d
+2026-10-20T23:00:08.270-03:00  INFO 149260 --- [orders-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-10-20T23:00:08.274-03:00  INFO 149260 --- [orders-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:32783/pedidos360_test_orders]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.4.11
+	Default catalog/schema: pedidos360_test_orders/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-20T23:00:08.355-03:00  INFO 149260 --- [orders-service] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-20T23:00:08.369-03:00  INFO 149260 --- [orders-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-20T23:00:09.024-03:00  INFO 149260 --- [orders-service] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-20T23:00:09.073-03:00  INFO 149260 --- [orders-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 36737 (http) with context path '/'
+2026-10-20T23:00:09.083-03:00  INFO 149260 --- [orders-service] [           main] c.d.p.orders.OrdersIntegrationTest       : Started OrdersIntegrationTest in 2.728 seconds (process running for 51.082)
+2026-10-20T23:00:09.286-03:00  INFO 149260 --- [orders-service] [1-auto-2-exec-1] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-20T23:00:09.286-03:00  INFO 149260 --- [orders-service] [1-auto-2-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-20T23:00:09.289-03:00  INFO 149260 --- [orders-service] [1-auto-2-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.69 s -- in cl.duoc.pedidos360.orders.OrdersIntegrationTest
+[INFO] Running cl.duoc.pedidos360.orders.OrderDomainTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.290 s -- in cl.duoc.pedidos360.orders.OrderDomainTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ orders-service ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/orders-service/orders-service-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ orders-service ---
+[INFO] Replacing main artifact /home/codex/.cache/pedidos360-ep3/build/orders-service/orders-service-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /home/codex/.cache/pedidos360-ep3/build/orders-service/orders-service-0.1.0-SNAPSHOT.jar.original
+[INFO] 
+[INFO] -----------------------< cl.duoc.pedidos360:bff >-----------------------
+[INFO] Building bff 0.1.0-SNAPSHOT                                        [5/7]
+[INFO]   from bff/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ bff ---
+[INFO] Deleting /home/codex/.cache/pedidos360-ep3/build/bff
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ bff ---
+[INFO] Copying 3 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/bff/classes
+[INFO] Copying 0 resource from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/bff/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ bff ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 5 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/bff/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ bff ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/bff/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ bff ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/bff/test-classes
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/bff/src/test/java/cl/duoc/pedidos360/bff/BffContractTest.java: /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/bff/src/test/java/cl/duoc/pedidos360/bff/BffContractTest.java uses or overrides a deprecated API.
+[INFO] /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/bff/src/test/java/cl/duoc/pedidos360/bff/BffContractTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ bff ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cl.duoc.pedidos360.bff.BffContractTest
+23:00:16.388 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [cl.duoc.pedidos360.bff.BffContractTest]: BffContractTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:00:16.585 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration cl.duoc.pedidos360.bff.BffApplication for test class cl.duoc.pedidos360.bff.BffContractTest
+23:00:16.782 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [cl.duoc.pedidos360.bff.BffContractTest]: BffContractTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:00:16.788 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration cl.duoc.pedidos360.bff.BffApplication for test class cl.duoc.pedidos360.bff.BffContractTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-20T23:00:17.964-03:00  INFO 151639 --- [bff] [           main] cl.duoc.pedidos360.bff.BffContractTest   : Starting BffContractTest using Java 25.0.4.1 with PID 151639 (started by codex in /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/bff)
+2026-10-20T23:00:17.972-03:00  INFO 151639 --- [bff] [           main] cl.duoc.pedidos360.bff.BffContractTest   : No active profile set, falling back to 1 default profile: "default"
+2026-10-20T23:00:21.184-03:00  INFO 151639 --- [bff] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+2026-10-20T23:00:21.227-03:00  INFO 151639 --- [bff] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-20T23:00:21.228-03:00  INFO 151639 --- [bff] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-20T23:00:21.322-03:00  INFO 151639 --- [bff] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3272 ms
+2026-10-20T23:00:24.306-03:00  INFO 151639 --- [bff] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-20T23:00:24.460-03:00  INFO 151639 --- [bff] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 43015 (http) with context path '/'
+2026-10-20T23:00:24.481-03:00  INFO 151639 --- [bff] [           main] cl.duoc.pedidos360.bff.BffContractTest   : Started BffContractTest in 7.097 seconds (process running for 9.678)
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+2026-10-20T23:00:25.683-03:00  INFO 151639 --- [bff] [1-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-20T23:00:25.684-03:00  INFO 151639 --- [bff] [1-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-20T23:00:25.689-03:00  INFO 151639 --- [bff] [1-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.45 s -- in cl.duoc.pedidos360.bff.BffContractTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ bff ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/bff/bff-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ bff ---
+[INFO] Replacing main artifact /home/codex/.cache/pedidos360-ep3/build/bff/bff-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /home/codex/.cache/pedidos360-ep3/build/bff/bff-0.1.0-SNAPSHOT.jar.original
+[INFO] 
+[INFO] ----------------< cl.duoc.pedidos360:receipts-service >-----------------
+[INFO] Building receipts-service 0.1.0-SNAPSHOT                           [6/7]
+[INFO]   from receipts-service/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ receipts-service ---
+[INFO] Deleting /home/codex/.cache/pedidos360-ep3/build/receipts-service
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ receipts-service ---
+[INFO] Copying 2 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/receipts-service/classes
+[INFO] Copying 0 resource from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/receipts-service/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ receipts-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/receipts-service/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ receipts-service ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/receipts-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ receipts-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/receipts-service/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ receipts-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cl.duoc.pedidos360.receipts.ReceiptListenerTest
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+23:00:35.088 [main] INFO cl.duoc.pedidos360.receipts.infrastructure.ReceiptListener -- ACK eventId=4476ed8d-3f61-4e80-b895-7095a0b7f210 orderId=be80420c-367d-49d5-a912-169085b7f253 result=RECEIPT_STORED attempt=1 redelivered=null
+23:00:35.109 [main] INFO cl.duoc.pedidos360.receipts.infrastructure.ReceiptListener -- ACK eventId=4476ed8d-3f61-4e80-b895-7095a0b7f210 orderId=be80420c-367d-49d5-a912-169085b7f253 result=DUPLICATE attempt=1 redelivered=null
+23:00:35.324 [main] WARN cl.duoc.pedidos360.receipts.infrastructure.ReceiptListener -- RETRY eventId=0bfb1266-694c-4f34-926d-65dbd5905a0f orderId=b343b4b0-5eb8-4eaf-8836-5f87431ad194 reason=STORAGE_UNAVAILABLE attempt=1 max=3
+23:00:35.329 [main] INFO cl.duoc.pedidos360.receipts.infrastructure.ReceiptListener -- ACK eventId=0bfb1266-694c-4f34-926d-65dbd5905a0f orderId=b343b4b0-5eb8-4eaf-8836-5f87431ad194 result=RECEIPT_STORED attempt=2 redelivered=null
+23:00:35.369 [main] WARN cl.duoc.pedidos360.receipts.infrastructure.ReceiptListener -- RETRY eventId=6951d972-cddb-4d3e-85da-046136a93c5e orderId=dcd5b2b5-830b-4ae9-b1cf-c68d0be54fba reason=STORAGE_UNAVAILABLE attempt=1 max=3
+23:00:35.371 [main] WARN cl.duoc.pedidos360.receipts.infrastructure.ReceiptListener -- RETRY eventId=6951d972-cddb-4d3e-85da-046136a93c5e orderId=dcd5b2b5-830b-4ae9-b1cf-c68d0be54fba reason=STORAGE_UNAVAILABLE attempt=2 max=3
+23:00:35.373 [main] WARN cl.duoc.pedidos360.receipts.infrastructure.ReceiptListener -- NACK_DLQ eventId=6951d972-cddb-4d3e-85da-046136a93c5e orderId=dcd5b2b5-830b-4ae9-b1cf-c68d0be54fba reason=RETRY_EXHAUSTED attempts=3
+23:00:35.397 [main] WARN cl.duoc.pedidos360.receipts.infrastructure.ReceiptListener -- NACK_DLQ eventId=UNTRUSTED reason=INVALID_CONTRACT deliveryTag=7
+23:00:35.411 [main] WARN cl.duoc.pedidos360.receipts.infrastructure.ReceiptListener -- NACK_DLQ eventId=ab0a6e1a-4b7e-4a08-bebd-773616a05de6 orderId=eaf91ee6-0869-4696-96f1-c65a444f17a2 reason=PERMANENT_PROCESSING_ERROR
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.155 s -- in cl.duoc.pedidos360.receipts.ReceiptListenerTest
+[INFO] Running cl.duoc.pedidos360.receipts.RabbitReceiptIntegrationTest
+23:00:35.495 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+23:00:35.500 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+23:00:35.530 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 2.0.5
+23:00:35.896 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+23:00:36.985 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+23:00:36.987 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+23:00:37.016 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.7.2
+  API Version: 1.55
+  Operating System: Ubuntu 26.04 LTS
+  Total Memory: 11961 MB
+23:00:37.020 [main] WARN org.testcontainers.utility.ResourceReaper -- 
+********************************************************************************
+Ryuk has been disabled. This can cause unexpected behavior in your environment.
+********************************************************************************
+23:00:37.024 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+23:00:37.025 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+23:00:37.399 [main] INFO tc.rabbitmq:4.2.9-management@sha256:1cca59... -- Creating container for image: rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be
+23:00:37.409 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be, configFile: /home/codex/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /home/codex/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+23:00:37.691 [main] INFO tc.rabbitmq:4.2.9-management@sha256:1cca59... -- Container rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be is starting: 908cd4d338d9d2b058cc0157be0ad871dc37938172dfa384780f4cc2e620e0af
+23:00:44.587 [main] INFO tc.rabbitmq:4.2.9-management@sha256:1cca59... -- Container rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be started in PT7.187756725S
+23:00:44.702 [main] INFO org.springframework.amqp.rabbit.connection.CachingConnectionFactory -- Attempting to connect to: localhost:32784
+23:00:44.765 [main] INFO org.springframework.amqp.rabbit.connection.CachingConnectionFactory -- Created new connection: SpringAMQP#2e3cd732:0/SimpleConnection@37d6dddc [delegate=amqp://ep3-test@127.0.0.1:32784/, localPort=45924]
+23:00:45.692 [receipt-orders-1] INFO cl.duoc.pedidos360.receipts.infrastructure.ReceiptListener -- ACK eventId=d15c1385-f8ab-402a-b77e-b082a9b77cb7 orderId=3c6e2999-6b14-43be-b9fd-f534557736ce result=RECEIPT_STORED attempt=1 redelivered=false
+23:00:45.709 [receipt-orders-1] WARN cl.duoc.pedidos360.receipts.infrastructure.ReceiptListener -- NACK_DLQ eventId=UNTRUSTED reason=INVALID_CONTRACT deliveryTag=2
+23:00:45.902 [receipt-orders-2] INFO org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer -- Waiting for workers to finish.
+23:00:46.711 [receipt-orders-2] INFO org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer -- Successfully waited for workers to finish.
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.59 s -- in cl.duoc.pedidos360.receipts.RabbitReceiptIntegrationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ receipts-service ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/receipts-service/receipts-service-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ receipts-service ---
+[INFO] Replacing main artifact /home/codex/.cache/pedidos360-ep3/build/receipts-service/receipts-service-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /home/codex/.cache/pedidos360-ep3/build/receipts-service/receipts-service-0.1.0-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --------------< cl.duoc.pedidos360:rabbit-admin-service >---------------
+[INFO] Building rabbit-admin-service 0.1.0-SNAPSHOT                       [7/7]
+[INFO]   from rabbit-admin-service/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ rabbit-admin-service ---
+[INFO] Deleting /home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ rabbit-admin-service ---
+[INFO] Copying 2 resources from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/classes
+[INFO] Copying 0 resource from src/main/resources to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ rabbit-admin-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ rabbit-admin-service ---
+[INFO] skip non existing resourceDirectory /mnt/c/Users/Benja/Documents/cloudnative/ev1/pedidos360-backend/rabbit-admin-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ rabbit-admin-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 25] to ../../../../../../../../../home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ rabbit-admin-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cl.duoc.pedidos360.rabbitadmin.AdminValidationTest
+23:00:50.813 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.1.3.Final
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.790 s -- in cl.duoc.pedidos360.rabbitadmin.AdminValidationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ rabbit-admin-service ---
+[INFO] Building jar: /home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/rabbit-admin-service-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ rabbit-admin-service ---
+[INFO] Replacing main artifact /home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/rabbit-admin-service-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /home/codex/.cache/pedidos360-ep3/build/rabbit-admin-service/rabbit-admin-service-0.1.0-SNAPSHOT.jar.original
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Pedidos360 backend 0.1.0-SNAPSHOT:
+[INFO] 
+[INFO] Pedidos360 backend ................................. SUCCESS [  1.297 s]
+[INFO] messaging-support .................................. SUCCESS [  5.238 s]
+[INFO] catalog-service .................................... SUCCESS [ 42.574 s]
+[INFO] orders-service ..................................... SUCCESS [01:01 min]
+[INFO] bff ................................................ SUCCESS [ 15.976 s]
+[INFO] receipts-service ................................... SUCCESS [ 18.928 s]
+[INFO] rabbit-admin-service ............................... SUCCESS [  5.313 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:31 min
+[INFO] Finished at: 2026-10-20T23:00:52-03:00
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,173 @@
+{
+  "at": "2026-09-06T09:38:28.693231+00:00",
+  "mode": "entra",
+  "discovery_and_jwks_verified": true,
+  "note": "No valid Entra access token used here. Real authenticated browser evidence is separate.",
+  "checks": [
+    {
+      "port": 8180,
+      "method": "GET",
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/me",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/me",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8180,
+      "method": "GET",
+      "path": "/api/v1/me",
+      "expected": 401,
+      "actual": 401,
+      "case": "local_fixture_rejected_in_entra_mode"
+    },
+    {
+      "port": 8181,
+      "method": "GET",
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8181,
+      "method": "GET",
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401,
+      "case": "local_fixture_rejected_in_entra_mode"
+    },
+    {
+      "port": 8182,
+      "method": "GET",
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/admin/pedidos",
+      "expected": 401,
+      "actual": 401
+    },
+    {
+      "port": 8182,
+      "method": "GET",
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401,
+      "case": "local_fixture_rejected_in_entra_mode"
+    },
+    {
+      "port": 8180,
+      "method": "OPTIONS",
+      "path": "/api/v1/me",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "port": 8180,
+      "method": "OPTIONS",
+      "path": "/api/v1/me",
+      "expected": 200,
+      "actual": 200
+    },
+    {
+      "port": 8180,
+      "method": "OPTIONS",
+      "path": "/api/v1/me",
+      "expected": 403,
+      "actual": 403
+    }
+  ],
+  "passed": 23
+}

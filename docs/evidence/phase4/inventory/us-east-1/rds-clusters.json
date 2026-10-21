@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T09:57:33.7399990Z",
+  "command": [
+    "aws",
+    "rds",
+    "describe-db-clusters",
+    "--region",
+    "us-east-1",
+    "--query",
+    "DBClusters[].{Id:DBClusterIdentifier,Arn:DBClusterArn,Engine:Engine,Status:Status,Tags:TagList}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

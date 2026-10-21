@@ -1,0 +1,10 @@
+Comprobación ejecutada desde PowerShell/Windows, 2026-10-20 America/Santiago.
+curl.exe --silent --output NUL --max-time 8 --write-out "<URL> HTTP %{http_code}\n" <URL>
+
+http://localhost:5173 HTTP 200
+http://localhost:19180/actuator/health HTTP 200
+http://localhost:19181/actuator/health HTTP 200
+http://localhost:19182/actuator/health HTTP 200
+http://localhost:19183/actuator/health HTTP 200
+http://localhost:19184/actuator/health HTTP 200
+http://localhost:15672 HTTP 200

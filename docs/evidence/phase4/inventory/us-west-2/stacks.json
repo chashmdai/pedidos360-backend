@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T14:35:50.2191828Z",
+  "command": [
+    "aws",
+    "cloudformation",
+    "describe-stacks",
+    "--region",
+    "us-west-2",
+    "--query",
+    "Stacks[].{Name:StackName,Id:StackId,Status:StackStatus,Created:CreationTime,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

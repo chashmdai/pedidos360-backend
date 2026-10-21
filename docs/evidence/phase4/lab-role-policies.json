@@ -1,0 +1,15 @@
+{
+  "at": "2026-09-06T14:36:47.1888801Z",
+  "command": [
+    "aws",
+    "iam",
+    "list-attached-role-policies",
+    "--role-name",
+    "LabRole",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "output": "{\n    \"AttachedPolicies\": [\n        {\n            \"PolicyName\": \"c225479a5690755l16596670t1w002996184293-VocLabPolicy1-tLVC2Dj3lCRu\",\n            \"PolicyArn\": \"arn:aws:iam::002996184293:policy/c225479a5690755l16596670t1w002996184293-VocLabPolicy1-tLVC2Dj3lCRu\"\n        },\n        {\n            \"PolicyName\": \"c225479a5690755l16596670t1w002996184293-VocLabPolicy3-y33PDNkphWJv\",\n            \"PolicyArn\": \"arn:aws:iam::002996184293:policy/c225479a5690755l16596670t1w002996184293-VocLabPolicy3-y33PDNkphWJv\"\n        },\n        {\n            \"PolicyName\": \"c225479a5690755l16596670t1w002996184293-VocLabPolicy2-IcSotJeufCXv\",\n            \"PolicyArn\": \"arn:aws:iam::002996184293:policy/c225479a5690755l16596670t1w002996184293-VocLabPolicy2-IcSotJeufCXv\"\n        },\n        {\n            \"PolicyName\": \"AmazonSSMManagedInstanceCore\",\n            \"PolicyArn\": \"arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore\"\n        },\n        {\n            \"PolicyName\": \"AmazonEKSClusterPolicy\",\n            \"PolicyArn\": \"arn:aws:iam::aws:policy/AmazonEKSClusterPolicy\"\n        },\n        {\n            \"PolicyName\": \"AmazonEC2ContainerRegistryReadOnly\",\n            \"PolicyArn\": \"arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly\"\n        },\n        {\n            \"PolicyName\": \"AmazonEKSWorkerNodePolicy\",\n            \"PolicyArn\": \"arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy\"\n        }\n    ]\n}"
+}

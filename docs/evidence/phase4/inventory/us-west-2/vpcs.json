@@ -1,0 +1,26 @@
+{
+  "at": "2026-09-06T14:34:47.2713146Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-vpcs",
+    "--region",
+    "us-west-2",
+    "--query",
+    "Vpcs[].{Id:VpcId,Default:IsDefault,Cidr:CidrBlock,State:State,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [
+    {
+      "Id": "vpc-06ae700022d76672e",
+      "Default": true,
+      "Cidr": "172.31.0.0/16",
+      "State": "available",
+      "Tags": null
+    }
+  ],
+  "error": null
+}

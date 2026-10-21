@@ -1,0 +1,39 @@
+name: pedidos360-ep3
+services:
+  rabbitmq:
+    image: rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be
+    container_name: pedidos360-ep3-rabbitmq
+    hostname: pedidos360-ep3-rabbitmq
+    labels: { Project: Pedidos360, Purpose: ep3 }
+    environment:
+      RABBITMQ_DEFAULT_USER: pedidos360_ep3_admin
+      RABBITMQ_DEFAULT_VHOST: pedidos360-ep3
+      RABBITMQ_NODENAME: rabbit@pedidos360-ep3-rabbitmq
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '+S 2:2'
+    entrypoint: ["/bin/sh", "/opt/pedidos360/broker-entrypoint.sh"]
+    command: ["rabbitmq-server"]
+    ports: ["127.0.0.1:5672:5672", "127.0.0.1:15672:15672"]
+    volumes:
+      - rabbit-data:/var/lib/rabbitmq
+      - ./docker/rabbitmq/broker-entrypoint.sh:/opt/pedidos360/broker-entrypoint.sh:ro
+    secrets: [rabbit_admin_password]
+    networks: [messaging]
+    mem_limit: 768m
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "check_running"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+    restart: unless-stopped
+secrets:
+  rabbit_admin_password:
+    file: ${PEDIDOS_EP3_CONFIG_DIR:?Run scripts/ep3.sh setup first}/rabbit-admin-password
+volumes:
+  rabbit-data:
+    name: pedidos360-ep3-rabbit-data
+    labels: { Project: Pedidos360, Purpose: ep3 }
+networks:
+  messaging:
+    name: pedidos360-ep3-network
+    labels: { Project: Pedidos360, Purpose: ep3 }

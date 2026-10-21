@@ -1,0 +1,139 @@
+{
+  "at": "2026-10-21T02:17:47.685191+00:00",
+  "mode": "entra",
+  "realLogin": false,
+  "publicDiscoveryAndJwks": true,
+  "scopes": [
+    "Catalog.Read",
+    "Orders.Read",
+    "Orders.Create"
+  ],
+  "redirectSource": "previously verified Graph manifest; no new Graph write",
+  "redirects": [
+    "http://127.0.0.1:5173/",
+    "http://localhost:5173/"
+  ],
+  "fixtureRejectedByAllFiveServices": true,
+  "checks": [
+    {
+      "port": 19180,
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200,
+      "case": "health_or_cors"
+    },
+    {
+      "port": 19180,
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401,
+      "case": "unauthenticated"
+    },
+    {
+      "port": 19180,
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401,
+      "case": "fixture_rejected"
+    },
+    {
+      "port": 19181,
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200,
+      "case": "health_or_cors"
+    },
+    {
+      "port": 19181,
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401,
+      "case": "unauthenticated"
+    },
+    {
+      "port": 19181,
+      "path": "/api/v1/productos",
+      "expected": 401,
+      "actual": 401,
+      "case": "fixture_rejected"
+    },
+    {
+      "port": 19182,
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200,
+      "case": "health_or_cors"
+    },
+    {
+      "port": 19182,
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401,
+      "case": "unauthenticated"
+    },
+    {
+      "port": 19182,
+      "path": "/api/v1/pedidos",
+      "expected": 401,
+      "actual": 401,
+      "case": "fixture_rejected"
+    },
+    {
+      "port": 19183,
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200,
+      "case": "health_or_cors"
+    },
+    {
+      "port": 19183,
+      "path": "/api/v1/admin/receipts",
+      "expected": 401,
+      "actual": 401,
+      "case": "unauthenticated"
+    },
+    {
+      "port": 19183,
+      "path": "/api/v1/admin/receipts",
+      "expected": 401,
+      "actual": 401,
+      "case": "fixture_rejected"
+    },
+    {
+      "port": 19184,
+      "path": "/actuator/health",
+      "expected": 200,
+      "actual": 200,
+      "case": "health_or_cors"
+    },
+    {
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.lab.none",
+      "expected": 401,
+      "actual": 401,
+      "case": "unauthenticated"
+    },
+    {
+      "port": 19184,
+      "path": "/api/v1/rabbit/queues/pedidos360.lab.none",
+      "expected": 401,
+      "actual": 401,
+      "case": "fixture_rejected"
+    },
+    {
+      "port": 19180,
+      "path": "/api/v1/me",
+      "expected": 200,
+      "actual": 200,
+      "case": "health_or_cors"
+    },
+    {
+      "port": 19180,
+      "path": "/api/v1/me",
+      "expected": 200,
+      "actual": 200,
+      "case": "health_or_cors"
+    }
+  ],
+  "passed": 17
+}

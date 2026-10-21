@@ -1,0 +1,77 @@
+{
+  "at": "2026-09-06T19:42:45.695562+00:00",
+  "SecurityGroups": [
+    {
+      "GroupId": "sg-07b4bb5c29cd90bf1",
+      "IpPermissionsEgress": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 3306,
+          "ToPort": 3306,
+          "UserIdGroupPairs": [
+            {
+              "UserId": "002996184293",
+              "GroupId": "sg-03f6cf26c9842a760"
+            }
+          ],
+          "IpRanges": [],
+          "Ipv6Ranges": [],
+          "PrefixListIds": []
+        },
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 443,
+          "ToPort": 443,
+          "UserIdGroupPairs": [],
+          "IpRanges": [
+            {
+              "Description": "HTTPS Entra SSM and packages",
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "pedidos360-app-sg"
+        },
+        {
+          "Key": "Course",
+          "Value": "DSY1107"
+        },
+        {
+          "Key": "Environment",
+          "Value": "lab"
+        },
+        {
+          "Key": "Project",
+          "Value": "Pedidos360"
+        }
+      ],
+      "VpcId": "vpc-06151b6c4ebba3edb",
+      "SecurityGroupArn": "arn:aws:ec2:us-east-1:002996184293:security-group/sg-07b4bb5c29cd90bf1",
+      "OwnerId": "002996184293",
+      "GroupName": "pedidos360-app-sg",
+      "Description": "Pedidos360 app dedicated security boundary",
+      "IpPermissions": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 8180,
+          "ToPort": 8180,
+          "UserIdGroupPairs": [
+            {
+              "UserId": "002996184293",
+              "GroupId": "sg-03780b62c8cf4c511"
+            }
+          ],
+          "IpRanges": [],
+          "Ipv6Ranges": [],
+          "PrefixListIds": []
+        }
+      ]
+    }
+  ]
+}

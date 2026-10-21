@@ -1,0 +1,11 @@
+{
+  "command": [
+    "aws",
+    "iam",
+    "get-policy",
+    "--policy-arn",
+    "arn:aws:iam::002996184293:policy/voc-cancel-cred"
+  ],
+  "exitCode": 254,
+  "output": "\naws: [ERROR]: An error occurred (AccessDenied) when calling the GetPolicy operation: User: arn:aws:sts::002996184293:assumed-role/voclabs/user3301432=BENJAMIN__TORREJON is not authorized to perform: iam:GetPolicy on resource: policy arn:aws:iam::002996184293:policy/voc-cancel-cred with an explicit deny in an identity-based policy: arn:aws:iam::002996184293:policy/Pvoclabs2"
+}

@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-21T02:22:09.711442+00:00",
+  "surefire": {
+    "tests": 23,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontendTests": 10,
+  "buildsPassed": true,
+  "localAcceptanceGroups": 15,
+  "localHttpAssertions": 48,
+  "entraReal": true,
+  "entraHttp": {
+    "catalog": 200,
+    "createOrder": 201,
+    "listOrdersAfterReload": 200,
+    "adminUserDenied": 403,
+    "meAfterRequestedRefresh": 200
+  },
+  "logoutAndRouteProtection": true,
+  "reactAuthorizedByTeacher": true,
+  "captures": 34,
+  "pdfPages": 8,
+  "pdfSha256": "19eb27a1fc7a1b2d1ddc72d3def66185047c8d884a268335807cdeb984211997",
+  "sourceTreeSha256": "12c3234d6f9ae16d00d18e9e77c0403517106cbd807db25d90ac668947ae7c78",
+  "frontendStylesSha256": "ad493558ad25d8e428fcb7732646307727c8bceb358118688cf2b08a4bce24cc",
+  "preexistingContainersUnchanged": true,
+  "syntax": {
+    "python": 25,
+    "bash": 9,
+    "json": 167,
+    "xml": 8
+  },
+  "secretScanFindings": [],
+  "brokenReportLinks": [],
+  "pendingRequired": [],
+  "limits": [
+    "No real Admin Entra 200 claimed; User 403 is verified",
+    "No HA, natural token expiration or EP3 AWS test claimed",
+    "Two preexisting high npm dependency advisories remain documented"
+  ]
+}

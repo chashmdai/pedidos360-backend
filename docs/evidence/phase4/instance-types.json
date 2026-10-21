@@ -1,0 +1,20 @@
+{
+  "at": "2026-09-06T14:36:38.5397610Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-instance-types",
+    "--instance-types",
+    "t3.small",
+    "t3.medium",
+    "--region",
+    "us-east-1",
+    "--query",
+    "InstanceTypes[].{Type:InstanceType,vCPU:VCpuInfo.DefaultVCpus,MemoryMiB:MemoryInfo.SizeInMiB,Arch:ProcessorInfo.SupportedArchitectures}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "output": "[\n    {\n        \"Type\": \"t3.medium\",\n        \"vCPU\": 2,\n        \"MemoryMiB\": 4096,\n        \"Arch\": [\n            \"x86_64\"\n        ]\n    },\n    {\n        \"Type\": \"t3.small\",\n        \"vCPU\": 2,\n        \"MemoryMiB\": 2048,\n        \"Arch\": [\n            \"x86_64\"\n        ]\n    }\n]"
+}

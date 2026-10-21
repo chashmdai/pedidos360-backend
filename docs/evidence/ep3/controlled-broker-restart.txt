@@ -1,0 +1,6 @@
+ Container pedidos360-ep3-rabbitmq Stopping 
+ Container pedidos360-ep3-rabbitmq Stopped 
+ Container pedidos360-ep3-rabbitmq Starting 
+ Container pedidos360-ep3-rabbitmq Started 
+ Container pedidos360-ep3-rabbitmq Waiting 
+ Container pedidos360-ep3-rabbitmq Healthy 

@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T14:35:16.0724670Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-key-pairs",
+    "--region",
+    "us-west-2",
+    "--query",
+    "KeyPairs[].{Id:KeyPairId,Name:KeyName,Type:KeyType,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

@@ -1,0 +1,5 @@
+{
+  "identifierUris": [
+    "api://{{API_CLIENT_ID}}"
+  ]
+}

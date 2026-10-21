@@ -1,0 +1,1 @@
+2026-10-20T22:54:39.058-03:00  INFO 136288 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=2f662e1b-6b3e-4793-bd2c-1b2856a93e5b orderId=454b2f14-351f-408d-95ae-728a20380b27

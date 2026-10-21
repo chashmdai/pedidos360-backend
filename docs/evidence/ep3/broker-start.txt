@@ -1,0 +1,181 @@
+ Image rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be Pulling 
+ 57981d038ef2 Pulling fs layer 0B
+ 599b60273b47 Pulling fs layer 0B
+ f2b4ef06ff01 Pulling fs layer 0B
+ d1f7ae0d39b1 Pulling fs layer 0B
+ dad126e13446 Pulling fs layer 0B
+ ac8fe8c2a465 Pulling fs layer 0B
+ b0acd6304262 Pulling fs layer 0B
+ a4be38c36796 Pulling fs layer 0B
+ 45c135015752 Pulling fs layer 0B
+ 42000d55ba98 Pulling fs layer 0B
+ e3c2421f9a21 Pulling fs layer 0B
+ f2b4ef06ff01 Downloading 2.097MB
+ f2b4ef06ff01 Downloading 6.291MB
+ f2b4ef06ff01 Downloading 11.53MB
+ 45c135015752 Downloading 109B
+ f2b4ef06ff01 Downloading 16.78MB
+ 45c135015752 Download complete 0B
+ f2b4ef06ff01 Downloading 20.97MB
+ f2b4ef06ff01 Downloading 27.26MB
+ f2b4ef06ff01 Download complete 0B
+ d1f7ae0d39b1 Downloading 1.049MB
+ 57981d038ef2 Downloading 1.049MB
+ f2b4ef06ff01 Extracting 1B
+ 57981d038ef2 Downloading 1.049MB
+ d1f7ae0d39b1 Downloading 5.243MB
+ f2b4ef06ff01 Extracting 1B
+ 57981d038ef2 Downloading 1.049MB
+ d1f7ae0d39b1 Downloading 8.389MB
+ dad126e13446 Downloading 3.146MB
+ f2b4ef06ff01 Extracting 1B
+ 57981d038ef2 Downloading 1.049MB
+ d1f7ae0d39b1 Downloading 12.58MB
+ dad126e13446 Downloading 6.291MB
+ f2b4ef06ff01 Extracting 1B
+ 57981d038ef2 Downloading 2.097MB
+ d1f7ae0d39b1 Downloading 16.78MB
+ dad126e13446 Download complete 0B
+ f2b4ef06ff01 Extracting 1B
+ d1f7ae0d39b1 Downloading 23.07MB
+ 57981d038ef2 Downloading 2.097MB
+ f2b4ef06ff01 Extracting 1B
+ 57981d038ef2 Downloading 2.097MB
+ 599b60273b47 Downloading 2.097MB
+ d1f7ae0d39b1 Downloading 27.26MB
+ f2b4ef06ff01 Extracting 1B
+ 57981d038ef2 Downloading 2.097MB
+ 599b60273b47 Downloading 4.194MB
+ d1f7ae0d39b1 Downloading 30.41MB
+ f2b4ef06ff01 Extracting 1B
+ 57981d038ef2 Downloading 3.146MB
+ 599b60273b47 Downloading 6.291MB
+ d1f7ae0d39b1 Downloading 32.51MB
+ f2b4ef06ff01 Extracting 1B
+ 57981d038ef2 Downloading 3.146MB
+ 599b60273b47 Downloading 9.437MB
+ d1f7ae0d39b1 Downloading 36.7MB
+ f2b4ef06ff01 Extracting 1B
+ 57981d038ef2 Downloading 3.146MB
+ 599b60273b47 Downloading 12.58MB
+ d1f7ae0d39b1 Downloading 42.99MB
+ f2b4ef06ff01 Extracting 2B
+ d1f7ae0d39b1 Downloading 46.37MB
+ 57981d038ef2 Downloading 4.194MB
+ 599b60273b47 Downloading 15.73MB
+ f2b4ef06ff01 Extracting 2B
+ 57981d038ef2 Download complete 0B
+ 599b60273b47 Downloading 19.92MB
+ d1f7ae0d39b1 Download complete 0B
+ f2b4ef06ff01 Extracting 2B
+ ac8fe8c2a465 Download complete 0B
+ 599b60273b47 Downloading 24.12MB
+ f2b4ef06ff01 Extracting 2B
+ 599b60273b47 Downloading 28.31MB
+ b0acd6304262 Download complete 0B
+ f2b4ef06ff01 Extracting 2B
+ a4be38c36796 Download complete 0B
+ e3c2421f9a21 Download complete 0B
+ 599b60273b47 Download complete 0B
+ f2b4ef06ff01 Extracting 2B
+ 42000d55ba98 Download complete 0B
+ f2b4ef06ff01 Extracting 2B
+ f2b4ef06ff01 Extracting 2B
+ f2b4ef06ff01 Extracting 2B
+ f2b4ef06ff01 Extracting 2B
+ f2b4ef06ff01 Extracting 2B
+ f2b4ef06ff01 Extracting 3B
+ f2b4ef06ff01 Extracting 3B
+ f2b4ef06ff01 Extracting 3B
+ f2b4ef06ff01 Extracting 3B
+ f2b4ef06ff01 Pull complete 0B
+ d1f7ae0d39b1 Extracting 1B
+ d1f7ae0d39b1 Extracting 1B
+ d1f7ae0d39b1 Extracting 1B
+ d1f7ae0d39b1 Extracting 1B
+ d1f7ae0d39b1 Extracting 1B
+ d1f7ae0d39b1 Extracting 1B
+ d1f7ae0d39b1 Extracting 1B
+ d1f7ae0d39b1 Extracting 1B
+ d1f7ae0d39b1 Extracting 1B
+ d1f7ae0d39b1 Extracting 1B
+ d1f7ae0d39b1 Extracting 2B
+ d1f7ae0d39b1 Extracting 2B
+ d1f7ae0d39b1 Extracting 2B
+ d1f7ae0d39b1 Extracting 2B
+ d1f7ae0d39b1 Extracting 2B
+ d1f7ae0d39b1 Extracting 2B
+ d1f7ae0d39b1 Extracting 2B
+ d1f7ae0d39b1 Extracting 2B
+ d1f7ae0d39b1 Extracting 2B
+ d1f7ae0d39b1 Extracting 2B
+ d1f7ae0d39b1 Extracting 3B
+ d1f7ae0d39b1 Extracting 3B
+ d1f7ae0d39b1 Extracting 3B
+ d1f7ae0d39b1 Extracting 3B
+ d1f7ae0d39b1 Extracting 3B
+ d1f7ae0d39b1 Extracting 3B
+ d1f7ae0d39b1 Extracting 3B
+ d1f7ae0d39b1 Extracting 3B
+ d1f7ae0d39b1 Extracting 3B
+ d1f7ae0d39b1 Extracting 3B
+ d1f7ae0d39b1 Extracting 4B
+ d1f7ae0d39b1 Pull complete 0B
+ dad126e13446 Extracting 1B
+ dad126e13446 Extracting 1B
+ dad126e13446 Extracting 1B
+ dad126e13446 Extracting 1B
+ dad126e13446 Extracting 1B
+ dad126e13446 Pull complete 0B
+ ac8fe8c2a465 Pull complete 0B
+ 599b60273b47 Extracting 1B
+ 599b60273b47 Extracting 1B
+ 599b60273b47 Extracting 1B
+ 599b60273b47 Extracting 1B
+ 599b60273b47 Extracting 1B
+ 599b60273b47 Extracting 1B
+ 599b60273b47 Extracting 1B
+ 599b60273b47 Extracting 1B
+ 599b60273b47 Extracting 1B
+ 599b60273b47 Extracting 1B
+ 599b60273b47 Extracting 1B
+ 599b60273b47 Extracting 2B
+ 599b60273b47 Extracting 2B
+ 599b60273b47 Extracting 2B
+ 599b60273b47 Extracting 2B
+ 599b60273b47 Extracting 2B
+ 599b60273b47 Extracting 2B
+ 599b60273b47 Extracting 2B
+ 599b60273b47 Extracting 2B
+ 599b60273b47 Extracting 2B
+ 599b60273b47 Extracting 3B
+ 599b60273b47 Extracting 3B
+ 599b60273b47 Extracting 3B
+ 599b60273b47 Extracting 3B
+ 599b60273b47 Extracting 3B
+ 599b60273b47 Pull complete 0B
+ a4be38c36796 Pull complete 0B
+ 45c135015752 Pull complete 0B
+ e3c2421f9a21 Pull complete 0B
+ b0acd6304262 Pull complete 0B
+ 57981d038ef2 Extracting 1B
+ 42000d55ba98 Pull complete 0B
+ 57981d038ef2 Extracting 1B
+ 57981d038ef2 Extracting 1B
+ 57981d038ef2 Extracting 1B
+ 57981d038ef2 Pull complete 0B
+ Image rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be Pulled 
+ Network pedidos360-ep3-network Creating 
+ Network pedidos360-ep3-network Creating 
+ Volume pedidos360-ep3-rabbit-data Creating 
+ Volume pedidos360-ep3-rabbit-data Creating 
+ Volume pedidos360-ep3-rabbit-data Created 
+ Volume pedidos360-ep3-rabbit-data Created 
+ Network pedidos360-ep3-network Created 
+ Network pedidos360-ep3-network Created 
+ Container pedidos360-ep3-rabbitmq Creating 
+ Container pedidos360-ep3-rabbitmq Created 
+ Container pedidos360-ep3-rabbitmq Starting 
+ Container pedidos360-ep3-rabbitmq Started 
+ Container pedidos360-ep3-rabbitmq Waiting 
+ Container pedidos360-ep3-rabbitmq Healthy 

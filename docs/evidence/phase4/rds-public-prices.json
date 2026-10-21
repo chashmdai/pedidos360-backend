@@ -1,0 +1,102 @@
+{
+  "at": "2026-09-06T14:42:36.3125879Z",
+  "source": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonRDS/current/us-east-1/index.json",
+  "publicationDate": "2026-09-04T17:27:16Z",
+  "matches": [
+    {
+      "product": {
+        "sku": "AXC2TYPWXFK88MVY",
+        "productFamily": "Database Instance",
+        "attributes": {
+          "servicecode": "AmazonRDS",
+          "location": "US East (N. Virginia)",
+          "locationType": "AWS Region",
+          "instanceType": "db.t3.micro",
+          "currentGeneration": "Yes",
+          "instanceFamily": "General purpose",
+          "vcpu": "2",
+          "physicalProcessor": "Intel Skylake E5 2686 v5 (2.5 GHz)",
+          "memory": "1 GiB",
+          "storage": "EBS Only",
+          "networkPerformance": "Low to Moderate",
+          "processorArchitecture": "64-bit",
+          "engineCode": "2",
+          "databaseEngine": "MySQL",
+          "licenseModel": "No license required",
+          "deploymentOption": "Single-AZ",
+          "usagetype": "InstanceUsage:db.t3.micro",
+          "operation": "CreateDBInstance:0002",
+          "instanceTypeFamily": "T3",
+          "normalizationSizeFactor": "0.5",
+          "regionCode": "us-east-1",
+          "servicename": "Amazon Relational Database Service",
+          "unbundledLicensing": "FALSE"
+        }
+      },
+      "terms": {
+        "AXC2TYPWXFK88MVY.JRTCKXETXF": {
+          "offerTermCode": "JRTCKXETXF",
+          "sku": "AXC2TYPWXFK88MVY",
+          "effectiveDate": "2026-09-01T00:00:00Z",
+          "priceDimensions": {
+            "AXC2TYPWXFK88MVY.JRTCKXETXF.6YS6EN2CT7": {
+              "rateCode": "AXC2TYPWXFK88MVY.JRTCKXETXF.6YS6EN2CT7",
+              "description": "USD 0.017 per db.t3.micro Single-AZ instance hour (or partial hour) running MySQL",
+              "beginRange": "0",
+              "endRange": "Inf",
+              "unit": "Hrs",
+              "pricePerUnit": {
+                "USD": "0.0170000000"
+              },
+              "appliesTo": []
+            }
+          },
+          "termAttributes": {}
+        }
+      }
+    },
+    {
+      "product": {
+        "sku": "H4R2WBBMX6VRJG4S",
+        "productFamily": "Database Storage",
+        "attributes": {
+          "servicecode": "AmazonRDS",
+          "location": "US East (N. Virginia)",
+          "locationType": "AWS Region",
+          "storageMedia": "SSD",
+          "volumeType": "General Purpose-GP3",
+          "minVolumeSize": "5 GB",
+          "maxVolumeSize": "16 TB",
+          "engineCode": "2",
+          "databaseEngine": "MySQL",
+          "deploymentOption": "Single-AZ",
+          "usagetype": "RDS:GP3-Storage",
+          "operation": "CreateDBInstance:0002",
+          "regionCode": "us-east-1",
+          "servicename": "Amazon Relational Database Service"
+        }
+      },
+      "terms": {
+        "H4R2WBBMX6VRJG4S.JRTCKXETXF": {
+          "offerTermCode": "JRTCKXETXF",
+          "sku": "H4R2WBBMX6VRJG4S",
+          "effectiveDate": "2026-09-01T00:00:00Z",
+          "priceDimensions": {
+            "H4R2WBBMX6VRJG4S.JRTCKXETXF.6YS6EN2CT7": {
+              "rateCode": "H4R2WBBMX6VRJG4S.JRTCKXETXF.6YS6EN2CT7",
+              "description": "$0.115 per GB-month of provisioned GP3 storage running MySQL",
+              "beginRange": "0",
+              "endRange": "Inf",
+              "unit": "GB-Mo",
+              "pricePerUnit": {
+                "USD": "0.1150000000"
+              },
+              "appliesTo": []
+            }
+          },
+          "termAttributes": {}
+        }
+      }
+    }
+  ]
+}

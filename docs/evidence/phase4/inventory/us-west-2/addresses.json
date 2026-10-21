@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T14:35:13.4721191Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-addresses",
+    "--region",
+    "us-west-2",
+    "--query",
+    "Addresses[].{Allocation:AllocationId,PublicIp:PublicIp,Association:AssociationId,Instance:InstanceId,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

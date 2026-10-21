@@ -1,0 +1,59 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#servicePrincipals/$entity",
+  "accountEnabled": true,
+  "addIns": [],
+  "alternativeNames": [],
+  "appDescription": null,
+  "appDisplayName": "pedidos360-betorrejons-frontend",
+  "appId": "b4ede06a-cde3-4982-8b79-56fab7264fdd",
+  "appOwnerOrganizationId": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+  "appRoleAssignmentRequired": false,
+  "appRoles": [],
+  "applicationTemplateId": null,
+  "createdByAppId": "04b07795-8ddb-461a-bbee-02f9e1bf7b46",
+  "createdDateTime": null,
+  "deletedDateTime": null,
+  "description": null,
+  "disabledByMicrosoftStatus": null,
+  "displayName": "pedidos360-betorrejons-frontend",
+  "homepage": null,
+  "id": "44b2cf43-c864-49f8-883b-a79767674c58",
+  "info": {
+    "logoUrl": null,
+    "marketingUrl": null,
+    "privacyStatementUrl": null,
+    "supportUrl": null,
+    "termsOfServiceUrl": null
+  },
+  "isDisabled": null,
+  "keyCredentials": [],
+  "loginUrl": null,
+  "logoutUrl": null,
+  "notes": null,
+  "notificationEmailAddresses": [],
+  "oauth2PermissionScopes": [],
+  "passwordCredentials": [],
+  "preferredSingleSignOnMode": null,
+  "preferredTokenSigningKeyThumbprint": null,
+  "replyUrls": [
+    "http://127.0.0.1:5173/",
+    "http://localhost:5173/"
+  ],
+  "resourceSpecificApplicationPermissions": [],
+  "samlSingleSignOnSettings": null,
+  "servicePrincipalNames": [
+    "b4ede06a-cde3-4982-8b79-56fab7264fdd"
+  ],
+  "servicePrincipalType": "Application",
+  "signInAudience": "AzureADMyOrg",
+  "tags": [
+    "Project=Pedidos360",
+    "Course=DSY1107"
+  ],
+  "tokenEncryptionKeyId": null,
+  "verifiedPublisher": {
+    "addedDateTime": null,
+    "displayName": null,
+    "verifiedPublisherId": null
+  }
+}

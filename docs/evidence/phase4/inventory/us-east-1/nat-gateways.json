@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T09:57:17.3356198Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-nat-gateways",
+    "--region",
+    "us-east-1",
+    "--query",
+    "NatGateways[].{Id:NatGatewayId,Vpc:VpcId,Subnet:SubnetId,State:State,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

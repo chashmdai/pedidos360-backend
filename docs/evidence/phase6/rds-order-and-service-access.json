@@ -1,0 +1,62 @@
+{
+  "at": "2026-09-06T19:55:52.403569+00:00",
+  "release": "20260906T151739Z",
+  "order": {
+    "id": "9f82f14f-7f81-4f6a-a346-2add0865fe7f",
+    "items": [
+      {
+        "name": "Caf\u00e9 de especialidad",
+        "price": 8990.0,
+        "currency": "CLP",
+        "quantity": 2,
+        "productId": "10000000-0000-0000-0000-000000000001"
+      },
+      {
+        "name": "Taza de cer\u00e1mica",
+        "price": 12990.0,
+        "currency": "CLP",
+        "quantity": 1,
+        "productId": "10000000-0000-0000-0000-000000000002"
+      }
+    ],
+    "owner": "c375a6eb-b82a-44f6-abe0-fe32d7901c3e",
+    "total": 30970.0,
+    "status": "REGISTERED",
+    "tenant": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+    "createdAt": "2026-09-06 19:49:22.193934"
+  },
+  "accessLogs": {
+    "bff": [
+      "[06/Sep/2026:19:43:54 +0000] GET /api/v1/me 200 733193",
+      "[06/Sep/2026:19:43:54 +0000] GET /api/v1/me 200 12625",
+      "[06/Sep/2026:19:45:09 +0000] GET /api/v1/admin/pedidos 403 40901",
+      "[06/Sep/2026:19:45:50 +0000] GET /api/v1/productos 200 1282777",
+      "[06/Sep/2026:19:45:51 +0000] GET /api/v1/productos 200 47111",
+      "[06/Sep/2026:19:47:46 +0000] GET /api/v1/productos 200 33218",
+      "[06/Sep/2026:19:47:47 +0000] GET /api/v1/productos 200 38749",
+      "[06/Sep/2026:19:49:22 +0000] POST /api/v1/pedidos 201 1347138",
+      "[06/Sep/2026:19:49:23 +0000] GET /api/v1/pedidos 200 663815",
+      "[06/Sep/2026:19:49:24 +0000] GET /api/v1/pedidos 200 39121",
+      "[06/Sep/2026:19:50:38 +0000] GET /api/v1/pedidos 200 56408",
+      "[06/Sep/2026:19:51:35 +0000] GET /api/v1/me 200 10876",
+      "[06/Sep/2026:19:51:35 +0000] GET /api/v1/me 200 9643",
+      "[06/Sep/2026:19:52:57 +0000] GET /api/v1/me 200 8173",
+      "[06/Sep/2026:19:53:53 +0000] GET /api/v1/admin/pedidos 403 5131"
+    ],
+    "catalog": [
+      "[06/Sep/2026:19:45:50 +0000] GET /api/v1/productos 200 1147365",
+      "[06/Sep/2026:19:45:51 +0000] GET /api/v1/productos 200 32169",
+      "[06/Sep/2026:19:47:46 +0000] GET /api/v1/productos 200 17745",
+      "[06/Sep/2026:19:47:47 +0000] GET /api/v1/productos 200 26576",
+      "[06/Sep/2026:19:49:22 +0000] GET /api/v1/productos/10000000-0000-0000-0000-000000000001 200 42333",
+      "[06/Sep/2026:19:49:22 +0000] GET /api/v1/productos/10000000-0000-0000-0000-000000000002 200 22079"
+    ],
+    "orders": [
+      "[06/Sep/2026:19:49:22 +0000] POST /api/v1/pedidos 201 1023235",
+      "[06/Sep/2026:19:49:23 +0000] GET /api/v1/pedidos 200 652517",
+      "[06/Sep/2026:19:49:24 +0000] GET /api/v1/pedidos 200 26982",
+      "[06/Sep/2026:19:50:38 +0000] GET /api/v1/pedidos 200 37901"
+    ]
+  },
+  "note": "Direct TLS SQL read of the browser-created test order; HTTP access logs omit query, headers and body."
+}

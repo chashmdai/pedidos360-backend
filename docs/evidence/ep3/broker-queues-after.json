@@ -1,0 +1,172 @@
+[
+  {
+    "arguments": {
+      "x-queue-type": "classic"
+    },
+    "auto_delete": false,
+    "consumer_capacity": 0,
+    "consumer_utilisation": 0,
+    "consumers": 0,
+    "durable": true,
+    "effective_policy_definition": {},
+    "exclusive": false,
+    "internal": false,
+    "internal_owner": false,
+    "memory": 21976,
+    "message_bytes": 2036,
+    "message_bytes_paged_out": 0,
+    "message_bytes_persistent": 2036,
+    "message_bytes_ram": 9,
+    "message_bytes_ready": 2036,
+    "message_bytes_unacknowledged": 0,
+    "message_stats": {
+      "ack": 0,
+      "ack_details": {
+        "rate": 0.0
+      },
+      "deliver": 0,
+      "deliver_details": {
+        "rate": 0.0
+      },
+      "deliver_get": 12,
+      "deliver_get_details": {
+        "rate": 0.0
+      },
+      "deliver_no_ack": 0,
+      "deliver_no_ack_details": {
+        "rate": 0.0
+      },
+      "get": 12,
+      "get_details": {
+        "rate": 0.0
+      },
+      "get_empty": 1,
+      "get_empty_details": {
+        "rate": 0.0
+      },
+      "get_no_ack": 0,
+      "get_no_ack_details": {
+        "rate": 0.0
+      },
+      "redeliver": 11,
+      "redeliver_details": {
+        "rate": 0.0
+      }
+    },
+    "messages": 12,
+    "messages_details": {
+      "rate": 0.0
+    },
+    "messages_paged_out": 0,
+    "messages_persistent": 12,
+    "messages_ram": 1,
+    "messages_ready": 12,
+    "messages_ready_details": {
+      "rate": 0.0
+    },
+    "messages_ready_ram": 1,
+    "messages_unacknowledged": 0,
+    "messages_unacknowledged_details": {
+      "rate": 0.0
+    },
+    "messages_unacknowledged_ram": 0,
+    "name": "pedidos360.receipts.failed.v1",
+    "node": "rabbit@pedidos360-ep3-rabbitmq",
+    "reductions": 7686,
+    "reductions_details": {
+      "rate": 0.0
+    },
+    "state": "running",
+    "storage_version": 2,
+    "type": "classic",
+    "vhost": "pedidos360-ep3"
+  },
+  {
+    "arguments": {
+      "x-dead-letter-exchange": "pedidos360.receipts.errors.v1",
+      "x-dead-letter-routing-key": "receipt.failed.v1",
+      "x-queue-type": "classic"
+    },
+    "auto_delete": false,
+    "consumer_capacity": 0,
+    "consumer_utilisation": 0,
+    "consumers": 0,
+    "durable": true,
+    "effective_policy_definition": {},
+    "exclusive": false,
+    "internal": false,
+    "internal_owner": false,
+    "memory": 17168,
+    "message_bytes": 253,
+    "message_bytes_paged_out": 0,
+    "message_bytes_persistent": 253,
+    "message_bytes_ram": 253,
+    "message_bytes_ready": 253,
+    "message_bytes_unacknowledged": 0,
+    "message_stats": {
+      "ack": 1,
+      "ack_details": {
+        "rate": 0.0
+      },
+      "deliver": 1,
+      "deliver_details": {
+        "rate": 0.0
+      },
+      "deliver_get": 1,
+      "deliver_get_details": {
+        "rate": 0.0
+      },
+      "deliver_no_ack": 0,
+      "deliver_no_ack_details": {
+        "rate": 0.0
+      },
+      "get": 0,
+      "get_details": {
+        "rate": 0.0
+      },
+      "get_empty": 0,
+      "get_empty_details": {
+        "rate": 0.0
+      },
+      "get_no_ack": 0,
+      "get_no_ack_details": {
+        "rate": 0.0
+      },
+      "publish": 1,
+      "publish_details": {
+        "rate": 0.0
+      },
+      "redeliver": 0,
+      "redeliver_details": {
+        "rate": 0.0
+      }
+    },
+    "messages": 1,
+    "messages_details": {
+      "rate": 0.0
+    },
+    "messages_paged_out": 0,
+    "messages_persistent": 1,
+    "messages_ram": 1,
+    "messages_ready": 1,
+    "messages_ready_details": {
+      "rate": 0.0
+    },
+    "messages_ready_ram": 1,
+    "messages_unacknowledged": 0,
+    "messages_unacknowledged_details": {
+      "rate": 0.0
+    },
+    "messages_unacknowledged_ram": 0,
+    "name": "pedidos360.receipts.order-registered.v1",
+    "node": "rabbit@pedidos360-ep3-rabbitmq",
+    "reductions": 8123,
+    "reductions_details": {
+      "rate": 0.0
+    },
+    "state": "running",
+    "storage_version": 2,
+    "type": "classic",
+    "vhost": "pedidos360-ep3"
+  }
+]

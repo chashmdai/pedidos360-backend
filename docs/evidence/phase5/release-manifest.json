@@ -1,0 +1,21 @@
+{
+  "release": "20260906T151739Z",
+  "rdsEndpoint": "pedidos360-mysql.cm0hfwnpocww.us-east-1.rds.amazonaws.com",
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "publicIp": "44.211.119.38",
+  "artifacts": {
+    "catalog-service.jar": "e67336fe90d1e2d5bbc920ed7e09a68625d63d3de3f7981ea399ff551682d3f6",
+    "orders-service.jar": "5ac85d65fbf89846be6795b969e711faca0ba44c82459b38579868694cc40acc",
+    "bff.jar": "d30c1bba5f3f9202534037212a0cf29492dc101130cbf3ff904ce6f1b60217ee"
+  },
+  "entra": {
+    "tenantId": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+    "apiClientId": "114f7b58-b207-4d46-9d6e-f491c3a0c0e0",
+    "spaClientId": "b4ede06a-cde3-4982-8b79-56fab7264fdd",
+    "scopes": [
+      "Catalog.Read",
+      "Orders.Read",
+      "Orders.Create"
+    ]
+  }
+}

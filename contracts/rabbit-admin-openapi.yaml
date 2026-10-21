@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: Pedidos360 RabbitMQ laboratory administrator
+  version: 1.0.0
+  description: >-
+    Separate loopback service. Every operation requires a validated access token with
+    role Admin AND scope Orders.Read. Only disposable pedidos360.lab.* resources
+    in the configured vhost can be managed. Immutable changes return 409; existing
+    matching declarations return 200, new declarations 201. No purge endpoint.
+servers:
+  - url: http://127.0.0.1:19184/api/v1/rabbit
+    description: EP3 WSL codex demo
+security:
+  - bearerAuth: []
+paths:
+  /queues:
+    post:
+      summary: Declare a laboratory classic queue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/QueueRequest'}
+      responses:
+        '201': {description: Created and queried successfully}
+        '200': {description: Matching queue already exists}
+        '400': {description: Invalid DTO}
+        '401': {description: Missing or invalid JWT}
+        '403': {description: Missing role/scope or protected namespace}
+        '409': {description: Incompatible immutable declaration}
+        '503': {description: Broker unavailable}
+  /queues/{name}:
+    parameters:
+      - {$ref: '#/components/parameters/Name'}
+    get:
+      summary: Query a permitted laboratory queue
+      responses:
+        '200': {description: Queue details}
+        '404': {description: Not found}
+        '403': {description: Protected namespace or insufficient permissions}
+        '503': {description: Broker unavailable}
+    delete:
+      summary: Delete only if unused and empty
+      responses:
+        '204': {description: Deleted}
+        '404': {description: Not found}
+        '409': {description: Consumers or messages exist; data preserved}
+        '403': {description: Protected namespace or insufficient permissions}
+        '503': {description: Broker unavailable}
+  /exchanges:
+    post:
+      summary: Declare a laboratory exchange
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ExchangeRequest'}
+      responses:
+        '201': {description: Created}
+        '200': {description: Matching declaration exists}
+        '400': {description: Invalid DTO}
+        '403': {description: Protected namespace or insufficient permissions}
+        '409': {description: Immutable settings differ}
+        '503': {description: Broker unavailable}
+  /exchanges/{name}:
+    parameters:
+      - {$ref: '#/components/parameters/Name'}
+    get:
+      responses:
+        '200': {description: Exchange details}
+        '404': {description: Not found}
+        '403': {description: Protected namespace or insufficient permissions}
+        '503': {description: Broker unavailable}
+    delete:
+      summary: Delete an unused laboratory exchange
+      responses:
+        '204': {description: Deleted}
+        '404': {description: Not found}
+        '409': {description: Exchange is in use}
+        '403': {description: Protected namespace or insufficient permissions}
+        '503': {description: Broker unavailable}
+  /bindings:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/BindingRequest'}
+      responses:
+        '201': {description: Created}
+        '200': {description: Binding already exists}
+        '400': {description: Invalid DTO}
+        '404': {description: Source or destination not found}
+        '403': {description: Protected namespace or insufficient permissions}
+        '503': {description: Broker unavailable}
+    delete:
+      summary: Delete a binding identified by exchange, queue and routing key
+      description: The composite resource identity is supplied in a JSON request body.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/BindingRequest'}
+      responses:
+        '204': {description: Deleted}
+        '400': {description: Invalid DTO}
+        '404': {description: Binding/source/destination not found}
+        '403': {description: Protected namespace or insufficient permissions}
+        '503': {description: Broker unavailable}
+  /bindings/{exchange}/{queue}:
+    parameters:
+      - {in: path, name: exchange, required: true, schema: {type: string}}
+      - {in: path, name: queue, required: true, schema: {type: string}}
+    get:
+      responses:
+        '200': {description: List of broker bindings}
+        '404': {description: Source/destination not found}
+        '403': {description: Protected namespace or insufficient permissions}
+        '503': {description: Broker unavailable}
+components:
+  securitySchemes:
+    bearerAuth: {type: http, scheme: bearer, bearerFormat: JWT}
+  parameters:
+    Name: {in: path, name: name, required: true, schema: {type: string, pattern: '^pedidos360\.lab\.[a-zA-Z0-9._-]+$'}}
+  schemas:
+    QueueRequest:
+      type: object
+      required: [name, durable, autoDelete]
+      properties:
+        name: {type: string, minLength: 1, maxLength: 101, example: pedidos360.lab.demo.queue}
+        durable: {type: boolean}
+        autoDelete: {type: boolean}
+        messageTtl: {type: integer, minimum: 100, maximum: 86400000}
+        maxLength: {type: integer, minimum: 1, maximum: 10000}
+    ExchangeRequest:
+      type: object
+      required: [name, type, durable, autoDelete]
+      properties:
+        name: {type: string, example: pedidos360.lab.demo.events}
+        type: {type: string, enum: [direct, topic, fanout]}
+        durable: {type: boolean}
+        autoDelete: {type: boolean}
+    BindingRequest:
+      type: object
+      required: [exchange, queue, routingKey]
+      properties:
+        exchange: {type: string, example: pedidos360.lab.demo.events}
+        queue: {type: string, example: pedidos360.lab.demo.queue}
+        routingKey: {type: string, minLength: 1, maxLength: 100, example: demo.registered}

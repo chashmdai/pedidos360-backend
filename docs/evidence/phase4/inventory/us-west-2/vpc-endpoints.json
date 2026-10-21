@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T14:35:05.6042104Z",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-vpc-endpoints",
+    "--region",
+    "us-west-2",
+    "--query",
+    "VpcEndpoints[].{Id:VpcEndpointId,Vpc:VpcId,Type:VpcEndpointType,Service:ServiceName,State:State,Tags:Tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

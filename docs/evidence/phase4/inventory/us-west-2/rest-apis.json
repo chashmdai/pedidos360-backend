@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-06T14:35:34.9474177Z",
+  "command": [
+    "aws",
+    "apigateway",
+    "get-rest-apis",
+    "--region",
+    "us-west-2",
+    "--query",
+    "items[].{Id:id,Name:name,Endpoint:endpointConfiguration,Tags:tags}",
+    "--output",
+    "json",
+    "--no-cli-pager"
+  ],
+  "exitCode": 0,
+  "response": [],
+  "error": null
+}

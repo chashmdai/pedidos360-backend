@@ -1,0 +1,4 @@
+playwright==1.64.0
+reportlab==5.0.1
+pypdf==6.21.1
+pillow==13.0.0

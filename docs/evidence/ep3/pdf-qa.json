@@ -1,0 +1,64 @@
+{
+  "pdfSha256": "19eb27a1fc7a1b2d1ddc72d3def66185047c8d884a268335807cdeb984211997",
+  "a4": true,
+  "pages": [
+    {
+      "page": 1,
+      "characters": 2358,
+      "images": 0,
+      "begin": "1\nPedidos360 - Integración RabbitMQ, EP3\nImplementación y evidencias · 20 de octubre de 2026\n1. Estado inicial del proye",
+      "end": "onservé MySQL, los datos, JWT/Entra y el diseño del frontend. React está\nautorizado por el docente. Esta etapa no ejecutó operaciones AWS ni creó gastos cloud.\n"
+    },
+    {
+      "page": 2,
+      "characters": 574,
+      "images": 2,
+      "begin": "2\n3. Evidencias de funcionamiento\nCompilación y regresión\nVolví a ejecutar clean verify y las pruebas/build del frontend",
+      "end": "s u omitidos.\nFigura 2. Extractos de los tests y build React/TypeScript/Vite ejecutados en WSL. Estas vistas muestran archivos reales;\nno simulan una terminal.\n"
+    },
+    {
+      "page": 3,
+      "characters": 537,
+      "images": 2,
+      "begin": "3\nBroker y recursos de mensajería\nUsé un solo nodo, vhost, red y volumen exclusivos de Pedidos360. No presento este ento",
+      "end": "ntrolados.\nFigura 4. Detalle real de Management: binding del exchange de Orders hacia la cola de Receipts. La fuente centralizada\nes pedidos-rabbit.properties.\n"
+    },
+    {
+      "page": 4,
+      "characters": 630,
+      "images": 2,
+      "begin": "4\nPedido institucional y comprobante asíncrono\nDespués de iniciar sesión con mi cuenta DUOC y completar el MFA, registré",
+      "end": "201 y la figura 6.\nFigura 6. El mismo pedido tiene outbox publicada y comprobante durable. Los logs reales enlazan orderId/eventId con\nPUBLISH_CONFIRMED y ACK.\n"
+    },
+    {
+      "page": 5,
+      "characters": 705,
+      "images": 2,
+      "begin": "5\nACK explícito, reintentos y errores diferenciados\nEn una observación local controlada detuve únicamente Receipts. El m",
+      "end": "duplicado idempotente, fallo transitorio, tres intentos agotados, contrato inválido y conflicto\npermanente. Las pruebas de fallo corresponden al fixture local.\n"
+    },
+    {
+      "page": 6,
+      "characters": 630,
+      "images": 2,
+      "begin": "6\nDLQ y administrador REST\nComprobé que el consumidor rechaza sin requeue los mensajes no procesables. La respuesta real",
+      "end": "201/200/204, validación 400, protección 403, inexistencia\n404, conflicto 409 y broker caído 503. La autorización Admin 200 de esta prueba usa el fixture local.\n"
+    },
+    {
+      "page": 7,
+      "characters": 917,
+      "images": 2,
+      "begin": "7\nMicrosoft Entra y protección de acceso\nLa prueba institucional es independiente del fixture. El BFF verificó audience ",
+      "end": "capturas 18, 21 y 22 registran renovación, logout y protección de rutas, sin contraseñas ni códigos\nMFA. No presento una sesión Admin Entra 200 que no ejecuté.\n"
+    },
+    {
+      "page": 8,
+      "characters": 1592,
+      "images": 1,
+      "begin": "8\nRecuperación y resultado final\nDetuve y reinicié solamente el broker propio, sin borrar el volumen. Durante la caída e",
+      "end": "as están en el backend. Mantengo ambos repositorios\nseparados:\nhttps://github.com/chashmdai/pedidos360-backend\nhttps://github.com/chashmdai/pedidos360-frontend\n"
+    }
+  ],
+  "note": "All pages rendered. Visual review is separate from text checks.",
+  "renderDirectory": "tmp/pdfs/ep3"
+}

@@ -1,0 +1,46 @@
+{
+  "at": "2026-10-21T01:58:17.816494+00:00",
+  "mode": "MICROSOFT_ENTRA_REAL",
+  "authentication": "Manual DUOC login and MFA completed by user; no tokens or browser sessions read/exported",
+  "principalRole": "User",
+  "scopes": [
+    "Catalog.Read",
+    "Orders.Read",
+    "Orders.Create"
+  ],
+  "http": {
+    "catalog": 200,
+    "createOrder": 201,
+    "listOrdersAfterReload": 200,
+    "adminUserDenied": 403,
+    "meAfterRequestedRefresh": 200
+  },
+  "tokenRefresh": "MSAL forceRefresh requested; accepted by BFF. Natural expiration was not tested.",
+  "order": {
+    "eventId": "2f662e1b-6b3e-4793-bd2c-1b2856a93e5b",
+    "orderId": "454b2f14-351f-408d-95ae-728a20380b27",
+    "createdAt": "2026-10-21 01:54:38.597686",
+    "published": true
+  },
+  "receipt": {
+    "schemaVersion": 1,
+    "eventId": "2f662e1b-6b3e-4793-bd2c-1b2856a93e5b",
+    "orderId": "454b2f14-351f-408d-95ae-728a20380b27",
+    "tenantId": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+    "occurredAt": "2026-10-21T01:54:38.597686Z",
+    "total": 30970.0,
+    "currency": "CLP",
+    "itemCount": 2
+  },
+  "publisherAndConsumerLogs": {
+    "orders-service": [
+      "2026-10-20T22:54:39.058-03:00  INFO 136288 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=2f662e1b-6b3e-4793-bd2c-1b2856a93e5b orderId=454b2f14-351f-408d-95ae-728a20380b27"
+    ],
+    "receipts-service": [
+      "2026-10-20T22:54:39.218-03:00  INFO 136290 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : ACK eventId=2f662e1b-6b3e-4793-bd2c-1b2856a93e5b orderId=454b2f14-351f-408d-95ae-728a20380b27 result=RECEIPT_STORED attempt=1 redelivered=false"
+    ]
+  },
+  "temporaryAdminAssignment": false,
+  "noEntraWrites": true,
+  "noAwsOperations": true
+}
