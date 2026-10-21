@@ -1,0 +1,63 @@
+name: pedidos360-ep4
+x-node: &node
+  image: rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be
+  labels: { Project: Pedidos360, Purpose: ep4 }
+  entrypoint: ["/bin/sh", "/opt/pedidos360/ep4-entrypoint.sh"]
+  command: ["rabbitmq-server"]
+  environment: &environment
+    RABBITMQ_DEFAULT_USER: pedidos360_ep4_admin
+    RABBITMQ_DEFAULT_VHOST: pedidos360-ep4
+    RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '+S 1:1 +A 2'
+  secrets: [rabbit_admin_password, rabbit_cookie]
+  networks: [messaging]
+  mem_limit: 512m
+  restart: unless-stopped
+  healthcheck:
+    test: ["CMD", "rabbitmq-diagnostics", "-q", "check_running"]
+    interval: 10s
+    timeout: 10s
+    retries: 30
+    start_period: 45s
+services:
+  rabbit-1:
+    <<: *node
+    container_name: pedidos360-ep4-rabbit-1
+    hostname: pedidos360-ep4-rabbit-1
+    environment:
+      <<: *environment
+      RABBITMQ_NODENAME: rabbit@pedidos360-ep4-rabbit-1
+    ports: ["127.0.0.1:5674:5672", "127.0.0.1:15674:15672"]
+    volumes:
+      - rabbit-1-data:/var/lib/rabbitmq
+      - ./docker/rabbitmq/ep4-entrypoint.sh:/opt/pedidos360/ep4-entrypoint.sh:ro
+      - ./docker/rabbitmq/ep4.conf:/etc/rabbitmq/rabbitmq.conf:ro
+  rabbit-2:
+    <<: *node
+    container_name: pedidos360-ep4-rabbit-2
+    hostname: pedidos360-ep4-rabbit-2
+    depends_on:
+      rabbit-1: { condition: service_started }
+    environment:
+      <<: *environment
+      RABBITMQ_NODENAME: rabbit@pedidos360-ep4-rabbit-2
+    ports: ["127.0.0.1:5675:5672", "127.0.0.1:15675:15672"]
+    volumes:
+      - rabbit-2-data:/var/lib/rabbitmq
+      - ./docker/rabbitmq/ep4-entrypoint.sh:/opt/pedidos360/ep4-entrypoint.sh:ro
+      - ./docker/rabbitmq/ep4.conf:/etc/rabbitmq/rabbitmq.conf:ro
+secrets:
+  rabbit_admin_password:
+    file: ${PEDIDOS_EP4_CONFIG_DIR:?Run scripts/ep4-broker.py up first}/rabbit-admin-password
+  rabbit_cookie:
+    file: ${PEDIDOS_EP4_CONFIG_DIR:?Run scripts/ep4-broker.py up first}/rabbit-cookie
+volumes:
+  rabbit-1-data:
+    name: pedidos360-ep4-rabbit-1-data
+    labels: { Project: Pedidos360, Purpose: ep4 }
+  rabbit-2-data:
+    name: pedidos360-ep4-rabbit-2-data
+    labels: { Project: Pedidos360, Purpose: ep4 }
+networks:
+  messaging:
+    name: pedidos360-ep4-network
+    labels: { Project: Pedidos360, Purpose: ep4 }

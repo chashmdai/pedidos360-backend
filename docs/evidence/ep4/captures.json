@@ -1,0 +1,163 @@
+[
+  {
+    "file": "01-java-39-tests-wsl.png",
+    "at": "2026-10-21T10:20:28.534959+00:00",
+    "source": "backend-verify.txt",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "f47096f841d4d0ac4189bc1b4acf1be57a9932d63e6e06a1e313c373108e963d"
+  },
+  {
+    "file": "02-react-tests-build-wsl.png",
+    "at": "2026-10-21T10:20:28.694848+00:00",
+    "source": "frontend-tests.txt + frontend-build.txt",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "8fc5963e384c96a44db67a6a3800e57555d3dec1828395257f5cceb11ee8f9bf"
+  },
+  {
+    "file": "03-cluster-two-nodes-wsl.png",
+    "at": "2026-10-21T10:20:30.901758+00:00",
+    "source": "http://127.0.0.1:15674/#/",
+    "description": "RabbitMQ Management real en WSL; no prueba cloud",
+    "sha256": "4c9519252e562199f2001d8c6160f210fa98508cd07d548dbae96710ad420ea0"
+  },
+  {
+    "file": "04-three-queues-three-dlq-wsl.png",
+    "at": "2026-10-21T10:20:31.092928+00:00",
+    "source": "http://127.0.0.1:15674/#/queues",
+    "description": "Seis colas reales del clúster local; el tráfico AWS se acredita por separado",
+    "sha256": "7067a41183576a15f3977a7d8049b0bb93c4ca2b7669271e52e3ceb8da93c408"
+  },
+  {
+    "file": "05-aws-services.png",
+    "at": "2026-10-21T10:20:31.382364+00:00",
+    "source": "installation.json",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "36db3f3cf0ae09b214f3ad877ef3312dd821f2c5bee42194c639efeff39697c2"
+  },
+  {
+    "file": "06-aws-cluster-checks.png",
+    "at": "2026-10-21T10:20:31.692952+00:00",
+    "source": "cloud-verification.json",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "1a4ab753bfeacdc69860906844b446f25501e861b2ee6821a987bfdcf18635a4"
+  },
+  {
+    "file": "07-aws-routing-dlq.png",
+    "at": "2026-10-21T10:20:32.142449+00:00",
+    "source": "cloud-verification.json",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "db8c1f2db132902c05d96aa9afa632a7de17965bbbe31b4228ddfb2f09969b61"
+  },
+  {
+    "file": "08-aws-order-effects.png",
+    "at": "2026-10-21T10:20:32.616665+00:00",
+    "source": "cloud-order-verification.json",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "46ec78e0024fcf3dcbbb45d650e473e5aa720c1085f7bdc720c8e904e41d5978"
+  },
+  {
+    "file": "09-aws-recovery.png",
+    "at": "2026-10-21T10:20:32.800205+00:00",
+    "source": "cloud-recovery.json",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "3addd47c38b5414a639f6fe9655fa581546973d9c68c84a6cf273eb8fe09b9d5"
+  },
+  {
+    "file": "10-gateway-http.png",
+    "at": "2026-10-21T10:20:33.036759+00:00",
+    "source": "gateway-http.json",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "8604dd3051a54f368d735710e2af23428da20f0dfc408bc2b9aa65b9eb81b39e"
+  },
+  {
+    "file": "pdf-aws-cluster.png",
+    "at": "2026-10-21T10:20:33.160275+00:00",
+    "source": "cloud-verification.json; selección de campos reales",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "5d3bb870b2c98be05aad67c0fce0e9472034f40ca239c5ad696caab44e789021"
+  },
+  {
+    "file": "pdf-aws-routing.png",
+    "at": "2026-10-21T10:20:33.291631+00:00",
+    "source": "cloud-verification.json.routingTests y deadLetters",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "1feb416b4120b1709a4733996245b7ab5815d0303bd18233a5f0496cc28fd8ca"
+  },
+  {
+    "file": "pdf-aws-acks.png",
+    "at": "2026-10-21T10:20:33.426532+00:00",
+    "source": "cloud-order-verification.json + cloud-idempotency.json",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "4fe1237782cc8648f95e45310e608ee272d33907eadffcc6cd5240a58c220a61"
+  },
+  {
+    "file": "pdf-aws-recovery.png",
+    "at": "2026-10-21T10:20:33.577695+00:00",
+    "source": "cloud-outbox-pending.json + cloud-recovery.json + cloud-recovered-order.json",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "38e072167a7ae022f4c859cc7049830555f627015ced90a5488ecd81db23c46f"
+  },
+  {
+    "file": "pdf-entra-cloud.png",
+    "at": "2026-10-21T10:20:33.731240+00:00",
+    "source": "entra-browser.json; valores visibles de la API, sin identidad personal ni tokens",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "52358956520d216370662ce8c61de206a434d461b441f467afdb37581a9cd45d"
+  },
+  {
+    "file": "pdf-tests-summary.png",
+    "at": "2026-10-21T10:20:33.900454+00:00",
+    "source": "backend-verify.txt + insights-http-final.txt + frontend-tests.txt + frontend-build.txt",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "30e31a827f6b8a6013c79a2c436cad09e4cf1788bb119ab5d277840c242f4c2f"
+  },
+  {
+    "file": "pdf-gateway-http.png",
+    "at": "2026-10-21T10:20:34.057506+00:00",
+    "source": "gateway-http.json + gateway-access-logs.json",
+    "description": "Vista legible del archivo real indicado; no interfaz o consola simulada",
+    "sha256": "d66537a45e9673307b89da64331e7218d24f458513183a10af8fc92080813975"
+  },
+  {
+    "file": "11-cloud-spa-public.png",
+    "at": "2026-10-21T09:56:05.220689+00:00",
+    "source": "Codex IAB; sesión real con intervención manual del usuario",
+    "description": "SPA real alojada en AWS, antes de iniciar sesión",
+    "sha256": "76dc5642b95bf32c3a7be254d5675fc88718ec10560ec591b4c33209f4b6db41"
+  },
+  {
+    "file": "12-cloud-order-entra.png",
+    "at": "2026-10-21T10:01:17.303634+00:00",
+    "source": "Codex IAB; sesión real con intervención manual del usuario",
+    "description": "Pedido real desde frontend cloud, sesión Microsoft Entra",
+    "sha256": "a01f0810dfa11fe4adebac390888582a7fc1fec561ace3924c3871ff4df97da0"
+  },
+  {
+    "file": "13-cloud-recovered-order-entra.png",
+    "at": "2026-10-21T10:07:22.766356+00:00",
+    "source": "Codex IAB; sesión real con intervención manual del usuario",
+    "description": "Historial real después de recuperación y reload",
+    "sha256": "15123d05deb21a141a8cc6328fc5cefa5bf277d7132bf5ca837ba2d06725ad2d"
+  },
+  {
+    "file": "14-cloud-catalog-entra.png",
+    "at": "2026-10-21T10:08:56.359884+00:00",
+    "source": "Codex IAB; sesión real con intervención manual del usuario",
+    "description": "Catálogo cloud, precios y stock conservados",
+    "sha256": "ab4434e54e5a7cb581c4c454eeb04e76fc94b9bf5e0847f7d8649a2a10dabb30"
+  },
+  {
+    "file": "15-entra-cloud-logout.png",
+    "at": "2026-10-21T10:09:09.688864+00:00",
+    "source": "Codex IAB; sesión real con intervención manual del usuario",
+    "description": "Regreso a la SPA sin sesión tras logout Microsoft",
+    "sha256": "5444f6ebfc3f9d4a471eefc88436f5aef2972aad70dcd4bcce29fe3b416f1e5a"
+  },
+  {
+    "file": "16-cloud-protected-after-logout.png",
+    "at": "2026-10-21T10:09:18.964041+00:00",
+    "source": "Codex IAB; sesión real con intervención manual del usuario",
+    "description": "Ruta protegida redirigida a inicio tras logout",
+    "sha256": "8e5120054634a7fcb7a948e450db241bea349f6311cf37076adb2f827118f4ae"
+  }
+]

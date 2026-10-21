@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-21T10:03:43.944829+00:00",
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "commandId": "355bd143-fa99-4249-bbbc-541e3ffe94dd",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "at": "2026-10-21T10:03:40.001564+00:00",
+    "environment": "AWS EC2",
+    "action": "recovered through Docker Compose",
+    "sameContainerAndVolumeIds": true,
+    "previousFilesUnchanged": 3,
+    "dlqCountsBefore": {
+      "pedidos360.audit.failed.v1": 2,
+      "pedidos360.receipts.failed.v1": 1,
+      "pedidos360.sales.failed.v1": 2
+    },
+    "dlqCountsAfter": {
+      "pedidos360.audit.failed.v1": 2,
+      "pedidos360.receipts.failed.v1": 1,
+      "pedidos360.sales.failed.v1": 2
+    },
+    "consumers": {
+      "pedidos360.audit.order-registered.v1": 1,
+      "pedidos360.receipts.order-registered.v1": 1,
+      "pedidos360.sales.order-registered.v1": 1
+    },
+    "clusterMembers": [
+      "rabbit@pedidos360-ep4-rabbit-1",
+      "rabbit@pedidos360-ep4-rabbit-2"
+    ],
+    "partitions": {}
+  },
+  "error": ""
+}

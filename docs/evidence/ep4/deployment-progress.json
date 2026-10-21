@@ -1,0 +1,149 @@
+{
+  "at": "2026-10-21T09:55:10.139306+00:00",
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "commandId": "6bb98182-435b-4682-bdab-c7d2cce3a1d5",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "runtime": {
+      "code": 0,
+      "out": "openjdk 25.0.4.1 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-25.0.4.1+1 (build 25.0.4.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-25.0.4.1+1 (build 25.0.4.1+1-LTS, mixed mode, sharing)\n",
+      "error": ""
+    },
+    "memory": {
+      "code": 0,
+      "out": "               total        used        free      shared  buff/cache   available\nMem:            3832        2102         247          41        1799        1729\nSwap:              0           0           0\n",
+      "error": ""
+    },
+    "disk": {
+      "code": 0,
+      "out": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/root        19G  5.0G   14G  27% /\n",
+      "error": ""
+    },
+    "services": {
+      "catalog": {
+        "code": 0,
+        "out": "MemoryCurrent=289955840\nLoadState=loaded\nActiveState=active\nSubState=running\n",
+        "error": ""
+      },
+      "orders": {
+        "code": 0,
+        "out": "MemoryCurrent=292065280\nLoadState=loaded\nActiveState=active\nSubState=running\n",
+        "error": ""
+      },
+      "bff": {
+        "code": 0,
+        "out": "MemoryCurrent=179073024\nLoadState=loaded\nActiveState=active\nSubState=running\n",
+        "error": ""
+      },
+      "receipts": {
+        "code": 0,
+        "out": "MemoryCurrent=178360320\nLoadState=loaded\nActiveState=active\nSubState=running\n",
+        "error": ""
+      },
+      "rabbit-admin": {
+        "code": 0,
+        "out": "MemoryCurrent=172093440\nLoadState=loaded\nActiveState=active\nSubState=running\n",
+        "error": ""
+      },
+      "insights": {
+        "code": 0,
+        "out": "MemoryCurrent=178978816\nLoadState=loaded\nActiveState=active\nSubState=running\n",
+        "error": ""
+      }
+    },
+    "health": {
+      "catalog": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "orders": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "bff": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "receipts": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "rabbit-admin": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "insights": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      }
+    },
+    "artifacts": {
+      "orders-service.jar": "042b769374c37581ef0205a66320fa473967a0ad6ba3b78d99dce1fb48dc7209",
+      "bff.jar": "898b1f33b32565a1e8c196c5d19028873b40c3cb3f8a9a4bcd5ab29b378df8de",
+      "receipts-service.jar": "96a083c178c92cf30554e6989c9c7b3f88710042c77638a3ef589af3fe2c98f7",
+      "rabbit-admin-service.jar": "e7646e0f33fac7c35426537030a8edf78b5ad7f9bad6eee61d88ee4e6d0b5f1e",
+      "order-insights-service.jar": "a0555c2c06117ca0a689c4aa742c804917d2dc49d7dd5dfd2fc88ab6e59d1204",
+      "catalog-service.jar": "0eff027dc0ba29e01a2c8deceb506319f6bc887d240d5f3758654ac4aac5dab5"
+    },
+    "listeners": {
+      "code": 0,
+      "out": "State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess\nLISTEN 0      100        127.0.0.1:8184       0.0.0.0:*          \nLISTEN 0      100        127.0.0.1:8185       0.0.0.0:*          \nLISTEN 0      100        127.0.0.1:8181       0.0.0.0:*          \nLISTEN 0      100        127.0.0.1:8182       0.0.0.0:*          \nLISTEN 0      100        127.0.0.1:8183       0.0.0.0:*          \nLISTEN 0      4096         0.0.0.0:22         0.0.0.0:*          \nLISTEN 0      4096       127.0.0.1:5674       0.0.0.0:*          \nLISTEN 0      4096       127.0.0.1:5675       0.0.0.0:*          \nLISTEN 0      4096       127.0.0.1:40433      0.0.0.0:*          \nLISTEN 0      4096      127.0.0.54:53         0.0.0.0:*          \nLISTEN 0      4096       127.0.0.1:15674      0.0.0.0:*          \nLISTEN 0      4096       127.0.0.1:15675      0.0.0.0:*          \nLISTEN 0      4096   127.0.0.53%lo:53         0.0.0.0:*          \nLISTEN 0      100          0.0.0.0:8180       0.0.0.0:*          \nLISTEN 0      4096            [::]:22            [::]:*          \n",
+      "error": ""
+    },
+    "dockerInstalled": true,
+    "frontendPresent": false,
+    "dockerVersion": {
+      "code": 0,
+      "out": "29.1.3\n",
+      "error": ""
+    },
+    "composeVersion": {
+      "code": 0,
+      "out": "Docker Compose version 2.40.3+ds1-0ubuntu1~24.04.1\n",
+      "error": ""
+    },
+    "containers": {
+      "code": 0,
+      "out": "pedidos360-ep4-rabbit-2 Up 2 minutes (healthy)\npedidos360-ep4-rabbit-1 Up 2 minutes (healthy)\n",
+      "error": ""
+    }
+  },
+  "error": ""
+}

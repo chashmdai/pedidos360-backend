@@ -1,0 +1,39 @@
+{
+  "api": {
+    "acceptMappedClaims": null,
+    "knownClientApplications": [],
+    "oauth2PermissionScopes": [],
+    "preAuthorizedApplications": [],
+    "requestedAccessTokenVersion": null
+  },
+  "appId": "b4ede06a-cde3-4982-8b79-56fab7264fdd",
+  "displayName": "pedidos360-betorrejons-frontend",
+  "objectId": "fbfdd96f-b7f0-4fd6-8763-f698a1d5f43e",
+  "permissions": [
+    {
+      "resourceAccess": [
+        {
+          "id": "4482449c-36a1-4fee-bb8a-b02499d0bc86",
+          "type": "Scope"
+        },
+        {
+          "id": "11266639-2c90-4510-b7a3-a6189bc33bc1",
+          "type": "Scope"
+        },
+        {
+          "id": "ce8aff5b-d18b-48a5-8fc8-e82ca0922515",
+          "type": "Scope"
+        }
+      ],
+      "resourceAppId": "114f7b58-b207-4d46-9d6e-f491c3a0c0e0"
+    }
+  ],
+  "roles": [],
+  "spa": {
+    "redirectUris": [
+      "https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com/app/",
+      "http://127.0.0.1:5173/",
+      "http://localhost:5173/"
+    ]
+  }
+}

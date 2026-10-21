@@ -1,0 +1,181 @@
+{
+  "at": "2026-10-21T10:02:59.425562+00:00",
+  "source": "CloudWatch /pedidos360/api-gateway",
+  "events": [
+    {
+      "timestamp": 1792576530326,
+      "requestId": "FlrS8iGkIAMEbOA=",
+      "routeKey": "GET /app",
+      "status": "200",
+      "latency": "48"
+    },
+    {
+      "timestamp": 1792576530778,
+      "requestId": "FlrTAh4iIAMEVhA=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "30"
+    },
+    {
+      "timestamp": 1792576531225,
+      "requestId": "FlrTFg_9IAMEVUw=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "15"
+    },
+    {
+      "timestamp": 1792576546904,
+      "requestId": "FlrVigTfoAMEbYA=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "21"
+    },
+    {
+      "timestamp": 1792576547084,
+      "requestId": "FlrVjhHtoAMEbNg=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "16"
+    },
+    {
+      "timestamp": 1792576547084,
+      "requestId": "FlrVjgAVoAMEbkg=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "33"
+    },
+    {
+      "timestamp": 1792576591350,
+      "requestId": "FlrcehdyoAMEV9g=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "17"
+    },
+    {
+      "timestamp": 1792576591548,
+      "requestId": "Flrcggb7IAMEV6Q=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "18"
+    },
+    {
+      "timestamp": 1792576591548,
+      "requestId": "FlrcgjntIAMEV8w=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "25"
+    },
+    {
+      "timestamp": 1792576593464,
+      "requestId": "Flrczh1mIAMEYlw=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "17"
+    },
+    {
+      "timestamp": 1792576593944,
+      "requestId": "Flrc4gQeoAMEbOA=",
+      "routeKey": "GET /app",
+      "status": "200",
+      "latency": "14"
+    },
+    {
+      "timestamp": 1792576594351,
+      "requestId": "Flrc8jtpIAMEVTA=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "13"
+    },
+    {
+      "timestamp": 1792576594765,
+      "requestId": "FlrdAgGJIAMEVow=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "20"
+    },
+    {
+      "timestamp": 1792576595946,
+      "requestId": "FlrdMjgLoAMEVhw=",
+      "routeKey": "GET /app/{proxy+}",
+      "status": "200",
+      "latency": "20"
+    },
+    {
+      "timestamp": 1792576596500,
+      "requestId": "FlrdSiyGoAMEV2w=",
+      "routeKey": "GET /api/v1/productos",
+      "status": "401",
+      "latency": "0"
+    },
+    {
+      "timestamp": 1792576596929,
+      "requestId": "FlrdWhu7oAMEcYQ=",
+      "routeKey": "GET /api/v1/productos",
+      "status": "401",
+      "latency": "0"
+    },
+    {
+      "timestamp": 1792576597333,
+      "requestId": "FlrdajIYIAMEbqA=",
+      "routeKey": "GET /api/v1/pedidos",
+      "status": "401",
+      "latency": "0"
+    },
+    {
+      "timestamp": 1792576613921,
+      "requestId": "FlrgAixEoAMEbtQ=",
+      "routeKey": "GET /api/v1/me",
+      "status": "200",
+      "latency": "925"
+    },
+    {
+      "timestamp": 1792576664156,
+      "requestId": "Flrn2gJFoAMEVtA=",
+      "routeKey": "GET /api/v1/admin/pedidos",
+      "status": "403",
+      "latency": "83"
+    },
+    {
+      "timestamp": 1792576738522,
+      "requestId": "Flrzejn6oAMEVyQ=",
+      "routeKey": "GET /api/v1/me",
+      "status": "200",
+      "latency": "384"
+    },
+    {
+      "timestamp": 1792576769436,
+      "requestId": "Flr4TibYoAMEbNA=",
+      "routeKey": "GET /api/v1/productos",
+      "status": "200",
+      "latency": "1615"
+    },
+    {
+      "timestamp": 1792576784479,
+      "requestId": "Flr6pjqqIAMEb0w=",
+      "routeKey": "GET /api/v1/productos",
+      "status": "200",
+      "latency": "160"
+    },
+    {
+      "timestamp": 1792576814316,
+      "requestId": "Flr_UhQtIAMEVEQ=",
+      "routeKey": "POST /api/v1/pedidos",
+      "status": "201",
+      "latency": "1642"
+    },
+    {
+      "timestamp": 1792576816136,
+      "requestId": "Flr_mjIMoAMEVYg=",
+      "routeKey": "GET /api/v1/pedidos",
+      "status": "200",
+      "latency": "1025"
+    },
+    {
+      "timestamp": 1792576877065,
+      "requestId": "FlsJHiaSIAMEbNA=",
+      "routeKey": "GET /api/v1/productos",
+      "status": "200",
+      "latency": "53"
+    }
+  ]
+}

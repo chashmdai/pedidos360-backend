@@ -41,7 +41,7 @@ public class AdministrativeSecurity {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/actuator/health").permitAll()
-                    .requestMatchers("/api/v1/rabbit/**", "/api/v1/admin/receipts/**").access(
+                    .requestMatchers("/api/v1/rabbit/**", "/api/v1/admin/receipts/**", "/api/v1/admin/insights/**").access(
                         new WebExpressionAuthorizationManager("hasRole('Admin') and hasAuthority('SCOPE_Orders.Read')"))
                     .anyRequest().denyAll())
                 .oauth2ResourceServer(s -> s.jwt(j -> j.jwtAuthenticationConverter(converter))).build();

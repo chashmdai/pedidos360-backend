@@ -1,0 +1,76 @@
+{
+  "at": "2026-10-21T10:01:11.615549+00:00",
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "commandId": "39f4f69a-ca93-4374-acc4-aa2ed54fcbcf",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "environment": "AWS EC2/RDS + actual cloud UI order",
+    "at": "2026-10-21T10:01:06.365550+00:00",
+    "orderId": "cee13d49-4bd2-43be-bc85-7c700b3d37a5",
+    "status": "REGISTERED",
+    "outbox": {
+      "eventId": "77bc410d-3462-4982-a428-ab4b83c305b6",
+      "published": true,
+      "attempts": 1,
+      "errorCode": ""
+    },
+    "event": {
+      "total": 30970.0,
+      "eventId": "77bc410d-3462-4982-a428-ab4b83c305b6",
+      "orderId": "cee13d49-4bd2-43be-bc85-7c700b3d37a5",
+      "currency": "CLP",
+      "tenantId": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+      "itemCount": 2,
+      "occurredAt": "2026-10-21T10:00:15.594293Z",
+      "schemaVersion": 1
+    },
+    "effects": {
+      "receipt": {
+        "sha256": "6a4f933eb2ace60796300c5ddc0760715e2066ada59907d583bd82121b0d3e95",
+        "eventId": "77bc410d-3462-4982-a428-ab4b83c305b6",
+        "orderId": "cee13d49-4bd2-43be-bc85-7c700b3d37a5",
+        "amount": 30970.0,
+        "currency": "CLP"
+      },
+      "audit": {
+        "sha256": "6a4f933eb2ace60796300c5ddc0760715e2066ada59907d583bd82121b0d3e95",
+        "eventId": "77bc410d-3462-4982-a428-ab4b83c305b6",
+        "orderId": "cee13d49-4bd2-43be-bc85-7c700b3d37a5",
+        "amount": 30970.0,
+        "currency": "CLP"
+      },
+      "sales": {
+        "sha256": "6a4f933eb2ace60796300c5ddc0760715e2066ada59907d583bd82121b0d3e95",
+        "eventId": "77bc410d-3462-4982-a428-ab4b83c305b6",
+        "orderId": "cee13d49-4bd2-43be-bc85-7c700b3d37a5",
+        "amount": 30970.0,
+        "currency": "CLP"
+      }
+    },
+    "logs": [
+      "PUBLISH_CONFIRMED eventId=77bc410d-3462-4982-a428-ab4b83c305b6 orderId=cee13d49-4bd2-43be-bc85-7c700b3d37a5",
+      "ACK eventId=77bc410d-3462-4982-a428-ab4b83c305b6 orderId=cee13d49-4bd2-43be-bc85-7c700b3d37a5 result=RECEIPT_STORED attempt=1 redelivered=false",
+      "ACK flow=sales eventId=77bc410d-3462-4982-a428-ab4b83c305b6 orderId=cee13d49-4bd2-43be-bc85-7c700b3d37a5 result=PROJECTION_STORED attempt=1",
+      "ACK flow=audit eventId=77bc410d-3462-4982-a428-ab4b83c305b6 orderId=cee13d49-4bd2-43be-bc85-7c700b3d37a5 result=PROJECTION_STORED attempt=1"
+    ],
+    "previousDataPreserved": {
+      "catalog.products": {
+        "previousRows": 2,
+        "currentRows": 2,
+        "allPreviousHashesUnchanged": true
+      },
+      "orders.purchase_orders": {
+        "previousRows": 2,
+        "currentRows": 3,
+        "allPreviousHashesUnchanged": true
+      },
+      "orders.order_items": {
+        "previousRows": 3,
+        "currentRows": 5,
+        "allPreviousHashesUnchanged": true
+      }
+    }
+  },
+  "error": ""
+}

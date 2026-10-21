@@ -15,6 +15,9 @@ class AdminValidationTest {
             assertFalse(validator.validate(new QueueRequest("pedidos360.lab.ok",null,false,null,null)).isEmpty());
             assertFalse(validator.validate(new ExchangeRequest("pedidos360.lab.ok","invalid",true,false)).isEmpty());
             assertFalse(validator.validate(new BindingRequest("ok","ok","")).isEmpty());
+            assertFalse(validator.validate(new QueuePolicyRequest(null,null)).isEmpty());
+            assertFalse(validator.validate(new QueuePolicyRequest(0,10001)).isEmpty());
+            assertTrue(validator.validate(new QueuePolicyRequest(1000,100)).isEmpty());
             assertTrue(validator.validate(new QueueRequest("pedidos360.lab.ok",true,false,1000,10)).isEmpty());
         }
     }
@@ -22,5 +25,7 @@ class AdminValidationTest {
         var broker=mock(RestClient.class);var service=new RabbitAdminService(broker,"pedidos360-ep3","pedidos360.lab.");
         var denied=assertThrows(ResponseStatusException.class,()->service.deleteQueue("pedidos360.receipts.failed.v1"));
         assertEquals(403,denied.getStatusCode().value());verifyNoInteractions(broker);
+        var invalid=assertThrows(ResponseStatusException.class,()->service.getQueue("pedidos360.lab."+"x".repeat(101)));
+        assertEquals(400,invalid.getStatusCode().value());verifyNoInteractions(broker);
     }
 }

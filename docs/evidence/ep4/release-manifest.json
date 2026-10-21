@@ -1,0 +1,40 @@
+{
+  "release": "ep4-20261021T094446Z",
+  "at": "2026-10-21T09:44:47.475418+00:00",
+  "files": {
+    "bff.jar": "898b1f33b32565a1e8c196c5d19028873b40c3cb3f8a9a4bcd5ab29b378df8de",
+    "catalog-service.jar": "0eff027dc0ba29e01a2c8deceb506319f6bc887d240d5f3758654ac4aac5dab5",
+    "compose.ep4.yaml": "fcbf2ac931be222ba8d19000098ecd99595c2a30060f9017c90f51b2183da67a",
+    "deploy/ep4-install.py": "2576252c8ef98dcf1eb7fb76ee36351411b1be4f2fca29e3902050914958b8fd",
+    "docker/rabbitmq/ep4-entrypoint.sh": "0049e816997a906d79339eaeab29fb41097e166ac4e454fec57f51658846b2eb",
+    "docker/rabbitmq/ep4.conf": "a6e10994cdfed5cb17786ef903b312ad1b95973e51aba704346fc425954df858",
+    "frontend/assets/index-BnPrCUl4.css": "a9dc5fca975148852de12732e105838756ffdfccc36fedaa96477ffb5f8ca251",
+    "frontend/assets/index-D62gQPHr.js": "b4e9a8141e8c1a95516e16f6197a5982649a1a891b909286d61e9bffc0c84c29",
+    "frontend/index.html": "d1f950d7623c4ca205adc5efb612cd2dd9e96ac77518f9a3286cdd61c4a98080",
+    "messaging-support/src/main/resources/pedidos-rabbit.properties": "d10d92534fc7c495544811bc8e9b74ea85d2ad442e548484747816570d184849",
+    "order-insights-service.jar": "a0555c2c06117ca0a689c4aa742c804917d2dc49d7dd5dfd2fc88ab6e59d1204",
+    "orders-service.jar": "042b769374c37581ef0205a66320fa473967a0ad6ba3b78d99dce1fb48dc7209",
+    "rabbit-admin-service.jar": "e7646e0f33fac7c35426537030a8edf78b5ad7f9bad6eee61d88ee4e6d0b5f1e",
+    "receipts-service.jar": "96a083c178c92cf30554e6989c9c7b3f88710042c77638a3ef589af3fe2c98f7",
+    "scripts/ep4-broker.py": "46cba5f4830243a611be0aca069914af6883dbf2df8b51c099c04d758fa2f9c6"
+  },
+  "entra": {
+    "tenantId": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+    "apiClientId": "114f7b58-b207-4d46-9d6e-f491c3a0c0e0",
+    "spaClientId": "b4ede06a-cde3-4982-8b79-56fab7264fdd",
+    "scopes": [
+      "Catalog.Read",
+      "Orders.Read",
+      "Orders.Create"
+    ]
+  },
+  "gateway": {
+    "account": "002996184293",
+    "region": "us-east-1",
+    "apiId": "7k2zyh0t0d",
+    "apiEndpoint": "https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com",
+    "apiBaseUrl": "https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com/api/v1"
+  },
+  "archiveSha256": "c21958c72a73313c5e7fdd8ef4aaed46a0488a4ad3704a8cf00a644f141b9970",
+  "archiveBytes": 235877405
+}

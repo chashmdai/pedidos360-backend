@@ -1,0 +1,24 @@
+{
+  "environment": "Real Microsoft Entra, SPA hosted on AWS",
+  "observedAt": "2026-10-21T09:59:29.478Z",
+  "source": "Normal SessionPage UI after institutional login and API response; no tokens or session storage read",
+  "origin": "https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com/app/",
+  "role": "User",
+  "scopes": [
+    "Catalog.Read",
+    "Orders.Create",
+    "Orders.Read"
+  ],
+  "tenantId": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+  "audience": "114f7b58-b207-4d46-9d6e-f491c3a0c0e0",
+  "clientId": "b4ede06a-cde3-4982-8b79-56fab7264fdd",
+  "issuer": "https://login.microsoftonline.com/72fd0b5a-8a6a-4cff-89f6-bde961f7e250/v2.0",
+  "tokenVersion": "2.0",
+  "adminHttp": 403,
+  "forcedRefreshFromMicrosoftAccepted": true,
+  "naturalExpirationTest": false,
+  "logoutMicrosoftConfirmed": true,
+  "protectedRouteAfterLogout": "/app/catalogo -> /app/ (login required)",
+  "cloudCatalogAndTwoOrdersVerified": true,
+  "pendingRealAdminLogin": "Not executed; existing Graph assignment only. No privilege elevation."
+}

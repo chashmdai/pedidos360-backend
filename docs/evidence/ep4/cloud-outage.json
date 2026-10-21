@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-21T10:02:29.399405+00:00",
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "commandId": "18739b64-3362-4186-a1cd-d09c0fe2f451",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "at": "2026-10-21T10:02:25.672038+00:00",
+    "environment": "AWS EC2",
+    "action": "stopped only the two owned EP4 nodes",
+    "preserved": {
+      "at": "2026-10-21T10:02:24.090297+00:00",
+      "containers": {
+        "pedidos360-ep4-rabbit-1": {
+          "id": "f5a68f37d075467427c54367417d6b0a942436a6f90cbd4ba47e24fa0f02b916",
+          "volumes": [
+            "pedidos360-ep4-rabbit-1-data"
+          ]
+        },
+        "pedidos360-ep4-rabbit-2": {
+          "id": "8068f0203363f98e1ffdc602b307f34de8d977e26d81eefe3427233a8c6c9bdb",
+          "volumes": [
+            "pedidos360-ep4-rabbit-2-data"
+          ]
+        }
+      },
+      "files": {
+        "/var/lib/pedidos360-receipts/receipts/77bc410d-3462-4982-a428-ab4b83c305b6.json": "6a4f933eb2ace60796300c5ddc0760715e2066ada59907d583bd82121b0d3e95",
+        "/var/lib/pedidos360-insights/projections/audit/77bc410d-3462-4982-a428-ab4b83c305b6.json": "6a4f933eb2ace60796300c5ddc0760715e2066ada59907d583bd82121b0d3e95",
+        "/var/lib/pedidos360-insights/projections/sales/77bc410d-3462-4982-a428-ab4b83c305b6.json": "6a4f933eb2ace60796300c5ddc0760715e2066ada59907d583bd82121b0d3e95"
+      },
+      "dlqCounts": {
+        "pedidos360.audit.failed.v1": 2,
+        "pedidos360.receipts.failed.v1": 1,
+        "pedidos360.sales.failed.v1": 2
+      }
+    }
+  },
+  "error": ""
+}

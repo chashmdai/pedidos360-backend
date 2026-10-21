@@ -1,8 +1,18 @@
 # Pedidos360 backend
 
+## EP4 - versión cloud verificada
+
+Frontend desplegado: **https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com/app/**. La SPA se aloja en la EC2 propia y llega por HTTPS al Gateway, VPC Link, ALB interno y BFF existentes. Las siete rutas API conservan JWT/scopes. La disponibilidad depende de que el laboratorio esté encendido.
+
+La iteración añade un clúster RabbitMQ real de dos nodos en Docker Compose sobre esa EC2, tres colas con tres DLQ y enrutamiento direct/topic. Mantiene Orders -> outbox -> Receipts y suma auditoría y resumen diario por moneda en `order-insights-service`. Son seis servicios Spring; las colas classic no replican mensajes y ambos nodos comparten host, por lo que **no es HA**.
+
+**[PDF complementario EP4](docs/EP4_IMPLEMENTACION_EVIDENCIAS.pdf)** · [implementación](docs/EP4_IMPLEMENTACION.md) · [trazabilidad P01-P11/R1-R8](docs/EP4_TRAZABILIDAD.md) · [operación reproducible](docs/EP4_OPERACION.md) · [evidencias](docs/evidence/ep4/).
+
+Pruebas: 39 Java en `clean verify` y 2 HTTP adicionales de Insights (41 distintas), 11 React y build de producción; AWS acreditó clúster, rutas, NACK/DLQ, tres efectos/ACK, duplicados, recuperación de outbox y conservación de datos. Entra real desde la SPA cloud: login, catálogo, pedidos, renovación, User 403 y logout. Los JAR desplegados y los bytes servidos de la SPA se contrastan por SHA-256. La evidencia EP3 permanece intacta.
+
 ## EP3 — RabbitMQ
 
-Se incorporó el flujo local Orders → outbox transaccional → RabbitMQ → comprobante durable, junto con un microservicio administrador REST protegido. La mensajería de Orders se habilita únicamente con el perfil `ep3`.
+En EP3 se incorporó el flujo local Orders → outbox transaccional → RabbitMQ → comprobante durable, junto con un microservicio administrador REST protegido. Su launcher habilita la mensajería con el perfil `ep3`; el despliegue EP4 la habilita mediante configuración explícita sin cambiar el contrato.
 
 **Entregable principal: [PDF de implementación y evidencias EP3](docs/EP3_RABBITMQ_EVIDENCIAS.pdf)**, ocho páginas A4 revisadas visualmente. [Informe técnico, matriz y demo](docs/EP3_RABBITMQ_IMPLEMENTACION.md), [índice de capturas reales](docs/evidence/ep3/CAPTURAS_PENDIENTES.md) y [prueba Entra institucional](docs/evidence/ep3/entra-verification.json).
 
@@ -12,7 +22,7 @@ Catálogo, pedidos multítem y BFF con Microsoft Entra, desplegados en EC2 y RDS
 
 Para demostrar el backend AWS existente, ejecutar `bash scripts/dev.sh start cloud` y abrir `http://localhost:5173`. Este modo inicia únicamente la SPA con el endpoint Gateway verificado; consultar [DEPLOY.md](docs/DEPLOY.md) para reanudar el laboratorio sin recrear recursos.
 
-[Entrega y evidencias](docs/ENTREGA.md). Al cerrar la revisión el usuario informó que AWS está apagado; las pruebas cloud documentadas corresponden a su ejecución anterior.
+[Entrega y evidencias históricas](docs/ENTREGA.md). El cierre anterior ocurrió con AWS apagado; las nuevas verificaciones cloud de EP4 están fechadas y separadas en `docs/evidence/ep4/`.
 
 Para reanudar una nueva sesión del laboratorio, seguir [Arrancar Pedidos360 después de renovar AWS](docs/ARRANQUE_LABORATORIO.md). La guía cubre la actualización de las tres credenciales temporales, reconciliación, inicio condicional de EC2/RDS, health checks y arranque de la SPA.
 
@@ -58,7 +68,7 @@ Inicialización de esquemas/usuarios: `docker/mysql/init-databases.sh`. Migracio
 
 ## Seguridad y alcance
 
-Todos los endpoints de negocio validan JWT firmado, issuer, audience, tiempo de validez, identidad y scopes. Solo `/actuator/health` es público. El BFF propaga el access token a URLs internas fijas, con timeouts y sin seguir redirecciones. Las rutas `/pedidos` usan `tid` + `oid` para filtrar por propietario. `/admin/pedidos` exige además rol Admin y Orders.Read, y consulta únicamente el tenant validado.
+Todos los endpoints de negocio validan JWT firmado, issuer, audience, tiempo de validez, identidad y scopes. Son públicos `/actuator/health` y los GET de archivos de la SPA bajo `/app/`; estos últimos no exponen datos de negocio. El BFF propaga el access token a URLs internas fijas, con timeouts y sin seguir redirecciones. Las rutas `/pedidos` usan `tid` + `oid` para filtrar por propietario. `/admin/pedidos` exige además rol Admin y Orders.Read, y consulta únicamente el tenant validado.
 
 El emisor de `scripts/local-identity.mjs` es **un fixture de desarrollo**, sin contraseña ni identidad real; cualquier proceso local puede obtener su token demo. No se despliega ni acredita integración Entra. Usa claves locales fuera del repositorio y tokens de diez minutos. La configuración normal exige `JWT_ISSUER`, `JWT_AUDIENCE`, `JWT_JWKS_URI`, `JWT_TENANT_ID` y `JWT_CLIENT_ID`, derivados de los registros verificados. El launcher los inyecta desde la configuración pública. El modo fixture permanece restringido a localhost.
 

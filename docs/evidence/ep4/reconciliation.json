@@ -1,0 +1,47 @@
+{
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "instanceState": "running",
+  "instanceType": "t3.medium",
+  "ssm": [
+    {
+      "id": "i-0818fdfafcfb7cb31",
+      "status": "Online"
+    }
+  ],
+  "rds": [
+    {
+      "id": "pedidos360-mysql",
+      "status": "available",
+      "class": "db.t3.micro"
+    }
+  ],
+  "targets": [
+    {
+      "Target": {
+        "Id": "i-0818fdfafcfb7cb31",
+        "Port": 8180
+      },
+      "HealthCheckPort": "8180",
+      "TargetHealth": {
+        "State": "healthy"
+      },
+      "AdministrativeOverride": {
+        "State": "no_override",
+        "Reason": "AdministrativeOverride.NoOverride",
+        "Description": "No override is currently active on target"
+      }
+    }
+  ],
+  "sevenRecordedRoutesMatch": true,
+  "networkPreservation": {
+    "security-groups": {
+      "previousResources": 6,
+      "allPreviousRulesUnchanged": true
+    },
+    "route-tables": {
+      "previousResources": 4,
+      "allPreviousRulesUnchanged": true
+    }
+  },
+  "ep3PdfSha256": "19eb27a1fc7a1b2d1ddc72d3def66185047c8d884a268335807cdeb984211997"
+}

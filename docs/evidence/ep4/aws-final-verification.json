@@ -1,0 +1,148 @@
+{
+  "at": "2026-10-21T10:12:32.156739+00:00",
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "commandId": "b934cc44-014f-4c00-aff3-635d9040fae2",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "at": "2026-10-21T10:12:26.132892+00:00",
+    "environment": "AWS EC2/RDS",
+    "release": "ep4-20261021T094446Z",
+    "artifacts": {
+      "orders-service.jar": "042b769374c37581ef0205a66320fa473967a0ad6ba3b78d99dce1fb48dc7209",
+      "bff.jar": "898b1f33b32565a1e8c196c5d19028873b40c3cb3f8a9a4bcd5ab29b378df8de",
+      "receipts-service.jar": "96a083c178c92cf30554e6989c9c7b3f88710042c77638a3ef589af3fe2c98f7",
+      "rabbit-admin-service.jar": "e7646e0f33fac7c35426537030a8edf78b5ad7f9bad6eee61d88ee4e6d0b5f1e",
+      "order-insights-service.jar": "a0555c2c06117ca0a689c4aa742c804917d2dc49d7dd5dfd2fc88ab6e59d1204",
+      "catalog-service.jar": "0eff027dc0ba29e01a2c8deceb506319f6bc887d240d5f3758654ac4aac5dab5"
+    },
+    "health": {
+      "bff": {
+        "http": 200,
+        "status": "UP"
+      },
+      "catalog": {
+        "http": 200,
+        "status": "UP"
+      },
+      "orders": {
+        "http": 200,
+        "status": "UP"
+      },
+      "receipts": {
+        "http": 200,
+        "status": "UP"
+      },
+      "rabbit-admin": {
+        "http": 200,
+        "status": "UP"
+      },
+      "insights": {
+        "http": 200,
+        "status": "UP"
+      }
+    },
+    "database": {
+      "catalog": {
+        "tlsVerifyIdentitySucceeded": true,
+        "requireSecureTransport": true,
+        "migrationAndGrantOutput": "Ssl_cipher\tTLS_AES_256_GCM_SHA384\n1\n1\tcreate products\t1\n2\tdemo products\t1\nGRANT USAGE ON *.* TO `pedidos360_catalog_app`@`%`\nGRANT SELECT, INSERT, UPDATE, DELETE ON `pedidos360_catalog`.* TO `pedidos360_catalog_app`@`%`\n"
+      },
+      "orders": {
+        "tlsVerifyIdentitySucceeded": true,
+        "requireSecureTransport": true,
+        "migrationAndGrantOutput": "Ssl_cipher\tTLS_AES_256_GCM_SHA384\n1\n1\tcreate orders\t1\n2\torder event outbox\t1\nGRANT USAGE ON *.* TO `pedidos360_orders_app`@`%`\nGRANT SELECT, INSERT, UPDATE, DELETE ON `pedidos360_orders`.* TO `pedidos360_orders_app`@`%`\n"
+      }
+    },
+    "preservation": {
+      "catalog.products": {
+        "previous": 2,
+        "now": 2,
+        "allPreviousHashesUnchanged": true
+      },
+      "orders.purchase_orders": {
+        "previous": 2,
+        "now": 4,
+        "allPreviousHashesUnchanged": true
+      },
+      "orders.order_items": {
+        "previous": 3,
+        "now": 7,
+        "allPreviousHashesUnchanged": true
+      }
+    },
+    "queues": [
+      {
+        "name": "pedidos360.audit.failed.v1",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "type": "classic",
+        "consumers": 0,
+        "messages_ready": 2,
+        "messages_unacknowledged": 0
+      },
+      {
+        "name": "pedidos360.audit.order-registered.v1",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "type": "classic",
+        "consumers": 1,
+        "messages_ready": 0,
+        "messages_unacknowledged": 0
+      },
+      {
+        "name": "pedidos360.receipts.failed.v1",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "type": "classic",
+        "consumers": 0,
+        "messages_ready": 1,
+        "messages_unacknowledged": 0
+      },
+      {
+        "name": "pedidos360.receipts.order-registered.v1",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "type": "classic",
+        "consumers": 1,
+        "messages_ready": 0,
+        "messages_unacknowledged": 0
+      },
+      {
+        "name": "pedidos360.sales.failed.v1",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "type": "classic",
+        "consumers": 0,
+        "messages_ready": 2,
+        "messages_unacknowledged": 0
+      },
+      {
+        "name": "pedidos360.sales.order-registered.v1",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "type": "classic",
+        "consumers": 1,
+        "messages_ready": 0,
+        "messages_unacknowledged": 0
+      }
+    ],
+    "connections": [
+      {
+        "node": "rabbit@pedidos360-ep4-rabbit-2",
+        "user": "pedidos360_ep4_producer",
+        "vhost": "pedidos360-ep4",
+        "state": "running"
+      },
+      {
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "user": "pedidos360_ep4_consumer",
+        "vhost": "pedidos360-ep4",
+        "state": "running"
+      },
+      {
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "user": "pedidos360_ep4_consumer",
+        "vhost": "pedidos360-ep4",
+        "state": "running"
+      }
+    ],
+    "memory": "               total        used        free      shared  buff/cache   available\nMem:            3832        2173         294          36        1674        1658\nSwap:              0           0           0\n",
+    "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/root        19G  5.0G   14G  27% /\n"
+  },
+  "error": ""
+}

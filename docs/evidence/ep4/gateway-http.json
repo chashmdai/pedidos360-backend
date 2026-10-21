@@ -1,0 +1,79 @@
+{
+  "at": "2026-10-21T09:56:33.843147+00:00",
+  "environment": "AWS API Gateway HTTPS",
+  "checks": [
+    {
+      "path": "/app/",
+      "status": 200,
+      "expected": 200,
+      "invalidSyntheticBearer": false,
+      "requestId": "Flrczh1mIAMEYlw=",
+      "contentType": "text/html;charset=UTF-8",
+      "sha256": "d1f950d7623c4ca205adc5efb612cd2dd9e96ac77518f9a3286cdd61c4a98080"
+    },
+    {
+      "path": "/app",
+      "status": 200,
+      "expected": 200,
+      "invalidSyntheticBearer": false,
+      "requestId": "Flrc4gQeoAMEbOA=",
+      "contentType": "text/html;charset=UTF-8",
+      "sha256": "d1f950d7623c4ca205adc5efb612cd2dd9e96ac77518f9a3286cdd61c4a98080"
+    },
+    {
+      "path": "/app/pedidos",
+      "status": 200,
+      "expected": 200,
+      "invalidSyntheticBearer": false,
+      "requestId": "Flrc8jtpIAMEVTA=",
+      "contentType": "text/html",
+      "sha256": "d1f950d7623c4ca205adc5efb612cd2dd9e96ac77518f9a3286cdd61c4a98080"
+    },
+    {
+      "path": "/app/assets/index-D62gQPHr.js",
+      "status": 200,
+      "expected": 200,
+      "invalidSyntheticBearer": false,
+      "requestId": "FlrdAgGJIAMEVow=",
+      "contentType": "text/javascript",
+      "sha256": "b4e9a8141e8c1a95516e16f6197a5982649a1a891b909286d61e9bffc0c84c29"
+    },
+    {
+      "path": "/app/assets/index-BnPrCUl4.css",
+      "status": 200,
+      "expected": 200,
+      "invalidSyntheticBearer": false,
+      "requestId": "FlrdMjgLoAMEVhw=",
+      "contentType": "text/css",
+      "sha256": "a9dc5fca975148852de12732e105838756ffdfccc36fedaa96477ffb5f8ca251"
+    },
+    {
+      "path": "/api/v1/productos",
+      "status": 401,
+      "expected": 401,
+      "invalidSyntheticBearer": false,
+      "requestId": "FlrdSiyGoAMEV2w=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/productos",
+      "status": 401,
+      "expected": 401,
+      "invalidSyntheticBearer": true,
+      "requestId": "FlrdWhu7oAMEcYQ=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/pedidos",
+      "status": 401,
+      "expected": 401,
+      "invalidSyntheticBearer": false,
+      "requestId": "FlrdajIYIAMEbqA=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    }
+  ],
+  "verifiedFrontendBytesMatchRelease": true
+}

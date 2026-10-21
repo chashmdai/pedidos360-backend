@@ -14,4 +14,10 @@ public final class AdminRequests {
         @NotBlank @Pattern(regexp="[a-zA-Z0-9][a-zA-Z0-9._-]{0,100}") String exchange,
         @NotBlank @Pattern(regexp="[a-zA-Z0-9][a-zA-Z0-9._-]{0,100}") String queue,
         @NotBlank @Pattern(regexp="[a-zA-Z0-9.*#_-]{1,100}") String routingKey) {}
+    public record QueuePolicyRequest(
+        @Min(100) @Max(86400000) Integer messageTtl,
+        @Min(1) @Max(10000) Integer maxLength) {
+        @AssertTrue(message="Provide at least one bounded policy setting")
+        public boolean isSettingProvided() { return messageTtl!=null || maxLength!=null; }
+    }
 }

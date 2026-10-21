@@ -1,0 +1,60 @@
+openapi: 3.1.0
+info:
+  title: Pedidos360 EP4 - extensiones administrativas privadas
+  version: 1.0.0
+  description: Complementa el contrato EP3. API de laboratorio y proyecciones en loopback; JWT Admin + Orders.Read. No son rutas públicas del Gateway.
+servers:
+  - url: http://127.0.0.1:8184
+security:
+  - bearer: []
+paths:
+  /api/v1/rabbit/queues/{name}/policy:
+    patch:
+      summary: Actualizar una política limitada a una cola descartable propia
+      description: Conserva la cola; 409 si los argumentos de declaración tienen precedencia. TTL/longitud máxima tienen sus efectos normales de expiración/límite y nunca se aplican a colas de negocio.
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema: {type: string, pattern: '^pedidos360\.lab\.[a-zA-Z0-9._-]+$', maxLength: 101}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 1
+              anyOf:
+                - required: [messageTtl]
+                - required: [maxLength]
+              properties:
+                messageTtl: {type: integer, minimum: 100, maximum: 86400000}
+                maxLength: {type: integer, minimum: 1, maximum: 10000}
+      responses:
+        '200': {description: Política aplicada sin reconstruir la cola}
+        '400': {description: Parámetros inválidos o ambos ausentes}
+        '401': {description: JWT ausente o inválido}
+        '403': {description: Rol/scope insuficiente o namespace protegido}
+        '404': {description: Cola inexistente}
+        '409': {description: Atributos inmutables tienen precedencia}
+        '503': {description: Management indisponible}
+  /api/v1/admin/insights/audit:
+    get:
+      servers: [{url: 'http://127.0.0.1:8185'}]
+      summary: Eventos únicos de auditoría pertenecientes al tenant validado
+      responses:
+        '200': {description: Eventos OrderRegisteredV1 del tenant, sin duplicar redelivery}
+        '401': {description: JWT ausente o inválido}
+        '403': {description: Requiere Admin y Orders.Read}
+  /api/v1/admin/insights/sales:
+    get:
+      servers: [{url: 'http://127.0.0.1:8185'}]
+      summary: Conteo e importe de pedidos registrados, agrupados por día UTC y moneda
+      description: No representa pagos ni ventas cobradas; no suma monedas diferentes.
+      responses:
+        '200': {description: Lista de objetos day, currency, orders y total}
+        '401': {description: JWT ausente o inválido}
+        '403': {description: Requiere Admin y Orders.Read}
+components:
+  securitySchemes:
+    bearer: {type: http, scheme: bearer, bearerFormat: JWT}

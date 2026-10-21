@@ -1,0 +1,102 @@
+{
+  "at": "2026-10-21T02:56:25.812638+00:00",
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "commandId": "a15e4e40-70cb-4eff-84dc-ee9705740264",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "runtime": {
+      "code": 0,
+      "out": "openjdk 25.0.4.1 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-25.0.4.1+1 (build 25.0.4.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-25.0.4.1+1 (build 25.0.4.1+1-LTS, mixed mode, sharing)\n",
+      "error": ""
+    },
+    "memory": {
+      "code": 0,
+      "out": "               total        used        free      shared  buff/cache   available\nMem:            3832        1235        1632           2        1211        2596\nSwap:              0           0           0\n",
+      "error": ""
+    },
+    "disk": {
+      "code": 0,
+      "out": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/root        19G  3.3G   16G  18% /\n",
+      "error": ""
+    },
+    "services": {
+      "catalog": {
+        "code": 0,
+        "out": "MemoryCurrent=274006016\nLoadState=loaded\nActiveState=active\nSubState=running\n",
+        "error": ""
+      },
+      "orders": {
+        "code": 0,
+        "out": "MemoryCurrent=301846528\nLoadState=loaded\nActiveState=active\nSubState=running\n",
+        "error": ""
+      },
+      "bff": {
+        "code": 0,
+        "out": "MemoryCurrent=208744448\nLoadState=loaded\nActiveState=active\nSubState=running\n",
+        "error": ""
+      },
+      "receipts": {
+        "code": 0,
+        "out": "MemoryCurrent=[not set]\nLoadState=not-found\nActiveState=inactive\nSubState=dead\n",
+        "error": ""
+      },
+      "rabbit-admin": {
+        "code": 0,
+        "out": "MemoryCurrent=[not set]\nLoadState=not-found\nActiveState=inactive\nSubState=dead\n",
+        "error": ""
+      }
+    },
+    "health": {
+      "catalog": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "orders": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "bff": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "receipts": {
+        "error": "<urlopen error [Errno 111] Connection refused>"
+      },
+      "rabbit-admin": {
+        "error": "<urlopen error [Errno 111] Connection refused>"
+      }
+    },
+    "artifacts": {
+      "orders-service.jar": "5ac85d65fbf89846be6795b969e711faca0ba44c82459b38579868694cc40acc",
+      "bff.jar": "d30c1bba5f3f9202534037212a0cf29492dc101130cbf3ff904ce6f1b60217ee",
+      "catalog-service.jar": "e67336fe90d1e2d5bbc920ed7e09a68625d63d3de3f7981ea399ff551682d3f6"
+    },
+    "listeners": {
+      "code": 0,
+      "out": "State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\nLISTEN 0      4096      127.0.0.54:53        0.0.0.0:*          \nLISTEN 0      100          0.0.0.0:8180      0.0.0.0:*          \nLISTEN 0      4096         0.0.0.0:22        0.0.0.0:*          \nLISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*          \nLISTEN 0      100        127.0.0.1:8182      0.0.0.0:*          \nLISTEN 0      100        127.0.0.1:8181      0.0.0.0:*          \nLISTEN 0      4096            [::]:22           [::]:*          \n",
+      "error": ""
+    },
+    "dockerInstalled": false,
+    "frontendPresent": false
+  },
+  "error": ""
+}

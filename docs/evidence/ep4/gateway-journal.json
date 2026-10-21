@@ -1,0 +1,20 @@
+{
+  "account": "002996184293",
+  "apiId": "7k2zyh0t0d",
+  "steps": {
+    "GET /app": {
+      "status": "verified-existing",
+      "routeId": "g3xwwqm"
+    },
+    "GET /app/": {
+      "status": "rejected-not-created-resolved",
+      "at": "2026-10-21T09:41:27.541620+00:00",
+      "error": "aws: [ERROR]: An error occurred (BadRequestException) when calling the CreateRoute operation: Part of the given route key path is empty",
+      "resolution": "Trailing slash is normalized by HTTP API; GET /app serves /app/, verified by gateway-http.json"
+    },
+    "GET /app/{proxy+}": {
+      "status": "verified-existing",
+      "routeId": "yao37su"
+    }
+  }
+}

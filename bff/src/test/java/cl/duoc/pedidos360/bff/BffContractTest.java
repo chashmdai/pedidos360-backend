@@ -2,6 +2,7 @@ package cl.duoc.pedidos360.bff;
 import com.sun.net.httpserver.HttpServer;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +15,14 @@ class BffContractTest {
     static final AtomicReference<String> BEARER=new AtomicReference<>();
     static final AtomicReference<String> BODY=new AtomicReference<>();
     static final HttpServer UPSTREAM=upstream();
+    static final Path SPA=spa();
+    static Path spa() {
+        try {
+            var directory=Files.createTempDirectory("pedidos360-spa-contract-");
+            Files.writeString(directory.resolve("index.html"),"<!doctype html><title>Cloud SPA contract</title>");
+            Files.writeString(directory.resolve("asset.js"),"console.log('verified')");return directory;
+        } catch(Exception e) { throw new IllegalStateException(e); }
+    }
     static HttpServer upstream() {
         try {
             var server=HttpServer.create(new InetSocketAddress("127.0.0.1",0),0);
@@ -31,6 +40,7 @@ class BffContractTest {
     }
     @LocalServerPort int port;
     @DynamicPropertySource static void configure(DynamicPropertyRegistry r) {
+        r.add("pedidos.spa.enabled",()->"true");r.add("pedidos.spa.directory",SPA::toString);
         r.add("pedidos.security.tenant",()->"test-tenant"); r.add("pedidos.security.client",()->"test-spa");
         r.add("pedidos.security.issuer",TOKENS::issuer);r.add("pedidos.security.audience",()->TestTokens.AUDIENCE);r.add("pedidos.security.jwks",()->TOKENS.issuer()+"/jwks");
         r.add("pedidos.catalog-url",()->"http://127.0.0.1:"+UPSTREAM.getAddress().getPort());
@@ -43,6 +53,16 @@ class BffContractTest {
         var response=TestHttp.call(port,"POST","/api/v1/pedidos",body,token);
         assertEquals(201,response.statusCode());assertTrue(response.headers().firstValue("Location").orElseThrow().startsWith("/api/v1/pedidos/"));
         assertEquals(body,BODY.get());assertEquals("Bearer "+token,BEARER.get());
+    }
+    @Test void servesOnlyPublicSpaGetRoutesWithoutOpeningTheProtectedApi() throws Exception {
+        var index=TestHttp.call(port,"GET","/app/",null,null);
+        assertEquals(200,index.statusCode());assertTrue(index.body().contains("Cloud SPA contract"));
+        assertEquals(200,TestHttp.call(port,"GET","/app/pedidos",null,null).statusCode());
+        var asset=TestHttp.call(port,"GET","/app/asset.js",null,null);
+        assertEquals(200,asset.statusCode());assertTrue(asset.body().contains("verified"));
+        assertEquals(404,TestHttp.call(port,"GET","/app/missing.js",null,null).statusCode());
+        assertEquals(401,TestHttp.call(port,"GET","/api/v1/pedidos",null,null).statusCode());
+        assertEquals(401,TestHttp.call(port,"POST","/app/index.html","{}",null).statusCode());
     }
     @Test void bffItselfRejectsInvalidAudienceAndMissingScopes() throws Exception {
         assertEquals(401,TestHttp.call(port,"GET","/api/v1/productos",null,null).statusCode());

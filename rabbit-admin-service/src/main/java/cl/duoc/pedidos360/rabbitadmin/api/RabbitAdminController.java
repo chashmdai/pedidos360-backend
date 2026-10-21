@@ -15,6 +15,7 @@ public class RabbitAdminController {
     }
     @PostMapping("/queues") public ResponseEntity<Object> createQueue(@Valid @RequestBody QueueRequest dto) { return response(service.createQueue(dto)); }
     @GetMapping("/queues/{name}") public Map<String,Object> queue(@PathVariable String name) { return service.getQueue(name); }
+    @PatchMapping("/queues/{name}/policy") public Object updateQueue(@PathVariable String name,@Valid @RequestBody QueuePolicyRequest dto) { return service.updateQueuePolicy(name,dto); }
     @DeleteMapping("/queues/{name}") @ResponseStatus(HttpStatus.NO_CONTENT) public void deleteQueue(@PathVariable String name) { service.deleteQueue(name); }
     @PostMapping("/exchanges") public ResponseEntity<Object> createExchange(@Valid @RequestBody ExchangeRequest dto) { return response(service.createExchange(dto)); }
     @GetMapping("/exchanges/{name}") public Map<String,Object> exchange(@PathVariable String name) { return service.getExchange(name); }

@@ -1,0 +1,195 @@
+{
+  "at": "2026-10-21T10:14:27.149262+00:00",
+  "api": {
+    "ApiEndpoint": "https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com",
+    "ApiId": "7k2zyh0t0d",
+    "ApiKeySelectionExpression": "$request.header.x-api-key",
+    "CorsConfiguration": {
+      "AllowCredentials": false,
+      "AllowHeaders": [
+        "authorization",
+        "content-type"
+      ],
+      "AllowMethods": [
+        "GET",
+        "POST",
+        "OPTIONS"
+      ],
+      "AllowOrigins": [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
+      ],
+      "ExposeHeaders": [
+        "location"
+      ],
+      "MaxAge": 300
+    },
+    "CreatedDate": "2026-09-06T15:12:19+00:00",
+    "Description": "Pedidos360 BFF with Microsoft Entra JWT",
+    "DisableExecuteApiEndpoint": false,
+    "IpAddressType": "ipv4",
+    "Name": "pedidos360-http-api",
+    "ProtocolType": "HTTP",
+    "RouteSelectionExpression": "$request.method $request.path",
+    "Tags": {
+      "Course": "DSY1107",
+      "Project": "Pedidos360",
+      "Environment": "lab"
+    }
+  },
+  "routes": [
+    {
+      "ApiKeyRequired": false,
+      "AuthorizationScopes": [
+        "Orders.Read"
+      ],
+      "AuthorizationType": "JWT",
+      "AuthorizerId": "b8vlwv",
+      "RouteId": "2mdxsyl",
+      "RouteKey": "GET /api/v1/pedidos/{id}",
+      "Target": "integrations/19mlbdh"
+    },
+    {
+      "ApiKeyRequired": false,
+      "AuthorizationScopes": [
+        "Catalog.Read"
+      ],
+      "AuthorizationType": "JWT",
+      "AuthorizerId": "b8vlwv",
+      "RouteId": "34yqqk4",
+      "RouteKey": "GET /api/v1/productos/{id}",
+      "Target": "integrations/19mlbdh"
+    },
+    {
+      "ApiKeyRequired": false,
+      "AuthorizationScopes": [
+        "Orders.Read"
+      ],
+      "AuthorizationType": "JWT",
+      "AuthorizerId": "b8vlwv",
+      "RouteId": "8w206b3",
+      "RouteKey": "GET /api/v1/admin/pedidos",
+      "Target": "integrations/19mlbdh"
+    },
+    {
+      "ApiKeyRequired": false,
+      "AuthorizationScopes": [
+        "Catalog.Read",
+        "Orders.Read",
+        "Orders.Create"
+      ],
+      "AuthorizationType": "JWT",
+      "AuthorizerId": "b8vlwv",
+      "RouteId": "ahxzj2g",
+      "RouteKey": "GET /api/v1/me",
+      "Target": "integrations/19mlbdh"
+    },
+    {
+      "ApiKeyRequired": false,
+      "AuthorizationScopes": [
+        "Orders.Create"
+      ],
+      "AuthorizationType": "JWT",
+      "AuthorizerId": "b8vlwv",
+      "RouteId": "b5qfy2l",
+      "RouteKey": "POST /api/v1/pedidos",
+      "Target": "integrations/19mlbdh"
+    },
+    {
+      "ApiKeyRequired": false,
+      "AuthorizationType": "NONE",
+      "RouteId": "g3xwwqm",
+      "RouteKey": "GET /app",
+      "Target": "integrations/19mlbdh"
+    },
+    {
+      "ApiKeyRequired": false,
+      "AuthorizationScopes": [
+        "Catalog.Read"
+      ],
+      "AuthorizationType": "JWT",
+      "AuthorizerId": "b8vlwv",
+      "RouteId": "m7dyekr",
+      "RouteKey": "GET /api/v1/productos",
+      "Target": "integrations/19mlbdh"
+    },
+    {
+      "ApiKeyRequired": false,
+      "AuthorizationScopes": [
+        "Orders.Read"
+      ],
+      "AuthorizationType": "JWT",
+      "AuthorizerId": "b8vlwv",
+      "RouteId": "u1vafa1",
+      "RouteKey": "GET /api/v1/pedidos",
+      "Target": "integrations/19mlbdh"
+    },
+    {
+      "ApiKeyRequired": false,
+      "AuthorizationType": "NONE",
+      "RouteId": "yao37su",
+      "RouteKey": "GET /app/{proxy+}",
+      "Target": "integrations/19mlbdh"
+    }
+  ],
+  "originalSevenJwtRoutesUnchanged": true,
+  "integration": {
+    "ConnectionId": "2dh4hv",
+    "ConnectionType": "VPC_LINK",
+    "IntegrationId": "19mlbdh",
+    "IntegrationMethod": "ANY",
+    "IntegrationType": "HTTP_PROXY",
+    "IntegrationUri": "arn:aws:elasticloadbalancing:us-east-1:002996184293:listener/app/pedidos360-internal-alb/03e15310cdcb53b8/12cc3ae0a7cfec33",
+    "PayloadFormatVersion": "1.0",
+    "RequestParameters": {
+      "overwrite:path": "$request.path"
+    },
+    "TimeoutInMillis": 30000
+  },
+  "authorizers": {
+    "Items": [
+      {
+        "AuthorizerId": "b8vlwv",
+        "AuthorizerType": "JWT",
+        "IdentitySource": [
+          "$request.header.Authorization"
+        ],
+        "JwtConfiguration": {
+          "Audience": [
+            "114f7b58-b207-4d46-9d6e-f491c3a0c0e0"
+          ],
+          "Issuer": "https://login.microsoftonline.com/72fd0b5a-8a6a-4cff-89f6-bde961f7e250/v2.0"
+        },
+        "Name": "pedidos360-entra-jwt"
+      }
+    ]
+  },
+  "stages": {
+    "Items": [
+      {
+        "AccessLogSettings": {
+          "DestinationArn": "arn:aws:logs:us-east-1:002996184293:log-group:/pedidos360/api-gateway",
+          "Format": "{\"requestId\":\"$context.requestId\",\"routeKey\":\"$context.routeKey\",\"status\":\"$context.status\",\"latency\":\"$context.responseLatency\"}"
+        },
+        "AutoDeploy": true,
+        "CreatedDate": "2026-09-06T15:12:48+00:00",
+        "DefaultRouteSettings": {
+          "DetailedMetricsEnabled": false,
+          "ThrottlingBurstLimit": 10,
+          "ThrottlingRateLimit": 5.0
+        },
+        "DeploymentId": "3ygzf7",
+        "LastDeploymentStatusMessage": "Successfully deployed stage with deployment ID '3ygzf7'",
+        "LastUpdatedDate": "2026-10-21T09:42:04+00:00",
+        "RouteSettings": {},
+        "StageName": "$default",
+        "StageVariables": {},
+        "Tags": {
+          "Course": "DSY1107",
+          "Project": "Pedidos360",
+          "Environment": "lab"
+        }
+      }
+    ]
+  }
+}

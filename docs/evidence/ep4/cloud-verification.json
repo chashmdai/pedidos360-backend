@@ -1,0 +1,356 @@
+{
+  "at": "2026-10-21T09:55:42.057024+00:00",
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "commandId": "e16233ae-b011-4481-ae15-21eb0b17e079",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "environment": "AWS EC2 (not WSL)",
+    "at": "2026-10-21T09:55:24.203573+00:00",
+    "release": "ep4-20261021T094446Z",
+    "checks": [
+      "Both nodes report the same two running members, no partitions/alarms",
+      "Three live consumers, three separate DLQs, production direct/topic bindings",
+      "Actual direct fanout to three NACK/DLQs; selective wildcard topic routing and negative controls",
+      "All six services reject missing JWT; cloud SPA served without opening API authorization"
+    ],
+    "cluster": {
+      "pedidos360-ep4-rabbit-1": {
+        "cluster_name": "pedidos360-ep4",
+        "disk_nodes": [
+          "rabbit@pedidos360-ep4-rabbit-1",
+          "rabbit@pedidos360-ep4-rabbit-2"
+        ],
+        "running_nodes": [
+          "rabbit@pedidos360-ep4-rabbit-1",
+          "rabbit@pedidos360-ep4-rabbit-2"
+        ],
+        "partitions": {},
+        "alarms": [],
+        "versions": {
+          "rabbit@pedidos360-ep4-rabbit-1": {
+            "erlang_version": "27.3.4.19",
+            "rabbitmq_name": "RabbitMQ",
+            "rabbitmq_version": "4.2.9"
+          },
+          "rabbit@pedidos360-ep4-rabbit-2": {
+            "erlang_version": "27.3.4.19",
+            "rabbitmq_name": "RabbitMQ",
+            "rabbitmq_version": "4.2.9"
+          }
+        }
+      },
+      "pedidos360-ep4-rabbit-2": {
+        "cluster_name": "pedidos360-ep4",
+        "disk_nodes": [
+          "rabbit@pedidos360-ep4-rabbit-1",
+          "rabbit@pedidos360-ep4-rabbit-2"
+        ],
+        "running_nodes": [
+          "rabbit@pedidos360-ep4-rabbit-1",
+          "rabbit@pedidos360-ep4-rabbit-2"
+        ],
+        "partitions": {},
+        "alarms": [],
+        "versions": {
+          "rabbit@pedidos360-ep4-rabbit-2": {
+            "erlang_version": "27.3.4.19",
+            "rabbitmq_name": "RabbitMQ",
+            "rabbitmq_version": "4.2.9"
+          },
+          "rabbit@pedidos360-ep4-rabbit-1": {
+            "erlang_version": "27.3.4.19",
+            "rabbitmq_name": "RabbitMQ",
+            "rabbitmq_version": "4.2.9"
+          }
+        }
+      }
+    },
+    "queuesBefore": [
+      {
+        "name": "pedidos360.audit.failed.v1",
+        "type": "classic",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "durable": true,
+        "arguments": {
+          "x-queue-type": "classic"
+        },
+        "consumers": 0,
+        "messages": 0,
+        "messages_ready": 0,
+        "messages_unacknowledged": 0
+      },
+      {
+        "name": "pedidos360.audit.order-registered.v1",
+        "type": "classic",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "durable": true,
+        "arguments": {
+          "x-dead-letter-exchange": "pedidos360.audit.errors.v1",
+          "x-dead-letter-routing-key": "audit.failed.v1",
+          "x-queue-type": "classic"
+        },
+        "consumers": 1,
+        "messages": 0,
+        "messages_ready": 0,
+        "messages_unacknowledged": 0
+      },
+      {
+        "name": "pedidos360.receipts.failed.v1",
+        "type": "classic",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "durable": true,
+        "arguments": {
+          "x-queue-type": "classic"
+        },
+        "consumers": 0,
+        "messages": 0,
+        "messages_ready": 0,
+        "messages_unacknowledged": 0
+      },
+      {
+        "name": "pedidos360.receipts.order-registered.v1",
+        "type": "classic",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "durable": true,
+        "arguments": {
+          "x-dead-letter-exchange": "pedidos360.receipts.errors.v1",
+          "x-dead-letter-routing-key": "receipt.failed.v1",
+          "x-queue-type": "classic"
+        },
+        "consumers": 1,
+        "messages": 0,
+        "messages_ready": 0,
+        "messages_unacknowledged": 0
+      },
+      {
+        "name": "pedidos360.sales.failed.v1",
+        "type": "classic",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "durable": true,
+        "arguments": {
+          "x-queue-type": "classic"
+        },
+        "consumers": 0,
+        "messages": 0,
+        "messages_ready": 0,
+        "messages_unacknowledged": 0
+      },
+      {
+        "name": "pedidos360.sales.order-registered.v1",
+        "type": "classic",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "durable": true,
+        "arguments": {
+          "x-dead-letter-exchange": "pedidos360.sales.errors.v1",
+          "x-dead-letter-routing-key": "sales.failed.v1",
+          "x-queue-type": "classic"
+        },
+        "consumers": 1,
+        "messages": 0,
+        "messages_ready": 0,
+        "messages_unacknowledged": 0
+      }
+    ],
+    "exchanges": [
+      {
+        "name": "pedidos360.audit.errors.v1",
+        "type": "direct",
+        "durable": true
+      },
+      {
+        "name": "pedidos360.orders.events.v1",
+        "type": "direct",
+        "durable": true
+      },
+      {
+        "name": "pedidos360.orders.insights.v1",
+        "type": "topic",
+        "durable": true
+      },
+      {
+        "name": "pedidos360.receipts.errors.v1",
+        "type": "direct",
+        "durable": true
+      },
+      {
+        "name": "pedidos360.sales.errors.v1",
+        "type": "direct",
+        "durable": true
+      }
+    ],
+    "bindings": [
+      {
+        "source": "pedidos360.audit.errors.v1",
+        "vhost": "pedidos360-ep4",
+        "destination": "pedidos360.audit.failed.v1",
+        "destination_type": "queue",
+        "routing_key": "audit.failed.v1",
+        "arguments": {},
+        "properties_key": "audit.failed.v1"
+      },
+      {
+        "source": "pedidos360.orders.events.v1",
+        "vhost": "pedidos360-ep4",
+        "destination": "pedidos360.orders.insights.v1",
+        "destination_type": "exchange",
+        "routing_key": "order.registered.v1",
+        "arguments": {},
+        "properties_key": "order.registered.v1"
+      },
+      {
+        "source": "pedidos360.orders.events.v1",
+        "vhost": "pedidos360-ep4",
+        "destination": "pedidos360.receipts.order-registered.v1",
+        "destination_type": "queue",
+        "routing_key": "order.registered.v1",
+        "arguments": {},
+        "properties_key": "order.registered.v1"
+      },
+      {
+        "source": "pedidos360.orders.insights.v1",
+        "vhost": "pedidos360-ep4",
+        "destination": "pedidos360.audit.order-registered.v1",
+        "destination_type": "queue",
+        "routing_key": "order.registered.*",
+        "arguments": {},
+        "properties_key": "order.registered.%2A"
+      },
+      {
+        "source": "pedidos360.orders.insights.v1",
+        "vhost": "pedidos360-ep4",
+        "destination": "pedidos360.sales.order-registered.v1",
+        "destination_type": "queue",
+        "routing_key": "*.registered.v1",
+        "arguments": {},
+        "properties_key": "%2A.registered.v1"
+      },
+      {
+        "source": "pedidos360.receipts.errors.v1",
+        "vhost": "pedidos360-ep4",
+        "destination": "pedidos360.receipts.failed.v1",
+        "destination_type": "queue",
+        "routing_key": "receipt.failed.v1",
+        "arguments": {},
+        "properties_key": "receipt.failed.v1"
+      },
+      {
+        "source": "pedidos360.sales.errors.v1",
+        "vhost": "pedidos360-ep4",
+        "destination": "pedidos360.sales.failed.v1",
+        "destination_type": "queue",
+        "routing_key": "sales.failed.v1",
+        "arguments": {},
+        "properties_key": "sales.failed.v1"
+      }
+    ],
+    "routingTests": [
+      {
+        "eventId": "a5304fa4-3f21-437b-81ac-93e1a9301b23",
+        "key": "order.registered.v1",
+        "routed": true,
+        "label": "all-three-dlq"
+      },
+      {
+        "eventId": "c7819cca-4ca7-470a-aac8-c1d3789200c4",
+        "key": "order.registered.probe",
+        "routed": true,
+        "label": "selective-topic"
+      },
+      {
+        "eventId": "955b2cc8-bb8f-409c-9a58-f55a850b3334",
+        "key": "probe.registered.v1",
+        "routed": true,
+        "label": "selective-topic"
+      },
+      {
+        "eventId": "1850c68d-2323-425c-86e6-51ec4d885a37",
+        "key": "order.cancelled.v1",
+        "routed": false,
+        "label": "unrouted-negative"
+      },
+      {
+        "eventId": "533ac163-4153-4da6-a89f-26a99829cd27",
+        "key": "order.cancelled.v1",
+        "routed": false,
+        "label": "unrouted-negative"
+      }
+    ],
+    "deadLetters": {
+      "pedidos360.receipts.failed.v1": {
+        "messageId": "a5304fa4-3f21-437b-81ac-93e1a9301b23",
+        "xDeath": [
+          {
+            "count": 1,
+            "exchange": "pedidos360.orders.events.v1",
+            "queue": "pedidos360.receipts.order-registered.v1",
+            "reason": "rejected",
+            "routing-keys": [
+              "order.registered.v1"
+            ],
+            "time": 1792576526
+          }
+        ]
+      },
+      "pedidos360.audit.failed.v1": {
+        "messageId": "a5304fa4-3f21-437b-81ac-93e1a9301b23",
+        "xDeath": [
+          {
+            "count": 1,
+            "exchange": "pedidos360.orders.events.v1",
+            "queue": "pedidos360.audit.order-registered.v1",
+            "reason": "rejected",
+            "routing-keys": [
+              "order.registered.v1"
+            ],
+            "time": 1792576526
+          }
+        ]
+      },
+      "pedidos360.sales.failed.v1": {
+        "messageId": "a5304fa4-3f21-437b-81ac-93e1a9301b23",
+        "xDeath": [
+          {
+            "count": 1,
+            "exchange": "pedidos360.orders.events.v1",
+            "queue": "pedidos360.sales.order-registered.v1",
+            "reason": "rejected",
+            "routing-keys": [
+              "order.registered.v1"
+            ],
+            "time": 1792576526
+          }
+        ]
+      }
+    },
+    "unauthenticatedHttp": {
+      "bff": 401,
+      "catalog": 401,
+      "orders": 401,
+      "receipts": 401,
+      "admin": 401,
+      "insights": 401
+    },
+    "connections": [
+      {
+        "name": "172.18.0.1:38124 -> 172.18.0.2:5672",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "user": "pedidos360_ep4_consumer",
+        "vhost": "pedidos360-ep4",
+        "state": "running",
+        "peer_host": "172.18.0.1"
+      },
+      {
+        "name": "172.18.0.1:38138 -> 172.18.0.2:5672",
+        "node": "rabbit@pedidos360-ep4-rabbit-1",
+        "user": "pedidos360_ep4_consumer",
+        "vhost": "pedidos360-ep4",
+        "state": "running",
+        "peer_host": "172.18.0.1"
+      }
+    ],
+    "compose": "{\"Command\":\"\\\"/bin/sh /opt/pedido\u2026\\\"\",\"CreatedAt\":\"2026-10-21 09:53:03 +0000 UTC\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"f5a68f37d075\",\"Image\":\"rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be\",\"Labels\":\"com.docker.compose.project.config_files=/opt/pedidos360/releases/ep4-20261021T094446Z/compose.ep4.yaml,com.docker.compose.project.working_dir=/opt/pedidos360/releases/ep4-20261021T094446Z,com.docker.compose.version=2.40.3,Project=Pedidos360,com.docker.compose.depends_on=,com.docker.compose.image=sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be,com.docker.compose.oneoff=False,com.docker.compose.project=pedidos360-ep4,com.docker.compose.service=rabbit-1,org.opencontainers.image.version=24.04,Purpose=ep4,com.docker.compose.config-hash=9d221f3a17da2329030182058c63802dfc62d27fc461aba60c675785a947c7c2,com.docker.compose.container-number=1\",\"LocalVolumes\":\"1\",\"Mounts\":\"/opt/pedidos36\u2026,/etc/pedidos36\u2026,/etc/pedidos36\u2026,pedidos360-ep4\u2026,/opt/pedidos36\u2026\",\"Name\":\"pedidos360-ep4-rabbit-1\",\"Names\":\"pedidos360-ep4-rabbit-1\",\"Networks\":\"pedidos360-ep4-network\",\"Ports\":\"4369/tcp, 5671/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 127.0.0.1:5674-\\u003e5672/tcp, 127.0.0.1:15674-\\u003e15672/tcp\",\"Project\":\"pedidos360-ep4\",\"Publishers\":[{\"URL\":\"\",\"TargetPort\":4369,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":5671,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"127.0.0.1\",\"TargetPort\":5672,\"PublishedPort\":5674,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15671,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"127.0.0.1\",\"TargetPort\":15672,\"PublishedPort\":15674,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15691,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15692,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":25672,\"PublishedPort\":0,\"Protocol\":\"tcp\"}],\"RunningFor\":\"2 minutes ago\",\"Service\":\"rabbit-1\",\"Size\":\"0B\",\"State\":\"running\",\"Status\":\"Up 2 minutes (healthy)\"}\n{\"Command\":\"\\\"/bin/sh /opt/pedido\u2026\\\"\",\"CreatedAt\":\"2026-10-21 09:53:03 +0000 UTC\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"8068f0203363\",\"Image\":\"rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be\",\"Labels\":\"com.docker.compose.service=rabbit-2,Purpose=ep4,com.docker.compose.depends_on=rabbit-1:service_started:false,com.docker.compose.project=pedidos360-ep4,com.docker.compose.project.working_dir=/opt/pedidos360/releases/ep4-20261021T094446Z,com.docker.compose.version=2.40.3,org.opencontainers.image.version=24.04,Project=Pedidos360,com.docker.compose.config-hash=e7539e279479164c500f352dc1987f52c2b8935bd0bbb3d531166694e7837394,com.docker.compose.container-number=1,com.docker.compose.image=sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/opt/pedidos360/releases/ep4-20261021T094446Z/compose.ep4.yaml\",\"LocalVolumes\":\"1\",\"Mounts\":\"/opt/pedidos36\u2026,/opt/pedidos36\u2026,/etc/pedidos36\u2026,/etc/pedidos36\u2026,pedidos360-ep4\u2026\",\"Name\":\"pedidos360-ep4-rabbit-2\",\"Names\":\"pedidos360-ep4-rabbit-2\",\"Networks\":\"pedidos360-ep4-network\",\"Ports\":\"4369/tcp, 5671/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 127.0.0.1:5675-\\u003e5672/tcp, 127.0.0.1:15675-\\u003e15672/tcp\",\"Project\":\"pedidos360-ep4\",\"Publishers\":[{\"URL\":\"\",\"TargetPort\":4369,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":5671,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"127.0.0.1\",\"TargetPort\":5672,\"PublishedPort\":5675,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15671,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"127.0.0.1\",\"TargetPort\":15672,\"PublishedPort\":15675,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15691,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15692,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":25672,\"PublishedPort\":0,\"Protocol\":\"tcp\"}],\"RunningFor\":\"2 minutes ago\",\"Service\":\"rabbit-2\",\"Size\":\"0B\",\"State\":\"running\",\"Status\":\"Up 2 minutes (healthy)\"}\n",
+    "memory": "               total        used        free      shared  buff/cache   available\nMem:            3832        2126         247          41        1776        1706\nSwap:              0           0           0\n"
+  },
+  "error": ""
+}

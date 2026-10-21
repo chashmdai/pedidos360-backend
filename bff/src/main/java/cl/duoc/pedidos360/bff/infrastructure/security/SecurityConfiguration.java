@@ -54,6 +54,7 @@ public class SecurityConfiguration {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/actuator/health").permitAll()
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/app", "/app/**").permitAll()
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/me").hasAnyAuthority("SCOPE_Catalog.Read", "SCOPE_Orders.Read", "SCOPE_Orders.Create")
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/admin/pedidos").access(
                     new WebExpressionAuthorizationManager("hasAuthority('SCOPE_Orders.Read') and hasRole('Admin')"))

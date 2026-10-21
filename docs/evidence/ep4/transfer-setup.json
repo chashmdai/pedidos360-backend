@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-21T03:10:38.549313+00:00",
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "commandId": "b69e0f04-ea3f-462f-a692-8a3194cd809c",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "hostKey": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFsBKslQ2fD5h9ucya7VJjAeviv+KIL2EoIh9k6hxfiK root@ip-10-36-0-38",
+    "ownTransferKeyAdded": true,
+    "publicSshIngressAdded": false
+  },
+  "error": ""
+}

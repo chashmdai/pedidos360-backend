@@ -1,0 +1,76 @@
+{
+  "at": "2026-10-21T09:54:47.783634+00:00",
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "commandId": "07172b4a-5e3e-4165-a082-010f58c3ff8a",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "release": "ep4-20261021T094446Z",
+    "health": {
+      "bff": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "receipts": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "rabbit-admin": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "insights": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "catalog": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      },
+      "orders": {
+        "status": 200,
+        "body": {
+          "groups": [
+            "liveness",
+            "readiness"
+          ],
+          "status": "UP"
+        }
+      }
+    },
+    "pending": {},
+    "memory": "               total        used        free      shared  buff/cache   available\nMem:            3832        2143         222          41        1783        1688\nSwap:              0           0           0\n",
+    "compose": "{\"Command\":\"\\\"/bin/sh /opt/pedido\u2026\\\"\",\"CreatedAt\":\"2026-10-21 09:53:03 +0000 UTC\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"f5a68f37d075\",\"Image\":\"rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be\",\"Labels\":\"com.docker.compose.image=sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be,com.docker.compose.oneoff=False,com.docker.compose.project=pedidos360-ep4,com.docker.compose.project.working_dir=/opt/pedidos360/releases/ep4-20261021T094446Z,Project=Pedidos360,Purpose=ep4,com.docker.compose.config-hash=9d221f3a17da2329030182058c63802dfc62d27fc461aba60c675785a947c7c2,com.docker.compose.depends_on=,com.docker.compose.project.config_files=/opt/pedidos360/releases/ep4-20261021T094446Z/compose.ep4.yaml,com.docker.compose.service=rabbit-1,com.docker.compose.version=2.40.3,org.opencontainers.image.version=24.04,com.docker.compose.container-number=1\",\"LocalVolumes\":\"1\",\"Mounts\":\"/opt/pedidos36\u2026,/opt/pedidos36\u2026,/etc/pedidos36\u2026,/etc/pedidos36\u2026,pedidos360-ep4\u2026\",\"Name\":\"pedidos360-ep4-rabbit-1\",\"Names\":\"pedidos360-ep4-rabbit-1\",\"Networks\":\"pedidos360-ep4-network\",\"Ports\":\"4369/tcp, 5671/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 127.0.0.1:5674-\\u003e5672/tcp, 127.0.0.1:15674-\\u003e15672/tcp\",\"Project\":\"pedidos360-ep4\",\"Publishers\":[{\"URL\":\"\",\"TargetPort\":4369,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":5671,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"127.0.0.1\",\"TargetPort\":5672,\"PublishedPort\":5674,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15671,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"127.0.0.1\",\"TargetPort\":15672,\"PublishedPort\":15674,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15691,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15692,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":25672,\"PublishedPort\":0,\"Protocol\":\"tcp\"}],\"RunningFor\":\"About a minute ago\",\"Service\":\"rabbit-1\",\"Size\":\"0B\",\"State\":\"running\",\"Status\":\"Up About a minute (healthy)\"}\n{\"Command\":\"\\\"/bin/sh /opt/pedido\u2026\\\"\",\"CreatedAt\":\"2026-10-21 09:53:03 +0000 UTC\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"8068f0203363\",\"Image\":\"rabbitmq:4.2.9-management@sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be\",\"Labels\":\"Purpose=ep4,com.docker.compose.container-number=1,com.docker.compose.depends_on=rabbit-1:service_started:false,com.docker.compose.oneoff=False,com.docker.compose.project=pedidos360-ep4,com.docker.compose.project.working_dir=/opt/pedidos360/releases/ep4-20261021T094446Z,com.docker.compose.version=2.40.3,org.opencontainers.image.version=24.04,Project=Pedidos360,com.docker.compose.config-hash=e7539e279479164c500f352dc1987f52c2b8935bd0bbb3d531166694e7837394,com.docker.compose.image=sha256:1cca59efba1c7f3da7daae7ae1e08f70e174e5a09ecfb08f01305b440fabe9be,com.docker.compose.project.config_files=/opt/pedidos360/releases/ep4-20261021T094446Z/compose.ep4.yaml,com.docker.compose.service=rabbit-2\",\"LocalVolumes\":\"1\",\"Mounts\":\"/opt/pedidos36\u2026,/etc/pedidos36\u2026,/etc/pedidos36\u2026,pedidos360-ep4\u2026,/opt/pedidos36\u2026\",\"Name\":\"pedidos360-ep4-rabbit-2\",\"Names\":\"pedidos360-ep4-rabbit-2\",\"Networks\":\"pedidos360-ep4-network\",\"Ports\":\"4369/tcp, 5671/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 127.0.0.1:5675-\\u003e5672/tcp, 127.0.0.1:15675-\\u003e15672/tcp\",\"Project\":\"pedidos360-ep4\",\"Publishers\":[{\"URL\":\"\",\"TargetPort\":4369,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":5671,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"127.0.0.1\",\"TargetPort\":5672,\"PublishedPort\":5675,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15671,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"127.0.0.1\",\"TargetPort\":15672,\"PublishedPort\":15675,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15691,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":15692,\"PublishedPort\":0,\"Protocol\":\"tcp\"},{\"URL\":\"\",\"TargetPort\":25672,\"PublishedPort\":0,\"Protocol\":\"tcp\"}],\"RunningFor\":\"About a minute ago\",\"Service\":\"rabbit-2\",\"Size\":\"0B\",\"State\":\"running\",\"Status\":\"Up About a minute (healthy)\"}\n"
+  },
+  "error": ""
+}

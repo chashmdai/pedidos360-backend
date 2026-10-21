@@ -21,6 +21,8 @@ public class RabbitAdminService {
         this.broker=broker; this.vhost=vhost; this.prefix=prefix;
     }
     private void allowed(String name) {
+        if (name==null || !name.matches("[a-zA-Z0-9][a-zA-Z0-9._-]{0,100}"))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Invalid resource name");
         if (name==null || !name.startsWith(prefix) || name.length()<=prefix.length())
             throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Only disposable laboratory resources may be managed");
     }
@@ -73,6 +75,25 @@ public class RabbitAdminService {
         var info=getQueue(name);
         // Management counters may lag: broker-side if-empty/if-unused is the final guard.
         deleteGuarded("queues",name,true);
+        var policy=path("policies",policyName(name));
+        if (request(HttpMethod.GET,policy,null,true)!=null) request(HttpMethod.DELETE,policy,null,false);
+    }
+    private String policyName(String queue) { return prefix+"policy."+queue; }
+    /** Mutable limits via a queue-specific policy, never delete/redeclare a queue to fake an update. */
+    public Object updateQueuePolicy(String name,QueuePolicyRequest dto) {
+        var queue=getQueue(name);
+        if (dto.messageTtl()==null && dto.maxLength()==null)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Provide a bounded policy setting");
+        var arguments=(Map<?,?>)queue.get("arguments");
+        if ((dto.messageTtl()!=null && arguments.containsKey("x-message-ttl")) ||
+            (dto.maxLength()!=null && arguments.containsKey("x-max-length")))
+            throw new ResponseStatusException(HttpStatus.CONFLICT,"Immutable queue arguments override policies; existing data preserved");
+        var definition=new HashMap<String,Object>();
+        if (dto.messageTtl()!=null) definition.put("message-ttl",dto.messageTtl());
+        if (dto.maxLength()!=null) definition.put("max-length",dto.maxLength());
+        String pattern="^"+name.replace(".","\\.")+"$";
+        request(HttpMethod.PUT,path("policies",policyName(name)),Map.of("pattern",pattern,"apply-to","queues","priority",500,"definition",definition),false);
+        return request(HttpMethod.GET,path("policies",policyName(name)),null,false);
     }
     public void deleteExchange(String name) { getExchange(name); deleteGuarded("exchanges",name,false); }
     private void deleteGuarded(String kind,String name,boolean queue) {

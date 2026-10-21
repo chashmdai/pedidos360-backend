@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-21T12:08:00.966948+00:00",
+  "environment": "WSL codex; local inspection of existing test/cloud evidence, no AWS requests",
+  "pdf": {
+    "file": "EP4_IMPLEMENTACION_EVIDENCIAS.pdf",
+    "sha256": "506939409c480b38e81a0bfcd9bd378de906d8bd20edc5345a2a1a372dd7f142",
+    "pages": 7,
+    "format": "A4",
+    "allPagesVisuallyReviewedByOperator": true,
+    "visualReviewMethod": "Poppler PNGs, all seven pages inspected; page 2 spacing corrected"
+  },
+  "javaDistinctTests": 41,
+  "javaCleanVerifyTests": 39,
+  "additionalHttpTests": 2,
+  "reactTests": 11,
+  "productionBuildPassed": true,
+  "installedRelease": "ep4-20261021T094446Z",
+  "sixJarsMatchNativeManifestAndAws": true,
+  "compiledClassAndResourceFilesMatchJar": 98,
+  "frontendFilesMatchVerifiedBuildSources": true,
+  "ep3PdfAndTrackedEvidenceUnchanged": true,
+  "frontendCssUnchanged": true,
+  "newOrTrackedFilesScanned": 612,
+  "localDocumentationLinksChecked": 74,
+  "captureHashesChecked": 23,
+  "sensitivePatternScan": "passed; not a claim of exhaustive secret detection",
+  "untrackedUserEp3ZipExcluded": true
+}

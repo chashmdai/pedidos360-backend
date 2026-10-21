@@ -1,0 +1,87 @@
+{
+  "at": "2026-10-21T10:03:59.206516+00:00",
+  "instanceId": "i-0818fdfafcfb7cb31",
+  "commandId": "d486b3dc-8cdf-41ab-a97a-c1ac34c932ca",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "environment": "AWS EC2/RDS + actual cloud UI order",
+    "at": "2026-10-21T10:03:53.729904+00:00",
+    "orderId": "b07ddc47-8ec0-4e9f-974c-76ef85b07727",
+    "status": "REGISTERED",
+    "outbox": {
+      "eventId": "2734d62d-86c6-4cf2-90c4-ab7b321bf805",
+      "published": true,
+      "attempts": 12,
+      "errorCode": ""
+    },
+    "event": {
+      "total": 21980.0,
+      "eventId": "2734d62d-86c6-4cf2-90c4-ab7b321bf805",
+      "orderId": "b07ddc47-8ec0-4e9f-974c-76ef85b07727",
+      "currency": "CLP",
+      "tenantId": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+      "itemCount": 2,
+      "occurredAt": "2026-10-21T10:02:38.620760Z",
+      "schemaVersion": 1
+    },
+    "effects": {
+      "receipt": {
+        "sha256": "5f2cff56c65a935875abe4ae600f7b79ef060d97128b50159e345a1e36e0d1db",
+        "eventId": "2734d62d-86c6-4cf2-90c4-ab7b321bf805",
+        "orderId": "b07ddc47-8ec0-4e9f-974c-76ef85b07727",
+        "amount": 21980.0,
+        "currency": "CLP"
+      },
+      "audit": {
+        "sha256": "5f2cff56c65a935875abe4ae600f7b79ef060d97128b50159e345a1e36e0d1db",
+        "eventId": "2734d62d-86c6-4cf2-90c4-ab7b321bf805",
+        "orderId": "b07ddc47-8ec0-4e9f-974c-76ef85b07727",
+        "amount": 21980.0,
+        "currency": "CLP"
+      },
+      "sales": {
+        "sha256": "5f2cff56c65a935875abe4ae600f7b79ef060d97128b50159e345a1e36e0d1db",
+        "eventId": "2734d62d-86c6-4cf2-90c4-ab7b321bf805",
+        "orderId": "b07ddc47-8ec0-4e9f-974c-76ef85b07727",
+        "amount": 21980.0,
+        "currency": "CLP"
+      }
+    },
+    "logs": [
+      "PUBLISH_DEFERRED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 reason=BROKER_UNCONFIRMED",
+      "PUBLISH_DEFERRED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 reason=BROKER_UNCONFIRMED",
+      "PUBLISH_DEFERRED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 reason=BROKER_UNCONFIRMED",
+      "PUBLISH_DEFERRED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 reason=BROKER_UNCONFIRMED",
+      "PUBLISH_DEFERRED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 reason=BROKER_UNCONFIRMED",
+      "PUBLISH_DEFERRED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 reason=BROKER_UNCONFIRMED",
+      "PUBLISH_DEFERRED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 reason=BROKER_UNCONFIRMED",
+      "PUBLISH_DEFERRED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 reason=BROKER_UNCONFIRMED",
+      "PUBLISH_DEFERRED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 reason=BROKER_UNCONFIRMED",
+      "PUBLISH_DEFERRED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 reason=BROKER_UNCONFIRMED",
+      "PUBLISH_DEFERRED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 reason=BROKER_UNCONFIRMED",
+      "PUBLISH_CONFIRMED eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727",
+      "ACK eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 result=RECEIPT_STORED attempt=1 redelivered=false",
+      "ACK flow=sales eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 result=PROJECTION_STORED attempt=1",
+      "ACK flow=audit eventId=2734d62d-86c6-4cf2-90c4-ab7b321bf805 orderId=b07ddc47-8ec0-4e9f-974c-76ef85b07727 result=PROJECTION_STORED attempt=1"
+    ],
+    "previousDataPreserved": {
+      "catalog.products": {
+        "previousRows": 2,
+        "currentRows": 2,
+        "allPreviousHashesUnchanged": true
+      },
+      "orders.purchase_orders": {
+        "previousRows": 2,
+        "currentRows": 4,
+        "allPreviousHashesUnchanged": true
+      },
+      "orders.order_items": {
+        "previousRows": 3,
+        "currentRows": 7,
+        "allPreviousHashesUnchanged": true
+      }
+    }
+  },
+  "error": ""
+}

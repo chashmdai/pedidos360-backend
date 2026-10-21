@@ -7,6 +7,7 @@ import org.springframework.context.annotation.*;
 @Configuration(proxyBeanMethods=false)
 @PropertySource("classpath:pedidos-rabbit.properties")
 @EnableConfigurationProperties(MessagingProperties.class)
+@Import(InsightsTopology.class)
 public class MessagingConfiguration {
     @Bean DirectExchange orderEvents(MessagingProperties p) { return new DirectExchange(p.exchange(), true, false); }
     @Bean DirectExchange receiptErrors(MessagingProperties p) { return new DirectExchange(p.deadExchange(), true, false); }
