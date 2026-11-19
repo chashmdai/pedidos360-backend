@@ -20,6 +20,8 @@ EP4_CONFIG = Path(os.environ.get("PEDIDOS_EP4_CONFIG_DIR", Path.home() / ".confi
 CORE = [("catalog-service", 8181, 384), ("orders-service", 8182, 384), ("bff", 8180, 384)]
 # Optional RabbitMQ EP4 consumers/admin, configured as in deploy/ep4-install.py.
 RABBIT = [("receipts-service", 8183, 192), ("rabbit-admin-service", 8184, 192), ("order-insights-service", 8185, 192)]
+# Optional EP5 Kafka services (scripts/ep5-kafka.sh up); STREAMS_* come from application.env.
+KAFKA = [("sales-stream-service", 8186, 256)]
 
 
 def ep4_secret(name):
@@ -97,7 +99,7 @@ def start(mode, options=()):
     if not java or not node or java.startswith("/mnt/") or node.startswith("/mnt/"):
         raise SystemExit("Native Linux Java and Node are required.")
     commands = [("identity", 8190, [node, str(ROOT / "scripts/local-identity.mjs"), "serve"], ROOT)] if mode == "local" else []
-    services = [] if mode == "cloud" else CORE + (RABBIT if with_rabbit else [])
+    services = [] if mode == "cloud" else CORE + (RABBIT if with_rabbit else []) + (KAFKA if with_kafka else [])
     extra = {}
     for module, port, heap in services:
         jar = ROOT / module / "target" / f"{module}-0.1.0-SNAPSHOT.jar"

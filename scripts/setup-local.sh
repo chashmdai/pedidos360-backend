@@ -4,7 +4,7 @@ config="${PEDIDOS360_CONFIG_DIR:-$HOME/.config/pedidos360/local}"
 umask 077
 mkdir -p "$config"
 chmod 700 "$config"
-for name in mysql-root catalog-app catalog-migration orders-app orders-migration; do
+for name in mysql-root catalog-app catalog-migration orders-app orders-migration streams-app streams-migration; do
   if [ ! -f "$config/$name-password" ]; then openssl rand -hex 24 > "$config/$name-password"; fi
   # Compose bind-mounted secrets preserve host modes. The mysql UID must read them.
   # Host access remains restricted by the enclosing directory's mode 0700.
@@ -17,7 +17,7 @@ import pathlib,shlex,sys
 root=pathlib.Path(sys.argv[1])
 port=int(sys.argv[2])
 values={'SPRING_PROFILES_ACTIVE':'local','PEDIDOS360_MYSQL_PORT':str(port)}
-for context in ['catalog','orders']:
+for context in ['catalog','orders','streams']:
     upper=context.upper()
     values[upper+'_DB_URL']=f'jdbc:mysql://127.0.0.1:{port}/pedidos360_{context}?sslMode=DISABLED&allowPublicKeyRetrieval=true&connectionTimeZone=UTC'
     values[upper+'_DB_USER']=f'pedidos360_{context}_app'
