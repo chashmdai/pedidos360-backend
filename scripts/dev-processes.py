@@ -82,12 +82,13 @@ def stop():
 def start(mode, options=()):
     if mode not in ("entra", "local", "cloud"):
         raise SystemExit("Mode must be entra, local or cloud (frontend only).")
-    unknown = set(options) - {"--with-rabbit"}
+    unknown = set(options) - {"--with-rabbit", "--with-kafka"}
     if unknown:
         raise SystemExit(f"Unknown options: {sorted(unknown)}")
     with_rabbit = "--with-rabbit" in options
-    if with_rabbit and mode == "cloud":
-        raise SystemExit("--with-rabbit starts local services; it cannot be combined with cloud mode.")
+    with_kafka = "--with-kafka" in options
+    if (with_rabbit or with_kafka) and mode == "cloud":
+        raise SystemExit("--with-rabbit/--with-kafka start local services; they cannot be combined with cloud mode.")
     auth_env = entra_environment(cloud=mode == "cloud") if mode != "local" else {"SPRING_PROFILES_ACTIVE": "local", "VITE_AUTH_MODE": "local"}
     previous = records()
     if any(running(r) for r in previous.values()):
@@ -104,6 +105,9 @@ def start(mode, options=()):
             raise SystemExit("Build the backend with ./mvnw clean verify first.")
         if with_rabbit and module in ("orders-service", "receipts-service", "rabbit-admin-service", "order-insights-service"):
             extra[module] = rabbit_environment(module)
+        if with_kafka and module == "orders-service":
+            # EP5 streaming outbox + relay against the local Compose cluster (scripts/ep5-kafka.sh up).
+            extra.setdefault(module, {})["PEDIDOS_KAFKA_ENABLED"] = "true"
         # Explicit IPv4 listeners (kept from the WSL setup; harmless on native Linux).
         commands.append((module, port, [java, "--enable-native-access=ALL-UNNAMED", "-Djava.net.preferIPv4Stack=true", "-Xms64m", f"-Xmx{heap}m", "-jar", str(jar)], ROOT))
     vite = FRONTEND / "node_modules/vite/bin/vite.js"
@@ -175,4 +179,4 @@ elif action == "status":
     for name, record in records().items():
         print(f"{name}: {'RUNNING' if running(record) else 'STOPPED'} (port {record['port']})")
 else:
-    raise SystemExit("Usage: bash scripts/dev.sh start|status|stop [entra|local|cloud] [--with-rabbit]")
+    raise SystemExit("Usage: bash scripts/dev.sh start|status|stop [entra|local|cloud] [--with-rabbit] [--with-kafka]")
