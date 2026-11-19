@@ -2,10 +2,14 @@
 from /opt/pedidos360/current and prints JSON {action: [{cmd, exit, out}]}. Kafka CLI tools use the approved heap cap
 (D-06). Kafka UI is queried through its own API on 127.0.0.1:8090 with the credentials stored on the host; they are
 never printed. Output is redacted (hex secrets, bearer tokens). Usage: ep5-evidence.py ACTION [ARG...]
-Read-only actions: e01..e06, e08, e19, groups, outbox, logs, topic-tail, rabbit, view.
+Read-only actions: e01..e06, e08, e19, groups, outbox, logs, topic-tail, rabbit, dlt, health [quick].
+start-units (scripts/p360.py) starts only units that are not active.
+secret kafka-ui|rabbitmq PUBKEY_B64 (scripts/p360.py): returns the console login encrypted with a one-time RSA public key
+(OAEP-SHA256), so the plaintext never appears in the SSM command output or history.
 Actions that change state only as the report's procedure requires: stop-stream/start-stream/restart-stream (E-10, E-15),
 invalid (E-11, one invalid record), replay (E-12, republish an already processed record), stop-broker/start-broker (E-13).
 """
+import base64
 import http.cookiejar
 import json
 import os
@@ -14,6 +18,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -299,6 +304,82 @@ elif action == "rabbit":   # E-16: cluster, queues with DLQ and exchanges (read-
         vhost = [] if command == ["cluster_status"] else ["-p", configured]   # vhost the services use (EP4: pedidos360-ep4)
         steps.append(sh(f"docker exec pedidos360-ep4-rabbit-1 rabbitmqctl -q {' '.join(vhost)} {shown}".replace("  ", " "),
                         ["docker", "exec", "pedidos360-ep4-rabbit-1", "rabbitmqctl", "-q", *vhost, *command]))
+elif action == "health":   # scripts/p360.py status: units, actuator health, containers, ZooKeeper and lag per group
+    units = ("rabbit-cluster", "kafka-cluster", "kafka-ui", "catalog", "orders", "sales-stream", "bff", "receipts",
+             "insights", "rabbit-admin", "kafka-admin")
+    services = (("catalog", 8181), ("orders", 8182), ("sales-stream", 8186), ("bff", 8180), ("receipts", 8183),
+                ("insights", 8185), ("rabbit-admin", 8184), ("kafka-admin", 8187))
+    containers = ("zookeeper-1", "zookeeper-2", "zookeeper-3", "kafka-1", "kafka-2", "kafka-3", "kafka-ui",
+                  "pedidos360-ep4-rabbit-1", "pedidos360-ep4-rabbit-2")
+    data = {"units": {}, "services": {}, "containers": {}, "zookeeper": {}, "groups": {}}
+    for unit in units:
+        data["units"][unit] = subprocess.run(["systemctl", "is-active", f"pedidos360-{unit}"], capture_output=True, text=True).stdout.strip()
+    for name, port in services:
+        try:
+            with urllib.request.urlopen(f"http://127.0.0.1:{port}/actuator/health", timeout=4) as response:
+                data["services"][name] = json.loads(response.read()).get("status", "?")
+        except urllib.error.HTTPError as error:
+            try:
+                data["services"][name] = json.loads(error.read()).get("status", f"HTTP {error.code}")
+            except ValueError:
+                data["services"][name] = f"HTTP {error.code}"
+        except Exception:   # not listening yet
+            data["services"][name] = "DOWN"
+    for container in containers:
+        inspected = subprocess.run(["docker", "inspect", "--format", "{{.State.Status}} {{if .State.Health}}{{.State.Health.Status}}{{end}}",
+                                    container], capture_output=True, text=True)
+        data["containers"][container] = inspected.stdout.strip() if inspected.returncode == 0 else "missing"
+    zk = subprocess.run(["bash", "scripts/ep5-kafka.sh", "zk-status"], cwd=CURRENT, env=ENV, capture_output=True, text=True, timeout=60)
+    for line in zk.stdout.splitlines():
+        found = re.match(r"(zookeeper-\d): Mode: (\w+)", line)
+        if found:
+            data["zookeeper"][found.group(1)] = found.group(2)
+    if "quick" not in args:
+        described = subprocess.run(["docker", "exec", *HEAP, "kafka-1", "kafka-consumer-groups", "--bootstrap-server", "kafka-1:29092",
+                                    "--describe", "--all-groups"], capture_output=True, text=True, timeout=120)
+        for group in GROUPS:
+            data["groups"][group] = {"lag": 0, "partitions": 0, "members": set(), "unknownLag": 0}
+        for line in described.stdout.splitlines():
+            fields = line.split()
+            if len(fields) >= 7 and fields[0] in data["groups"]:
+                entry = data["groups"][fields[0]]
+                entry["partitions"] += 1
+                if fields[5].isdigit():
+                    entry["lag"] += int(fields[5])
+                else:
+                    entry["unknownLag"] += 1
+                if fields[6] != "-":
+                    entry["members"].add(fields[6])
+        for entry in data["groups"].values():
+            entry["members"] = len(entry["members"])
+        if described.returncode:
+            data["groupsError"] = redact(described.stderr.strip()[-300:])
+    steps.append({"cmd": "health", "exit": 0, "json": data})
+elif action == "secret":   # scripts/p360.py tunnels: console login encrypted for the operator, never in clear text
+    service, public_b64 = args[0], args[1]
+    if service == "kafka-ui":
+        values = dict(line.split("=", 1) for line in (CONFIG / "ep5/kafka-ui.env").read_text().splitlines() if "=" in line)
+        login = {"user": values["SPRING_SECURITY_USER_NAME"], "password": values["SPRING_SECURITY_USER_PASSWORD"]}
+    elif service == "rabbitmq":
+        login = {"user": "pedidos360_ep4_admin", "password": (CONFIG / "ep4/rabbit-admin-password").read_text().strip()}
+    else:
+        raise SystemExit("Unknown service " + service)
+    with tempfile.TemporaryDirectory() as directory:
+        key = Path(directory) / "operator.pub.pem"
+        key.write_bytes(base64.b64decode(public_b64))
+        assert key.read_text().startswith("-----BEGIN PUBLIC KEY-----"), "Expected a PEM public key"
+        encrypted = subprocess.run(["openssl", "pkeyutl", "-encrypt", "-pubin", "-inkey", str(key), "-pkeyopt", "rsa_padding_mode:oaep",
+                                    "-pkeyopt", "rsa_oaep_md:sha256"], input=json.dumps(login).encode(), capture_output=True, check=True).stdout
+    steps.append({"cmd": f"secret {service}", "exit": 0, "json": {"ciphertext": base64.b64encode(encrypted).decode()}})
+elif action == "start-units":   # scripts/p360.py up: start (never restart) the units that are not active, in boot order
+    for unit in ("rabbit-cluster", "kafka-cluster", "kafka-ui", "catalog", "orders", "sales-stream", "bff", "receipts",
+                 "insights", "rabbit-admin", "kafka-admin"):
+        name = f"pedidos360-{unit}"
+        if subprocess.run(["systemctl", "is-active", name], capture_output=True, text=True).stdout.strip() != "active":
+            subprocess.run(["systemctl", "reset-failed", name], capture_output=True)
+            steps.append(sh(f"systemctl start {name}", ["systemctl", "start", name], timeout=900))
+    if not steps:
+        steps.append({"cmd": "start-units", "exit": 0, "out": "Todas las unidades ya estaban activas"})
 else:
     raise SystemExit("Unknown action " + action)
 print(json.dumps({"action": action, "args": args, "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "steps": steps}, ensure_ascii=False))

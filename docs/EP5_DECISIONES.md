@@ -147,6 +147,12 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
   - Cada `E-XX` lleva ahora el resultado esperado textual del informe nuevo y el comando escrito como en él (`-e KAFKA_HEAP_OPTS=-Xmx128m`, `docker exec -i` en E-11).
   - Diferencias que siguen, todas sin efecto en el resultado: Kafka UI registrado desde su API (E-03, E-04, E-05, E-08), mensajes leídos con `kafka-console-consumer` (E-07, E-09), `--wait-timeout` (E-01), `./mvnw -B` (E-18), la republicación con la misma version (E-12), la compactación aún no ejecutada (E-15) y el tercer 401 (E-17).
 
+- **Consola `scripts/p360.py` (2026-11-19):** menú y subcomandos en español para operar sin asistencia.
+  - **Reutilización:** el Run Command de `ep4-ssm.py` pasó a `scripts/ssm_remote.py`, importable y con el mismo comando remoto, y lo usan `ep4-ssm.py` (evidencias) y `p360.py`. En `deploy/ep5-evidence.py` se sumaron `health` (unidades, actuator, contenedores, ZooKeeper y lag con un solo `kafka-consumer-groups --all-groups`), `start-units` (`reset-failed` + `start` de las unidades no activas, en orden de arranque, para cuando el RDS tarda más que el `StartLimitBurst`) y `secret`.
+  - **Credenciales de consola:** `secret` cifra el login de Kafka UI o de RabbitMQ con RSA-OAEP-SHA256 y una clave pública de un solo uso generada localmente con `openssl`, así el texto plano no queda en la salida ni en el historial de Run Command.
+  - **Portapapeles:** en GNOME, `wl-copy --clear` no surte efecto (Mutter conserva la selección), así que la consola copia un valor vacío y lo verifica con `wl-paste`. Si no lo logra, avisa.
+  - **Probada contra AWS:** estado, levantar con el sistema arriba, túneles (login a Kafka UI con la credencial copiada, Management 200, kafka-admin 401 sin token, puertos cerrados y portapapeles vacío al terminar), un ciclo detener/iniciar de sales-stream desde el menú (con el aviso al salir) y `describir`. Los errores de credenciales se probaron con un archivo temporal de claves falsas. No se probó `levantar` con la EC2 o el RDS detenidos.
+
 ## Pendientes
 
 - Separar el UID 999 (imagen RabbitMQ) del usuario de sistema `pedidos360-bff` en la EC2 (ver Fase 6, E-19).

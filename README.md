@@ -58,6 +58,23 @@ python3 scripts/aws_deploy.py status && python3 scripts/ep5-verify-gateway.py
 - **Evidencias en la instancia:** `python3 scripts/ep4-ssm.py deploy/ep5-evidence.py --argument <acción> --output raw-<x>.json`. Las acciones son fijas y revisadas. `scripts/ep5-evidence-report.py` genera el archivo `E-XX`.
 - **Kafka UI y kafka-admin desde el equipo local:** `aws ssm start-session --target <instancia> --document-name AWS-StartPortForwardingSession --parameters '{"portNumber":["8090"],"localPortNumber":["18090"]}'` (8187 para kafka-admin). La contraseña de Kafka UI está en `/etc/pedidos360/ep5/kafka-ui.env` en la instancia (0600 root) y se lee dentro de una sesión SSM.
 
+### Consola de operación (`p360.py`)
+
+`python3 scripts/p360.py` (funciona igual desde fish) abre un menú. Cada opción también existe como subcomando.
+
+| Opción | Subcomando | Qué hace |
+|---|---|---|
+| 1 | `credenciales` | Lee el bloque `[default]` de «AWS Details» desde el portapapeles (`wl-paste`) o pegado sin eco. Valida las tres claves, respalda `~/.aws/credentials`, lo escribe en 0600 y comprueba con STS la cuenta 647660738152. |
+| 2 | `levantar` | Inicia la EC2 y el RDS si están detenidos (nunca crea ni termina recursos). Espera SSM Online, RDS available, target healthy y los 8 servicios UP. |
+| 3 | `estado` | EC2, SSM, RDS, ALB, VPC Link, `/app/` (200), sonda sin token (401), 11 unidades, ZooKeeper, brokers, Kafka UI, RabbitMQ y lag por grupo. |
+| 4 | `tuneles` | Reenvío SSM a Kafka UI (http://127.0.0.1:18090), RabbitMQ Management (25674) y kafka-admin (18187). Copia el login al portapapeles sin mostrarlo y lo vacía al cerrar con Ctrl+C. |
+| 5 | `demo stream-stop`, `stream-start`, `broker-stop`, `broker-start`, `describir` | Pasos de la demo E-10, E-13, E-05 y E-08. Pide confirmación antes de detener algo y, al salir, ofrece iniciar lo que quedó detenido. |
+| 6 | `abrir` | Abre la app con `xdg-open`. |
+
+Requiere solo la biblioteca estándar de Python, la CLI de aws con `session-manager-plugin` y, opcionalmente, `wl-clipboard`, `xdg-open` y `openssl`. Usa `config/aws-target.json`, `scripts/aws_deploy.py`, `scripts/ssm_remote.py` y las acciones revisadas de `deploy/ep5-evidence.py`.
+
+Las credenciales de las consolas viajan cifradas con una clave RSA de un solo uso: el texto plano no queda en el historial de SSM. Si las credenciales del laboratorio vencieron (`ExpiredToken`, `InvalidClientTokenId`, `voc-cancel-cred`), la consola lo indica, sugiere la opción 1 y no reintenta.
+
 ## EP4 - versión cloud verificada (histórica)
 
 Frontend desplegado en la cuenta de EP4, que agotó sus créditos (histórico; la versión vigente está en la sección EP5): **https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com/app/**. La SPA se aloja en la EC2 propia y llega por HTTPS al Gateway, VPC Link, ALB interno y BFF existentes. Las siete rutas API conservan JWT/scopes. La disponibilidad depende de que el laboratorio esté encendido.

@@ -1,10 +1,9 @@
-"""Execute an explicit, reviewed script only on the reconciled project instance."""
+"""Execute an explicit, reviewed script only on the reconciled project instance (evidence saved under aws.EVIDENCE)."""
 import argparse
-import base64
 import json
 from pathlib import Path
-import time
 import aws_deploy as aws
+import ssm_remote
 
 parser=argparse.ArgumentParser()
 parser.add_argument('script',type=Path)
@@ -13,36 +12,16 @@ parser.add_argument('--argument',action='append',default=[])
 args=parser.parse_args()
 assert args.script.is_file()
 aws.PRIVATE.mkdir(parents=True,exist_ok=True,mode=0o700);aws.EVIDENCE.mkdir(parents=True,exist_ok=True)
-identity=aws.call('sts','get-caller-identity')
-assert identity['Account']==aws.ACCOUNT and '/voclabs/' in identity['Arn']
-state=json.loads(aws.JOURNAL.read_text())
-instance=state['steps']['ec2']['response']['Instances'][0]['InstanceId']
-actual=aws.call('ec2','describe-instances',{'InstanceIds':[instance]})['Reservations'][0]['Instances'][0]
-assert actual['State']['Name']=='running' and {'Key':'Project','Value':'Pedidos360'} in actual['Tags']
-script=base64.b64encode(args.script.read_bytes()).decode()
-arguments=base64.b64encode(json.dumps([str(args.script),*args.argument]).encode()).decode()
-command="python3 -c \"import base64,sys,json; sys.argv=json.loads(base64.b64decode('"+arguments+"')); exec(compile(base64.b64decode('"+script+"'),'<pedidos360-ep4>','exec'))\""
-result=aws.call('ssm','send-command',{'InstanceIds':[instance],'DocumentName':'AWS-RunShellScript',
- 'Comment':'Pedidos360 explicit project script','TimeoutSeconds':600,
- 'Parameters':{'commands':[command],'executionTimeout':['1800']}})
-command_id=result['Command']['CommandId']
-print('SSM command '+command_id,flush=True)
 # Evidence of the current deployment target (config/aws-target.json; EP5: docs/evidence/ep5/aws).
 destination=aws.EVIDENCE/args.output
 assert destination.parent==aws.EVIDENCE and '/' not in args.output
-while True:
-    time.sleep(3)
-    try: invocation=aws.call('ssm','get-command-invocation',{'CommandId':command_id,'InstanceId':instance})
-    except RuntimeError as exc:
-        if 'InvocationDoesNotExist' in str(exc): continue
-        raise
-    if invocation['Status'] in ('Pending','InProgress','Delayed'): continue
-    stdout=invocation.get('StandardOutputContent','')
-    try: output=json.loads(stdout)
-    except ValueError: output=stdout
-    report={'at':aws.now(),'instanceId':instance,'commandId':command_id,'status':invocation['Status'],
-            'exitCode':invocation['ResponseCode'],'output':output,'error':invocation.get('StandardErrorContent','')}
-    aws.save(destination,report)
-    print(json.dumps(report,indent=2))
-    assert invocation['Status']=='Success', 'Remote script failed; inspect evidence before retry'
-    break
+instance=ssm_remote.verify_target()
+command_id,invocation=ssm_remote.run(args.script,args.argument,instance,on_sent=lambda c:print('SSM command '+c,flush=True))
+stdout=invocation.get('StandardOutputContent','')
+try: output=json.loads(stdout)
+except ValueError: output=stdout
+report={'at':aws.now(),'instanceId':instance,'commandId':command_id,'status':invocation['Status'],
+        'exitCode':invocation['ResponseCode'],'output':output,'error':invocation.get('StandardErrorContent','')}
+aws.save(destination,report)
+print(json.dumps(report,indent=2))
+assert invocation['Status']=='Success', 'Remote script failed; inspect evidence before retry'
