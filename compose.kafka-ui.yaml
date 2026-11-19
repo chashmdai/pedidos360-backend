@@ -1,0 +1,37 @@
+# EP5: Kafka UI in its own Compose file. Joins the Kafka network as an external network and
+# publishes the UI only on loopback (AWS: reached through SSM port forwarding).
+# Login credentials live outside Git in $PEDIDOS_EP5_CONFIG_DIR/kafka-ui.env (mode 0600),
+# created by `bash scripts/ep5-kafka.sh ui up`; they are never printed.
+name: pedidos360-kafka-ui
+
+services:
+  kafka-ui:
+    image: kafbat/kafka-ui:v1.5.0@sha256:7cda86a33344160309fdb65146332e4da65db81a945614f2fe32e210803f6fd1
+    container_name: kafka-ui
+    hostname: kafka-ui
+    labels: { Project: Pedidos360, Purpose: ep5 }
+    ports: ["127.0.0.1:8090:8080"]
+    networks: [kafka]
+    env_file:
+      - path: ${PEDIDOS_EP5_CONFIG_DIR:?Run scripts/ep5-kafka.sh ui up first}/kafka-ui.env
+        required: true
+    environment:
+      KAFKA_CLUSTERS_0_NAME: pedidos360
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "kafka-1:29092,kafka-2:29092,kafka-3:29092"
+      KAFKA_CLUSTERS_0_READONLY: "false"
+      DYNAMIC_CONFIG_ENABLED: "false"
+      AUTH_TYPE: LOGIN_FORM
+      JAVA_OPTS: "-Xms64m -Xmx256m -XX:MaxMetaspaceSize=128m"
+    mem_limit: 448m
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/actuator/health | grep -q UP"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 40s
+
+networks:
+  kafka:
+    name: pedidos360-kafka
+    external: true
