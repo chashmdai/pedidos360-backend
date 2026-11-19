@@ -202,7 +202,7 @@ def gateway():
     log_name = "/pedidos360/api-gateway"
     write("api-logs", "logs", "create-log-group", {"logGroupName": log_name, "tags": TAGS})
     write("api-logs-retention", "logs", "put-retention-policy", {"logGroupName": log_name, "retentionInDays": 7})
-    write("default-stage", "apigatewayv2", "create-stage", {"ApiId": api, "StageName": "$default", "AutoDeploy": True, "DefaultRouteSettings": {"ThrottlingRateLimit": 5.0, "ThrottlingBurstLimit": 10}, "AccessLogSettings": {"DestinationArn": f"arn:aws:logs:{REGION}:{ACCOUNT}:log-group:{log_name}", "Format": '{"requestId":"$context.requestId","routeKey":"$context.routeKey","status":"$context.status","latency":"$context.responseLatency"}'}, "Tags": TAGS})
+    write("default-stage", "apigatewayv2", "create-stage", {"ApiId": api, "StageName": "$default", "AutoDeploy": True, "DefaultRouteSettings": {"ThrottlingRateLimit": 10.0, "ThrottlingBurstLimit": 20}, "AccessLogSettings": {"DestinationArn": f"arn:aws:logs:{REGION}:{ACCOUNT}:log-group:{log_name}", "Format": '{"requestId":"$context.requestId","routeKey":"$context.routeKey","status":"$context.status","latency":"$context.responseLatency"}'}, "Tags": TAGS})
     save(ROOT / "config/aws-public.json", {"account": ACCOUNT, "region": REGION, "apiId": api, "apiEndpoint": response("http-api")["ApiEndpoint"], "apiBaseUrl": response("http-api")["ApiEndpoint"] + "/api/v1"})
 
 

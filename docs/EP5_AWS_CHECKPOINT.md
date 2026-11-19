@@ -1,6 +1,6 @@
 # Checkpoint AWS EP5 (cuenta 647660738152, us-east-1)
 
-Estado: **pendiente de aprobación**. Nada se ha creado. El preflight de solo lectura del 2026-11-19
+Estado: **aprobado por el usuario el 2026-11-19** (con apt solo por HTTPS y throttling 10/20). El preflight de solo lectura del 2026-11-19
 (`docs/evidence/ep5/aws/preflight-names.json`) confirma que la cuenta no tiene recursos de Pedidos360:
 solo la VPC por defecto y el par `vockey`, que no se usa. Es una cuenta nueva: todo se crea desde cero
 con un journal nuevo (`docs/evidence/ep5/aws/deployment-journal.json`); el journal de EP4 es histórico.
@@ -21,7 +21,7 @@ con un journal nuevo (`docs/evidence/ep5/aws/deployment-journal.json`); el journ
 | compute | EC2 | `pedidos360-app` | **t3.large** (2 vCPU, 8 GiB), AMI **`ami-0719278fd447e399f`** (Ubuntu 24.04 LTS, Canonical 099720109477, `ubuntu-noble-24.04-amd64-server-20261118`), raíz **gp3 30 GiB cifrado**, `LabInstanceProfile`, IMDSv2 obligatorio, créditos *standard* (sin cargos por ráfaga), IPv4 pública automática (sin EIP), **sin par de claves**, user data `deploy/ec2-bootstrap.sh` |
 | gateway | ALB interno | `pedidos360-internal-alb` | scheme internal, private-b/c, listener HTTP:80 → TG `pedidos360-bff-tg` (HTTP 8180, health `/actuator/health`) |
 | gateway | VPC Link | `pedidos360-vpclink` | private-b/c, `vpclink-sg` |
-| gateway | HTTP API | `pedidos360-http-api` | autorizador JWT `pedidos360-entra-jwt` (issuer `https://login.microsoftonline.com/72fd0b5a-…/v2.0`, audience `114f7b58-…`); integración HTTP_PROXY por VPC Link; stage `$default` auto-deploy, throttling 5 rps / ráfaga 10 |
+| gateway | HTTP API | `pedidos360-http-api` | autorizador JWT `pedidos360-entra-jwt` (issuer `https://login.microsoftonline.com/72fd0b5a-…/v2.0`, audience `114f7b58-…`); integración HTTP_PROXY por VPC Link; stage `$default` auto-deploy, throttling **10 rps / ráfaga 20** (EP4: 5/10) |
 | gateway | Log group | `/pedidos360/api-gateway` | retención 7 días; formato sin token, query ni cuerpo |
 
 Rutas del HTTP API: las 7 de EP4 + 1 de EP5 con JWT, y 2 GET públicas de archivos de la SPA.

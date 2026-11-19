@@ -2,7 +2,7 @@
   "account": "647660738152",
   "region": "us-east-1",
   "evidenceDir": "docs/evidence/ep5/aws",
-  "approval": "EP5 Fase 4: checkpoint pendiente de aprobación del usuario",
+  "approval": "User approved the EP5 Fase 4 checkpoint (resources and stages 1-9) on 2026-11-19 with HTTPS-only apt and API throttling 10 rps / burst 20",
   "instanceType": "t3.large",
   "rootVolumeGiB": 30,
   "amiId": "ami-0719278fd447e399f",

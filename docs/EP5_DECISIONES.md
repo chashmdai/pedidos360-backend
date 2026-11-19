@@ -109,6 +109,9 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
 - `deploy/ep5-install.py` consolida en un instalador idempotente lo que en EP4 hacían `install-release.py`, `ep4-host-prepare.py` y `ep4-install.py`, más EP5: swap, Docker, esquema `pedidos360_streams`, Kafka y Kafka UI, y los 8 servicios con los heaps de la tabla 16. El arranque escalonado usa `After=` en cadena y un `ExecStartPost` que espera `/actuator/health` UP antes de iniciar el siguiente. Las unidades Compose (`pedidos360-rabbit-cluster`, `-kafka-cluster`, `-kafka-ui`) arrancan antes.
 - Los heaps de receipts, rabbit-admin e insights pasan de 128 MiB (EP4) a 192 MiB, según la tabla 16.
 - La identidad guardada en evidencias omite el nombre de sesión del ARN (contiene el correo de quien abrió el laboratorio).
+- **Throttling de API Gateway:** EP4 usaba 5 rps / ráfaga 10 en el stage `$default` (journal de fase 5 y `gateway-after.json` de EP4). En EP5 se sube a **10 rps / ráfaga 20**, a pedido del usuario: la SPA carga varias rutas a la vez y la vista en vivo consulta cada 3 s, y la demo no debe recibir 429. Sigue siendo un límite bajo de laboratorio.
+- **apt solo por HTTPS:** el SG de la EC2 permite salir solo por 443. Al inicio, el bootstrap reemplaza `/etc/apt/sources.list.d/ubuntu.sources` por fuentes explícitas `https://archive.ubuntu.com` y `https://security.ubuntu.com` (antes era un `sed` sobre la réplica regional) y verifica `apt-get update` con reintentos. Si falla, se detiene sin marcar `bootstrap-complete`. No se abre el puerto 80.
+- Aprobación del checkpoint: el usuario aprobó la creación de los recursos y las etapas 1 a 9 el 2026-11-19, con los dos ajustes anteriores.
 - Detalle de recursos, seguridad, orden y costo: [EP5_AWS_CHECKPOINT.md](EP5_AWS_CHECKPOINT.md).
 
 ## Pendientes

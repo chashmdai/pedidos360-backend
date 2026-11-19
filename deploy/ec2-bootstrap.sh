@@ -2,13 +2,36 @@
 # Runs only on the new, dedicated Pedidos360 EC2. Contains no credentials.
 set -euo pipefail
 umask 027
-# HTTPS-only package egress matches the approved application security group.
-sed -i 's|http://|https://|g' /etc/apt/sources.list.d/ubuntu.sources
+# The application SG only allows egress TCP 443: apt must use HTTPS before anything else (no port 80).
+install -d -m 0700 /var/lib/pedidos360-provision
+cp -n /etc/apt/sources.list.d/ubuntu.sources /var/lib/pedidos360-provision/ubuntu.sources.orig 2>/dev/null || true
+cat > /etc/apt/sources.list.d/ubuntu.sources <<'SOURCES'
+Types: deb
+URIs: https://archive.ubuntu.com/ubuntu
+Suites: noble noble-updates noble-backports
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+Types: deb
+URIs: https://security.ubuntu.com/ubuntu
+Suites: noble-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+SOURCES
+rm -f /etc/apt/sources.list.d/*.list /etc/apt/sources.list
+[ ! -e /etc/apt/sources.list ] || : > /etc/apt/sources.list
 export DEBIAN_FRONTEND=noninteractive
-apt-get update
+# Verify HTTPS apt before continuing; stop (no bootstrap-complete marker) if it cannot update.
+ok=0
+for attempt in 1 2 3 4 5; do
+  if apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update 2>&1 | tee /var/lib/pedidos360-provision/apt-update.log \
+     | grep -qE '^(Err|W: Failed)'; then sleep $((attempt * 10)); else ok=1; break; fi
+done
+[ "$ok" = 1 ] || { echo "apt-get update over HTTPS failed; see /var/lib/pedidos360-provision/apt-update.log" >&2; exit 1; }
+grep -qE '^(Hit|Get):.*https://(archive|security)\.ubuntu\.com' /var/lib/pedidos360-provision/apt-update.log
+touch /var/lib/pedidos360-provision/apt-https-ok
 apt-get install -y --no-install-recommends ca-certificates curl unzip mysql-client
 install -d -m 0755 /opt/pedidos360/releases /opt/pedidos360/runtime /etc/pedidos360/tls
-install -d -m 0700 /var/lib/pedidos360-provision
 archive=/var/lib/pedidos360-provision/temurin.tar.gz
 curl --fail --location --retry 3 --proto '=https' --proto-redir '=https' \
   'https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.4.1%2B1/OpenJDK25U-jdk_x64_linux_hotspot_25.0.4.1_1.tar.gz' -o "$archive"
