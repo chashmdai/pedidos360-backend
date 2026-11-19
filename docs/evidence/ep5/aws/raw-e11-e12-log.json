@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-19T14:17:09.210419+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "3b1d25b5-d2e9-4e0c-9d1c-69f9b1deaa08",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "logs",
+    "args": [
+      "pedidos360-sales-stream",
+      "CONSUME_DLT|CONSUME_DUPLICATE|CONSUME_RETRY|CONSUME_OK",
+      "-6min"
+    ],
+    "at": "2026-11-19T14:17:05Z",
+    "steps": [
+      {
+        "cmd": "journalctl -u pedidos360-sales-stream --since -6min -o cat | grep -E 'CONSUME_DLT|CONSUME_DUPLICATE|CONSUME_RETRY|CONSUME_OK' | tail -40",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "2026-11-19T14:13:51.868Z  INFO 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=1 offset=0 attempt=1 result=ALERT\n2026-11-19T14:13:51.939Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=1 attempt=1 result=VIEW_UPDATED version=2\n2026-11-19T14:13:51.945Z  INFO 28052 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=1 offset=0 attempt=1 result=ACCUMULATORS_UPDATED metrics=2\n2026-11-19T14:13:51.961Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1 attempt=1 result=VIEW_UPDATED version=2\n2026-11-19T14:16:49.770Z ERROR 28052 --- [sales-stream-service] [ggregator-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_DLT eventId=unknown group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=0 offset=0 code=DESERIALIZATION_FAILED retried=false\n2026-11-19T14:16:49.864Z ERROR 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_DLT eventId=unknown group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=0 offset=0 code=DESERIALIZATION_FAILED retried=false\n2026-11-19T14:17:00.053Z  INFO 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=2 offset=1 attempt=1 result=NO_ALERT\n2026-11-19T14:17:00.237Z  INFO 28052 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_DUPLICATE eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=2 offset=1 attempt=1 code=ALREADY_PROCESSED\n2026-11-19T14:17:00.237Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2\n2026-11-19T14:17:00.256Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2"
+      }
+    ]
+  },
+  "error": ""
+}

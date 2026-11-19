@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-19T14:15:38.428948+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "d23e7fde-6ca9-4ae1-b0d1-3a88122c1ac9",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "logs",
+    "args": [
+      "pedidos360-sales-stream",
+      "CONSUME_|METRIC_PUBLISHED|ORDER_ALERT",
+      "-30min"
+    ],
+    "at": "2026-11-19T14:15:34Z",
+    "steps": [
+      {
+        "cmd": "journalctl -u pedidos360-sales-stream --since -30min -o cat | grep -E 'CONSUME_|METRIC_PUBLISHED|ORDER_ALERT' | tail -40",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "2026-11-19T14:05:43.898Z  INFO 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=2 offset=0 attempt=1 result=NO_ALERT\n2026-11-19T14:05:45.589Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=0 attempt=1 result=VIEW_UPDATED version=1\n2026-11-19T14:05:45.597Z  INFO 28052 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP version=1 lastEventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b topic=pedidos360.sales.product-metrics.v1 partition=1 offset=0\n2026-11-19T14:05:45.660Z  INFO 28052 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP version=1 lastEventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b topic=pedidos360.sales.product-metrics.v1 partition=2 offset=0\n2026-11-19T14:05:45.661Z  INFO 28052 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=2 offset=0 attempt=1 result=ACCUMULATORS_UPDATED metrics=2\n2026-11-19T14:05:45.713Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=0 attempt=1 result=VIEW_UPDATED version=1\n2026-11-19T14:13:51.865Z  WARN 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.OrderEventListeners  : ORDER_ALERT eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a orderId=79a3d04a-9721-4cd2-956c-5e7386921647 reasons=[HIGH_VALUE] total=52950.00 currency=CLP lines=2\n2026-11-19T14:13:51.868Z  INFO 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=1 offset=0 attempt=1 result=ALERT\n2026-11-19T14:13:51.939Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=1 attempt=1 result=VIEW_UPDATED version=2\n2026-11-19T14:13:51.942Z  INFO 28052 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP version=2 lastEventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a topic=pedidos360.sales.product-metrics.v1 partition=1 offset=1\n2026-11-19T14:13:51.945Z  INFO 28052 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP version=2 lastEventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1\n2026-11-19T14:13:51.945Z  INFO 28052 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=1 offset=0 attempt=1 result=ACCUMULATORS_UPDATED metrics=2\n2026-11-19T14:13:51.961Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1 attempt=1 result=VIEW_UPDATED version=2"
+      }
+    ]
+  },
+  "error": ""
+}

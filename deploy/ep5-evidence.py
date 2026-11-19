@@ -36,7 +36,7 @@ def redact(text):
 
 def sh(shown, command, stdin=None, timeout=180):
     started = time.time()
-    result = subprocess.run(command, cwd=CURRENT, env=ENV, input=stdin, capture_output=True, text=True, timeout=timeout)
+    result = subprocess.run(command, cwd=CURRENT, env=ENV, input=stdin, capture_output=True, text=True, errors="replace", timeout=timeout)
     return {"cmd": shown, "exit": result.returncode, "seconds": round(time.time() - started, 1),
             "out": redact((result.stdout + result.stderr).rstrip())}
 
@@ -205,6 +205,38 @@ elif action == "logs":   # logs UNIT PATTERN [SINCE]
 elif action == "topic-tail":   # topic-tail TOPIC [COUNT] [KEY]
     assert args[0] in (ORDERS, METRICS, ORDERS + DLT, METRICS + DLT)
     steps += tail(args[0], int(args[1]) if len(args) > 1 else 5, args[2] if len(args) > 2 else None)
+elif action == "dlt":   # E-11: DLT records with Spring's headers decoded (partition int32, offset/timestamp int64 big-endian)
+    import struct
+    topic = ORDERS + DLT
+    numeric = {"kafka_dlt-original-partition": ">i", "kafka_dlt-original-offset": ">q", "kafka_dlt-original-timestamp": ">q"}
+    strings = ("kafka_dlt-original-topic", "kafka_dlt-original-consumer-group", "kafka_dlt-exception-fqcn",
+               "kafka_dlt-exception-cause-fqcn", "kafka_dlt-exception-message", "kafka_dlt-exception-stacktrace")
+    for partition in (0, 1, 2):
+        raw = subprocess.run(["docker", "exec", *HEAP, "kafka-1", "kafka-console-consumer", "--bootstrap-server", "kafka-1:29092",
+                              "--topic", topic, "--partition", str(partition), "--offset", "earliest", "--timeout-ms", "8000",
+                              "--property", "print.key=true", "--property", "print.partition=true", "--property", "print.offset=true",
+                              "--property", "print.headers=true"], capture_output=True, timeout=120).stdout
+        records = [b"CreateTime:" + r for r in raw.split(b"CreateTime:")[1:]] or [r for r in raw.split(b"Partition:")[1:]]
+        lines = []
+        for record in raw.split(b"Partition:")[1:]:
+            fields = {"dltPartition": partition, "dltOffset": int(record.split(b"Offset:", 1)[1].split(b"\t", 1)[0])}
+            for name, fmt in numeric.items():
+                at = record.find(name.encode() + b":")
+                if at >= 0:
+                    start = at + len(name) + 1
+                    fields[name] = struct.unpack(fmt, record[start:start + struct.calcsize(fmt)])[0]
+            for name in strings:
+                at = record.find(name.encode() + b":")
+                if at >= 0:
+                    rest = record[at + len(name) + 1:]
+                    end = min([i for i in (rest.find(b",kafka_dlt-"), rest.find(b"\n"), rest.find(b"\t")) if i >= 0] or [len(rest)])
+                    fields[name] = rest[:min(end, 300)].decode("utf-8", "replace")
+            tail_part = record.rsplit(b"\t", 2)
+            fields["key"], fields["value"] = tail_part[-2].decode("utf-8", "replace"), tail_part[-1].strip().decode("utf-8", "replace")[:300]
+            lines.append(json.dumps(fields, ensure_ascii=False))
+        steps.append({"cmd": f"docker exec {SHOWN_HEAP} kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic {topic} "
+                             f"--partition {partition} --offset earliest --property print.headers=true ... (encabezados kafka_dlt-* decodificados)",
+                      "exit": 0, "out": redact("\n".join(lines) or "(sin registros)")})
 elif action == "describe":
     steps += describe(ORDERS, METRICS, ORDERS + DLT, METRICS + DLT)
 elif action == "stop-stream":    # E-10

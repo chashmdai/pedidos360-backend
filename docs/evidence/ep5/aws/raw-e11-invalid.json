@@ -1,0 +1,26 @@
+{
+  "at": "2026-11-19T14:16:51.239428+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "dbc21238-725b-456c-9690-6db510aa4bc4",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "invalid",
+    "args": [],
+    "at": "2026-11-19T14:16:49Z",
+    "steps": [
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-console-producer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --property parse.key=true --property key.separator=\"|\"   <<< 'e11-invalid-141647|{\"eventId\": no-es-json'",
+        "exit": 0,
+        "seconds": 2.4,
+        "out": ""
+      },
+      {
+        "cmd": "key",
+        "exit": 0,
+        "out": "e11-invalid-141647"
+      }
+    ]
+  },
+  "error": ""
+}

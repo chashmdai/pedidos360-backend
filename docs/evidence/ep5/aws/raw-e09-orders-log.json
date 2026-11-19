@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-19T14:15:31.785474+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "48192586-f10c-456e-af68-2e4271ad55ef",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "logs",
+    "args": [
+      "pedidos360-orders",
+      "PUBLISH_CONFIRMED|PUBLISH_DEFERRED",
+      "-30min"
+    ],
+    "at": "2026-11-19T14:15:28Z",
+    "steps": [
+      {
+        "cmd": "journalctl -u pedidos360-orders --since -30min -o cat | grep -E 'PUBLISH_CONFIRMED|PUBLISH_DEFERRED' | tail -40",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "2026-11-19T14:05:41.916Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=3053af70-9ccd-46ed-be8d-96560a2d6184 orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61\n2026-11-19T14:05:43.411Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61 topic=pedidos360.orders.registered.v1 partition=2 offset=0\n2026-11-19T14:13:51.074Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=cabde51f-6ac1-41af-8a0c-96f7fbb4be13 orderId=79a3d04a-9721-4cd2-956c-5e7386921647\n2026-11-19T14:13:51.866Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a orderId=79a3d04a-9721-4cd2-956c-5e7386921647 topic=pedidos360.orders.registered.v1 partition=1 offset=0"
+      }
+    ]
+  },
+  "error": ""
+}

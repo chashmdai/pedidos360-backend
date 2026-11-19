@@ -1,0 +1,30 @@
+{
+  "at": "2026-11-19T14:19:42.360934+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "abb809f3-9e69-4a8b-ab69-f7000716a070",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "dlt",
+    "args": [],
+    "at": "2026-11-19T14:19:39Z",
+    "steps": [
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1.DLT --partition 0 --offset earliest --property print.headers=true ... (encabezados kafka_dlt-* decodificados)",
+        "exit": 0,
+        "out": "{\"dltPartition\": 0, \"dltOffset\": 0, \"kafka_dlt-original-partition\": 0, \"kafka_dlt-original-offset\": 0, \"kafka_dlt-original-timestamp\": 1795097809461, \"kafka_dlt-original-topic\": \"pedidos360.orders.registered.v1\", \"kafka_dlt-original-consumer-group\": \"pedidos360-sales-aggregator\", \"kafka_dlt-exception-fqcn\": \"org.springframework.kafka.support.serializer.DeserializationException\", \"kafka_dlt-exception-cause-fqcn\": \"org.springframework.kafka.support.serializer.DeserializationException\", \"kafka_dlt-exception-message\": \"failed to deserialize\", \"kafka_dlt-exception-stacktrace\": \"org.springframework.kafka.support.serializer.DeserializationException: failed to deserialize\", \"key\": \"e11-invalid-141647\", \"value\": \"{\\\"eventId\\\": no-es-json\"}\n{\"dltPartition\": 0, \"dltOffset\": 1, \"kafka_dlt-original-partition\": 0, \"kafka_dlt-original-offset\": 0, \"kafka_dlt-original-timestamp\": 1795097809461, \"kafka_dlt-original-topic\": \"pedidos360.orders.registered.v1\", \"kafka_dlt-original-consumer-group\": \"pedidos360-order-monitor\", \"kafka_dlt-exception-fqcn\": \"org.springframework.kafka.support.serializer.DeserializationException\", \"kafka_dlt-exception-cause-fqcn\": \"org.springframework.kafka.support.serializer.DeserializationException\", \"kafka_dlt-exception-message\": \"failed to deserialize\", \"kafka_dlt-exception-stacktrace\": \"org.springframework.kafka.support.serializer.DeserializationException: failed to deserialize\", \"key\": \"e11-invalid-141647\", \"value\": \"{\\\"eventId\\\": no-es-json\"}"
+      },
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1.DLT --partition 1 --offset earliest --property print.headers=true ... (encabezados kafka_dlt-* decodificados)",
+        "exit": 0,
+        "out": "(sin registros)"
+      },
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1.DLT --partition 2 --offset earliest --property print.headers=true ... (encabezados kafka_dlt-* decodificados)",
+        "exit": 0,
+        "out": "(sin registros)"
+      }
+    ]
+  },
+  "error": ""
+}

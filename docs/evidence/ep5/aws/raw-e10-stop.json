@@ -1,0 +1,33 @@
+{
+  "at": "2026-11-19T14:19:58.224542+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "97535262-40d6-4dff-8306-262794d120c9",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "stop-stream",
+    "args": [],
+    "at": "2026-11-19T14:19:55Z",
+    "steps": [
+      {
+        "cmd": "systemctl stop pedidos360-sales-stream",
+        "exit": 0,
+        "seconds": 0.7,
+        "out": ""
+      },
+      {
+        "cmd": "systemctl is-active pedidos360-sales-stream",
+        "exit": 3,
+        "seconds": 0.0,
+        "out": "inactive"
+      },
+      {
+        "cmd": "curl -s http://127.0.0.1:8186/actuator/health",
+        "exit": 7,
+        "seconds": 0.0,
+        "out": ""
+      }
+    ]
+  },
+  "error": ""
+}
