@@ -1,5 +1,20 @@
 # Pedidos360 backend
 
+## EP5 - operación en Linux nativo (en curso)
+
+Desde EP5 el desarrollo se ejecuta en Linux nativo (CachyOS), no en WSL2. Arranque local con RabbitMQ EP4:
+
+```bash
+PEDIDOS360_MYSQL_PORT=13306 bash scripts/setup-local.sh   # elegir otro puerto si 13306 está ocupado
+bash scripts/mysql.sh up -d --wait
+./mvnw clean verify
+(cd ../pedidos360-frontend && npm ci && npm test)
+python3 scripts/ep4-broker.py up
+bash scripts/dev.sh start entra --with-rabbit
+```
+
+Los scripts `scripts/ep3*.sh|py` (incluido `ep3-publish.py`) se conservan **sin modificar como históricos**: exigen WSL con el usuario `codex` o Windows y solo documentan cómo se obtuvieron las evidencias EP3. Adaptaciones y desviaciones del informe EP5/EP6: [EP5_DECISIONES.md](docs/EP5_DECISIONES.md).
+
 ## EP4 - versión cloud verificada
 
 Frontend desplegado: **https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com/app/**. La SPA se aloja en la EC2 propia y llega por HTTPS al Gateway, VPC Link, ALB interno y BFF existentes. Las siete rutas API conservan JWT/scopes. La disponibilidad depende de que el laboratorio esté encendido.
