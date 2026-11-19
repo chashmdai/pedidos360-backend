@@ -94,6 +94,13 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
 - Contrato `contracts/kafka-admin-openapi.yaml`. `OpenApiContractTest` verifica que el contrato, la tabla 14 y el controlador expongan exactamente las mismas 9 operaciones.
 - Referencia local de E-14 (fixture Admin, clúster de 3 brokers): `docs/evidence/ep5/local/E-14-kafka-admin-local-referencia.txt`.
 
+## Fase 3: vista "Ventas en vivo" (repositorio frontend)
+
+- Ruta protegida `/ventas-en-vivo` y enlace "Ventas en vivo" en la navegación principal. Consulta `GET /ventas/en-vivo` mediante el cliente API central (mismo bearer MSAL) al montarse y luego cada 3 s **después de terminar** la consulta anterior (sin solapamientos). Se detiene al cerrar la vista y ante 401/403. Ante errores transitorios conserva los últimos datos y sigue consultando.
+- Muestra el día UTC, el total del día por moneda (nunca suma monedas distintas), los acumulados por producto (unidades, pedidos, importe, version), las alertas recientes y la hora de la última actualización correcta (y la del último evento procesado).
+- Reutiliza solo clases existentes (`page`, `section-title`, `section-rule`, `order-list`, `order`, `badge`, `empty`, `loading-state`, `config-status`); `style.css` no cambia (el hash del CSS de producción es idéntico al de la línea base).
+- Pruebas Vitest sin dependencias nuevas: el sondeo se prueba con temporizadores falsos y la vista con `react-dom/server`.
+
 ## Pendientes conocidos para la Fase 4 (no resueltos todavía)
 
 - `aws_deploy.py`, `entra_config.py` y `config/aws-public.json` fijan la cuenta `002996184293`
