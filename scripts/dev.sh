@@ -7,4 +7,4 @@ if [ "$action" = start ] && [ "${2:-entra}" != cloud ]; then
   if [ ! -f "$config/application.env" ]; then echo 'Run bash scripts/setup-local.sh first.' >&2; exit 1; fi
   source "$config/application.env"
 fi
-exec python3 "$root/scripts/dev-processes.py" "$action" "${2:-entra}"
+exec python3 "$root/scripts/dev-processes.py" "$action" "${2:-entra}" "${@:3}"
