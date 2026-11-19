@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-19T12:55:52.822297+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "bc658c1a-aaae-45df-9cc4-acc4c22fadc0",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "sql",
+    "args": [
+      "products"
+    ],
+    "at": "2026-11-19T12:55:49Z",
+    "steps": [
+      {
+        "cmd": "mysql (pedidos360_catalog_app, TLS VERIFY_IDENTITY) -e \"SELECT id, name, price, currency, stock FROM products\"",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "+--------------------------------------+-----------------------+----------+----------+-------+\n| id                                   | name                  | price    | currency | stock |\n+--------------------------------------+-----------------------+----------+----------+-------+\n| 10000000-0000-0000-0000-000000000001 | Caf\u00e9 de especialidad  |  8990.00 | CLP      |    24 |\n| 10000000-0000-0000-0000-000000000002 | Taza de cer\u00e1mica      | 12990.00 | CLP      |    12 |\n+--------------------------------------+-----------------------+----------+----------+-------+"
+      }
+    ]
+  },
+  "error": ""
+}

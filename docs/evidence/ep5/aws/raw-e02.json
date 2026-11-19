@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-19T12:51:57.877325+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "539c061d-20cd-451b-b074-0ec0061543d1",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "e02",
+    "args": [],
+    "at": "2026-11-19T12:51:54Z",
+    "steps": [
+      {
+        "cmd": "bash scripts/ep5-kafka.sh zk-status",
+        "exit": 0,
+        "seconds": 0.3,
+        "out": "zookeeper-1: Mode: follower | Zookeeper version: 3.8.6-6df26081269769c160c8c3a24929c60c91cd19c3\nzookeeper-2: Mode: follower | Zookeeper version: 3.8.6-6df26081269769c160c8c3a24929c60c91cd19c3\nzookeeper-3: Mode: leader | Zookeeper version: 3.8.6-6df26081269769c160c8c3a24929c60c91cd19c3"
+      }
+    ]
+  },
+  "error": ""
+}

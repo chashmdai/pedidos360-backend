@@ -1,0 +1,51 @@
+{
+  "at": "2026-11-19T12:53:31.486694+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "26f9a3f7-d56c-404d-8894-8c1e0584f8ac",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "e19",
+    "args": [],
+    "at": "2026-11-19T12:53:30Z",
+    "steps": [
+      {
+        "cmd": "free -m",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "               total        used        free      shared  buff/cache   available\nMem:            7816        4217        1513          35        2405        3599\nSwap:           2047           0        2047"
+      },
+      {
+        "cmd": "swapon --show",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "NAME      TYPE SIZE USED PRIO\n/swapfile file   2G   0B   -1"
+      },
+      {
+        "cmd": "docker stats --no-stream",
+        "exit": 0,
+        "seconds": 2.2,
+        "out": "NAME                      CPU %     MEM USAGE / LIMIT   MEM %\npedidos360-ep4-rabbit-2   0.33%     109.9MiB / 512MiB   21.47%\npedidos360-ep4-rabbit-1   11.96%    141.3MiB / 512MiB   27.60%\nkafka-ui                  0.02%     311.7MiB / 448MiB   69.57%\nkafka-2                   2.00%     385.1MiB / 896MiB   42.98%\nkafka-3                   2.18%     380MiB / 896MiB     42.41%\nkafka-1                   2.17%     351.7MiB / 896MiB   39.25%\nzookeeper-1               0.16%     72.04MiB / 320MiB   22.51%\nzookeeper-2               0.18%     77.8MiB / 320MiB    24.31%\nzookeeper-3               0.22%     72.75MiB / 320MiB   22.73%"
+      },
+      {
+        "cmd": "docker inspect (mem_limit)",
+        "exit": 0,
+        "seconds": 0.2,
+        "out": "/pedidos360-ep4-rabbit-2 mem_limit=536870912\n/pedidos360-ep4-rabbit-1 mem_limit=536870912\n/kafka-ui mem_limit=469762048\n/kafka-2 mem_limit=939524096\n/kafka-3 mem_limit=939524096\n/kafka-1 mem_limit=939524096\n/zookeeper-1 mem_limit=335544320\n/zookeeper-2 mem_limit=335544320\n/zookeeper-3 mem_limit=335544320"
+      },
+      {
+        "cmd": "systemctl status pedidos360-* --no-pager",
+        "exit": 0,
+        "seconds": 0.1,
+        "out": "\u25cf pedidos360-catalog.service - Pedidos360 catalog (EP5)\n     Active: active (running) since Thu 2026-11-19 12:45:25 UTC; 8min ago\n   Main PID: 26213 (java)\n     Memory: 257.1M (peak: 259.0M)\n\u25cf pedidos360-bff.service - Pedidos360 bff (EP5)\n     Active: active (running) since Thu 2026-11-19 12:46:30 UTC; 6min ago\n   Main PID: 28713 (java)\n     Memory: 177.4M (peak: 177.9M)\n\u25cf pedidos360-kafka-ui.service - Pedidos360 EP5 Kafka UI\n     Active: active (exited) since Thu 2026-11-19 12:44:51 UTC; 8min ago\n   Main PID: 25844 (code=exited, status=0/SUCCESS)\n\u25cf pedidos360-receipts.service - Pedidos360 receipts (EP5)\n     Active: active (running) since Thu 2026-11-19 12:46:45 UTC; 6min ago\n   Main PID: 29194 (java)\n     Memory: 175.9M (peak: 178.0M)\n\u25cf pedidos360-kafka-cluster.service - Pedidos360 EP5 Kafka cluster (3 ZooKeeper + 3 brokers)\n     Active: active (exited) since Thu 2026-11-19 12:44:33 UTC; 8min ago\n   Main PID: 24801 (code=exited, status=0/SUCCESS)\n\u25cf pedidos360-orders.service - Pedidos360 orders (EP5)\n     Active: active (running) since Thu 2026-11-19 12:45:53 UTC; 7min ago\n   Main PID: 27232 (java)\n     Memory: 325.4M (peak: 325.4M)\n\u25cf pedidos360-kafka-admin.service - Pedidos360 kafka-admin (EP5)\n     Active: active (running) since Thu 2026-11-19 12:47:29 UTC; 6min ago\n   Main PID: 30577 (java)\n     Memory: 180.6M (peak: 182.7M)\n\u25cf pedidos360-insights.service - Pedidos360 insights (EP5)\n     Active: active (running) since Thu 2026-11-19 12:46:59 UTC; 6min ago\n   Main PID: 29641 (java)\n     Memory: 183.1M (peak: 184.6M)\n\u25cf pedidos360-rabbit-admin.service - Pedidos360 rabbit-admin (EP5)\n     Active: active (running) since Thu 2026-11-19 12:47:13 UTC; 6min ago\n   Main PID: 30071 (java)\n     Memory: 168.2M (peak: 170.2M)\n\u25cf pedidos360-rabbit-cluster.service - Pedidos360 EP4 RabbitMQ Compose cluster\n     Active: active (exited) since Thu 2026-11-19 12:44:31 UTC; 8min ago\n   Main PID: 23737 (code=exited, status=0/SUCCESS)\n\u25cf pedidos360-sales-stream.service - Pedidos360 sales-stream (EP5)\n     Active: active (running) since Thu 2026-11-19 12:46:14 UTC; 7min ago\n   Main PID: 28052 (java)\n     Memory: 237.5M (peak: 238.0M)"
+      },
+      {
+        "cmd": "ps (RSS por servicio Java)",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "USER                     RSS COMMAND\npedidos360-bff         132468 /opt/erlang/lib/erlang/erts-15.2.7.14/bin/beam.smp -W w -MBas ageffcbf -MHas ageffcbf -MBlmbcs 512 -MHlmbcs 512 -MMmcs 30 -pc unic\npedidos360-bff          1736 erl_child_setup 1024\npedidos360-bff         130692 /opt/erlang/lib/erlang/erts-15.2.7.14/bin/beam.smp -W w -MBas ageffcbf -MHas ageffcbf -MBlmbcs 512 -MHlmbcs 512 -MMmcs 30 -pc unic\npedidos360-bff          1752 erl_child_setup 1024\npedidos360-bff          1816 /opt/erlang/lib/erlang/erts-15.2.7.14/bin/inet_gethost 4\npedidos360-bff          1496 /opt/erlang/lib/erlang/erts-15.2.7.14/bin/inet_gethost 4\npedidos360-bff          1096 /opt/erlang/lib/erlang/erts-15.2.7.14/bin/epmd -daemon\npedidos360-bff          1800 /opt/erlang/lib/erlang/erts-15.2.7.14/bin/inet_gethost 4\npedidos360-bff          1452 /opt/erlang/lib/erlang/erts-15.2.7.14/bin/inet_gethost 4\npedidos360-bff          1148 /opt/erlang/lib/erlang/erts-15.2.7.14/bin/epmd -daemon\npedidos360-bff          1952 /bin/sh -s rabbit_disk_monitor\npedidos360-bff          1952 /bin/sh -s rabbit_disk_monitor\npedidos360-catalog     289416 /opt/pedidos360/runtime/bin/java --enable-native-access=ALL-UNNAMED -Xms32m -Xmx256m -XX:MaxMetaspaceSize=128m -Xss512k -jar /opt/\npedidos360-orders      359572 /opt/pedidos360/runtime/bin/java --enable-native-access=ALL-UNNAMED -Xms32m -Xmx256m -XX:MaxMetaspaceSize=128m -Xss512k -jar /opt/\npedidos360-sales-stre+ 268804 /opt/pedidos360/runtime/bin/java --enable-native-access=ALL-UNNAMED -Xms32m -Xmx256m -XX:MaxMetaspaceSize=128m -Xss512k -jar /opt/\npedidos360-bff         207788 /opt/pedidos360/runtime/bin/java --enable-native-access=ALL-UNNAMED -Xms32m -Xmx256m -XX:MaxMetaspaceSize=128m -Xss512k -jar /opt/\npedidos360-receipts    205304 /opt/pedidos360/runtime/bin/java --enable-native-access=ALL-UNNAMED -Xms32m -Xmx192m -XX:MaxMetaspaceSize=128m -Xss512k -jar /opt/\npedidos360-insights    212552 /opt/pedidos360/runtime/bin/java --enable-native-access=ALL-UNNAMED -Xms32m -Xmx192m -XX:MaxMetaspaceSize=128m -Xss512k -jar /opt/\npedidos360-rabbit-adm+ 198364 /opt/pedidos360/runtime/bin/java --enable-native-access=ALL-UNNAMED -Xms32m -Xmx192m -XX:MaxMetaspaceSize=128m -Xss512k -jar /opt/\npedidos360-kafka-admin 210284 /opt/pedidos360/runtime/bin/java --enable-native-access=ALL-UNNAMED -Xms32m -Xmx192m -XX:MaxMetaspaceSize=128m -Xss512k -jar /opt/"
+      }
+    ]
+  },
+  "error": ""
+}

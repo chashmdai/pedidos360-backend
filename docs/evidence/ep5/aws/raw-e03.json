@@ -1,0 +1,129 @@
+{
+  "at": "2026-11-19T12:52:08.316459+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "11432bbf-bdd2-4a59-9087-469d14240567",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "e03",
+    "args": [],
+    "at": "2026-11-19T12:52:04Z",
+    "steps": [
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 zookeeper-shell zookeeper-1:2181 ls /brokers/ids",
+        "exit": 0,
+        "seconds": 1.4,
+        "out": "Connecting to zookeeper-1:2181\n\nWATCHER::\n\nWatchedEvent state:SyncConnected type:None path:null\n[1, 2, 3]"
+      },
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 zookeeper-shell zookeeper-1:2181 get /controller",
+        "exit": 0,
+        "seconds": 1.6,
+        "out": "Connecting to zookeeper-1:2181\n\nWATCHER::\n\nWatchedEvent state:SyncConnected type:None path:null\n{\"version\":2,\"brokerid\":2,\"timestamp\":\"1795091493035\",\"kraftControllerEpoch\":-1}"
+      },
+      {
+        "cmd": "Kafka UI API GET /api/clusters",
+        "exit": 0,
+        "status": 200,
+        "json": [
+          {
+            "name": "pedidos360",
+            "defaultCluster": null,
+            "status": "ONLINE",
+            "lastError": null,
+            "brokerCount": 3,
+            "onlinePartitionCount": 62,
+            "topicCount": 5,
+            "bytesInPerSec": null,
+            "bytesOutPerSec": null,
+            "readOnly": false,
+            "version": "3.9-IV0",
+            "features": [
+              "TOPIC_DELETION",
+              "CLIENT_QUOTA_MANAGEMENT",
+              "FTS_ENABLED"
+            ],
+            "controller": "ZOOKEEPER"
+          }
+        ]
+      },
+      {
+        "cmd": "Kafka UI API GET /api/clusters/pedidos360/brokers",
+        "exit": 0,
+        "status": 200,
+        "json": [
+          {
+            "id": 1,
+            "host": "kafka-1",
+            "port": 29092,
+            "bytesInPerSec": null,
+            "bytesOutPerSec": null,
+            "partitionsLeader": 20,
+            "partitions": 62,
+            "inSyncPartitions": 62,
+            "partitionsSkew": 0.0,
+            "leadersSkew": -3.2
+          },
+          {
+            "id": 2,
+            "host": "kafka-2",
+            "port": 29092,
+            "bytesInPerSec": null,
+            "bytesOutPerSec": null,
+            "partitionsLeader": 21,
+            "partitions": 62,
+            "inSyncPartitions": 62,
+            "partitionsSkew": 0.0,
+            "leadersSkew": 1.6
+          },
+          {
+            "id": 3,
+            "host": "kafka-3",
+            "port": 29092,
+            "bytesInPerSec": null,
+            "bytesOutPerSec": null,
+            "partitionsLeader": 21,
+            "partitions": 62,
+            "inSyncPartitions": 62,
+            "partitionsSkew": 0.0,
+            "leadersSkew": 1.6
+          }
+        ]
+      },
+      {
+        "cmd": "Kafka UI API GET /api/clusters/pedidos360/stats",
+        "exit": 0,
+        "status": 200,
+        "json": {
+          "brokerCount": 3,
+          "zooKeeperStatus": null,
+          "activeControllers": 2,
+          "onlinePartitionCount": 62,
+          "offlinePartitionCount": 0,
+          "inSyncReplicasCount": 186,
+          "outOfSyncReplicasCount": 0,
+          "underReplicatedPartitionCount": 0,
+          "diskUsage": [
+            {
+              "brokerId": 1,
+              "segmentSize": 6257,
+              "segmentCount": 62
+            },
+            {
+              "brokerId": 2,
+              "segmentSize": 6257,
+              "segmentCount": 62
+            },
+            {
+              "brokerId": 3,
+              "segmentSize": 6257,
+              "segmentCount": 62
+            }
+          ],
+          "version": "3.9-IV0"
+        }
+      }
+    ]
+  },
+  "error": ""
+}

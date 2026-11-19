@@ -115,6 +115,20 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
 - Aprobación del checkpoint: el usuario aprobó la creación de los recursos y las etapas 1 a 9 el 2026-11-19, con los dos ajustes anteriores.
 - Detalle de recursos, seguridad, orden y costo: [EP5_AWS_CHECKPOINT.md](EP5_AWS_CHECKPOINT.md).
 
+- **Corte de credenciales y reinicio de la instancia (2026-11-19):** durante la subida del release ep5-20261119T040026Z, AWS Academy canceló la sesión (`explicit deny ... policy/voc-cancel-cred`). La operación se detuvo sin reintentos. Al renovarse las credenciales, el laboratorio ya había reiniciado la EC2 (IPv4 pública nueva, mismo ID). Las unidades systemd recuperaron solas toda la pila, en orden: Compose de RabbitMQ y Kafka, Kafka UI y los 8 servicios escalonados. Después se subió e instaló el release nuevo (instalador idempotente, 4 min).
+- **Etapa 9 completa (2026-11-19 12:50Z):** EC2 running, SSM Online, RDS available, target del ALB healthy y VPC Link AVAILABLE. Por API Gateway, `/app/`, `/app`, `/app/ventas-en-vivo` y los assets responden 200, con hash igual al del manifiesto. `/api/v1/productos`, `/pedidos`, `/me` y `/ventas/en-vivo` responden 401 sin token y con bearer inválido (`docs/evidence/ep5/aws/gateway-http.json`). El 404 del enlace directo a `/app/ventas-en-vivo` (la lista de rutas SPA del BFF no incluía la ruta nueva) quedó corregido en `CloudSpaConfiguration`, con su prueba.
+
+## Fase 5: URI de redirección en Entra
+
+- Aprobada de antemano por el usuario, condicionada a que la etapa 9 quedara completa. Se agregó `https://az3h2vqgsi.execute-api.us-east-1.amazonaws.com/app/` a `spa.redirectUris` de la app `b4ede06a-cde3-4982-8b79-56fab7264fdd`. El cambio se hizo con PATCH de Microsoft Graph enviando la lista completa y conservando las 3 URIs existentes (`7k2zyh0t0d/app/`, `127.0.0.1:5173/`, `localhost:5173/`). Script: `scripts/ep5-entra-redirect.py`. Lecturas antes y después: `docs/evidence/ep5/entra-spa-before.json` y `entra-spa-after.json`.
+
+## Fase 6: evidencias
+
+- Las evidencias de AWS se ejecutan con `deploy/ep5-evidence.py` (acciones fijas y revisadas) mediante SSM Run Command. La salida cruda queda en `docs/evidence/ep5/aws/raw-*.json`. `scripts/ep5-evidence-report.py` genera `E-XX-<nombre>.txt` en el formato de la sección 15.2, con resultado esperado, observado y diferencias. Las herramientas CLI de Kafka llevan `-e KAFKA_HEAP_OPTS="-Xmx128m"` (D-06).
+- Las partes "Kafka UI" de E-03, E-04, E-05 y E-08 se registran como texto desde la API de Kafka UI (`/api/clusters/...`), con sesión LOGIN_FORM abierta en la propia instancia. Es la misma información que muestran sus pantallas, y la contraseña no sale del host.
+- E-14 en AWS (`scripts/ep5-admin-evidence.py`) usa reenvío de puertos SSM a kafka-admin (8187) y un access token de Entra que el usuario deja en un archivo 0600 fuera del repositorio. El script lo borra al terminar y nunca lo imprime. Solo crea, modifica y elimina `pedidos360.lab.demo`.
+- E-19 mide la memoria de cada servicio con `systemctl show -p MemoryCurrent,MemoryPeak` y no con `ps` por usuario. El UID del usuario de los contenedores RabbitMQ coincide con el de `pedidos360-bff` en el host, y `ps` atribuía esos procesos al BFF. Es solo una coincidencia de numeración (cada contenedor tiene su propio espacio de usuarios y sus procesos no tienen acceso a los archivos del BFF), pero se evita para que la evidencia no confunda.
+
 ## Pendientes
 
 - `npm audit` informa 4 vulnerabilidades (2 moderadas, 2 altas) en dependencias del frontend;

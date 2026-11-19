@@ -1,0 +1,42 @@
+{
+  "at": "2026-11-19T12:34:52.653646+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "bff50ab4-642b-44df-87e8-cb4d01b5ee35",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "uptime": "12:34:50 up 4 min,  0 user,  load average: 5.24, 4.20, 1.92",
+    "units": [
+      "pedidos360-bff.service            loaded active     running          Pedidos360 bff (EP5)",
+      "pedidos360-catalog.service        loaded active     running          Pedidos360 catalog (EP5)",
+      "pedidos360-insights.service       loaded active     running          Pedidos360 insights (EP5)",
+      "pedidos360-kafka-admin.service    loaded activating start-post start Pedidos360 kafka-admin (EP5)",
+      "pedidos360-kafka-cluster.service  loaded active     exited           Pedidos360 EP5 Kafka cluster (3 ZooKeeper + 3 brokers)",
+      "pedidos360-kafka-ui.service       loaded active     exited           Pedidos360 EP5 Kafka UI",
+      "pedidos360-orders.service         loaded active     running          Pedidos360 orders (EP5)",
+      "pedidos360-rabbit-admin.service   loaded active     running          Pedidos360 rabbit-admin (EP5)",
+      "pedidos360-rabbit-cluster.service loaded active     exited           Pedidos360 EP4 RabbitMQ Compose cluster",
+      "pedidos360-receipts.service       loaded active     running          Pedidos360 receipts (EP5)",
+      "pedidos360-sales-stream.service   loaded active     running          Pedidos360 sales-stream (EP5)"
+    ],
+    "failed": "",
+    "enabled": "Glob pattern passed to check, but globs are not supported for this. Invalid unit name \"pedidos360-*\" escaped as \"pedidos360-\\x2a\". not-found",
+    "docker": [
+      "pedidos360-ep4-rabbit-2 Up 4 minutes (healthy)",
+      "pedidos360-ep4-rabbit-1 Up 4 minutes (healthy)",
+      "kafka-ui Up 4 minutes (healthy)",
+      "kafka-2 Up 4 minutes (healthy)",
+      "kafka-3 Up 4 minutes (healthy)",
+      "kafka-1 Up 4 minutes (healthy)",
+      "zookeeper-1 Up 4 minutes (healthy)",
+      "zookeeper-2 Up 4 minutes (healthy)",
+      "zookeeper-3 Up 4 minutes (healthy)"
+    ],
+    "mem": [
+      "total        used        free      shared  buff/cache   available",
+      "Mem:            7816        3969        2985          42        1169        3846",
+      "Swap:           2047           0        2047"
+    ]
+  },
+  "error": ""
+}

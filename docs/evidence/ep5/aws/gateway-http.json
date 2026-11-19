@@ -1,0 +1,125 @@
+{
+  "at": "2026-11-19T12:48:09.761699+00:00",
+  "endpoint": "https://az3h2vqgsi.execute-api.us-east-1.amazonaws.com",
+  "release": "ep5-20261119T040026Z",
+  "checks": [
+    {
+      "path": "/app/",
+      "status": 200,
+      "expected": 200,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpxri9UIAMEPdQ=",
+      "contentType": "text/html;charset=UTF-8",
+      "sha256": "f73043e2904c90028857ba2ab002e66566aac1a74e59add42be0304b9ec0edf9"
+    },
+    {
+      "path": "/app",
+      "status": 200,
+      "expected": 200,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpxvjj_oAMEZpQ=",
+      "contentType": "text/html;charset=UTF-8",
+      "sha256": "f73043e2904c90028857ba2ab002e66566aac1a74e59add42be0304b9ec0edf9"
+    },
+    {
+      "path": "/app/ventas-en-vivo",
+      "status": 200,
+      "expected": 200,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpxziN5IAMEZxg=",
+      "contentType": "text/html",
+      "sha256": "f73043e2904c90028857ba2ab002e66566aac1a74e59add42be0304b9ec0edf9"
+    },
+    {
+      "path": "/app/assets/index-JQdkrOhp.js",
+      "status": 200,
+      "expected": 200,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpx3hpAoAMEPyg=",
+      "contentType": "text/javascript",
+      "sha256": "8257942d97a6a40bc1ae8cc915d1dcc5b62eb01e7912755620551e4875073963"
+    },
+    {
+      "path": "/app/assets/index-BnPrCUl4.css",
+      "status": 200,
+      "expected": 200,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpyEigqIAMEZNQ=",
+      "contentType": "text/css",
+      "sha256": "a9dc5fca975148852de12732e105838756ffdfccc36fedaa96477ffb5f8ca251"
+    },
+    {
+      "path": "/api/v1/productos",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpyJgnnoAMEPdw=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/productos",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": true,
+      "requestId": "HFpyNgmIoAMEPrw=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/pedidos",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpyRgpmoAMEP9g=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/pedidos",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": true,
+      "requestId": "HFpyUjLfIAMEZDg=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/me",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpyYiBmoAMEPTA=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/me",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": true,
+      "requestId": "HFpycgx1oAMEPsA=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/ventas/en-vivo",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpyggzOIAMEPsA=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/ventas/en-vivo",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": true,
+      "requestId": "HFpyjjbmoAMEP2Q=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    }
+  ],
+  "frontendBytesMatchRelease": true
+}

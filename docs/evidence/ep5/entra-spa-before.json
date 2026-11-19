@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-19T12:48:52.890005+00:00",
+  "application": {
+    "appId": "b4ede06a-cde3-4982-8b79-56fab7264fdd",
+    "displayName": "pedidos360-betorrejons-frontend",
+    "id": "fbfdd96f-b7f0-4fd6-8763-f698a1d5f43e",
+    "publicClient": {
+      "redirectUris": []
+    },
+    "signInAudience": "AzureADMyOrg",
+    "spa": {
+      "redirectUris": [
+        "https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com/app/",
+        "http://127.0.0.1:5173/",
+        "http://localhost:5173/"
+      ]
+    },
+    "web": {
+      "homePageUrl": null,
+      "implicitGrantSettings": {
+        "enableAccessTokenIssuance": false,
+        "enableIdTokenIssuance": false
+      },
+      "logoutUrl": null,
+      "redirectUriSettings": [],
+      "redirectUris": []
+    }
+  }
+}

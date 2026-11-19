@@ -1,0 +1,406 @@
+Evidencia E-04. Kafka UI levantado y conectado
+
+Objetivo
+Comprobar que Kafka UI se ejecuta con su Compose propio y administra el clúster.
+
+Indicador asociado
+EP5: Compose de Kafka UI. EP6: Kafka UI (5 %).
+
+Entorno
+AWS cuenta 647660738152 (us-east-1), EC2 i-01bcf3ef9d3a64d4e (t3.large, Ubuntu 24.04), release ep5-20261119T040026Z; comandos ejecutados como root en /opt/pedidos360/current mediante SSM Run Command (AWS-RunShellScript, script revisado deploy/ep5-evidence.py). Kafka UI consultado por su API en 127.0.0.1:8090 desde la propia instancia (la misma vista que se abre por reenvío de puertos SSM).
+
+Resultado esperado (informe)
+Contenedor kafka-ui healthy; clúster pedidos360 en línea con tres brokers y los tópicos de la sección 5.
+
+Resultado observado
+Contenedor kafka-ui (kafbat/kafka-ui:v1.5.0 fijado por digest) healthy, publicado solo en 127.0.0.1:8090. Inicio de sesión LOGIN_FORM correcto con las credenciales generadas en la instancia (no impresas). Clúster pedidos360 ONLINE, 3 brokers, 5 tópicos (los 4 de la sección 5 más __consumer_offsets, que la lista oculta por ser interno).
+
+Diferencias con el informe
+Ninguna.
+
+Procedimiento y salida (sin secretos ni tokens)
+--- e04  @ 2026-11-19T12:52:32Z (SSM c20b82ca-3d44-4b39-b682-c550b8b82c4a) ---
+$ docker compose -f compose.kafka-ui.yaml up -d --wait
+     Container kafka-ui  Running
+     Container kafka-ui  Waiting
+     Container kafka-ui  Healthy
+
+$ docker compose -f compose.kafka-ui.yaml ps
+    NAME       IMAGE                                                                                            STATE     STATUS                    PORTS
+    kafka-ui   kafbat/kafka-ui:v1.5.0@sha256:7cda86a33344160309fdb65146332e4da65db81a945614f2fe32e210803f6fd1   running   Up 21 minutes (healthy)   127.0.0.1:8090->8080/tcp
+
+$ Kafka UI login (LOGIN_FORM, credentials from /etc/pedidos360/ep5/kafka-ui.env, not printed)
+    session established
+
+$ Kafka UI API GET /api/clusters
+    [
+     {
+      "name": "pedidos360",
+      "defaultCluster": null,
+      "status": "ONLINE",
+      "lastError": null,
+      "brokerCount": 3,
+      "onlinePartitionCount": 62,
+      "topicCount": 5,
+      "bytesInPerSec": null,
+      "bytesOutPerSec": null,
+      "readOnly": false,
+      "version": "3.9-IV0",
+      "features": [
+       "TOPIC_DELETION",
+       "CLIENT_QUOTA_MANAGEMENT",
+       "FTS_ENABLED"
+      ],
+      "controller": "ZOOKEEPER"
+     }
+    ]
+
+$ Kafka UI API GET /api/clusters/pedidos360/topics?perPage=50&showInternal=false
+    {
+     "pageCount": 1,
+     "topics": [
+      {
+       "name": "pedidos360.orders.registered.v1",
+       "internal": false,
+       "partitionCount": 3,
+       "replicationFactor": 3,
+       "replicas": 9,
+       "inSyncReplicas": 9,
+       "segmentSize": 0,
+       "segmentCount": 9,
+       "bytesInPerSec": null,
+       "bytesOutPerSec": null,
+       "underReplicatedPartitions": 0,
+       "messagesCount": 0,
+       "cleanUpPolicy": "DELETE",
+       "partitions": [
+        {
+         "partition": 0,
+         "leader": 2,
+         "replicas": [
+          {
+           "broker": 2,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 1,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 3,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        },
+        {
+         "partition": 1,
+         "leader": 3,
+         "replicas": [
+          {
+           "broker": 3,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 2,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 1,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        },
+        {
+         "partition": 2,
+         "leader": 1,
+         "replicas": [
+          {
+           "broker": 1,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 3,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 2,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        }
+       ]
+      },
+      {
+       "name": "pedidos360.orders.registered.v1.DLT",
+       "internal": false,
+       "partitionCount": 3,
+       "replicationFactor": 3,
+       "replicas": 9,
+       "inSyncReplicas": 9,
+       "segmentSize": 0,
+       "segmentCount": 9,
+       "bytesInPerSec": null,
+       "bytesOutPerSec": null,
+       "underReplicatedPartitions": 0,
+       "messagesCount": 0,
+       "cleanUpPolicy": "DELETE",
+       "partitions": [
+        {
+         "partition": 0,
+         "leader": 3,
+         "replicas": [
+          {
+           "broker": 3,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 1,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 2,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        },
+        {
+         "partition": 1,
+         "leader": 1,
+         "replicas": [
+          {
+           "broker": 1,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 2,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 3,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        },
+        {
+         "partition": 2,
+         "leader": 2,
+         "replicas": [
+          {
+           "broker": 2,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 3,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 1,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        }
+       ]
+      },
+      {
+       "name": "pedidos360.sales.product-metrics.v1",
+       "internal": false,
+       "partitionCount": 3,
+       "replicationFactor": 3,
+       "replicas": 9,
+       "inSyncReplicas": 9,
+       "segmentSize": 0,
+       "segmentCount": 9,
+       "bytesInPerSec": null,
+       "bytesOutPerSec": null,
+       "underReplicatedPartitions": 0,
+       "cleanUpPolicy": "COMPACT",
+       "partitions": [
+        {
+         "partition": 0,
+         "leader": 1,
+         "replicas": [
+          {
+           "broker": 1,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 2,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 3,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        },
+        {
+         "partition": 1,
+         "leader": 2,
+         "replicas": [
+          {
+           "broker": 2,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 3,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 1,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        },
+        {
+         "partition": 2,
+         "leader": 3,
+         "replicas": [
+          {
+           "broker": 3,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 1,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 2,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        }
+       ]
+      },
+      {
+       "name": "pedidos360.sales.product-metrics.v1.DLT",
+       "internal": false,
+       "partitionCount": 3,
+       "replicationFactor": 3,
+       "replicas": 9,
+       "inSyncReplicas": 9,
+       "segmentSize": 0,
+       "segmentCount": 9,
+       "bytesInPerSec": null,
+       "bytesOutPerSec": null,
+       "underReplicatedPartitions": 0,
+       "messagesCount": 0,
+       "cleanUpPolicy": "DELETE",
+       "partitions": [
+        {
+         "partition": 0,
+         "leader": 1,
+         "replicas": [
+          {
+           "broker": 1,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 2,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 3,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        },
+        {
+         "partition": 1,
+         "leader": 2,
+         "replicas": [
+          {
+           "broker": 2,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 3,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 1,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        },
+        {
+         "partition": 2,
+         "leader": 3,
+         "replicas": [
+          {
+           "broker": 3,
+           "leader": true,
+           "inSync": true
+          },
+          {
+           "broker": 1,
+           "leader": false,
+           "inSync": true
+          },
+          {
+           "broker": 2,
+           "leader": false,
+           "inSync": true
+          }
+         ],
+         "offsetMax": 0,
+         "offsetMin": 0
+        }
+       ]
+      }
+     ]
+    }

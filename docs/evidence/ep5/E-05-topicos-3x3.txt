@@ -1,0 +1,211 @@
+Evidencia E-05. Dos tópicos con tres particiones y tres réplicas
+
+Objetivo
+Verificar particiones, réplicas, líderes e ISR de los tópicos de negocio.
+
+Indicador asociado
+EP6: dos tópicos 3×3 en Kafka UI; justificación de tópicos (10 %).
+
+Entorno
+AWS cuenta 647660738152 (us-east-1), EC2 i-01bcf3ef9d3a64d4e (t3.large, Ubuntu 24.04), release ep5-20261119T040026Z; comandos ejecutados como root en /opt/pedidos360/current mediante SSM Run Command (AWS-RunShellScript, script revisado deploy/ep5-evidence.py). Kafka UI consultado por su API en 127.0.0.1:8090 desde la propia instancia (la misma vista que se abre por reenvío de puertos SSM).
+
+Resultado esperado (informe)
+PartitionCount: 3 y ReplicationFactor: 3 en ambos; un líder distinto por partición; ISR con tres réplicas.
+
+Resultado observado
+Ambos tópicos con PartitionCount: 3 y ReplicationFactor: 3. orders.registered.v1: líderes 2, 3 y 1; product-metrics.v1: líderes 1, 2 y 3 (un líder distinto por partición). ISR con las tres réplicas en todas las particiones. Kafka UI muestra lo mismo (inSyncReplicas 9 de 9, underReplicatedPartitions 0; cleanUpPolicy DELETE y COMPACT).
+
+Diferencias con el informe
+Ninguna.
+
+Procedimiento y salida (sin secretos ni tokens)
+--- e05  @ 2026-11-19T12:52:42Z (SSM 138fa38e-0025-40b6-9453-2840de854562) ---
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1
+    Topic: pedidos360.orders.registered.v1	TopicId: 3Bcle8goRxeU1Cbx9SFxQA	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=604800000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000
+    	Topic: pedidos360.orders.registered.v1	Partition: 0	Leader: 2	Replicas: 2,1,3	Isr: 2,1,3	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.orders.registered.v1	Partition: 1	Leader: 3	Replicas: 3,2,1	Isr: 3,2,1	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.orders.registered.v1	Partition: 2	Leader: 1	Replicas: 1,3,2	Isr: 1,3,2	Elr: N/A	LastKnownElr: N/A
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1
+    Topic: pedidos360.sales.product-metrics.v1	TopicId: 8SxeYCbcQMKkhz9UYPXDOw	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=compact,max.message.bytes=1048576,min.cleanable.dirty.ratio=0.1,unclean.leader.election.enable=false,delete.retention.ms=86400000,segment.ms=3600000
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,2,3	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 1	Leader: 2	Replicas: 2,3,1	Isr: 2,3,1	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 2	Leader: 3	Replicas: 3,1,2	Isr: 3,1,2	Elr: N/A	LastKnownElr: N/A
+
+$ Kafka UI API GET /api/clusters/pedidos360/topics/pedidos360.orders.registered.v1
+    {
+     "name": "pedidos360.orders.registered.v1",
+     "internal": false,
+     "partitions": [
+      {
+       "partition": 0,
+       "leader": 2,
+       "replicas": [
+        {
+         "broker": 2,
+         "leader": true,
+         "inSync": true
+        },
+        {
+         "broker": 1,
+         "leader": false,
+         "inSync": true
+        },
+        {
+         "broker": 3,
+         "leader": false,
+         "inSync": true
+        }
+       ],
+       "offsetMax": 0,
+       "offsetMin": 0
+      },
+      {
+       "partition": 1,
+       "leader": 3,
+       "replicas": [
+        {
+         "broker": 3,
+         "leader": true,
+         "inSync": true
+        },
+        {
+         "broker": 2,
+         "leader": false,
+         "inSync": true
+        },
+        {
+         "broker": 1,
+         "leader": false,
+         "inSync": true
+        }
+       ],
+       "offsetMax": 0,
+       "offsetMin": 0
+      },
+      {
+       "partition": 2,
+       "leader": 1,
+       "replicas": [
+        {
+         "broker": 1,
+         "leader": true,
+         "inSync": true
+        },
+        {
+         "broker": 3,
+         "leader": false,
+         "inSync": true
+        },
+        {
+         "broker": 2,
+         "leader": false,
+         "inSync": true
+        }
+       ],
+       "offsetMax": 0,
+       "offsetMin": 0
+      }
+     ],
+     "partitionCount": 3,
+     "replicationFactor": 3,
+     "replicas": 9,
+     "inSyncReplicas": 9,
+     "bytesInPerSec": null,
+     "bytesOutPerSec": null,
+     "segmentSize": 0,
+     "segmentCount": 9,
+     "underReplicatedPartitions": 0,
+     "cleanUpPolicy": "DELETE",
+     "keySerde": null,
+     "valueSerde": null
+    }
+
+$ Kafka UI API GET /api/clusters/pedidos360/topics/pedidos360.sales.product-metrics.v1
+    {
+     "name": "pedidos360.sales.product-metrics.v1",
+     "internal": false,
+     "partitions": [
+      {
+       "partition": 0,
+       "leader": 1,
+       "replicas": [
+        {
+         "broker": 1,
+         "leader": true,
+         "inSync": true
+        },
+        {
+         "broker": 2,
+         "leader": false,
+         "inSync": true
+        },
+        {
+         "broker": 3,
+         "leader": false,
+         "inSync": true
+        }
+       ],
+       "offsetMax": 0,
+       "offsetMin": 0
+      },
+      {
+       "partition": 1,
+       "leader": 2,
+       "replicas": [
+        {
+         "broker": 2,
+         "leader": true,
+         "inSync": true
+        },
+        {
+         "broker": 3,
+         "leader": false,
+         "inSync": true
+        },
+        {
+         "broker": 1,
+         "leader": false,
+         "inSync": true
+        }
+       ],
+       "offsetMax": 0,
+       "offsetMin": 0
+      },
+      {
+       "partition": 2,
+       "leader": 3,
+       "replicas": [
+        {
+         "broker": 3,
+         "leader": true,
+         "inSync": true
+        },
+        {
+         "broker": 1,
+         "leader": false,
+         "inSync": true
+        },
+        {
+         "broker": 2,
+         "leader": false,
+         "inSync": true
+        }
+       ],
+       "offsetMax": 0,
+       "offsetMin": 0
+      }
+     ],
+     "partitionCount": 3,
+     "replicationFactor": 3,
+     "replicas": 9,
+     "inSyncReplicas": 9,
+     "bytesInPerSec": null,
+     "bytesOutPerSec": null,
+     "segmentSize": 0,
+     "segmentCount": 9,
+     "underReplicatedPartitions": 0,
+     "cleanUpPolicy": "COMPACT",
+     "keySerde": null,
+     "valueSerde": null
+    }

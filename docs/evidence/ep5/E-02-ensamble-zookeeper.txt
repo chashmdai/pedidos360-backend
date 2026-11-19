@@ -1,0 +1,26 @@
+Evidencia E-02. Ensamble ZooKeeper con líder y seguidores
+
+Objetivo
+Demostrar que los tres nodos forman un ensamble con quórum.
+
+Indicador asociado
+EP6: arquitectura Kafka (10 %).
+
+Entorno
+AWS cuenta 647660738152 (us-east-1), EC2 i-01bcf3ef9d3a64d4e (t3.large, Ubuntu 24.04), release ep5-20261119T040026Z; comandos ejecutados como root en /opt/pedidos360/current mediante SSM Run Command (AWS-RunShellScript, script revisado deploy/ep5-evidence.py). Kafka UI consultado por su API en 127.0.0.1:8090 desde la propia instancia (la misma vista que se abre por reenvío de puertos SSM).
+
+Resultado esperado (informe)
+Un nodo en modo leader y dos en modo follower.
+
+Resultado observado
+zookeeper-3 en modo leader; zookeeper-1 y zookeeper-2 en modo follower (ZooKeeper 3.8.6). El ensamble tiene quórum.
+
+Diferencias con el informe
+Ninguna.
+
+Procedimiento y salida (sin secretos ni tokens)
+--- e02  @ 2026-11-19T12:51:54Z (SSM 539c061d-20cd-451b-b074-0ec0061543d1) ---
+$ bash scripts/ep5-kafka.sh zk-status
+    zookeeper-1: Mode: follower | Zookeeper version: 3.8.6-6df26081269769c160c8c3a24929c60c91cd19c3
+    zookeeper-2: Mode: follower | Zookeeper version: 3.8.6-6df26081269769c160c8c3a24929c60c91cd19c3
+    zookeeper-3: Mode: leader | Zookeeper version: 3.8.6-6df26081269769c160c8c3a24929c60c91cd19c3

@@ -1,0 +1,11 @@
+npm notice run pedidos360-frontend@0.1.0 test
+npm notice run vitest run
+
+ RUN  v4.1.11 /home/benja/.cache/pedidos360-ep5/frontend
+
+
+ Test Files  4 passed (4)
+      Tests  19 passed (19)
+   Start at  01:00:05
+   Duration  306ms (transform 165ms, setup 0ms, import 336ms, tests 100ms, environment 1ms)
+

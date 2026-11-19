@@ -1,0 +1,27 @@
+{
+  "at": "2026-11-19T12:52:28.133020+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "ba8d7f11-dafc-45ac-accc-7f8fb57f7b61",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "e01",
+    "args": [],
+    "at": "2026-11-19T12:52:25Z",
+    "steps": [
+      {
+        "cmd": "docker compose -f compose.kafka.yaml up -d --wait",
+        "exit": 0,
+        "seconds": 1.4,
+        "out": " Container zookeeper-3  Running\n Container zookeeper-1  Running\n Container zookeeper-2  Running\n Container kafka-2  Running\n Container kafka-3  Running\n Container kafka-1  Running\n Container zookeeper-1  Waiting\n Container zookeeper-2  Waiting\n Container zookeeper-3  Waiting\n Container zookeeper-2  Waiting\n Container zookeeper-3  Waiting\n Container zookeeper-1  Waiting\n Container zookeeper-3  Waiting\n Container zookeeper-1  Waiting\n Container zookeeper-2  Waiting\n Container zookeeper-1  Healthy\n Container zookeeper-3  Healthy\n Container zookeeper-2  Healthy\n Container zookeeper-2  Healthy\n Container zookeeper-3  Healthy\n Container zookeeper-1  Healthy\n Container zookeeper-1  Healthy\n Container zookeeper-2  Healthy\n Container zookeeper-3  Healthy\n Container kafka-3  Waiting\n Container zookeeper-1  Waiting\n Container zookeeper-2  Waiting\n Container zookeeper-3  Waiting\n Container kafka-1  Waiting\n Container kafka-2  Waiting\n Container kafka-2  Healthy\n Container kafka-1  Healthy\n Container kafka-3  Healthy\n Container zookeeper-1  Healthy\n Container zookeeper-2  Healthy\n Container zookeeper-3  Healthy"
+      },
+      {
+        "cmd": "docker compose -f compose.kafka.yaml ps",
+        "exit": 0,
+        "seconds": 0.2,
+        "out": "NAME          IMAGE                                                                                                      STATE     STATUS                    PORTS\nkafka-1       confluentinc/cp-kafka:7.9.10@sha256:07c3d60362e67c296f7f34b690b1240e5ecdcde4a84f5e73cab320fb4041f58c       running   Up 21 minutes (healthy)   9092/tcp, 127.0.0.1:19092->19092/tcp\nkafka-2       confluentinc/cp-kafka:7.9.10@sha256:07c3d60362e67c296f7f34b690b1240e5ecdcde4a84f5e73cab320fb4041f58c       running   Up 21 minutes (healthy)   9092/tcp, 127.0.0.1:19093->19093/tcp\nkafka-3       confluentinc/cp-kafka:7.9.10@sha256:07c3d60362e67c296f7f34b690b1240e5ecdcde4a84f5e73cab320fb4041f58c       running   Up 21 minutes (healthy)   9092/tcp, 127.0.0.1:19094->19094/tcp\nzookeeper-1   confluentinc/cp-zookeeper:7.9.10@sha256:1a870111c6e861f1e6015094fac902779981edb5cb1d2ad6b7437d2a6b8ba064   running   Up 21 minutes (healthy)   2181/tcp, 2888/tcp, 3888/tcp\nzookeeper-2   confluentinc/cp-zookeeper:7.9.10@sha256:1a870111c6e861f1e6015094fac902779981edb5cb1d2ad6b7437d2a6b8ba064   running   Up 21 minutes (healthy)   2181/tcp, 2888/tcp, 3888/tcp\nzookeeper-3   confluentinc/cp-zookeeper:7.9.10@sha256:1a870111c6e861f1e6015094fac902779981edb5cb1d2ad6b7437d2a6b8ba064   running   Up 21 minutes (healthy)   2181/tcp, 2888/tcp, 3888/tcp"
+      }
+    ]
+  },
+  "error": ""
+}

@@ -1,0 +1,36 @@
+Extracto de docs/evidence/ep5/build/backend-verify.txt (./mvnw -B clean verify):
+[INFO] Building Pedidos360 backend 0.1.0-SNAPSHOT                        [1/11]
+[INFO] Building messaging-support 0.1.0-SNAPSHOT                         [2/11]
+[INFO] Building kafka-support 0.1.0-SNAPSHOT                             [3/11]
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Building catalog-service 0.1.0-SNAPSHOT                           [4/11]
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Building orders-service 0.1.0-SNAPSHOT                            [5/11]
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Building bff 0.1.0-SNAPSHOT                                       [6/11]
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Building receipts-service 0.1.0-SNAPSHOT                          [7/11]
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Building rabbit-admin-service 0.1.0-SNAPSHOT                      [8/11]
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Building order-insights-service 0.1.0-SNAPSHOT                    [9/11]
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Building sales-stream-service 0.1.0-SNAPSHOT                     [10/11]
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Building kafka-admin-service 0.1.0-SNAPSHOT                      [11/11]
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Reactor Summary for Pedidos360 backend 0.1.0-SNAPSHOT:
+[INFO] Pedidos360 backend ................................. SUCCESS [  0.636 s]
+[INFO] messaging-support .................................. SUCCESS [  1.596 s]
+[INFO] kafka-support ...................................... SUCCESS [  2.564 s]
+[INFO] catalog-service .................................... SUCCESS [ 18.242 s]
+[INFO] orders-service ..................................... SUCCESS [01:08 min]
+[INFO] bff ................................................ SUCCESS [  6.916 s]
+[INFO] receipts-service ................................... SUCCESS [  7.157 s]
+[INFO] rabbit-admin-service ............................... SUCCESS [ 11.294 s]
+[INFO] order-insights-service ............................. SUCCESS [ 16.507 s]
+[INFO] sales-stream-service ............................... SUCCESS [ 35.146 s]
+[INFO] kafka-admin-service ................................ SUCCESS [ 14.370 s]
+[INFO] BUILD SUCCESS
+[INFO] Total time:  03:03 min
+[INFO] Finished at: 2026-11-19T01:00:03-03:00

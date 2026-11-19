@@ -18,4 +18,6 @@ Fuente: `docs/evidence/ep5/aws/deployment-journal.json` (creados el 2026-11-19).
 | Autorizador JWT / integración | 0ue6up / ea6ze8c |
 | URL de la aplicación | https://az3h2vqgsi.execute-api.us-east-1.amazonaws.com/app/ |
 | Log group | /pedidos360/api-gateway (7 días) |
-| Release instalado | ep5-20261119T021135Z (release ep5-20261119T040026Z preparado, pendiente de instalar) |
+| Release instalado | ep5-20261119T040026Z (2026-11-19T12:45Z; reemplaza a ep5-20261119T021135Z) |
+| IPv4 pública de la EC2 | dinámica, sin EIP: cambia si el laboratorio detiene la instancia (100.55.75.122 el 2026-11-19 12:30Z); no se usa para entrar |
+| App de Entra (SPA) | b4ede06a-cde3-4982-8b79-56fab7264fdd: URI `https://az3h2vqgsi.execute-api.us-east-1.amazonaws.com/app/` añadida el 2026-11-19 (se conservan las 3 anteriores) |

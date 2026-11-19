@@ -1,0 +1,130 @@
+Evidencia E-03. Brokers registrados y controlador
+
+Objetivo
+Comprobar el registro de los tres brokers y la existencia de un controlador.
+
+Indicador asociado
+EP6: arquitectura Kafka (10 %); Kafka UI (5 %).
+
+Entorno
+AWS cuenta 647660738152 (us-east-1), EC2 i-01bcf3ef9d3a64d4e (t3.large, Ubuntu 24.04), release ep5-20261119T040026Z; comandos ejecutados como root en /opt/pedidos360/current mediante SSM Run Command (AWS-RunShellScript, script revisado deploy/ep5-evidence.py). Kafka UI consultado por su API en 127.0.0.1:8090 desde la propia instancia (la misma vista que se abre por reenvío de puertos SSM).
+
+Resultado esperado (informe)
+Lista [1, 2, 3]; Kafka UI muestra tres brokers en línea y uno marcado como controlador.
+
+Resultado observado
+zookeeper-shell ls /brokers/ids devuelve [1, 2, 3]; get /controller indica brokerid 2 (modo ZooKeeper, kraftControllerEpoch -1). Kafka UI (API de la vista Brokers) muestra el clúster pedidos360 ONLINE con 3 brokers (kafka-1..3:29092), activeControllers=2, 62 particiones en línea, 0 fuera de línea, 0 subreplicadas y 186 réplicas en ISR.
+
+Diferencias con el informe
+Ninguna.
+
+Procedimiento y salida (sin secretos ni tokens)
+--- e03  @ 2026-11-19T12:52:04Z (SSM 11432bbf-bdd2-4a59-9087-469d14240567) ---
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 zookeeper-shell zookeeper-1:2181 ls /brokers/ids
+    Connecting to zookeeper-1:2181
+    
+    WATCHER::
+    
+    WatchedEvent state:SyncConnected type:None path:null
+    [1, 2, 3]
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 zookeeper-shell zookeeper-1:2181 get /controller
+    Connecting to zookeeper-1:2181
+    
+    WATCHER::
+    
+    WatchedEvent state:SyncConnected type:None path:null
+    {"version":2,"brokerid":2,"timestamp":"1795091493035","kraftControllerEpoch":-1}
+
+$ Kafka UI API GET /api/clusters
+    [
+     {
+      "name": "pedidos360",
+      "defaultCluster": null,
+      "status": "ONLINE",
+      "lastError": null,
+      "brokerCount": 3,
+      "onlinePartitionCount": 62,
+      "topicCount": 5,
+      "bytesInPerSec": null,
+      "bytesOutPerSec": null,
+      "readOnly": false,
+      "version": "3.9-IV0",
+      "features": [
+       "TOPIC_DELETION",
+       "CLIENT_QUOTA_MANAGEMENT",
+       "FTS_ENABLED"
+      ],
+      "controller": "ZOOKEEPER"
+     }
+    ]
+
+$ Kafka UI API GET /api/clusters/pedidos360/brokers
+    [
+     {
+      "id": 1,
+      "host": "kafka-1",
+      "port": 29092,
+      "bytesInPerSec": null,
+      "bytesOutPerSec": null,
+      "partitionsLeader": 20,
+      "partitions": 62,
+      "inSyncPartitions": 62,
+      "partitionsSkew": 0.0,
+      "leadersSkew": -3.2
+     },
+     {
+      "id": 2,
+      "host": "kafka-2",
+      "port": 29092,
+      "bytesInPerSec": null,
+      "bytesOutPerSec": null,
+      "partitionsLeader": 21,
+      "partitions": 62,
+      "inSyncPartitions": 62,
+      "partitionsSkew": 0.0,
+      "leadersSkew": 1.6
+     },
+     {
+      "id": 3,
+      "host": "kafka-3",
+      "port": 29092,
+      "bytesInPerSec": null,
+      "bytesOutPerSec": null,
+      "partitionsLeader": 21,
+      "partitions": 62,
+      "inSyncPartitions": 62,
+      "partitionsSkew": 0.0,
+      "leadersSkew": 1.6
+     }
+    ]
+
+$ Kafka UI API GET /api/clusters/pedidos360/stats
+    {
+     "brokerCount": 3,
+     "zooKeeperStatus": null,
+     "activeControllers": 2,
+     "onlinePartitionCount": 62,
+     "offlinePartitionCount": 0,
+     "inSyncReplicasCount": 186,
+     "outOfSyncReplicasCount": 0,
+     "underReplicatedPartitionCount": 0,
+     "diskUsage": [
+      {
+       "brokerId": 1,
+       "segmentSize": 6257,
+       "segmentCount": 62
+      },
+      {
+       "brokerId": 2,
+       "segmentSize": 6257,
+       "segmentCount": 62
+      },
+      {
+       "brokerId": 3,
+       "segmentSize": 6257,
+       "segmentCount": 62
+      }
+     ],
+     "version": "3.9-IV0"
+    }
