@@ -1,0 +1,37 @@
+{
+  "at": "2026-11-19T02:03:14.144390+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "d8174e7e-718c-42b5-b78a-5470d8d9a6f4",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "cloudInit": "status: done\nextended_status: done\nboot_status_code: enabled-by-generator\nlast_update: Thu, 01 Jan 1970 00:00:58 +0000\ndetail: DataSourceEc2Local\nerrors: []\nrecoverable_errors: {}",
+    "aptHttpsOk": true,
+    "bootstrapComplete": true,
+    "aptSources": "Types: deb\nURIs: https://archive.ubuntu.com/ubuntu\nSuites: noble noble-updates noble-backports\nComponents: main restricted universe multiverse\nSigned-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg\n\nTypes: deb\nURIs: https://security.ubuntu.com/ubuntu\nSuites: noble-security\nComponents: main restricted universe multiverse\nSigned-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg\n",
+    "aptUpdateIndexes": [
+      "Get:1 https://archive.ubuntu.com/ubuntu noble InRelease [256 kB]",
+      "Get:2 https://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]",
+      "Get:3 https://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]",
+      "Get:4 https://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1401 kB]",
+      "Get:5 https://archive.ubuntu.com/ubuntu noble/main Translation-en [513 kB]",
+      "Get:6 https://archive.ubuntu.com/ubuntu noble/main amd64 Components [464 kB]",
+      "Get:7 https://archive.ubuntu.com/ubuntu noble/main amd64 c-n-f Metadata [30.5 kB]",
+      "Get:8 https://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [93.9 kB]",
+      "Get:9 https://archive.ubuntu.com/ubuntu noble/restricted Translation-en [18.7 kB]",
+      "Get:10 https://archive.ubuntu.com/ubuntu noble/restricted amd64 c-n-f Metadata [416 B]",
+      "Get:11 https://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [15.0 MB]",
+      "Get:12 https://archive.ubuntu.com/ubuntu noble/universe Translation-en [5982 kB]"
+    ],
+    "httpUrisInSources": "",
+    "java": [
+      "openjdk 25.0.4.1 2026-08-18 LTS"
+    ],
+    "rdsCaBundle": true,
+    "ssmAgent": "Service                            Startup  Current  Notes\namazon-ssm-agent.amazon-ssm-agent  enabled  active   -",
+    "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/root        29G  2.7G   26G  10% /",
+    "memory": "total        used        free      shared  buff/cache   available\nMem:            7816         541        6314           2        1225        7275\nSwap:              0           0           0",
+    "os": "Ubuntu 24.04.5 LTS"
+  },
+  "error": ""
+}

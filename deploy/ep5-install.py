@@ -235,6 +235,11 @@ services = {
 }
 wait = Path("/usr/local/libexec/pedidos360-wait-health")
 wait.parent.mkdir(parents=True, exist_ok=True)
+# umask 077 applies to every directory created here: service users must traverse these parents
+# (their contents keep their own restrictive modes, e.g. *.env 0600 and ep4/ ep5/ 0700).
+for parent in (wait.parent, Path("/var/log/pedidos360"), Path("/etc/pedidos360"), tls, Path("/opt/pedidos360")):
+    parent.mkdir(parents=True, exist_ok=True)
+    parent.chmod(0o755)
 wait.write_text("""#!/bin/sh
 # Blocks until 127.0.0.1:$1/actuator/health reports UP (max $2 seconds).
 end=$(( $(date +%s) + ${2:-240} ))
