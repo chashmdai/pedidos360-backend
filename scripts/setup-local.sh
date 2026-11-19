@@ -10,13 +10,16 @@ for name in mysql-root catalog-app catalog-migration orders-app orders-migration
   # Host access remains restricted by the enclosing directory's mode 0700.
   chmod 0444 "$config/$name-password"
 done
-python3 - "$config" <<'PY'
+# Host port is configurable when 13306 is already used by another local project.
+port="${PEDIDOS360_MYSQL_PORT:-13306}"
+python3 - "$config" "$port" <<'PY'
 import pathlib,shlex,sys
 root=pathlib.Path(sys.argv[1])
-values={'SPRING_PROFILES_ACTIVE':'local'}
+port=int(sys.argv[2])
+values={'SPRING_PROFILES_ACTIVE':'local','PEDIDOS360_MYSQL_PORT':str(port)}
 for context in ['catalog','orders']:
     upper=context.upper()
-    values[upper+'_DB_URL']=f'jdbc:mysql://127.0.0.1:13306/pedidos360_{context}?sslMode=DISABLED&allowPublicKeyRetrieval=true&connectionTimeZone=UTC'
+    values[upper+'_DB_URL']=f'jdbc:mysql://127.0.0.1:{port}/pedidos360_{context}?sslMode=DISABLED&allowPublicKeyRetrieval=true&connectionTimeZone=UTC'
     values[upper+'_DB_USER']=f'pedidos360_{context}_app'
     values[upper+'_DB_PASSWORD']=(root/f'{context}-app-password').read_text().strip()
     values[upper+'_MIGRATION_USER']=f'pedidos360_{context}_migration'

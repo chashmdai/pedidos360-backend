@@ -6,7 +6,7 @@ services:
     labels:
       Project: Pedidos360
     ports:
-      - "127.0.0.1:13306:3306"
+      - "127.0.0.1:${PEDIDOS360_MYSQL_PORT:-13306}:3306"
     environment:
       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root
     secrets:
