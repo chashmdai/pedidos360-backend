@@ -138,6 +138,20 @@ paths:
         '403': { $ref: '#/components/responses/Forbidden' }
         '404': { $ref: '#/components/responses/NotFound' }
         '502': { $ref: '#/components/responses/Unavailable' }
+  /ventas/en-vivo:
+    get:
+      operationId: getLiveSales
+      summary: Ventas en vivo del día UTC por producto y moneda, con alertas recientes (EP5)
+      description: Requiere Orders.Read (rol User o Admin). El BFF reenvía a sales-stream-service, que vuelve a validar el JWT y filtra por el tenant (tid) del token. Datos agregados sin información de propietarios; la SPA consulta cada 3 s. Cache-Control no-store.
+      responses:
+        '200':
+          description: Acumulados del día UTC en curso y alertas recientes del tenant
+          content:
+            application/json:
+              schema: { $ref: './live-sales-response-v1.schema.json' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '502': { $ref: '#/components/responses/Unavailable' }
 components:
   securitySchemes:
     bearerAuth: { type: http, scheme: bearer, bearerFormat: JWT }

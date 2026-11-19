@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/chashmdai/pedidos360-backend/contracts/live-sales-response-v1.schema.json",
+  "title": "VentasEnVivo",
+  "description": "Respuesta de GET /api/v1/ventas/en-vivo (BFF -> sales-stream-service). Requiere JWT con scope Orders.Read (rol User o Admin). Solo incluye acumulados y alertas del tenant (claim tid) del token validado y del día UTC en curso. Sin datos de propietarios. Cache-Control: no-store. Importes solicitados, no pagos.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["fecha", "generadoEn", "ultimaActualizacion", "productos", "alertas"],
+  "properties": {
+    "fecha": { "type": "string", "format": "date", "description": "Día UTC de los acumulados (AAAA-MM-DD)." },
+    "generadoEn": { "type": "string", "format": "date-time", "description": "Instante en que el servicio generó la respuesta." },
+    "ultimaActualizacion": { "type": ["string", "null"], "format": "date-time", "description": "updatedAt más reciente entre los productos; null si no hay ventas hoy." },
+    "productos": {
+      "type": "array",
+      "description": "Último estado (mayor version) de cada acumulado producto+moneda; orden por importe descendente.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["productoId", "nombre", "moneda", "unidades", "pedidos", "importe", "version", "actualizadoEn"],
+        "properties": {
+          "productoId": { "type": "string", "format": "uuid" },
+          "nombre": { "type": "string", "minLength": 1, "maxLength": 120, "description": "Snapshot del nombre al registrar el pedido." },
+          "moneda": { "type": "string", "pattern": "^[A-Z]{3}$" },
+          "unidades": { "type": "integer", "minimum": 0 },
+          "pedidos": { "type": "integer", "minimum": 0, "description": "Pedidos que incluyen el producto." },
+          "importe": { "type": "number", "minimum": 0, "multipleOf": 0.01 },
+          "version": { "type": "integer", "minimum": 1 },
+          "actualizadoEn": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "alertas": {
+      "type": "array",
+      "maxItems": 50,
+      "description": "Alertas recientes del tenant (en memoria, máximo 50, la más reciente primero).",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["pedidoId", "motivos", "total", "moneda", "lineas", "ocurridoEn", "detectadaEn"],
+        "properties": {
+          "pedidoId": { "type": "string", "format": "uuid" },
+          "motivos": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["ALTO_VALOR", "MUCHAS_LINEAS"] },
+                       "description": "ALTO_VALOR: total >= pedidos.streams.alerts.high-value (50000 CLP). MUCHAS_LINEAS: más de 10 líneas." },
+          "total": { "type": "number", "minimum": 0, "multipleOf": 0.01 },
+          "moneda": { "type": "string", "pattern": "^[A-Z]{3}$" },
+          "lineas": { "type": "integer", "minimum": 1, "maximum": 50 },
+          "ocurridoEn": { "type": "string", "format": "date-time" },
+          "detectadaEn": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  },
+  "examples": [{
+    "fecha": "2026-11-24",
+    "generadoEn": "2026-11-24T14:05:15.002Z",
+    "ultimaActualizacion": "2026-11-24T14:05:13.120Z",
+    "productos": [
+      { "productoId": "10000000-0000-0000-0000-000000000001", "nombre": "Café de especialidad", "moneda": "CLP", "unidades": 3, "pedidos": 2, "importe": 56970.00, "version": 2, "actualizadoEn": "2026-11-24T14:05:13.120Z" }
+    ],
+    "alertas": [
+      { "pedidoId": "b2e4c6a8-1f3d-4b5a-8c7e-9d0f2a4b6c81", "motivos": ["ALTO_VALOR"], "total": 56970.00, "moneda": "CLP", "lineas": 1, "ocurridoEn": "2026-11-24T14:05:12.345Z", "detectadaEn": "2026-11-24T14:05:12.910Z" }
+    ]
+  }]
+}
