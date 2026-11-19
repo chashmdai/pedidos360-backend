@@ -1,0 +1,175 @@
+Evidencia E-10. Lag y recuperación de un consumidor detenido
+
+Objetivo
+Mostrar cómo el lag permite detectar un problema operacional y su resolución.
+
+Indicador asociado
+EP6: métricas de offsets y lag (15 %); administración de Kafka (15 %).
+
+Entorno
+AWS cuenta 647660738152 (us-east-1), EC2 i-01bcf3ef9d3a64d4e (t3.large, Ubuntu 24.04), release ep5-20261119T040026Z; comandos ejecutados como root en /opt/pedidos360/current mediante SSM Run Command (AWS-RunShellScript, script revisado deploy/ep5-evidence.py). Kafka UI consultado por su API en 127.0.0.1:8090 desde la propia instancia (la misma vista que se abre por reenvío de puertos SSM).
+
+Resultado esperado (informe)
+Con el servicio detenido, el grupo no tiene miembros y el lag total es 2. Tras el inicio, el lag vuelve a 0 y cada pedido se contabiliza una sola vez.
+
+Resultado observado
+Con systemctl stop pedidos360-sales-stream, el grupo pedidos360-sales-aggregator quedó sin miembros ('has no active members') y con lag 0. Con el servicio detenido, el usuario registró dos pedidos de 1 × Café (9c59571d… y e1bb7872…, 14:22:48Z y 14:22:53Z). Orders los publicó igual (particiones 1 y 0) y el grupo mostró lag total 2 (1 en p0 y 1 en p1), sin miembros. Durante la detención, el BFF respondió 502 a la vista (124 consultas, según el log de API Gateway) y la SPA mostró 'No fue posible consultar el servicio requerido. Intenta nuevamente.' sin dejar de sondear. Tras systemctl start, el servicio volvió a UP, los tres grupos recuperaron sus miembros y el lag volvió a 0. Café quedó en 7 u / 4 pedidos / 62.930,00 (version 4) y processed_stream_event en 4 eventos para 4 pedidos: cada pedido se contabilizó una sola vez. La vista se recuperó sola, sin recargar la página: la última consulta 502 fue a las 14:24:37 y desde las 14:24:38 todas respondieron 200, sin cargas de /app entre medio (confirmado por el usuario).
+
+Diferencias con el informe
+Ninguna.
+
+Procedimiento y salida (sin secretos ni tokens)
+--- stop-stream  @ 2026-11-19T14:19:55Z (SSM 97535262-40d6-4dff-8306-262794d120c9) ---
+$ systemctl stop pedidos360-sales-stream
+
+
+$ systemctl is-active pedidos360-sales-stream   [exit 3]
+    inactive
+
+$ curl -s http://127.0.0.1:8186/actuator/health   [exit 7]
+
+
+--- groups pedidos360-sales-aggregator @ 2026-11-19T14:20:05Z (SSM 4fba36bf-e41a-47e8-9bb2-46790cfaea96) ---
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator
+    
+    GROUP                       TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 1          1               1               0               -               -               -
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 2          2               2               0               -               -               -
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 0          1               1               0               -               -               -
+    Consumer group 'pedidos360-sales-aggregator' has no active members.
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose
+    
+    GROUP           CONSUMER-ID     HOST            CLIENT-ID       #PARTITIONS     ASSIGNMENT
+    
+    Consumer group 'pedidos360-sales-aggregator' has no active members.
+
+--- groups pedidos360-sales-aggregator @ 2026-11-19T14:24:05Z (SSM 610f40e2-85de-4eb3-a124-49eab390edcc) ---
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator
+    
+    GROUP                       TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 1          1               2               1               -               -               -
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 2          2               2               0               -               -               -
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 0          1               2               1               -               -               -
+    Consumer group 'pedidos360-sales-aggregator' has no active members.
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose
+    
+    GROUP           CONSUMER-ID     HOST            CLIENT-ID       #PARTITIONS     ASSIGNMENT
+    
+    Consumer group 'pedidos360-sales-aggregator' has no active members.
+
+--- start-stream  @ 2026-11-19T14:24:41Z (SSM e112fdfd-2e64-434e-b317-39e415a4c067) ---
+$ systemctl start pedidos360-sales-stream
+
+
+$ wait for 127.0.0.1:8186/actuator/health UP
+    {"groups":["liveness","readiness"],"status":"UP"}
+
+$ systemctl is-active pedidos360-sales-stream
+    active
+
+$ curl -s http://127.0.0.1:8186/actuator/health
+    {"groups":["liveness","readiness"],"status":"UP"}
+
+--- groups  @ 2026-11-19T14:25:07Z (SSM 300d8dd4-9e3f-428c-a5dc-c30378cafdae) ---
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator
+    
+    GROUP                       TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                             HOST            CLIENT-ID
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 1          2               2               0               sales-aggregator-1-38c2b24d-6670-4ce6-ae9d-d6ee8aff9da7 /172.19.0.1     sales-aggregator-1
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 0          2               2               0               sales-aggregator-0-d69f3495-d4c7-4f62-a3ff-5697bf58a023 /172.19.0.1     sales-aggregator-0
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 2          2               2               0               sales-aggregator-2-c50de012-a114-41fc-8811-f647af5c5568 /172.19.0.1     sales-aggregator-2
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose
+    
+    GROUP                       CONSUMER-ID                                             HOST            CLIENT-ID          #PARTITIONS     ASSIGNMENT
+    pedidos360-sales-aggregator sales-aggregator-1-38c2b24d-6670-4ce6-ae9d-d6ee8aff9da7 /172.19.0.1     sales-aggregator-1 1               (1)
+    pedidos360-sales-aggregator sales-aggregator-0-d69f3495-d4c7-4f62-a3ff-5697bf58a023 /172.19.0.1     sales-aggregator-0 1               (0)
+    pedidos360-sales-aggregator sales-aggregator-2-c50de012-a114-41fc-8811-f647af5c5568 /172.19.0.1     sales-aggregator-2 1               (2)
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor
+    
+    GROUP                    TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                          HOST            CLIENT-ID
+    pedidos360-order-monitor pedidos360.orders.registered.v1 1          2               2               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
+    pedidos360-order-monitor pedidos360.orders.registered.v1 2          2               2               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
+    pedidos360-order-monitor pedidos360.orders.registered.v1 0          2               2               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor --members --verbose
+    
+    GROUP                    CONSUMER-ID                                          HOST            CLIENT-ID       #PARTITIONS     ASSIGNMENT
+    pedidos360-order-monitor order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0 3               (0,1,2)
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard
+    
+    GROUP                      TOPIC                               PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                            HOST            CLIENT-ID
+    pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 0          -               0               -               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
+    pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 2          3               3               0               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
+    pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 1          5               5               0               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard --members --verbose
+    
+    GROUP                      CONSUMER-ID                                            HOST            CLIENT-ID         #PARTITIONS     ASSIGNMENT
+    pedidos360-sales-dashboard sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0 3               (0,1,2)
+
+--- sql orders sales processed @ 2026-11-19T14:25:13Z (SSM 58bb83d5-0fb4-4fc8-9cdb-ed2bbbe4409d) ---
+$ mysql (pedidos360_orders_app, TLS VERIFY_IDENTITY) -e "SELECT o.id, o.status, o.created_at, i.product_name, i.quantity, i.unit_price, i.currency FROM purchase_orders o JOIN order_items i ON i.order_id = o.id ORDER BY o.created_at DESC, i.id LIMIT 30"
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+    | id                                   | status     | created_at                 | product_name          | quantity | unit_price | currency |
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+    | e1bb7872-07d6-4f8c-bd67-facf50d66ce8 | REGISTERED | 2026-11-19 14:22:53.515292 | Café de especialidad  |        1 |    8990.00 | CLP      |
+    | 9c59571d-d8db-4fe1-a5c4-39804bf4309d | REGISTERED | 2026-11-19 14:22:48.315330 | Café de especialidad  |        1 |    8990.00 | CLP      |
+    | 79a3d04a-9721-4cd2-956c-5e7386921647 | REGISTERED | 2026-11-19 14:13:50.994696 | Café de especialidad  |        3 |    8990.00 | CLP      |
+    | 79a3d04a-9721-4cd2-956c-5e7386921647 | REGISTERED | 2026-11-19 14:13:50.994696 | Taza de cerámica      |        2 |   12990.00 | CLP      |
+    | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Café de especialidad  |        2 |    8990.00 | CLP      |
+    | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Taza de cerámica      |        1 |   12990.00 | CLP      |
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+
+$ mysql (pedidos360_streams_app, TLS VERIFY_IDENTITY) -e "SELECT * FROM product_sales_daily ORDER BY 1"
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+    | tenant_id                            | product_id                           | business_date | currency | product_name          | units_sold | orders_count | revenue  | version | last_event_id                        | updated_at                 |
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+    | 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 | 10000000-0000-0000-0000-000000000001 | 2026-11-19    | CLP      | Café de especialidad  |          7 |            4 | 62930.00 |       4 | 040b91f0-d8c7-43ec-9851-37fdfbec3736 | 2026-11-19 14:24:42.413477 |
+    | 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 | 10000000-0000-0000-0000-000000000002 | 2026-11-19    | CLP      | Taza de cerámica      |          3 |            2 | 38970.00 |       2 | f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a | 2026-11-19 14:13:51.868827 |
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+
+$ mysql (pedidos360_streams_app, TLS VERIFY_IDENTITY) -e "SELECT COUNT(*) AS processed_events FROM processed_stream_event"
+    +------------------+
+    | processed_events |
+    +------------------+
+    |                4 |
+    +------------------+
+
+--- logs pedidos360-sales-stream CONSUME_|METRIC_PUBLISHED|ORDER_ALERT|DASHBOARD_REBUILD|Started -15min @ 2026-11-19T14:25:20Z (SSM e85b4452-9bc2-47cb-8922-703c5afc7e39) ---
+$ journalctl -u pedidos360-sales-stream --since -15min -o cat | grep -E 'CONSUME_|METRIC_PUBLISHED|ORDER_ALERT|DASHBOARD_REBUILD|Started' | tail -40
+    2026-11-19T14:13:51.865Z  WARN 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.OrderEventListeners  : ORDER_ALERT eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a orderId=79a3d04a-9721-4cd2-956c-5e7386921647 reasons=[HIGH_VALUE] total=52950.00 currency=CLP lines=2
+    2026-11-19T14:13:51.868Z  INFO 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=1 offset=0 attempt=1 result=ALERT
+    2026-11-19T14:13:51.939Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=1 attempt=1 result=VIEW_UPDATED version=2
+    2026-11-19T14:13:51.942Z  INFO 28052 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP version=2 lastEventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a topic=pedidos360.sales.product-metrics.v1 partition=1 offset=1
+    2026-11-19T14:13:51.945Z  INFO 28052 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP version=2 lastEventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1
+    2026-11-19T14:13:51.945Z  INFO 28052 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=1 offset=0 attempt=1 result=ACCUMULATORS_UPDATED metrics=2
+    2026-11-19T14:13:51.961Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1 attempt=1 result=VIEW_UPDATED version=2
+    2026-11-19T14:16:49.770Z ERROR 28052 --- [sales-stream-service] [ggregator-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_DLT eventId=unknown group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=0 offset=0 code=DESERIALIZATION_FAILED retried=false
+    2026-11-19T14:16:49.864Z ERROR 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_DLT eventId=unknown group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=0 offset=0 code=DESERIALIZATION_FAILED retried=false
+    2026-11-19T14:17:00.053Z  INFO 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=2 offset=1 attempt=1 result=NO_ALERT
+    2026-11-19T14:17:00.237Z  INFO 28052 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP version=2 lastEventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a topic=pedidos360.sales.product-metrics.v1 partition=1 offset=2
+    2026-11-19T14:17:00.237Z  INFO 28052 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP version=2 lastEventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a topic=pedidos360.sales.product-metrics.v1 partition=2 offset=2
+    2026-11-19T14:17:00.237Z  INFO 28052 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_DUPLICATE eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=2 offset=1 attempt=1 code=ALREADY_PROCESSED
+    2026-11-19T14:17:00.237Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2
+    2026-11-19T14:17:00.256Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2
+    2026-11-19T14:24:39.086Z  INFO 174321 --- [sales-stream-service] [           main] c.d.p.sales.SalesStreamApplication       : Started SalesStreamApplication in 16.378 seconds (process running for 17.745)
+    Started pedidos360-sales-stream.service - Pedidos360 sales-stream (EP5).
+    2026-11-19T14:24:42.245Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.s.SalesDashboardListener       : DASHBOARD_REBUILD group=pedidos360-sales-dashboard partitions=[pedidos360.sales.product-metrics.v1-0, pedidos360.sales.product-metrics.v1-2, pedidos360.sales.product-metrics.v1-1] from=beginning
+    2026-11-19T14:24:42.424Z  INFO 174321 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=73060681-f4b4-4ac9-a49c-3e5c9294c07d group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=1 offset=1 attempt=1 result=NO_ALERT
+    2026-11-19T14:24:42.429Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=0 attempt=1 result=VIEW_UPDATED version=1
+    2026-11-19T14:24:42.449Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1 attempt=1 result=VIEW_UPDATED version=2
+    2026-11-19T14:24:42.453Z  INFO 174321 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=040b91f0-d8c7-43ec-9851-37fdfbec3736 group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=0 offset=1 attempt=1 result=NO_ALERT
+    2026-11-19T14:24:42.473Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2
+    2026-11-19T14:24:42.516Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=0 attempt=1 result=VIEW_UPDATED version=1
+    2026-11-19T14:24:42.539Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=1 attempt=1 result=VIEW_UPDATED version=2
+    2026-11-19T14:24:42.562Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2
+    2026-11-19T14:24:42.830Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=73060681-f4b4-4ac9-a49c-3e5c9294c07d group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=3 attempt=1 result=VIEW_UPDATED version=3
+    2026-11-19T14:24:42.844Z  INFO 174321 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP version=3 lastEventId=73060681-f4b4-4ac9-a49c-3e5c9294c07d topic=pedidos360.sales.product-metrics.v1 partition=1 offset=3
+    2026-11-19T14:24:42.845Z  INFO 174321 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=73060681-f4b4-4ac9-a49c-3e5c9294c07d group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=1 offset=1 attempt=1 result=ACCUMULATORS_UPDATED metrics=1
+    2026-11-19T14:24:42.878Z  INFO 174321 --- [sales-stream-service] [ggregator-0-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP version=4 lastEventId=040b91f0-d8c7-43ec-9851-37fdfbec3736 topic=pedidos360.sales.product-metrics.v1 partition=1 offset=4
+    2026-11-19T14:24:42.881Z  INFO 174321 --- [sales-stream-service] [ggregator-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=040b91f0-d8c7-43ec-9851-37fdfbec3736 group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=0 offset=1 attempt=1 result=ACCUMULATORS_UPDATED metrics=1
+    2026-11-19T14:24:42.892Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=040b91f0-d8c7-43ec-9851-37fdfbec3736 group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=4 attempt=1 result=VIEW_UPDATED version=4

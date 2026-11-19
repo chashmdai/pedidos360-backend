@@ -1,0 +1,59 @@
+Evidencia E-12. Idempotencia ante un evento duplicado
+
+Objetivo
+Comprobar que una reentrega no duplica acumulados.
+
+Indicador asociado
+EP5: manejo de errores (12 %); consumidores (14 %).
+
+Entorno
+AWS cuenta 647660738152 (us-east-1), EC2 i-01bcf3ef9d3a64d4e (t3.large, Ubuntu 24.04), release ep5-20261119T040026Z; comandos ejecutados como root en /opt/pedidos360/current mediante SSM Run Command (AWS-RunShellScript, script revisado deploy/ep5-evidence.py). Kafka UI consultado por su API en 127.0.0.1:8090 desde la propia instancia (la misma vista que se abre por reenvío de puertos SSM).
+
+Resultado esperado (informe)
+Log CONSUME_DUPLICATE con el eventId; los acumulados no cambian.
+
+Resultado observado
+Se leyó el registro ya procesado del pedido d9d1058b… (partición 2, offset 0, eventId 4e172649-cccf-4f45-88a1-1ca5bbe0d10b) y se republicó con la misma clave y el mismo payload (quedó en p2, offset 1). Resultado: CONSUME_DUPLICATE eventId=4e172649… group=pedidos360-sales-aggregator ... code=ALREADY_PROCESSED. product_sales_daily no cambió (Café 5/2/44.950 v2, Taza 3/2/38.970 v2) y processed_stream_event siguió en 2. order-monitor lo evaluó otra vez (NO_ALERT): el monitor no acumula. Por diseño, ante un duplicado el agregador republica el estado vigente con la misma version, para cubrir una publicación fallida después del commit. La vista descartó esas copias como STALE_VERSION_DISCARDED version=2, así que los acumulados no cambiaron.
+
+Diferencias con el informe
+Ninguna en el resultado. Se documenta además la republicación idempotente con la misma version, que la vista descarta.
+
+Procedimiento y salida (sin secretos ni tokens)
+--- replay 2 0 @ 2026-11-19T14:17:00Z (SSM 32c5dfa9-76a7-4201-87cf-ec8066f89c77) ---
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 2 --offset 0 --max-messages 1 --property print.key=true --property key.separator="|"
+    d9d1058b-145c-4396-8f4a-87e03a9a2e61|{"schemaVersion":1,"eventId":"4e172649-cccf-4f45-88a1-1ca5bbe0d10b","orderId":"d9d1058b-145c-4396-8f4a-87e03a9a2e61","tenantId":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250","occurredAt":"2026-11-19T14:05:40.597505Z","currency":"CLP","total":30970.00,"itemCount":2,"items":[{"productId":"10000000-0000-0000-0000-000000000001","productName":"Café de especialidad","quantity":2,"unitPrice":8990.00,"lineTotal":17980.00},{"productId":"10000000-0000-0000-0000-000000000002","productName":"Taza de cerámica","quantity":1,"unitPrice":12990.00,"lineTotal":12990.00}]}
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-producer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --property parse.key=true --property key.separator="|"   <<< (mismo registro: misma clave y mismo payload)
+
+
+$ eventId republicado
+    4e172649-cccf-4f45-88a1-1ca5bbe0d10b
+
+--- logs pedidos360-sales-stream CONSUME_DLT|CONSUME_DUPLICATE|CONSUME_RETRY|CONSUME_OK -6min @ 2026-11-19T14:17:05Z (SSM 3b1d25b5-d2e9-4e0c-9d1c-69f9b1deaa08) ---
+$ journalctl -u pedidos360-sales-stream --since -6min -o cat | grep -E 'CONSUME_DLT|CONSUME_DUPLICATE|CONSUME_RETRY|CONSUME_OK' | tail -40
+    2026-11-19T14:13:51.868Z  INFO 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=1 offset=0 attempt=1 result=ALERT
+    2026-11-19T14:13:51.939Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=1 attempt=1 result=VIEW_UPDATED version=2
+    2026-11-19T14:13:51.945Z  INFO 28052 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=1 offset=0 attempt=1 result=ACCUMULATORS_UPDATED metrics=2
+    2026-11-19T14:13:51.961Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1 attempt=1 result=VIEW_UPDATED version=2
+    2026-11-19T14:16:49.770Z ERROR 28052 --- [sales-stream-service] [ggregator-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_DLT eventId=unknown group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=0 offset=0 code=DESERIALIZATION_FAILED retried=false
+    2026-11-19T14:16:49.864Z ERROR 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_DLT eventId=unknown group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=0 offset=0 code=DESERIALIZATION_FAILED retried=false
+    2026-11-19T14:17:00.053Z  INFO 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=2 offset=1 attempt=1 result=NO_ALERT
+    2026-11-19T14:17:00.237Z  INFO 28052 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_DUPLICATE eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=2 offset=1 attempt=1 code=ALREADY_PROCESSED
+    2026-11-19T14:17:00.237Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2
+    2026-11-19T14:17:00.256Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2
+
+--- sql sales processed @ 2026-11-19T14:17:30Z (SSM e4772dd3-babf-46b4-bac1-310a77c8b791) ---
+$ mysql (pedidos360_streams_app, TLS VERIFY_IDENTITY) -e "SELECT * FROM product_sales_daily ORDER BY 1"
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+    | tenant_id                            | product_id                           | business_date | currency | product_name          | units_sold | orders_count | revenue  | version | last_event_id                        | updated_at                 |
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+    | 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 | 10000000-0000-0000-0000-000000000001 | 2026-11-19    | CLP      | Café de especialidad  |          5 |            2 | 44950.00 |       2 | f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a | 2026-11-19 14:13:51.868827 |
+    | 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 | 10000000-0000-0000-0000-000000000002 | 2026-11-19    | CLP      | Taza de cerámica      |          3 |            2 | 38970.00 |       2 | f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a | 2026-11-19 14:13:51.868827 |
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+
+$ mysql (pedidos360_streams_app, TLS VERIFY_IDENTITY) -e "SELECT COUNT(*) AS processed_events FROM processed_stream_event"
+    +------------------+
+    | processed_events |
+    +------------------+
+    |                2 |
+    +------------------+

@@ -129,6 +129,17 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
 - E-14 en AWS (`scripts/ep5-admin-evidence.py`) usa reenvío de puertos SSM a kafka-admin (8187) y un access token de Entra que el usuario deja en un archivo 0600 fuera del repositorio. El script lo borra al terminar y nunca lo imprime. Solo crea, modifica y elimina `pedidos360.lab.demo`.
 - E-19 mide la memoria de cada servicio con `systemctl show -p MemoryCurrent,MemoryPeak` y no con `ps` por usuario. `ps` atribuía los procesos de RabbitMQ a `pedidos360-bff` porque la imagen de RabbitMQ usa el UID 999, que en el host es el usuario de sistema `pedidos360-bff` (Docker sin `userns-remap` comparte los UID con el host). Revisado el 2026-11-19 (`docs/evidence/ep5/aws/uid-check.json`): el contenedor solo monta su volumen de datos, su configuración y sus dos secretos, y `/var/lib/docker/volumes` es solo de root. Por eso el BFF no accede a los datos de RabbitMQ ni el contenedor a los archivos del BFF. Riesgo residual bajo, heredado de EP4. Se resolvería con UIDs de servicio fuera del rango de las imágenes o con `userns-remap`; queda como pendiente y no se cambia antes de la entrega.
 
+- **Resultado de la Fase 6 (2026-11-19, 12:50–14:40Z):** las 19 evidencias están en `docs/evidence/ep5/E-XX-<nombre>.txt`. Todas coinciden con el resultado del informe salvo las diferencias declaradas en cada archivo:
+  - IDs nuevos (EC2 `i-01bcf3ef9d3a64d4e`, API `az3h2vqgsi`) y CachyOS en vez de WSL2 (E-01, E-17, E-18, E-19).
+  - Mensajes del tópico leídos con `kafka-console-consumer` en lugar de la pantalla de Kafka UI (E-07); la parte Kafka UI se registró desde su API (E-03, E-04, E-05, E-08).
+  - Una copia por grupo en el DLT (E-11).
+  - Republicación con la misma version ante un duplicado, descartada por la vista (E-12).
+  - Compactación aún no ejecutada durante E-15 (segmento activo de 1 h); alertas no reconstruidas, limitación ya declarada en el informe.
+  - E-14 solo con referencia local: el usuario omitió el token Admin para la parte AWS.
+  - E-17 registra un tercer 401 sin token (repetición desde DevTools).
+- Pedidos de la sesión (todos desde la SPA con Entra): D9D1058B (E-07), 79A3D04A (E-09, alto valor), 9C59571D y E1BB7872 (E-10), A4B808EE (E-13). Acumulado del día UTC 2026-11-19: Café 7 u / 4 pedidos / 62.930 CLP, Taza 4 u / 3 pedidos / 51.960 CLP.
+- La consulta de `purchase_orders` de las evidencias nunca selecciona `owner_subject` (oid de Entra del usuario). Un archivo crudo que lo contenía se borró antes de llegar a Git.
+
 ## Pendientes
 
 - **404 de `/favicon.ico` en la consola del navegador** (informado por el usuario el 2026-11-19, bloque 1 de E-07/E-17). `pedidos360-frontend/index.html` no declara `<link rel="icon">` ni hay carpeta `public/`. Por eso el navegador pide `/favicon.ico` en la raíz del dominio de API Gateway, donde no hay ruta (solo `/app` y `/app/{proxy+}` son públicas), y responde 404; `/app/favicon.ico` también da 404. No afecta la funcionalidad. Corrección propuesta: declarar el ícono en `index.html` como SVG embebido (data URI) o servirlo bajo `/app/`, sin abrir rutas nuevas en API Gateway. Requiere recompilar el frontend e instalar un release nuevo; se hará después de las evidencias para no cambiar el release a mitad de la Fase 6.

@@ -1,0 +1,92 @@
+Evidencia E-09. Reacción del sistema en cuasi tiempo real
+
+Objetivo
+Demostrar que un nuevo pedido actualiza la vista y genera procesos derivados sin intervención.
+
+Indicador asociado
+EP6: respuesta a eventos en tiempo real (12 %); casos de uso (15 %).
+
+Entorno
+AWS cuenta 647660738152 (us-east-1), EC2 i-01bcf3ef9d3a64d4e (t3.large, Ubuntu 24.04), release ep5-20261119T040026Z; comandos ejecutados como root en /opt/pedidos360/current mediante SSM Run Command (AWS-RunShellScript, script revisado deploy/ep5-evidence.py). Kafka UI consultado por su API en 127.0.0.1:8090 desde la propia instancia (la misma vista que se abre por reenvío de puertos SSM).
+
+Resultado esperado (informe)
+En pocos segundos aumentan unidades, pedidos e importe de los productos; la métrica publicada incrementa version; aparece una alerta de alto valor.
+
+Resultado observado
+Con la vista 'Ventas en vivo' abierta, el usuario registró el pedido 79a3d04a-9721-4cd2-956c-5e7386921647 (3 × Café + 2 × Taza, 52.950 CLP) a las 14:13:50.995Z. Publicación en Kafka: 14:13:51.866 (partición 1, offset 0). order-monitor: ORDER_ALERT reasons=[HIGH_VALUE] total=52950.00 currency=CLP lines=2 (14:13:51.865). El agregador actualizó product_sales_daily a Café 5 u / 2 pedidos / 44.950,00 / version 2 y Taza 3 u / 2 pedidos / 38.970,00 / version 2, y publicó ambas métricas en product-metrics.v1 (version 1 → 2, offsets 0 → 1). La vista se actualizó a las 14:13:51.939 (0,94 s después del registro). La siguiente consulta de la SPA, a las 14:13:54.481 según el log de API Gateway, mostró los nuevos acumulados y la alerta de alto valor, unos 4 s después del POST (el sondeo es cada 3 s). El usuario confirmó la alerta en la vista.
+
+Diferencias con el informe
+Ninguna.
+
+Procedimiento y salida (sin secretos ni tokens)
+--- sql orders outbox sales processed @ 2026-11-19T14:15:21Z (SSM db70698b-20fb-4fcd-8a06-f41c8189db6c) ---
+$ mysql (pedidos360_orders_app, TLS VERIFY_IDENTITY) -e "SELECT o.id, o.status, o.created_at, i.product_name, i.quantity, i.unit_price, i.currency FROM purchase_orders o JOIN order_items i ON i.order_id = o.id ORDER BY o.created_at DESC, i.id LIMIT 30"
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+    | id                                   | status     | created_at                 | product_name          | quantity | unit_price | currency |
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+    | 79a3d04a-9721-4cd2-956c-5e7386921647 | REGISTERED | 2026-11-19 14:13:50.994696 | Café de especialidad  |        3 |    8990.00 | CLP      |
+    | 79a3d04a-9721-4cd2-956c-5e7386921647 | REGISTERED | 2026-11-19 14:13:50.994696 | Taza de cerámica      |        2 |   12990.00 | CLP      |
+    | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Café de especialidad  |        2 |    8990.00 | CLP      |
+    | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Taza de cerámica      |        1 |   12990.00 | CLP      |
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+
+$ mysql (pedidos360_orders_app, TLS VERIFY_IDENTITY) -e "SELECT event_id, order_id, created_at, published_at, attempts, last_error_code FROM order_stream_outbox ORDER BY created_at DESC LIMIT 10"
+    +--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+    | event_id                             | order_id                             | created_at                 | published_at               | attempts | last_error_code |
+    +--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+    | f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a | 79a3d04a-9721-4cd2-956c-5e7386921647 | 2026-11-19 14:13:51.020585 | 2026-11-19 14:13:51.866304 |        1 | NULL            |
+    | 4e172649-cccf-4f45-88a1-1ca5bbe0d10b | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | 2026-11-19 14:05:41.066188 | 2026-11-19 14:05:43.408069 |        1 | NULL            |
+    +--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+
+$ mysql (pedidos360_streams_app, TLS VERIFY_IDENTITY) -e "SELECT * FROM product_sales_daily ORDER BY 1"
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+    | tenant_id                            | product_id                           | business_date | currency | product_name          | units_sold | orders_count | revenue  | version | last_event_id                        | updated_at                 |
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+    | 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 | 10000000-0000-0000-0000-000000000001 | 2026-11-19    | CLP      | Café de especialidad  |          5 |            2 | 44950.00 |       2 | f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a | 2026-11-19 14:13:51.868827 |
+    | 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 | 10000000-0000-0000-0000-000000000002 | 2026-11-19    | CLP      | Taza de cerámica      |          3 |            2 | 38970.00 |       2 | f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a | 2026-11-19 14:13:51.868827 |
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+
+$ mysql (pedidos360_streams_app, TLS VERIFY_IDENTITY) -e "SELECT COUNT(*) AS processed_events FROM processed_stream_event"
+    +------------------+
+    | processed_events |
+    +------------------+
+    |                2 |
+    +------------------+
+
+--- logs pedidos360-orders PUBLISH_CONFIRMED|PUBLISH_DEFERRED -30min @ 2026-11-19T14:15:28Z (SSM 48192586-f10c-456e-af68-2e4271ad55ef) ---
+$ journalctl -u pedidos360-orders --since -30min -o cat | grep -E 'PUBLISH_CONFIRMED|PUBLISH_DEFERRED' | tail -40
+    2026-11-19T14:05:41.916Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=3053af70-9ccd-46ed-be8d-96560a2d6184 orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61
+    2026-11-19T14:05:43.411Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61 topic=pedidos360.orders.registered.v1 partition=2 offset=0
+    2026-11-19T14:13:51.074Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=cabde51f-6ac1-41af-8a0c-96f7fbb4be13 orderId=79a3d04a-9721-4cd2-956c-5e7386921647
+    2026-11-19T14:13:51.866Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a orderId=79a3d04a-9721-4cd2-956c-5e7386921647 topic=pedidos360.orders.registered.v1 partition=1 offset=0
+
+--- logs pedidos360-sales-stream CONSUME_|METRIC_PUBLISHED|ORDER_ALERT -30min @ 2026-11-19T14:15:34Z (SSM d23e7fde-6ca9-4ae1-b0d1-3a88122c1ac9) ---
+$ journalctl -u pedidos360-sales-stream --since -30min -o cat | grep -E 'CONSUME_|METRIC_PUBLISHED|ORDER_ALERT' | tail -40
+    2026-11-19T14:05:43.898Z  INFO 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=2 offset=0 attempt=1 result=NO_ALERT
+    2026-11-19T14:05:45.589Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=0 attempt=1 result=VIEW_UPDATED version=1
+    2026-11-19T14:05:45.597Z  INFO 28052 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP version=1 lastEventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b topic=pedidos360.sales.product-metrics.v1 partition=1 offset=0
+    2026-11-19T14:05:45.660Z  INFO 28052 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP version=1 lastEventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b topic=pedidos360.sales.product-metrics.v1 partition=2 offset=0
+    2026-11-19T14:05:45.661Z  INFO 28052 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=2 offset=0 attempt=1 result=ACCUMULATORS_UPDATED metrics=2
+    2026-11-19T14:05:45.713Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=0 attempt=1 result=VIEW_UPDATED version=1
+    2026-11-19T14:13:51.865Z  WARN 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.OrderEventListeners  : ORDER_ALERT eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a orderId=79a3d04a-9721-4cd2-956c-5e7386921647 reasons=[HIGH_VALUE] total=52950.00 currency=CLP lines=2
+    2026-11-19T14:13:51.868Z  INFO 28052 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=1 offset=0 attempt=1 result=ALERT
+    2026-11-19T14:13:51.939Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=1 attempt=1 result=VIEW_UPDATED version=2
+    2026-11-19T14:13:51.942Z  INFO 28052 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP version=2 lastEventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a topic=pedidos360.sales.product-metrics.v1 partition=1 offset=1
+    2026-11-19T14:13:51.945Z  INFO 28052 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP version=2 lastEventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1
+    2026-11-19T14:13:51.945Z  INFO 28052 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=1 offset=0 attempt=1 result=ACCUMULATORS_UPDATED metrics=2
+    2026-11-19T14:13:51.961Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1 attempt=1 result=VIEW_UPDATED version=2
+
+--- topic-tail pedidos360.sales.product-metrics.v1 4 @ 2026-11-19T14:16:12Z (SSM f2ea99da-0e43-402f-84d8-2a226813775a) ---
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.sales.product-metrics.v1 --partition 0 --offset earliest --timeout-ms 8000 --property print.key=true ... 
+    
+    (0 matching records in partition 0; last 4 shown)
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.sales.product-metrics.v1 --partition 1 --offset earliest --timeout-ms 8000 --property print.key=true ... 
+    CreateTime:1795097145281	Partition:1	Offset:0	NO_HEADERS	72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP	{"schemaVersion":1,"metricKey":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP","tenantId":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250","productId":"10000000-0000-0000-0000-000000000001","productName":"Café de especialidad","businessDate":"2026-11-19","currency":"CLP","unitsSold":2,"ordersCount":1,"revenue":17980.00,"version":1,"lastEventId":"4e172649-cccf-4f45-88a1-1ca5bbe0d10b","updatedAt":"2026-11-19T14:05:43.869197Z"}
+    CreateTime:1795097631911	Partition:1	Offset:1	NO_HEADERS	72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP	{"schemaVersion":1,"metricKey":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP","tenantId":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250","productId":"10000000-0000-0000-0000-000000000001","productName":"Café de especialidad","businessDate":"2026-11-19","currency":"CLP","unitsSold":5,"ordersCount":2,"revenue":44950.00,"version":2,"lastEventId":"f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a","updatedAt":"2026-11-19T14:13:51.868827Z"}
+    (2 matching records in partition 1; last 4 shown)
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.sales.product-metrics.v1 --partition 2 --offset earliest --timeout-ms 8000 --property print.key=true ... 
+    CreateTime:1795097145381	Partition:2	Offset:0	NO_HEADERS	72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP	{"schemaVersion":1,"metricKey":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP","tenantId":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250","productId":"10000000-0000-0000-0000-000000000002","productName":"Taza de cerámica","businessDate":"2026-11-19","currency":"CLP","unitsSold":1,"ordersCount":1,"revenue":12990.00,"version":1,"lastEventId":"4e172649-cccf-4f45-88a1-1ca5bbe0d10b","updatedAt":"2026-11-19T14:05:43.869197Z"}
+    CreateTime:1795097631911	Partition:2	Offset:1	NO_HEADERS	72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP	{"schemaVersion":1,"metricKey":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP","tenantId":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250","productId":"10000000-0000-0000-0000-000000000002","productName":"Taza de cerámica","businessDate":"2026-11-19","currency":"CLP","unitsSold":3,"ordersCount":2,"revenue":38970.00,"version":2,"lastEventId":"f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a","updatedAt":"2026-11-19T14:13:51.868827Z"}
+    (2 matching records in partition 2; last 4 shown)

@@ -1,0 +1,176 @@
+Evidencia E-16. Integración RabbitMQ sin cambios
+
+Objetivo
+Comprobar que el mismo pedido sigue procesándose por RabbitMQ.
+
+Indicador asociado
+EP5 y EP6: Kafka complementa la arquitectura sin afectar RabbitMQ; dos nodos, tres colas con DLQ, exchanges direct y topic.
+
+Entorno
+AWS cuenta 647660738152 (us-east-1), EC2 i-01bcf3ef9d3a64d4e (t3.large, Ubuntu 24.04), release ep5-20261119T040026Z; comandos ejecutados como root en /opt/pedidos360/current mediante SSM Run Command (AWS-RunShellScript, script revisado deploy/ep5-evidence.py). Kafka UI consultado por su API en 127.0.0.1:8090 desde la propia instancia (la misma vista que se abre por reenvío de puertos SSM).
+
+Resultado esperado (informe)
+Comprobante, auditoría y resumen con ACK; clúster de dos nodos sin particiones; tres colas con sus DLQ; exchanges direct y topic enlazados.
+
+Resultado observado
+Para el pedido de E-07 (d9d1058b-145c-4396-8f4a-87e03a9a2e61), la outbox RabbitMQ order_event_outbox registró el evento 3053af70-9ccd-46ed-be8d-96560a2d6184 (published_at 14:05:41.911, 1 intento) y OutboxPublisher registró PUBLISH_CONFIRMED. receipts-service: ACK eventId=3053af70… result=RECEIPT_STORED attempt=1 redelivered=false. order-insights-service: ACK flow=sales y ACK flow=audit, result=PROJECTION_STORED attempt=1. Comprobante, resumen y auditoría con ACK. Clúster pedidos360-ep4 con dos nodos en disco y en ejecución (RabbitMQ 4.2.9), Network Partitions (none) y Alarms (none). En el vhost pedidos360-ep4 hay tres colas de trabajo (receipts, sales y audit .order-registered.v1) con un consumidor cada una y sus tres DLQ (.failed.v1), sin mensajes pendientes. Los exchanges pedidos360.orders.events.v1 (direct) y pedidos360.orders.insights.v1 (topic) están enlazados entre sí (order.registered.v1) y con las colas, y cada cola de errores tiene su exchange direct .errors.v1. Los 5 pedidos de la sesión siguieron el mismo camino. Kafka no cambió el contrato OrderRegisteredV1 ni la topología.
+
+Diferencias con el informe
+Ninguna. El vhost es pedidos360-ep4, el de la configuración de EP4 en la EC2.
+
+Procedimiento y salida (sin secretos ni tokens)
+--- sql orders rabbit-outbox @ 2026-11-19T14:07:39Z (SSM bd5de28a-6e2d-4bc5-93f9-7e86665a2528) ---
+$ mysql (pedidos360_orders_app, TLS VERIFY_IDENTITY) -e "SELECT o.id, o.status, o.created_at, i.product_name, i.quantity, i.unit_price, i.currency FROM purchase_orders o JOIN order_items i ON i.order_id = o.id ORDER BY o.created_at DESC, i.id LIMIT 30"
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+    | id                                   | status     | created_at                 | product_name          | quantity | unit_price | currency |
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+    | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Café de especialidad  |        2 |    8990.00 | CLP      |
+    | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Taza de cerámica      |        1 |   12990.00 | CLP      |
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+
+$ mysql (pedidos360_orders_app, TLS VERIFY_IDENTITY) -e "SELECT event_id, order_id, created_at, published_at, attempts, last_error_code FROM order_event_outbox ORDER BY created_at DESC LIMIT 10"
+    +--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+    | event_id                             | order_id                             | created_at                 | published_at               | attempts | last_error_code |
+    +--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+    | 3053af70-9ccd-46ed-be8d-96560a2d6184 | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | 2026-11-19 14:05:41.048738 | 2026-11-19 14:05:41.911426 |        1 | NULL            |
+    +--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+
+--- logs pedidos360-orders PUBLISH_CONFIRMED|PUBLISH_DEFERRED -1h @ 2026-11-19T14:07:53Z (SSM 9be6bb43-f2bd-423a-9072-b37f4957e96b) ---
+$ journalctl -u pedidos360-orders --since -1h -o cat | grep -E 'PUBLISH_CONFIRMED|PUBLISH_DEFERRED' | tail -40
+    2026-11-19T14:05:41.916Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=3053af70-9ccd-46ed-be8d-96560a2d6184 orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61
+    2026-11-19T14:05:43.411Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61 topic=pedidos360.orders.registered.v1 partition=2 offset=0
+
+--- logs pedidos360-receipts ACK|NACK|REJECT -1h @ 2026-11-19T14:08:43Z (SSM 02527252-e172-49de-b5ca-356222642d3a) ---
+$ journalctl -u pedidos360-receipts --since -1h -o cat | grep -E 'ACK|NACK|REJECT' | tail -40
+    2026-11-19T14:05:42.304Z  INFO 29194 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : ACK eventId=3053af70-9ccd-46ed-be8d-96560a2d6184 orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61 result=RECEIPT_STORED attempt=1 redelivered=false
+
+--- logs pedidos360-insights ACK|NACK|REJECT -1h @ 2026-11-19T14:08:50Z (SSM f1fb122d-3dd8-484f-a05f-dee73663cd6c) ---
+$ journalctl -u pedidos360-insights --since -1h -o cat | grep -E 'ACK|NACK|REJECT' | tail -40
+    2026-11-19T14:05:42.457Z  INFO 29641 --- [order-insights-service] [ sales-orders-1] c.d.p.i.i.ManualProjectionConsumer       : ACK flow=sales eventId=3053af70-9ccd-46ed-be8d-96560a2d6184 orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61 result=PROJECTION_STORED attempt=1
+    2026-11-19T14:05:42.459Z  INFO 29641 --- [order-insights-service] [ audit-orders-1] c.d.p.i.i.ManualProjectionConsumer       : ACK flow=audit eventId=3053af70-9ccd-46ed-be8d-96560a2d6184 orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61 result=PROJECTION_STORED attempt=1
+
+--- rabbit  @ 2026-11-19T14:09:03Z (SSM 42786776-800d-4009-808b-3f082c233ccd) ---
+$ docker exec pedidos360-ep4-rabbit-1 rabbitmqctl -q cluster_status
+    Basics
+    
+    Cluster name: pedidos360-ep4
+    Total CPU cores available cluster-wide: 4
+    
+    Cluster Tags
+    
+    (none)
+    
+    Disk Nodes
+    
+    rabbit@pedidos360-ep4-rabbit-1
+    rabbit@pedidos360-ep4-rabbit-2
+    
+    Running Nodes
+    
+    rabbit@pedidos360-ep4-rabbit-1
+    rabbit@pedidos360-ep4-rabbit-2
+    
+    Versions
+    
+    rabbit@pedidos360-ep4-rabbit-1: RabbitMQ 4.2.9 on Erlang 27.3.4.19
+    rabbit@pedidos360-ep4-rabbit-2: RabbitMQ 4.2.9 on Erlang 27.3.4.19
+    
+    CPU Cores
+    
+    Node: rabbit@pedidos360-ep4-rabbit-1, available CPU cores: 2
+    Node: rabbit@pedidos360-ep4-rabbit-2, available CPU cores: 2
+    
+    Maintenance status
+    
+    Node: rabbit@pedidos360-ep4-rabbit-1, status: not under maintenance
+    Node: rabbit@pedidos360-ep4-rabbit-2, status: not under maintenance
+    
+    Alarms
+    
+    (none)
+    
+    Network Partitions
+    
+    (none)
+    
+    Listeners
+    
+    Node: rabbit@pedidos360-ep4-rabbit-1, interface: [::], port: 15672, protocol: http, purpose: HTTP API
+    Node: rabbit@pedidos360-ep4-rabbit-1, interface: [::], port: 15692, protocol: http/prometheus, purpose: Prometheus exporter API over HTTP
+    Node: rabbit@pedidos360-ep4-rabbit-1, interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication
+    Node: rabbit@pedidos360-ep4-rabbit-1, interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
+    Node: rabbit@pedidos360-ep4-rabbit-2, interface: [::], port: 15672, protocol: http, purpose: HTTP API
+    Node: rabbit@pedidos360-ep4-rabbit-2, interface: [::], port: 15692, protocol: http/prometheus, purpose: Prometheus exporter API over HTTP
+    Node: rabbit@pedidos360-ep4-rabbit-2, interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication
+    Node: rabbit@pedidos360-ep4-rabbit-2, interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
+    
+    Feature flags
+    
+    Flag: classic_mirrored_queue_version, state: enabled
+    Flag: classic_queue_type_delivery_support, state: enabled
+    Flag: detailed_queues_endpoint, state: enabled
+    Flag: direct_exchange_routing_v2, state: enabled
+    Flag: drop_unroutable_metric, state: enabled
+    Flag: empty_basic_get_metric, state: enabled
+    Flag: feature_flags_v2, state: enabled
+    Flag: implicit_default_bindings, state: enabled
+    Flag: khepri_db, state: enabled
+    Flag: listener_records_in_ets, state: enabled
+    Flag: maintenance_mode_status, state: enabled
+    Flag: message_containers, state: enabled
+    Flag: message_containers_deaths_v2, state: enabled
+    Flag: quorum_queue, state: enabled
+    Flag: quorum_queue_non_voters, state: enabled
+    Flag: rabbit_exchange_type_local_random, state: enabled
+    Flag: rabbitmq_4.0.0, state: enabled
+    Flag: rabbitmq_4.1.0, state: enabled
+    Flag: rabbitmq_4.2.0, state: enabled
+    Flag: restart_streams, state: enabled
+    Flag: stream_filtering, state: enabled
+    Flag: stream_queue, state: enabled
+    Flag: stream_sac_coordinator_unblock_group, state: enabled
+    Flag: stream_single_active_consumer, state: enabled
+    Flag: stream_update_config_command, state: enabled
+    Flag: tracking_records_in_ets, state: enabled
+    Flag: user_limits, state: enabled
+    Flag: virtual_host_metadata, state: enabled
+
+$ docker exec pedidos360-ep4-rabbit-1 rabbitmqctl -q -p pedidos360-ep4 list_queues name type messages_ready messages_unacknowledged consumers
+    name	type	messages_ready	messages_unacknowledged	consumers
+    pedidos360.sales.failed.v1	classic	0	0	0
+    pedidos360.audit.order-registered.v1	classic	0	0	1
+    pedidos360.receipts.failed.v1	classic	0	0	0
+    pedidos360.sales.order-registered.v1	classic	0	0	1
+    pedidos360.audit.failed.v1	classic	0	0	0
+    pedidos360.receipts.order-registered.v1	classic	0	0	1
+
+$ docker exec pedidos360-ep4-rabbit-1 rabbitmqctl -q -p pedidos360-ep4 list_exchanges name type
+    name	type
+    	direct
+    amq.direct	direct
+    amq.fanout	fanout
+    amq.headers	headers
+    amq.match	headers
+    amq.rabbitmq.trace	topic
+    amq.topic	topic
+    pedidos360.audit.errors.v1	direct
+    pedidos360.orders.events.v1	direct
+    pedidos360.orders.insights.v1	topic
+    pedidos360.receipts.errors.v1	direct
+    pedidos360.sales.errors.v1	direct
+
+$ docker exec pedidos360-ep4-rabbit-1 rabbitmqctl -q -p pedidos360-ep4 list_bindings source_name destination_name routing_key
+    source_name	destination_name	routing_key
+    	pedidos360.sales.failed.v1	pedidos360.sales.failed.v1
+    	pedidos360.audit.order-registered.v1	pedidos360.audit.order-registered.v1
+    	pedidos360.receipts.failed.v1	pedidos360.receipts.failed.v1
+    	pedidos360.sales.order-registered.v1	pedidos360.sales.order-registered.v1
+    	pedidos360.audit.failed.v1	pedidos360.audit.failed.v1
+    	pedidos360.receipts.order-registered.v1	pedidos360.receipts.order-registered.v1
+    pedidos360.audit.errors.v1	pedidos360.audit.failed.v1	audit.failed.v1
+    pedidos360.orders.events.v1	pedidos360.orders.insights.v1	order.registered.v1
+    pedidos360.receipts.errors.v1	pedidos360.receipts.failed.v1	receipt.failed.v1
+    pedidos360.sales.errors.v1	pedidos360.sales.failed.v1	sales.failed.v1
+    pedidos360.orders.insights.v1	pedidos360.audit.order-registered.v1	order.registered.*
+    pedidos360.orders.events.v1	pedidos360.receipts.order-registered.v1	order.registered.v1
+    pedidos360.orders.insights.v1	pedidos360.sales.order-registered.v1	*.registered.v1

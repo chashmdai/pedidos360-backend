@@ -29,7 +29,7 @@ UUID = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
 
 
 def redact(text):
-    text = re.sub(r"(?i)bearer\s+[A-Za-z0-9._~+/=-]+", "Bearer [REDACTED]", text)
+    text = re.sub(r"(?i)bearer\s+[A-Za-z0-9._~+/=-]{20,}", "Bearer [REDACTED]", text)
     text = re.sub(r"eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]+", "[JWT REDACTED]", text)
     return re.sub(r"(?<!sha256:)(?<![0-9a-f-])[0-9a-f]{32,64}(?![0-9a-f-])", "[REDACTED]", text)
 
@@ -136,6 +136,17 @@ def wait_health(port, seconds=300):
     return {"cmd": f"wait for 127.0.0.1:{port}/actuator/health UP", "exit": 1, "out": "timeout"}
 
 
+def memory_by_unit():
+    lines = []
+    for unit in ("catalog", "orders", "sales-stream", "bff", "receipts", "insights", "rabbit-admin", "kafka-admin"):
+        values = dict(line.split("=", 1) for line in subprocess.run(
+            ["systemctl", "show", f"pedidos360-{unit}", "-p", "MemoryCurrent", "-p", "MemoryPeak", "-p", "MemoryMax"],
+            capture_output=True, text=True).stdout.split())
+        mib = lambda v: f"{int(v) // 1048576} MiB" if v.isdigit() else v
+        lines.append(f"pedidos360-{unit:<14} current={mib(values.get('MemoryCurrent', '?')):>8}  peak={mib(values.get('MemoryPeak', '?')):>8}")
+    return {"cmd": "systemctl show pedidos360-<servicio> -p MemoryCurrent -p MemoryPeak", "exit": 0, "out": "\n".join(lines)}
+
+
 action, args = sys.argv[1], sys.argv[2:]
 steps = []
 if action == "e01":
@@ -176,10 +187,7 @@ elif action == "e19":
                  "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}"]),
               sh("docker inspect (mem_limit)", ["bash", "-c", "docker inspect --format '{{.Name}} mem_limit={{.HostConfig.Memory}}' $(docker ps -q)"]),
               sh("systemctl status pedidos360-* --no-pager", ["bash", "-c", "systemctl status 'pedidos360-*' --no-pager -n 0 | grep -E '^(●|○|×)|Active:|Memory:|Main PID:'"]),
-              sh("systemctl show pedidos360-* -p MemoryCurrent,MemoryPeak (servicios Java)", ["bash", "-c",
-                 "for u in catalog orders sales-stream bff receipts insights rabbit-admin kafka-admin; do "
-                 "printf '%-26s %s\\n' pedidos360-$u \"$(systemctl show pedidos360-$u -p MemoryCurrent -p MemoryPeak --value | "
-                 "awk '{printf \\\"%d MiB \\\", $1/1048576}')\"; done"])]
+              memory_by_unit()]
 elif action == "outbox":   # E-07: order_stream_outbox by orderId (optional) or latest
     where = f"WHERE order_id='{args[0]}'" if args and re.fullmatch(UUID, args[0]) else ""
     steps.append(mysql("orders", f"SELECT event_id, order_id, created_at, published_at, attempts, last_error_code FROM order_stream_outbox {where} ORDER BY created_at DESC LIMIT 10"))

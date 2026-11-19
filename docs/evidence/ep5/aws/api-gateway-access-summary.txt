@@ -1,0 +1,24 @@
+Log group /pedidos360/api-gateway (formato: requestId, routeKey, status, latency; sin token, query ni cuerpo)
+Ventana: 2026-11-19T12:48:10Z .. 2026-11-19T14:35:41Z
+
+Conteo por ruta y estado:
+  GET /api/v1/me                   401  x 2
+  GET /api/v1/pedidos              200  x 7
+  GET /api/v1/pedidos              401  x 2
+  GET /api/v1/productos            200  x 9
+  GET /api/v1/productos            401  x 2
+  GET /api/v1/ventas/en-vivo       200  x 534
+  GET /api/v1/ventas/en-vivo       401  x 3
+  GET /api/v1/ventas/en-vivo       502  x 124
+  GET /app                         200  x 1
+  GET /app/{proxy+}                200  x 34
+  GET /app/{proxy+}                404  x 1
+  POST /api/v1/pedidos             201  x 5
+
+Solicitudes 401 a GET /api/v1/ventas/en-vivo (latency 0 = rechazo del autorizador JWT antes de la integración):
+  12:48:15.526Z  status=401 latency=0 requestId=HFpyggzOIAMEPsA=
+  12:48:15.895Z  status=401 latency=0 requestId=HFpyjjbmoAMEP2Q=
+  14:04:48.179Z  status=401 latency=0 requestId=HF1AGjl0IAMEPxQ=
+
+Primeras y últimas 200 de la vista en vivo:
+  primera 14:04:12Z  última 14:35:41Z  total 534

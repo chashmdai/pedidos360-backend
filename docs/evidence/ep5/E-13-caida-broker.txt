@@ -1,0 +1,189 @@
+Evidencia E-13. Tolerancia a la caída de un broker
+
+Objetivo
+Verificar la continuidad del servicio con un broker detenido.
+
+Indicador asociado
+EP6: arquitectura Kafka (10 %); justificación de réplicas (10 %).
+
+Entorno
+AWS cuenta 647660738152 (us-east-1), EC2 i-01bcf3ef9d3a64d4e (t3.large, Ubuntu 24.04), release ep5-20261119T040026Z; comandos ejecutados como root en /opt/pedidos360/current mediante SSM Run Command (AWS-RunShellScript, script revisado deploy/ep5-evidence.py). Kafka UI consultado por su API en 127.0.0.1:8090 desde la propia instancia (la misma vista que se abre por reenvío de puertos SSM).
+
+Resultado esperado (informe)
+Las particiones lideradas por el broker 2 cambian de líder; ISR de dos réplicas; el pedido se publica y procesa. Tras el inicio, el ISR vuelve a tres réplicas.
+
+Resultado observado
+Antes: orders.registered.v1 p0 líder 2, p1 líder 3, p2 líder 1; product-metrics.v1 p0 líder 1, p1 líder 2, p2 líder 3; ISR de 3. Con docker stop kafka-2, las particiones lideradas por el broker 2 cambiaron de líder (orders p0 → 1; metrics p1 → 3) y todas quedaron con ISR de 2 réplicas, lo que aún cumple min.insync.replicas=2. Con kafka-2 detenido, el usuario registró 1 × Taza (a4b808ee…, 14:29:32Z). Orders lo publicó (PUBLISH_CONFIRMED partition=2 offset=2, 0,93 s después del commit), los tres grupos lo procesaron y Taza quedó en 4 u / 3 pedidos / 51.960,00 (version 3), con lag 0. La vista mostró 114.890 CLP y 11 unidades. Con docker start kafka-2, el contenedor pasó a healthy, el ISR volvió a 3 réplicas en todas las particiones y el broker 2 recuperó el liderazgo de sus particiones preferidas.
+
+Diferencias con el informe
+Ninguna.
+
+Procedimiento y salida (sin secretos ni tokens)
+--- describe  @ 2026-11-19T14:26:28Z (SSM 66d65ae5-e73d-4e00-be68-953b14335221) ---
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1
+    Topic: pedidos360.orders.registered.v1	TopicId: 3Bcle8goRxeU1Cbx9SFxQA	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=604800000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000
+    	Topic: pedidos360.orders.registered.v1	Partition: 0	Leader: 2	Replicas: 2,1,3	Isr: 2,1,3	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.orders.registered.v1	Partition: 1	Leader: 3	Replicas: 3,2,1	Isr: 3,2,1	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.orders.registered.v1	Partition: 2	Leader: 1	Replicas: 1,3,2	Isr: 1,3,2	Elr: N/A	LastKnownElr: N/A
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1
+    Topic: pedidos360.sales.product-metrics.v1	TopicId: 8SxeYCbcQMKkhz9UYPXDOw	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=compact,max.message.bytes=1048576,min.cleanable.dirty.ratio=0.1,unclean.leader.election.enable=false,delete.retention.ms=86400000,segment.ms=3600000
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,2,3	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 1	Leader: 2	Replicas: 2,3,1	Isr: 2,3,1	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 2	Leader: 3	Replicas: 3,1,2	Isr: 3,1,2	Elr: N/A	LastKnownElr: N/A
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1.DLT
+    Topic: pedidos360.orders.registered.v1.DLT	TopicId: z36Z9_odSpmvLVQokQWGJw	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=1209600000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000
+    	Topic: pedidos360.orders.registered.v1.DLT	Partition: 0	Leader: 3	Replicas: 3,1,2	Isr: 3,1,2	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.orders.registered.v1.DLT	Partition: 1	Leader: 1	Replicas: 1,2,3	Isr: 1,2,3	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.orders.registered.v1.DLT	Partition: 2	Leader: 2	Replicas: 2,3,1	Isr: 2,3,1	Elr: N/A	LastKnownElr: N/A
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1.DLT
+    Topic: pedidos360.sales.product-metrics.v1.DLT	TopicId: BjEG--HOT2KCVH2dmRx1AQ	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=1209600000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000
+    	Topic: pedidos360.sales.product-metrics.v1.DLT	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,2,3	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.sales.product-metrics.v1.DLT	Partition: 1	Leader: 2	Replicas: 2,3,1	Isr: 2,3,1	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.sales.product-metrics.v1.DLT	Partition: 2	Leader: 3	Replicas: 3,1,2	Isr: 3,1,2	Elr: N/A	LastKnownElr: N/A
+
+--- stop-broker  @ 2026-11-19T14:26:55Z (SSM 88d25ad5-72b0-4d82-b97a-560d3eb984c8) ---
+$ docker stop kafka-2
+    kafka-2
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1
+    Topic: pedidos360.orders.registered.v1	TopicId: 3Bcle8goRxeU1Cbx9SFxQA	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=604800000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000
+    	Topic: pedidos360.orders.registered.v1	Partition: 0	Leader: 1	Replicas: 2,1,3	Isr: 1,3	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.orders.registered.v1	Partition: 1	Leader: 3	Replicas: 3,2,1	Isr: 3,1	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.orders.registered.v1	Partition: 2	Leader: 1	Replicas: 1,3,2	Isr: 1,3	Elr: N/A	LastKnownElr: N/A
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1
+    Topic: pedidos360.sales.product-metrics.v1	TopicId: 8SxeYCbcQMKkhz9UYPXDOw	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=compact,max.message.bytes=1048576,min.cleanable.dirty.ratio=0.1,unclean.leader.election.enable=false,delete.retention.ms=86400000,segment.ms=3600000
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,3	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 1	Leader: 3	Replicas: 2,3,1	Isr: 3,1	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 2	Leader: 3	Replicas: 3,1,2	Isr: 3,1	Elr: N/A	LastKnownElr: N/A
+
+--- sql orders outbox sales processed @ 2026-11-19T14:30:28Z (SSM 24927242-72a7-4b01-9a3d-5fa594dcba7d) ---
+$ mysql (pedidos360_orders_app, TLS VERIFY_IDENTITY) -e "SELECT o.id, o.status, o.created_at, i.product_name, i.quantity, i.unit_price, i.currency FROM purchase_orders o JOIN order_items i ON i.order_id = o.id ORDER BY o.created_at DESC, i.id LIMIT 30"
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+    | id                                   | status     | created_at                 | product_name          | quantity | unit_price | currency |
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+    | a4b808ee-71f5-414a-91e5-657ea2e720c5 | REGISTERED | 2026-11-19 14:29:32.397092 | Taza de cerámica      |        1 |   12990.00 | CLP      |
+    | e1bb7872-07d6-4f8c-bd67-facf50d66ce8 | REGISTERED | 2026-11-19 14:22:53.515292 | Café de especialidad  |        1 |    8990.00 | CLP      |
+    | 9c59571d-d8db-4fe1-a5c4-39804bf4309d | REGISTERED | 2026-11-19 14:22:48.315330 | Café de especialidad  |        1 |    8990.00 | CLP      |
+    | 79a3d04a-9721-4cd2-956c-5e7386921647 | REGISTERED | 2026-11-19 14:13:50.994696 | Café de especialidad  |        3 |    8990.00 | CLP      |
+    | 79a3d04a-9721-4cd2-956c-5e7386921647 | REGISTERED | 2026-11-19 14:13:50.994696 | Taza de cerámica      |        2 |   12990.00 | CLP      |
+    | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Café de especialidad  |        2 |    8990.00 | CLP      |
+    | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Taza de cerámica      |        1 |   12990.00 | CLP      |
+    +--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+
+
+$ mysql (pedidos360_orders_app, TLS VERIFY_IDENTITY) -e "SELECT event_id, order_id, created_at, published_at, attempts, last_error_code FROM order_stream_outbox ORDER BY created_at DESC LIMIT 10"
+    +--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+    | event_id                             | order_id                             | created_at                 | published_at               | attempts | last_error_code |
+    +--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+    | 2baefa66-3fe3-4c94-a619-2ba3dd0c4592 | a4b808ee-71f5-414a-91e5-657ea2e720c5 | 2026-11-19 14:29:32.406588 | 2026-11-19 14:29:33.334668 |        1 | NULL            |
+    | 040b91f0-d8c7-43ec-9851-37fdfbec3736 | e1bb7872-07d6-4f8c-bd67-facf50d66ce8 | 2026-11-19 14:22:53.537713 | 2026-11-19 14:22:53.924601 |        1 | NULL            |
+    | 73060681-f4b4-4ac9-a49c-3e5c9294c07d | 9c59571d-d8db-4fe1-a5c4-39804bf4309d | 2026-11-19 14:22:48.337763 | 2026-11-19 14:22:48.862587 |        1 | NULL            |
+    | f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a | 79a3d04a-9721-4cd2-956c-5e7386921647 | 2026-11-19 14:13:51.020585 | 2026-11-19 14:13:51.866304 |        1 | NULL            |
+    | 4e172649-cccf-4f45-88a1-1ca5bbe0d10b | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | 2026-11-19 14:05:41.066188 | 2026-11-19 14:05:43.408069 |        1 | NULL            |
+    +--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+
+$ mysql (pedidos360_streams_app, TLS VERIFY_IDENTITY) -e "SELECT * FROM product_sales_daily ORDER BY 1"
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+    | tenant_id                            | product_id                           | business_date | currency | product_name          | units_sold | orders_count | revenue  | version | last_event_id                        | updated_at                 |
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+    | 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 | 10000000-0000-0000-0000-000000000001 | 2026-11-19    | CLP      | Café de especialidad  |          7 |            4 | 62930.00 |       4 | 040b91f0-d8c7-43ec-9851-37fdfbec3736 | 2026-11-19 14:24:42.413477 |
+    | 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 | 10000000-0000-0000-0000-000000000002 | 2026-11-19    | CLP      | Taza de cerámica      |          4 |            3 | 51960.00 |       3 | 2baefa66-3fe3-4c94-a619-2ba3dd0c4592 | 2026-11-19 14:29:33.337427 |
+    +--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+
+
+$ mysql (pedidos360_streams_app, TLS VERIFY_IDENTITY) -e "SELECT COUNT(*) AS processed_events FROM processed_stream_event"
+    +------------------+
+    | processed_events |
+    +------------------+
+    |                5 |
+    +------------------+
+
+--- logs pedidos360-orders PUBLISH_CONFIRMED|PUBLISH_DEFERRED -10min @ 2026-11-19T14:30:34Z (SSM 55e17ccf-de3a-4771-924a-e2a0fb9dce41) ---
+$ journalctl -u pedidos360-orders --since -10min -o cat | grep -E 'PUBLISH_CONFIRMED|PUBLISH_DEFERRED' | tail -40
+    2026-11-19T14:22:48.864Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=73060681-f4b4-4ac9-a49c-3e5c9294c07d orderId=9c59571d-d8db-4fe1-a5c4-39804bf4309d topic=pedidos360.orders.registered.v1 partition=1 offset=1
+    2026-11-19T14:22:48.922Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=f50fe464-ad95-42a1-89f8-45312f3f1f35 orderId=9c59571d-d8db-4fe1-a5c4-39804bf4309d
+    2026-11-19T14:22:53.925Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=040b91f0-d8c7-43ec-9851-37fdfbec3736 orderId=e1bb7872-07d6-4f8c-bd67-facf50d66ce8 topic=pedidos360.orders.registered.v1 partition=0 offset=1
+    2026-11-19T14:22:53.964Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=1f62550e-4487-41fb-ae7d-5b1941df89b2 orderId=e1bb7872-07d6-4f8c-bd67-facf50d66ce8
+    2026-11-19T14:29:33.312Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=7265f7a5-93d1-4d18-b241-6de33ad77446 orderId=a4b808ee-71f5-414a-91e5-657ea2e720c5
+    2026-11-19T14:29:33.336Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=2baefa66-3fe3-4c94-a619-2ba3dd0c4592 orderId=a4b808ee-71f5-414a-91e5-657ea2e720c5 topic=pedidos360.orders.registered.v1 partition=2 offset=2
+
+--- logs pedidos360-sales-stream CONSUME_|METRIC_PUBLISHED|ORDER_ALERT -10min @ 2026-11-19T14:30:41Z (SSM 4f1f1c0f-f48e-46e4-9428-4cf8c338baaa) ---
+$ journalctl -u pedidos360-sales-stream --since -10min -o cat | grep -E 'CONSUME_|METRIC_PUBLISHED|ORDER_ALERT' | tail -40
+    2026-11-19T14:24:42.424Z  INFO 174321 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=73060681-f4b4-4ac9-a49c-3e5c9294c07d group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=1 offset=1 attempt=1 result=NO_ALERT
+    2026-11-19T14:24:42.429Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=0 attempt=1 result=VIEW_UPDATED version=1
+    2026-11-19T14:24:42.449Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1 attempt=1 result=VIEW_UPDATED version=2
+    2026-11-19T14:24:42.453Z  INFO 174321 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=040b91f0-d8c7-43ec-9851-37fdfbec3736 group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=0 offset=1 attempt=1 result=NO_ALERT
+    2026-11-19T14:24:42.473Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2
+    2026-11-19T14:24:42.516Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=0 attempt=1 result=VIEW_UPDATED version=1
+    2026-11-19T14:24:42.539Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=1 attempt=1 result=VIEW_UPDATED version=2
+    2026-11-19T14:24:42.562Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2
+    2026-11-19T14:24:42.830Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=73060681-f4b4-4ac9-a49c-3e5c9294c07d group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=3 attempt=1 result=VIEW_UPDATED version=3
+    2026-11-19T14:24:42.844Z  INFO 174321 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP version=3 lastEventId=73060681-f4b4-4ac9-a49c-3e5c9294c07d topic=pedidos360.sales.product-metrics.v1 partition=1 offset=3
+    2026-11-19T14:24:42.845Z  INFO 174321 --- [sales-stream-service] [ggregator-1-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=73060681-f4b4-4ac9-a49c-3e5c9294c07d group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=1 offset=1 attempt=1 result=ACCUMULATORS_UPDATED metrics=1
+    2026-11-19T14:24:42.878Z  INFO 174321 --- [sales-stream-service] [ggregator-0-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP version=4 lastEventId=040b91f0-d8c7-43ec-9851-37fdfbec3736 topic=pedidos360.sales.product-metrics.v1 partition=1 offset=4
+    2026-11-19T14:24:42.881Z  INFO 174321 --- [sales-stream-service] [ggregator-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=040b91f0-d8c7-43ec-9851-37fdfbec3736 group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=0 offset=1 attempt=1 result=ACCUMULATORS_UPDATED metrics=1
+    2026-11-19T14:24:42.892Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=040b91f0-d8c7-43ec-9851-37fdfbec3736 group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=4 attempt=1 result=VIEW_UPDATED version=4
+    2026-11-19T14:29:33.332Z  INFO 174321 --- [sales-stream-service] [r-monitor-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=2baefa66-3fe3-4c94-a619-2ba3dd0c4592 group=pedidos360-order-monitor topic=pedidos360.orders.registered.v1 partition=2 offset=2 attempt=1 result=NO_ALERT
+    2026-11-19T14:29:33.413Z  INFO 174321 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.s.KafkaMetricPublisher         : METRIC_PUBLISHED metricKey=72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP version=3 lastEventId=2baefa66-3fe3-4c94-a619-2ba3dd0c4592 topic=pedidos360.sales.product-metrics.v1 partition=2 offset=3
+    2026-11-19T14:29:33.413Z  INFO 174321 --- [sales-stream-service] [ggregator-2-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=2baefa66-3fe3-4c94-a619-2ba3dd0c4592 group=pedidos360-sales-aggregator topic=pedidos360.orders.registered.v1 partition=2 offset=2 attempt=1 result=ACCUMULATORS_UPDATED metrics=1
+    2026-11-19T14:29:33.415Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=2baefa66-3fe3-4c94-a619-2ba3dd0c4592 group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=3 attempt=1 result=VIEW_UPDATED version=3
+
+--- groups  @ 2026-11-19T14:31:01Z (SSM 7f7c4907-a0e3-4a33-ab8c-b38df1badd70) ---
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator
+    
+    GROUP                       TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                             HOST            CLIENT-ID
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 1          2               2               0               sales-aggregator-1-38c2b24d-6670-4ce6-ae9d-d6ee8aff9da7 /172.19.0.1     sales-aggregator-1
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 0          2               2               0               sales-aggregator-0-d69f3495-d4c7-4f62-a3ff-5697bf58a023 /172.19.0.1     sales-aggregator-0
+    pedidos360-sales-aggregator pedidos360.orders.registered.v1 2          3               3               0               sales-aggregator-2-c50de012-a114-41fc-8811-f647af5c5568 /172.19.0.1     sales-aggregator-2
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose
+    
+    GROUP                       CONSUMER-ID                                             HOST            CLIENT-ID          #PARTITIONS     ASSIGNMENT
+    pedidos360-sales-aggregator sales-aggregator-1-38c2b24d-6670-4ce6-ae9d-d6ee8aff9da7 /172.19.0.1     sales-aggregator-1 1               (1)
+    pedidos360-sales-aggregator sales-aggregator-0-d69f3495-d4c7-4f62-a3ff-5697bf58a023 /172.19.0.1     sales-aggregator-0 1               (0)
+    pedidos360-sales-aggregator sales-aggregator-2-c50de012-a114-41fc-8811-f647af5c5568 /172.19.0.1     sales-aggregator-2 1               (2)
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor
+    
+    GROUP                    TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                          HOST            CLIENT-ID
+    pedidos360-order-monitor pedidos360.orders.registered.v1 1          2               2               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
+    pedidos360-order-monitor pedidos360.orders.registered.v1 2          3               3               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
+    pedidos360-order-monitor pedidos360.orders.registered.v1 0          2               2               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor --members --verbose
+    
+    GROUP                    CONSUMER-ID                                          HOST            CLIENT-ID       #PARTITIONS     ASSIGNMENT
+    pedidos360-order-monitor order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0 3               (0,1,2)
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard
+    
+    GROUP                      TOPIC                               PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                            HOST            CLIENT-ID
+    pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 0          -               0               -               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
+    pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 2          4               4               0               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
+    pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 1          5               5               0               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard --members --verbose
+    
+    GROUP                      CONSUMER-ID                                            HOST            CLIENT-ID         #PARTITIONS     ASSIGNMENT
+    pedidos360-sales-dashboard sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0 3               (0,1,2)
+
+--- start-broker  @ 2026-11-19T14:31:52Z (SSM 509bf2a7-b614-46b8-8f3d-fcdd61e87fda) ---
+$ docker start kafka-2
+    kafka-2
+
+$ docker inspect kafka-2 (health)
+    healthy
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1
+    Topic: pedidos360.orders.registered.v1	TopicId: 3Bcle8goRxeU1Cbx9SFxQA	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=604800000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000
+    	Topic: pedidos360.orders.registered.v1	Partition: 0	Leader: 2	Replicas: 2,1,3	Isr: 1,3,2	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.orders.registered.v1	Partition: 1	Leader: 3	Replicas: 3,2,1	Isr: 3,1,2	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.orders.registered.v1	Partition: 2	Leader: 1	Replicas: 1,3,2	Isr: 1,3,2	Elr: N/A	LastKnownElr: N/A
+
+$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1
+    Topic: pedidos360.sales.product-metrics.v1	TopicId: 8SxeYCbcQMKkhz9UYPXDOw	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=compact,max.message.bytes=1048576,min.cleanable.dirty.ratio=0.1,unclean.leader.election.enable=false,delete.retention.ms=86400000,segment.ms=3600000
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,3,2	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 1	Leader: 2	Replicas: 2,3,1	Isr: 3,1,2	Elr: N/A	LastKnownElr: N/A
+    	Topic: pedidos360.sales.product-metrics.v1	Partition: 2	Leader: 3	Replicas: 3,1,2	Isr: 3,1,2	Elr: N/A	LastKnownElr: N/A

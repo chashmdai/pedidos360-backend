@@ -1,0 +1,173 @@
+Evidencia E-17. API Gateway y validación JWT de la nueva ruta
+
+Objetivo
+Comprobar la protección de GET /api/v1/ventas/en-vivo.
+
+Indicador asociado
+EP6: API Manager valida JWT; frontend consume a través del API Manager; OAuth 2.0/OIDC.
+
+Entorno
+AWS cuenta 647660738152 (us-east-1), EC2 i-01bcf3ef9d3a64d4e (t3.large, Ubuntu 24.04), release ep5-20261119T040026Z; comandos ejecutados como root en /opt/pedidos360/current mediante SSM Run Command (AWS-RunShellScript, script revisado deploy/ep5-evidence.py). Kafka UI consultado por su API en 127.0.0.1:8090 desde la propia instancia (la misma vista que se abre por reenvío de puertos SSM).
+
+Resultado esperado (informe)
+HTTP 401 en los dos primeros casos; HTTP 200 con token válido emitido por Entra ID mediante authorization code con PKCE.
+
+Resultado observado
+Las tres solicitudes sin token válido fueron rechazadas por el autorizador JWT de API Gateway (az3h2vqgsi, autorizador 0ue6up) con HTTP 401 y latency 0, sin llegar al backend: (1) sin Authorization (sonda de scripts/ep5-verify-gateway.py, 12:48:15.526Z); (2) con un bearer inválido (12:48:15.895Z); (3) solicitud repetida por el usuario desde la pestaña Red del navegador, que la reenvía sin el header Authorization (14:04:48.179Z). Las sondas también dieron 401 en /productos, /pedidos y /me, con y sin bearer inválido. Desde la SPA en /app/, con sesión institucional obtenida por authorization code con PKCE (MSAL), la vista hizo 534 consultas GET /api/v1/ventas/en-vivo con HTTP 200, y el usuario verificó en el navegador el 200 y el header Authorization: Bearer. Las 124 respuestas 502 corresponden a la detención controlada de sales-stream en E-10.
+
+Diferencias con el informe
+La API es az3h2vqgsi en la cuenta nueva (el informe cita 7k2zyh0t0d, de EP4). Además de los dos casos del informe, se registra un tercer 401 sin token (repetición desde DevTools). El 404 de GET /app/{proxy+} es la sonda manual de /app/favicon.ico (pendiente del favicon en EP5_DECISIONES.md).
+
+Procedimiento y salida (sin secretos ni tokens)
+--- docs/evidence/ep5/aws/gateway-http.json ---
+{
+  "at": "2026-11-19T12:48:09.761699+00:00",
+  "endpoint": "https://az3h2vqgsi.execute-api.us-east-1.amazonaws.com",
+  "release": "ep5-20261119T040026Z",
+  "checks": [
+    {
+      "path": "/app/",
+      "status": 200,
+      "expected": 200,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpxri9UIAMEPdQ=",
+      "contentType": "text/html;charset=UTF-8",
+      "sha256": "f73043e2904c90028857ba2ab002e66566aac1a74e59add42be0304b9ec0edf9"
+    },
+    {
+      "path": "/app",
+      "status": 200,
+      "expected": 200,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpxvjj_oAMEZpQ=",
+      "contentType": "text/html;charset=UTF-8",
+      "sha256": "f73043e2904c90028857ba2ab002e66566aac1a74e59add42be0304b9ec0edf9"
+    },
+    {
+      "path": "/app/ventas-en-vivo",
+      "status": 200,
+      "expected": 200,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpxziN5IAMEZxg=",
+      "contentType": "text/html",
+      "sha256": "f73043e2904c90028857ba2ab002e66566aac1a74e59add42be0304b9ec0edf9"
+    },
+    {
+      "path": "/app/assets/index-JQdkrOhp.js",
+      "status": 200,
+      "expected": 200,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpx3hpAoAMEPyg=",
+      "contentType": "text/javascript",
+      "sha256": "8257942d97a6a40bc1ae8cc915d1dcc5b62eb01e7912755620551e4875073963"
+    },
+    {
+      "path": "/app/assets/index-BnPrCUl4.css",
+      "status": 200,
+      "expected": 200,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpyEigqIAMEZNQ=",
+      "contentType": "text/css",
+      "sha256": "a9dc5fca975148852de12732e105838756ffdfccc36fedaa96477ffb5f8ca251"
+    },
+    {
+      "path": "/api/v1/productos",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpyJgnnoAMEPdw=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/productos",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": true,
+      "requestId": "HFpyNgmIoAMEPrw=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/pedidos",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpyRgpmoAMEP9g=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/pedidos",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": true,
+      "requestId": "HFpyUjLfIAMEZDg=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/me",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpyYiBmoAMEPTA=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/me",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": true,
+      "requestId": "HFpycgx1oAMEPsA=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/ventas/en-vivo",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": false,
+      "requestId": "HFpyggzOIAMEPsA=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    },
+    {
+      "path": "/api/v1/ventas/en-vivo",
+      "status": 401,
+      "expected": 401,
+      "syntheticInvalidBearer": true,
+      "requestId": "HFpyjjbmoAMEP2Q=",
+      "contentType": "application/json",
+      "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
+    }
+  ],
+  "frontendBytesMatchRelease": true
+}
+
+--- docs/evidence/ep5/aws/api-gateway-access-summary.txt ---
+Log group /pedidos360/api-gateway (formato: requestId, routeKey, status, latency; sin token, query ni cuerpo)
+Ventana: 2026-11-19T12:48:10Z .. 2026-11-19T14:35:41Z
+
+Conteo por ruta y estado:
+  GET /api/v1/me                   401  x 2
+  GET /api/v1/pedidos              200  x 7
+  GET /api/v1/pedidos              401  x 2
+  GET /api/v1/productos            200  x 9
+  GET /api/v1/productos            401  x 2
+  GET /api/v1/ventas/en-vivo       200  x 534
+  GET /api/v1/ventas/en-vivo       401  x 3
+  GET /api/v1/ventas/en-vivo       502  x 124
+  GET /app                         200  x 1
+  GET /app/{proxy+}                200  x 34
+  GET /app/{proxy+}                404  x 1
+  POST /api/v1/pedidos             201  x 5
+
+Solicitudes 401 a GET /api/v1/ventas/en-vivo (latency 0 = rechazo del autorizador JWT antes de la integración):
+  12:48:15.526Z  status=401 latency=0 requestId=HFpyggzOIAMEPsA=
+  12:48:15.895Z  status=401 latency=0 requestId=HFpyjjbmoAMEP2Q=
+  14:04:48.179Z  status=401 latency=0 requestId=HF1AGjl0IAMEPxQ=
+
+Primeras y últimas 200 de la vista en vivo:
+  primera 14:04:12Z  última 14:35:41Z  total 534

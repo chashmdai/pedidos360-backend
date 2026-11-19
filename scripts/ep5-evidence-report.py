@@ -99,7 +99,7 @@ SPEC = {
 
 
 def redact(text):
-    text = re.sub(r"(?i)bearer\s+[A-Za-z0-9._~+/=-]+", "Bearer [REDACTED]", text)
+    text = re.sub(r"(?i)bearer\s+[A-Za-z0-9._~+/=-]{20,}", "Bearer [REDACTED]", text)
     text = re.sub(r"eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]+", "[JWT REDACTED]", text)
     return re.sub(r"assumed-role/voclabs/[^\s\"]+", "assumed-role/voclabs/[session]", text)
 

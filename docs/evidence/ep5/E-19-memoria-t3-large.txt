@@ -1,0 +1,106 @@
+Evidencia E-19. Uso de memoria en la instancia t3.large
+
+Objetivo
+Contrastar el presupuesto de memoria con el consumo real.
+
+Indicador asociado
+Dimensionamiento de la sección 13.
+
+Entorno
+AWS cuenta 647660738152 (us-east-1), EC2 i-01bcf3ef9d3a64d4e (t3.large, Ubuntu 24.04), release ep5-20261119T040026Z; comandos ejecutados como root en /opt/pedidos360/current mediante SSM Run Command (AWS-RunShellScript, script revisado deploy/ep5-evidence.py). Kafka UI consultado por su API en 127.0.0.1:8090 desde la propia instancia (la misma vista que se abre por reenvío de puertos SSM).
+
+Resultado esperado (informe)
+Memoria disponible positiva sin uso sostenido de intercambio; contenedores bajo su mem_limit; servicios systemd activos.
+
+Resultado observado
+Después de toda la sesión de evidencias (5 pedidos, detención y arranque de sales-stream y de kafka-2), memoria: total 7.816 MiB, usada 4.835 MiB, disponible 2.981 MiB; swap de 2 GiB con 0 B en uso. Todos los contenedores están bajo su mem_limit: kafka-1 546 / 896 MiB, kafka-2 329 / 896 MiB, kafka-3 561 / 896 MiB; zookeeper-1..3 entre 97 y 109 / 320 MiB; kafka-ui 335 / 448 MiB (75 %); rabbit-1 y rabbit-2 113 y 111 / 512 MiB. Los 8 servicios systemd están active (running) y las 3 unidades Compose active (exited, oneshot). Memoria por servicio: catalog 274, orders 361, sales-stream 249, bff 250 (total 1.134 MiB frente a ≈1,6 GiB presupuestados); receipts 179, insights 185, rabbit-admin 168, kafka-admin 181 (total 713 MiB frente a ≈1,3 GiB). Ninguno supera el límite por proceso de la tabla 16 (≈400 y ≈320 MiB). Brokers 1,44 GiB frente a 2,63 GiB; ZooKeeper 0,30 frente a 0,94 GiB; RabbitMQ 0,22 frente a 0,6 GiB.
+
+Diferencias con el informe
+La instancia es i-01bcf3ef9d3a64d4e, creada nueva como t3.large en la cuenta 647660738152 (no un redimensionamiento de i-0818fdfafcfb7cb31; desviación registrada en Fase 1).
+
+Procedimiento y salida (sin secretos ni tokens)
+--- e19  @ 2026-11-19T14:35:53Z (SSM 9c38b0f6-c3dc-4a58-a4a8-5504e78c8903) ---
+$ free -m
+                   total        used        free      shared  buff/cache   available
+    Mem:            7816        4835         831          42        2477        2981
+    Swap:           2047           0        2047
+
+$ swapon --show
+    NAME      TYPE SIZE USED PRIO
+    /swapfile file   2G   0B   -1
+
+$ docker stats --no-stream
+    NAME                      CPU %     MEM USAGE / LIMIT   MEM %
+    pedidos360-ep4-rabbit-2   0.94%     111.3MiB / 512MiB   21.74%
+    pedidos360-ep4-rabbit-1   1.75%     113MiB / 512MiB     22.07%
+    kafka-ui                  0.08%     334.9MiB / 448MiB   74.76%
+    kafka-2                   3.47%     328.8MiB / 896MiB   36.70%
+    kafka-3                   2.97%     560.9MiB / 896MiB   62.60%
+    kafka-1                   9.22%     545.8MiB / 896MiB   60.91%
+    zookeeper-1               0.36%     96.6MiB / 320MiB    30.19%
+    zookeeper-2               0.17%     97.04MiB / 320MiB   30.32%
+    zookeeper-3               4.48%     109.4MiB / 320MiB   34.19%
+
+$ docker inspect (mem_limit)
+    /pedidos360-ep4-rabbit-2 mem_limit=536870912
+    /pedidos360-ep4-rabbit-1 mem_limit=536870912
+    /kafka-ui mem_limit=469762048
+    /kafka-2 mem_limit=939524096
+    /kafka-3 mem_limit=939524096
+    /kafka-1 mem_limit=939524096
+    /zookeeper-1 mem_limit=335544320
+    /zookeeper-2 mem_limit=335544320
+    /zookeeper-3 mem_limit=335544320
+
+$ systemctl status pedidos360-* --no-pager
+    ● pedidos360-catalog.service - Pedidos360 catalog (EP5)
+         Active: active (running) since Thu 2026-11-19 12:45:25 UTC; 1h 50min ago
+       Main PID: 26213 (java)
+         Memory: 274.1M (peak: 274.6M)
+    ● pedidos360-bff.service - Pedidos360 bff (EP5)
+         Active: active (running) since Thu 2026-11-19 12:46:30 UTC; 1h 49min ago
+       Main PID: 28713 (java)
+         Memory: 250.5M (peak: 251.3M)
+    ● pedidos360-kafka-ui.service - Pedidos360 EP5 Kafka UI
+         Active: active (exited) since Thu 2026-11-19 12:44:51 UTC; 1h 51min ago
+       Main PID: 25844 (code=exited, status=0/SUCCESS)
+    ● pedidos360-receipts.service - Pedidos360 receipts (EP5)
+         Active: active (running) since Thu 2026-11-19 12:46:45 UTC; 1h 49min ago
+       Main PID: 29194 (java)
+         Memory: 179.1M (peak: 179.6M)
+    ● pedidos360-kafka-cluster.service - Pedidos360 EP5 Kafka cluster (3 ZooKeeper + 3 brokers)
+         Active: active (exited) since Thu 2026-11-19 12:44:33 UTC; 1h 51min ago
+       Main PID: 24801 (code=exited, status=0/SUCCESS)
+    ● pedidos360-orders.service - Pedidos360 orders (EP5)
+         Active: active (running) since Thu 2026-11-19 12:45:53 UTC; 1h 49min ago
+       Main PID: 27232 (java)
+         Memory: 361.1M (peak: 362.0M)
+    ● pedidos360-kafka-admin.service - Pedidos360 kafka-admin (EP5)
+         Active: active (running) since Thu 2026-11-19 12:47:29 UTC; 1h 48min ago
+       Main PID: 30577 (java)
+         Memory: 181.1M (peak: 182.7M)
+    ● pedidos360-insights.service - Pedidos360 insights (EP5)
+         Active: active (running) since Thu 2026-11-19 12:46:59 UTC; 1h 48min ago
+       Main PID: 29641 (java)
+         Memory: 185.8M (peak: 186.3M)
+    ● pedidos360-rabbit-admin.service - Pedidos360 rabbit-admin (EP5)
+         Active: active (running) since Thu 2026-11-19 12:47:13 UTC; 1h 48min ago
+       Main PID: 30071 (java)
+         Memory: 168.8M (peak: 170.2M)
+    ● pedidos360-rabbit-cluster.service - Pedidos360 EP4 RabbitMQ Compose cluster
+         Active: active (exited) since Thu 2026-11-19 12:44:31 UTC; 1h 51min ago
+       Main PID: 23737 (code=exited, status=0/SUCCESS)
+    ● pedidos360-sales-stream.service - Pedidos360 sales-stream (EP5)
+         Active: active (running) since Thu 2026-11-19 14:33:12 UTC; 2min 40s ago
+       Main PID: 187832 (java)
+         Memory: 249.6M (peak: 249.9M)
+
+$ systemctl show pedidos360-<servicio> -p MemoryCurrent -p MemoryPeak
+    pedidos360-catalog        current= 274 MiB  peak= 274 MiB
+    pedidos360-orders         current= 361 MiB  peak= 362 MiB
+    pedidos360-sales-stream   current= 249 MiB  peak= 249 MiB
+    pedidos360-bff            current= 250 MiB  peak= 251 MiB
+    pedidos360-receipts       current= 179 MiB  peak= 179 MiB
+    pedidos360-insights       current= 185 MiB  peak= 186 MiB
+    pedidos360-rabbit-admin   current= 168 MiB  peak= 170 MiB
+    pedidos360-kafka-admin    current= 181 MiB  peak= 182 MiB

@@ -1,49 +1,49 @@
 {
-  "at": "2026-11-19T14:09:26.670807+00:00",
+  "at": "2026-11-19T14:35:24.840661+00:00",
   "instanceId": "i-01bcf3ef9d3a64d4e",
-  "commandId": "36d631d0-73ba-4428-b31a-d736c624c8a6",
+  "commandId": "a5cd81c6-70d4-4808-bf07-15f3e54fa729",
   "status": "Success",
   "exitCode": 0,
   "output": {
     "action": "e08",
     "args": [],
-    "at": "2026-11-19T14:09:25Z",
+    "at": "2026-11-19T14:35:24Z",
     "steps": [
       {
         "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator",
         "exit": 0,
-        "seconds": 2.4,
-        "out": "\nGROUP                       TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                             HOST            CLIENT-ID\npedidos360-sales-aggregator pedidos360.orders.registered.v1 0          -               0               -               sales-aggregator-0-0e10946d-6600-4dfc-a03d-d7a348361d2d /172.19.0.1     sales-aggregator-0\npedidos360-sales-aggregator pedidos360.orders.registered.v1 1          -               0               -               sales-aggregator-1-0fc7dc21-792d-4493-8d9b-48374cf67610 /172.19.0.1     sales-aggregator-1\npedidos360-sales-aggregator pedidos360.orders.registered.v1 2          1               1               0               sales-aggregator-2-e2582e5c-79c8-4915-ac50-478e9214265a /172.19.0.1     sales-aggregator-2"
+        "seconds": 2.9,
+        "out": "\nGROUP                       TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                             HOST            CLIENT-ID\npedidos360-sales-aggregator pedidos360.orders.registered.v1 2          3               3               0               sales-aggregator-2-fb8041cc-02f5-40e6-9a79-8a6439677170 /172.19.0.1     sales-aggregator-2\npedidos360-sales-aggregator pedidos360.orders.registered.v1 0          2               2               0               sales-aggregator-0-b177a04b-2cf7-4551-9c9c-ac1c41fac377 /172.19.0.1     sales-aggregator-0\npedidos360-sales-aggregator pedidos360.orders.registered.v1 1          2               2               0               sales-aggregator-1-9fb3d083-2bf3-43e9-9ae9-63e16bd5ff8a /172.19.0.1     sales-aggregator-1"
       },
       {
         "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose",
         "exit": 0,
-        "seconds": 2.7,
-        "out": "\nGROUP                       CONSUMER-ID                                             HOST            CLIENT-ID          #PARTITIONS     ASSIGNMENT\npedidos360-sales-aggregator sales-aggregator-0-0e10946d-6600-4dfc-a03d-d7a348361d2d /172.19.0.1     sales-aggregator-0 1               (0)\npedidos360-sales-aggregator sales-aggregator-1-0fc7dc21-792d-4493-8d9b-48374cf67610 /172.19.0.1     sales-aggregator-1 1               (1)\npedidos360-sales-aggregator sales-aggregator-2-e2582e5c-79c8-4915-ac50-478e9214265a /172.19.0.1     sales-aggregator-2 1               (2)"
+        "seconds": 3.5,
+        "out": "\nGROUP                       CONSUMER-ID                                             HOST            CLIENT-ID          #PARTITIONS     ASSIGNMENT\npedidos360-sales-aggregator sales-aggregator-2-fb8041cc-02f5-40e6-9a79-8a6439677170 /172.19.0.1     sales-aggregator-2 1               (2)\npedidos360-sales-aggregator sales-aggregator-0-b177a04b-2cf7-4551-9c9c-ac1c41fac377 /172.19.0.1     sales-aggregator-0 1               (0)\npedidos360-sales-aggregator sales-aggregator-1-9fb3d083-2bf3-43e9-9ae9-63e16bd5ff8a /172.19.0.1     sales-aggregator-1 1               (1)"
       },
       {
         "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor",
         "exit": 0,
-        "seconds": 2.4,
-        "out": "\nGROUP                    TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                          HOST            CLIENT-ID\npedidos360-order-monitor pedidos360.orders.registered.v1 1          0               0               0               order-monitor-0-e53c6b6a-7d8d-4ccd-90f4-95c15d08c751 /172.19.0.1     order-monitor-0\npedidos360-order-monitor pedidos360.orders.registered.v1 2          1               1               0               order-monitor-0-e53c6b6a-7d8d-4ccd-90f4-95c15d08c751 /172.19.0.1     order-monitor-0\npedidos360-order-monitor pedidos360.orders.registered.v1 0          0               0               0               order-monitor-0-e53c6b6a-7d8d-4ccd-90f4-95c15d08c751 /172.19.0.1     order-monitor-0"
+        "seconds": 2.8,
+        "out": "\nGROUP                    TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                          HOST            CLIENT-ID\npedidos360-order-monitor pedidos360.orders.registered.v1 1          2               2               0               order-monitor-0-3817c6f8-9fc5-4270-a34e-56e6f393ef73 /172.19.0.1     order-monitor-0\npedidos360-order-monitor pedidos360.orders.registered.v1 2          3               3               0               order-monitor-0-3817c6f8-9fc5-4270-a34e-56e6f393ef73 /172.19.0.1     order-monitor-0\npedidos360-order-monitor pedidos360.orders.registered.v1 0          2               2               0               order-monitor-0-3817c6f8-9fc5-4270-a34e-56e6f393ef73 /172.19.0.1     order-monitor-0"
       },
       {
         "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor --members --verbose",
         "exit": 0,
-        "seconds": 3.6,
-        "out": "\nGROUP                    CONSUMER-ID                                          HOST            CLIENT-ID       #PARTITIONS     ASSIGNMENT\npedidos360-order-monitor order-monitor-0-e53c6b6a-7d8d-4ccd-90f4-95c15d08c751 /172.19.0.1     order-monitor-0 3               (0,1,2)"
+        "seconds": 2.8,
+        "out": "\nGROUP                    CONSUMER-ID                                          HOST            CLIENT-ID       #PARTITIONS     ASSIGNMENT\npedidos360-order-monitor order-monitor-0-3817c6f8-9fc5-4270-a34e-56e6f393ef73 /172.19.0.1     order-monitor-0 3               (0,1,2)"
       },
       {
         "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard",
         "exit": 0,
-        "seconds": 2.4,
-        "out": "\nGROUP                      TOPIC                               PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                            HOST            CLIENT-ID\npedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 0          -               0               -               sales-dashboard-0-3ded03f6-401c-4813-aa18-883a62610837 /172.19.0.1     sales-dashboard-0\npedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 2          1               1               0               sales-dashboard-0-3ded03f6-401c-4813-aa18-883a62610837 /172.19.0.1     sales-dashboard-0\npedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 1          1               1               0               sales-dashboard-0-3ded03f6-401c-4813-aa18-883a62610837 /172.19.0.1     sales-dashboard-0"
+        "seconds": 2.7,
+        "out": "\nGROUP                      TOPIC                               PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                            HOST            CLIENT-ID\npedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 0          -               0               -               sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0\npedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 2          4               4               0               sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0\npedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 1          5               5               0               sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0"
       },
       {
         "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard --members --verbose",
         "exit": 0,
-        "seconds": 3.1,
-        "out": "\nGROUP                      CONSUMER-ID                                            HOST            CLIENT-ID         #PARTITIONS     ASSIGNMENT\npedidos360-sales-dashboard sales-dashboard-0-3ded03f6-401c-4813-aa18-883a62610837 /172.19.0.1     sales-dashboard-0 3               (0,1,2)"
+        "seconds": 2.9,
+        "out": "\nGROUP                      CONSUMER-ID                                            HOST            CLIENT-ID         #PARTITIONS     ASSIGNMENT\npedidos360-sales-dashboard sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0 3               (0,1,2)"
       },
       {
         "cmd": "Kafka UI API GET /api/clusters/pedidos360/consumer-groups/pedidos360-sales-aggregator",
@@ -74,28 +74,28 @@
             {
               "topic": "pedidos360.orders.registered.v1",
               "partition": 1,
-              "currentOffset": null,
-              "endOffset": null,
-              "consumerLag": null,
-              "consumerId": "sales-aggregator-1-0fc7dc21-792d-4493-8d9b-48374cf67610",
+              "currentOffset": 2,
+              "endOffset": 2,
+              "consumerLag": 0,
+              "consumerId": "sales-aggregator-1-9fb3d083-2bf3-43e9-9ae9-63e16bd5ff8a",
               "host": "/172.19.0.1"
             },
             {
               "topic": "pedidos360.orders.registered.v1",
               "partition": 2,
-              "currentOffset": 1,
-              "endOffset": 1,
+              "currentOffset": 3,
+              "endOffset": 3,
               "consumerLag": 0,
-              "consumerId": "sales-aggregator-2-e2582e5c-79c8-4915-ac50-478e9214265a",
+              "consumerId": "sales-aggregator-2-fb8041cc-02f5-40e6-9a79-8a6439677170",
               "host": "/172.19.0.1"
             },
             {
               "topic": "pedidos360.orders.registered.v1",
               "partition": 0,
-              "currentOffset": null,
-              "endOffset": null,
-              "consumerLag": null,
-              "consumerId": "sales-aggregator-0-0e10946d-6600-4dfc-a03d-d7a348361d2d",
+              "currentOffset": 2,
+              "endOffset": 2,
+              "consumerLag": 0,
+              "consumerId": "sales-aggregator-0-b177a04b-2cf7-4551-9c9c-ac1c41fac377",
               "host": "/172.19.0.1"
             }
           ]
@@ -130,28 +130,28 @@
             {
               "topic": "pedidos360.orders.registered.v1",
               "partition": 1,
-              "currentOffset": 0,
-              "endOffset": 0,
+              "currentOffset": 2,
+              "endOffset": 2,
               "consumerLag": 0,
-              "consumerId": "order-monitor-0-e53c6b6a-7d8d-4ccd-90f4-95c15d08c751",
+              "consumerId": "order-monitor-0-3817c6f8-9fc5-4270-a34e-56e6f393ef73",
               "host": "/172.19.0.1"
             },
             {
               "topic": "pedidos360.orders.registered.v1",
               "partition": 2,
-              "currentOffset": 1,
-              "endOffset": 1,
+              "currentOffset": 3,
+              "endOffset": 3,
               "consumerLag": 0,
-              "consumerId": "order-monitor-0-e53c6b6a-7d8d-4ccd-90f4-95c15d08c751",
+              "consumerId": "order-monitor-0-3817c6f8-9fc5-4270-a34e-56e6f393ef73",
               "host": "/172.19.0.1"
             },
             {
               "topic": "pedidos360.orders.registered.v1",
               "partition": 0,
-              "currentOffset": 0,
-              "endOffset": 0,
+              "currentOffset": 2,
+              "endOffset": 2,
               "consumerLag": 0,
-              "consumerId": "order-monitor-0-e53c6b6a-7d8d-4ccd-90f4-95c15d08c751",
+              "consumerId": "order-monitor-0-3817c6f8-9fc5-4270-a34e-56e6f393ef73",
               "host": "/172.19.0.1"
             }
           ]
@@ -189,25 +189,25 @@
               "currentOffset": null,
               "endOffset": null,
               "consumerLag": null,
-              "consumerId": "sales-dashboard-0-3ded03f6-401c-4813-aa18-883a62610837",
+              "consumerId": "sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643",
               "host": "/172.19.0.1"
             },
             {
               "topic": "pedidos360.sales.product-metrics.v1",
               "partition": 2,
-              "currentOffset": 1,
-              "endOffset": 1,
+              "currentOffset": 4,
+              "endOffset": 4,
               "consumerLag": 0,
-              "consumerId": "sales-dashboard-0-3ded03f6-401c-4813-aa18-883a62610837",
+              "consumerId": "sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643",
               "host": "/172.19.0.1"
             },
             {
               "topic": "pedidos360.sales.product-metrics.v1",
               "partition": 1,
-              "currentOffset": 1,
-              "endOffset": 1,
+              "currentOffset": 5,
+              "endOffset": 5,
               "consumerLag": 0,
-              "consumerId": "sales-dashboard-0-3ded03f6-401c-4813-aa18-883a62610837",
+              "consumerId": "sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643",
               "host": "/172.19.0.1"
             }
           ]
