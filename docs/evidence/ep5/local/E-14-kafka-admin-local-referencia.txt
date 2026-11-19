@@ -1,0 +1,35 @@
+Evidencia E-14 (REFERENCIA LOCAL, fixture Admin). Operaciones de kafka-admin-service.
+Generada: 2026-11-19T01:32:17Z
+Entorno: CachyOS nativo, rama ep5-kafka; clúster Compose de 3 ZooKeeper + 3 brokers (compose.kafka.yaml); kafka-admin-service en 127.0.0.1:8187.
+Identidad: emisor JWT de desarrollo (scripts/local-identity.mjs), NO Microsoft Entra: token Admin + Orders.Read y token User + Orders.Read. Tokens no incluidos.
+
+1. Clúster                                                 GET /cluster -> HTTP 200
+    controller: 2 brokers: [(1, '127.0.0.1', 19092), (2, '127.0.0.1', 19093), (3, '127.0.0.1', 19094)]
+2. Crear tópico de laboratorio (3 particiones, RF 3)       POST /topics -> HTTP 201
+    partitions: [(0, 'leader', 2, 'replicas', [2, 3, 1], 'isr', [2, 3, 1]), (1, 'leader', 3, 'replicas', [3, 1, 2], 'isr', [3, 1, 2]), (2, 'leader', 1, 'replicas', [1, 2, 3], 'isr', [1, 2, 3])]
+    configs: {'cleanup.policy': 'delete', 'max.message.bytes': '1048588', 'min.insync.replicas': '2', 'retention.ms': '3600000', 'segment.ms': '604800000'}
+3. Consultar tópico                                        GET /topics/pedidos360.lab.demo -> HTTP 200
+    partitions: [(0, 'leader', 2, 'replicas', [2, 3, 1], 'isr', [2, 3, 1]), (1, 'leader', 3, 'replicas', [3, 1, 2], 'isr', [3, 1, 2]), (2, 'leader', 1, 'replicas', [1, 2, 3], 'isr', [1, 2, 3])]
+    configs: {'cleanup.policy': 'delete', 'max.message.bytes': '1048588', 'min.insync.replicas': '2', 'retention.ms': '3600000', 'segment.ms': '604800000'}
+4. Modificar retention.ms (incrementalAlterConfigs)        PATCH /topics/pedidos360.lab.demo/configs -> HTTP 200
+    partitions: [(0, 'leader', 2, 'replicas', [2, 3, 1], 'isr', [2, 3, 1]), (1, 'leader', 3, 'replicas', [3, 1, 2], 'isr', [3, 1, 2]), (2, 'leader', 1, 'replicas', [1, 2, 3], 'isr', [1, 2, 3])]
+    configs: {'cleanup.policy': 'delete', 'max.message.bytes': '1048588', 'min.insync.replicas': '2', 'retention.ms': '7200000', 'segment.ms': '604800000'}
+5. Aumentar particiones 3 -> 6                             POST /topics/pedidos360.lab.demo/partitions -> HTTP 200
+    partitions: [(0, 'leader', 2, 'replicas', [2, 3, 1], 'isr', [2, 3, 1]), (1, 'leader', 3, 'replicas', [3, 1, 2], 'isr', [3, 1, 2]), (2, 'leader', 1, 'replicas', [1, 2, 3], 'isr', [1, 2, 3]), (3, 'leader', 2, 'replicas', [2, 3, 1], 'isr', [2, 3, 1]), (4, 'leader', 3, 'replicas', [3, 1, 2], 'isr', [3, 1, 2]), (5, 'leader', 1, 'replicas', [1, 2, 3], 'isr', [1, 2, 3])]
+    configs: {'cleanup.policy': 'delete', 'max.message.bytes': '1048588', 'min.insync.replicas': '2', 'retention.ms': '7200000', 'segment.ms': '604800000'}
+6. Eliminar tópico de laboratorio                          DELETE /topics/pedidos360.lab.demo -> HTTP 204
+7. Eliminar tópico de negocio (protegido)                  DELETE /topics/pedidos360.orders.registered.v1 -> HTTP 409
+    problem: 409 Protected business or internal topic; data was preserved
+8. Config fuera de lista blanca                            PATCH /topics/pedidos360.orders.registered.v1/configs -> HTTP 400
+    problem: 400 Configuration not allowed: unclean.leader.election.enable
+9. Cambiar particiones de un tópico de negocio (protegido)POST /topics/pedidos360.orders.registered.v1/partitions -> HTTP 409
+    problem: 409 Protected business or internal topic; data was preserved
+10. Token rol User: listar tópicos                         GET /topics -> HTTP 403
+11. Token rol User: crear tópico                           POST /topics -> HTTP 403
+12. Token rol User: eliminar tópico de negocio             DELETE /topics/pedidos360.orders.registered.v1 -> HTTP 403
+13. Sin token                                              GET /cluster -> HTTP 401
+14. Detalle del grupo agregador (offsets y lag)            GET /consumer-groups/pedidos360-sales-aggregator -> HTTP 200
+    state: STABLE assignor: cooperative-sticky members: 3 totalLag: 0
+      pedidos360.orders.registered.v1 p0 committed= 1 logEnd= 1 lag= 0 member= sales-aggregator-0-6b38d263-
+      pedidos360.orders.registered.v1 p1 committed= None logEnd= 0 lag= None member= sales-aggregator-1-9a504fbe-
+      pedidos360.orders.registered.v1 p2 committed= None logEnd= 0 lag= None member= sales-aggregator-2-5e9ef9f2-

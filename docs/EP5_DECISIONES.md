@@ -84,6 +84,16 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
 - Esquema `pedidos360_streams` local: `docker/mysql/init-databases.sh` es idempotente y se puede re-ejecutar sobre un volumen existente (`bash scripts/mysql.sh exec -T mysql bash /docker-entrypoint-initdb.d/10-pedidos360.sh`) tras `setup-local.sh`, que genera las dos contraseñas nuevas sin tocar las existentes.
 - Prueba de punta a punta local sobre el clúster de 3 brokers (RF 3, min ISR 2, `acks=all`) con el emisor JWT de pruebas: POST 201 → `PUBLISH_CONFIRMED` → agregador, monitor (`ORDER_ALERT`) y dashboard → `GET /api/v1/ventas/en-vivo` por el BFF en ~1,2 s; grupos con la distribución de la tabla 11.
 
+## Fase 2C: kafka-admin-service
+
+- Estructura `api` / `application` / `configuration` / `security`, como `rabbit-admin-service`. Usa un único `Admin` (AdminClient) de larga vida con `request.timeout.ms=5000` y `default.api.timeout.ms=10000`, de modo que un clúster que no responde da 503 en lugar de bloquear. No declara `NewTopic` (`spring.kafka.admin.auto-create=false`); lee de `pedidos-kafka.properties` solo los nombres de negocio que protege.
+- Seguridad propia del servicio (no importa `messaging-support`, que es AMQP), con la misma regla: rol Admin **y** `SCOPE_Orders.Read` en `/api/v1/admin/kafka/**`.
+- Códigos de la sección 10: crear un tópico con nombre fuera de `pedidos360.lab.` (o con nombre de negocio) responde **400**, porque el nombre es un parámetro inválido de la creación. Eliminar o ampliar particiones de un tópico de negocio, DLT, interno (`__*`) o fuera del prefijo responde **409** (protegido). PATCH de configuraciones se permite en tópicos de laboratorio y de negocio (el informe solo restringe crear, ampliar y eliminar), pero no en internos (409). Valores acotados: `retention.ms` −1 o 1 min..1 año; `segment.ms` 1 min..7 días; `min.insync.replicas` 1..3 y no mayor que el RF; `max.message.bytes` 1 KiB..10 MiB; `cleanup.policy` delete/compact/ambas.
+- `GET /consumer-groups` usa `listGroups()` sin filtro de tipo KIP-848 (brokers 3.9 en modo ZooKeeper) e incluye, como `kafka-consumer-groups --list`, los grupos de protocolo `consumer` y los "simples" (solo offsets confirmados).
+- `GET /consumer-groups/{groupId}`: por partición, el offset confirmado (null si aún no hay), el log-end offset, el lag y el miembro asignado, más `totalLag`. Un grupo inexistente (estado DEAD) responde 404.
+- Contrato `contracts/kafka-admin-openapi.yaml`. `OpenApiContractTest` verifica que el contrato, la tabla 14 y el controlador expongan exactamente las mismas 9 operaciones.
+- Referencia local de E-14 (fixture Admin, clúster de 3 brokers): `docs/evidence/ep5/local/E-14-kafka-admin-local-referencia.txt`.
+
 ## Pendientes conocidos para la Fase 4 (no resueltos todavía)
 
 - `aws_deploy.py`, `entra_config.py` y `config/aws-public.json` fijan la cuenta `002996184293`
