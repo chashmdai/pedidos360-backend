@@ -1,0 +1,362 @@
+{
+  "at": "2026-11-19T03:56:06.780251+00:00",
+  "ec2": {
+    "Reservations": [
+      {
+        "ReservationId": "r-06a5bb26a9cb84211",
+        "OwnerId": "647660738152",
+        "Groups": [],
+        "Instances": [
+          {
+            "Architecture": "x86_64",
+            "BlockDeviceMappings": [
+              {
+                "DeviceName": "/dev/sda1",
+                "Ebs": {
+                  "AttachTime": "2026-11-19T02:01:30.848000+00:00",
+                  "DeleteOnTermination": true,
+                  "Status": "attached",
+                  "VolumeId": "vol-0e0426a7d042467a4",
+                  "EbsCardIndex": 0
+                }
+              }
+            ],
+            "ClientToken": "pedidos360-647660738152-ep5-app-v1",
+            "EbsOptimized": false,
+            "EnaSupport": true,
+            "Hypervisor": "xen",
+            "IamInstanceProfile": {
+              "Arn": "arn:aws:iam::647660738152:instance-profile/LabInstanceProfile",
+              "Id": "AIPAZNS4WSZUEFRRIJ45K"
+            },
+            "NetworkInterfaces": [
+              {
+                "Association": {
+                  "IpOwnerId": "amazon",
+                  "PublicDnsName": "ec2-100-60-79-16.compute-1.amazonaws.com",
+                  "PublicIp": "100.60.79.16"
+                },
+                "Attachment": {
+                  "AttachTime": "2026-11-19T02:01:31+00:00",
+                  "AttachmentId": "eni-attach-03d0949194a4d75fb",
+                  "DeleteOnTermination": true,
+                  "DeviceIndex": 0,
+                  "Status": "attached",
+                  "NetworkCardIndex": 0
+                },
+                "Description": "",
+                "Groups": [
+                  {
+                    "GroupId": "sg-04b48443a91df53b3",
+                    "GroupName": "pedidos360-app-sg"
+                  }
+                ],
+                "Ipv6Addresses": [],
+                "MacAddress": "02:ff:ce:02:70:bd",
+                "NetworkInterfaceId": "eni-0e5c8beb34d36519a",
+                "OwnerId": "647660738152",
+                "PrivateDnsName": "ip-10-36-0-113.ec2.internal",
+                "PrivateIpAddress": "10.36.0.113",
+                "PrivateIpAddresses": [
+                  {
+                    "Association": {
+                      "IpOwnerId": "amazon",
+                      "PublicDnsName": "ec2-100-60-79-16.compute-1.amazonaws.com",
+                      "PublicIp": "100.60.79.16"
+                    },
+                    "Primary": true,
+                    "PrivateDnsName": "ip-10-36-0-113.ec2.internal",
+                    "PrivateIpAddress": "10.36.0.113"
+                  }
+                ],
+                "SourceDestCheck": true,
+                "Status": "in-use",
+                "SubnetId": "subnet-0d9482ba2929cd737",
+                "VpcId": "vpc-0b48e978564207a3e",
+                "InterfaceType": "interface",
+                "Operator": {
+                  "Managed": false
+                }
+              }
+            ],
+            "RootDeviceName": "/dev/sda1",
+            "RootDeviceType": "ebs",
+            "SecurityGroups": [
+              {
+                "GroupId": "sg-04b48443a91df53b3",
+                "GroupName": "pedidos360-app-sg"
+              }
+            ],
+            "SourceDestCheck": true,
+            "Tags": [
+              {
+                "Key": "Environment",
+                "Value": "lab"
+              },
+              {
+                "Key": "Project",
+                "Value": "Pedidos360"
+              },
+              {
+                "Key": "Course",
+                "Value": "DSY1107"
+              },
+              {
+                "Key": "Name",
+                "Value": "pedidos360-app"
+              }
+            ],
+            "VirtualizationType": "hvm",
+            "CpuOptions": {
+              "CoreCount": 1,
+              "ThreadsPerCore": 2
+            },
+            "CapacityReservationSpecification": {
+              "CapacityReservationPreference": "open"
+            },
+            "HibernationOptions": {
+              "Configured": false
+            },
+            "MetadataOptions": {
+              "State": "applied",
+              "HttpTokens": "required",
+              "HttpPutResponseHopLimit": 1,
+              "HttpEndpoint": "enabled",
+              "HttpProtocolIpv6": "disabled",
+              "InstanceMetadataTags": "disabled"
+            },
+            "EnclaveOptions": {
+              "Enabled": false
+            },
+            "BootMode": "uefi-preferred",
+            "PlatformDetails": "Linux/UNIX",
+            "UsageOperation": "RunInstances",
+            "UsageOperationUpdateTime": "2026-11-19T02:01:31+00:00",
+            "PrivateDnsNameOptions": {
+              "HostnameType": "ip-name",
+              "EnableResourceNameDnsARecord": false,
+              "EnableResourceNameDnsAAAARecord": false
+            },
+            "MaintenanceOptions": {
+              "AutoRecovery": "default",
+              "RebootMigration": "default"
+            },
+            "CurrentInstanceBootMode": "uefi",
+            "NetworkPerformanceOptions": {
+              "BandwidthWeighting": "default"
+            },
+            "Operator": {
+              "Managed": false,
+              "HiddenByDefault": false
+            },
+            "SecondaryInterfaces": [],
+            "InstanceId": "i-01bcf3ef9d3a64d4e",
+            "ImageId": "ami-0719278fd447e399f",
+            "State": {
+              "Code": 16,
+              "Name": "running"
+            },
+            "PrivateDnsName": "ip-10-36-0-113.ec2.internal",
+            "PublicDnsName": "ec2-100-60-79-16.compute-1.amazonaws.com",
+            "StateTransitionReason": "",
+            "AmiLaunchIndex": 0,
+            "ProductCodes": [],
+            "InstanceType": "t3.large",
+            "LaunchTime": "2026-11-19T02:01:31+00:00",
+            "Placement": {
+              "AvailabilityZoneId": "use1-az1",
+              "GroupName": "",
+              "Tenancy": "default",
+              "AvailabilityZone": "us-east-1b"
+            },
+            "Monitoring": {
+              "State": "disabled"
+            },
+            "SubnetId": "subnet-0d9482ba2929cd737",
+            "VpcId": "vpc-0b48e978564207a3e",
+            "PrivateIpAddress": "10.36.0.113",
+            "PublicIpAddress": "100.60.79.16"
+          }
+        ]
+      }
+    ]
+  },
+  "ssm": {
+    "InstanceInformationList": [
+      {
+        "InstanceId": "i-01bcf3ef9d3a64d4e",
+        "PingStatus": "Online",
+        "LastPingDateTime": "2026-11-19T00:52:12.844000-03:00",
+        "AgentVersion": "3.3.4793.0",
+        "IsLatestVersion": false,
+        "PlatformType": "Linux",
+        "PlatformName": "Ubuntu",
+        "PlatformVersion": "24.04",
+        "ResourceType": "EC2Instance",
+        "IPAddress": "10.36.0.113",
+        "ComputerName": "ip-10-36-0-113.ec2.internal",
+        "SourceId": "i-01bcf3ef9d3a64d4e",
+        "SourceType": "AWS::EC2::Instance"
+      }
+    ]
+  },
+  "rds": {
+    "DBInstances": [
+      {
+        "DBInstanceIdentifier": "pedidos360-mysql",
+        "DBInstanceClass": "db.t3.micro",
+        "Engine": "mysql",
+        "DBInstanceStatus": "available",
+        "MasterUsername": "pedidos360_master",
+        "Endpoint": {
+          "Address": "pedidos360-mysql.c6vvzexjwmq0.us-east-1.rds.amazonaws.com",
+          "Port": 3306,
+          "HostedZoneId": "Z2R2ITUGPM61AM"
+        },
+        "AllocatedStorage": 20,
+        "InstanceCreateTime": "2026-11-19T02:06:32.699000+00:00",
+        "PreferredBackupWindow": "03:11-03:41",
+        "BackupRetentionPeriod": 1,
+        "DBSecurityGroups": [],
+        "VpcSecurityGroups": [
+          {
+            "VpcSecurityGroupId": "sg-090b97c5589956881",
+            "Status": "active"
+          }
+        ],
+        "DBParameterGroups": [
+          {
+            "DBParameterGroupName": "pedidos360-mysql84",
+            "ParameterApplyStatus": "in-sync"
+          }
+        ],
+        "AvailabilityZone": "us-east-1b",
+        "DBSubnetGroup": {
+          "DBSubnetGroupName": "pedidos360-db-subnets",
+          "DBSubnetGroupDescription": "Pedidos360 private database subnets",
+          "VpcId": "vpc-0b48e978564207a3e",
+          "SubnetGroupStatus": "Complete",
+          "Subnets": [
+            {
+              "SubnetIdentifier": "subnet-026d7d842cf211bfc",
+              "SubnetAvailabilityZone": {
+                "Name": "us-east-1c"
+              },
+              "SubnetOutpost": {},
+              "SubnetStatus": "Active"
+            },
+            {
+              "SubnetIdentifier": "subnet-0f87f31d86d3e6993",
+              "SubnetAvailabilityZone": {
+                "Name": "us-east-1b"
+              },
+              "SubnetOutpost": {},
+              "SubnetStatus": "Active"
+            }
+          ]
+        },
+        "PreferredMaintenanceWindow": "mon:08:06-mon:08:36",
+        "UpgradeRolloutOrder": "second",
+        "PendingModifiedValues": {},
+        "LatestRestorableTime": "2026-11-19T03:53:51+00:00",
+        "MultiAZ": false,
+        "EngineVersion": "8.4.11",
+        "AutoMinorVersionUpgrade": false,
+        "ReadReplicaDBInstanceIdentifiers": [],
+        "LicenseModel": "general-public-license",
+        "Iops": 3000,
+        "StorageThroughput": 125,
+        "OptionGroupMemberships": [
+          {
+            "OptionGroupName": "default:mysql-8-4",
+            "Status": "in-sync"
+          }
+        ],
+        "PubliclyAccessible": false,
+        "StorageType": "gp3",
+        "DbInstancePort": 0,
+        "StorageEncrypted": true,
+        "KmsKeyId": "arn:aws:kms:us-east-1:647660738152:key/91b3bd1b-e319-4100-9eb7-12fa48116b44",
+        "DbiResourceId": "db-Z32VREPIMU4NWMOO5PPMYVFFVY",
+        "CACertificateIdentifier": "rds-ca-rsa2048-g1",
+        "DomainMemberships": [],
+        "CopyTagsToSnapshot": true,
+        "MonitoringInterval": 0,
+        "DBInstanceArn": "arn:aws:rds:us-east-1:647660738152:db:pedidos360-mysql",
+        "IAMDatabaseAuthenticationEnabled": false,
+        "DatabaseInsightsMode": "standard",
+        "PerformanceInsightsEnabled": false,
+        "DeletionProtection": true,
+        "AssociatedRoles": [],
+        "TagList": [
+          {
+            "Key": "Project",
+            "Value": "Pedidos360"
+          },
+          {
+            "Key": "Environment",
+            "Value": "lab"
+          },
+          {
+            "Key": "Course",
+            "Value": "DSY1107"
+          },
+          {
+            "Key": "Name",
+            "Value": "pedidos360-mysql"
+          }
+        ],
+        "CustomerOwnedIpEnabled": false,
+        "NetworkType": "IPV4",
+        "ActivityStreamStatus": "stopped",
+        "BackupTarget": "region",
+        "CertificateDetails": {
+          "CAIdentifier": "rds-ca-rsa2048-g1",
+          "ValidTill": "2027-11-19T02:04:31+00:00"
+        },
+        "DedicatedLogVolume": false,
+        "IsStorageConfigUpgradeAvailable": false,
+        "EngineLifecycleSupport": "open-source-rds-extended-support"
+      }
+    ]
+  },
+  "targets": {
+    "TargetHealthDescriptions": [
+      {
+        "Target": {
+          "Id": "i-01bcf3ef9d3a64d4e",
+          "Port": 8180
+        },
+        "HealthCheckPort": "8180",
+        "TargetHealth": {
+          "State": "healthy"
+        },
+        "AdministrativeOverride": {
+          "State": "no_override",
+          "Reason": "AdministrativeOverride.NoOverride",
+          "Description": "No override is currently active on target"
+        }
+      }
+    ]
+  },
+  "vpclink": {
+    "CreatedDate": "2026-11-19T02:01:46+00:00",
+    "Name": "pedidos360-vpclink",
+    "SecurityGroupIds": [
+      "sg-09f0f4b26620dee6b"
+    ],
+    "SubnetIds": [
+      "subnet-0f87f31d86d3e6993",
+      "subnet-026d7d842cf211bfc"
+    ],
+    "Tags": {
+      "Course": "DSY1107",
+      "Project": "Pedidos360",
+      "Environment": "lab"
+    },
+    "VpcLinkId": "uk728z",
+    "VpcLinkStatus": "AVAILABLE",
+    "VpcLinkStatusMessage": "VPC link is ready to route traffic",
+    "VpcLinkVersion": "V2"
+  }
+}
