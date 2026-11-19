@@ -12,8 +12,8 @@ Los archivos 01–08 son los cuerpos de las solicitudes listadas en ese checkpoi
 - 04 crea el service principal correspondiente a cada nueva aplicación.
 - 05 añade como propietario a la cuenta autenticada elegida, si aún no figura.
 - 06 preautoriza exclusivamente esa SPA para los tres scopes; conservar todos los scopes al aplicar la colección.
-- 07 asigna User a `be.torrejons@duocuc.cl` en la nueva API.
-- 08 asigna Admin de Pedidos360 a `ja.pissani@duocuc.cl` en la nueva API.
+- 07 asigna User a `<correo-redactado>` en la nueva API.
+- 08 asigna Admin de Pedidos360 a `<correo-redactado>` en la nueva API.
 
 Después de la aprobación, el formato de comando será:
 

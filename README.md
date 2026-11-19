@@ -136,7 +136,7 @@ Consultar [arquitectura](docs/ARQUITECTURA.md), [pruebas](docs/PRUEBAS.md), [dec
 
 ## Configuración y pruebas de identidad
 
-Los identificadores de `config/entra-public.json` son públicos, no secretos. La SPA usa authorization code + PKCE, sessionStorage gestionado por MSAL y acquireTokenSilent con fallback interactivo. No requiere contraseña de aplicación, certificado ni permisos Microsoft Graph. Las asignaciones de aplicación son User para be.torrejons@duocuc.cl y Admin para ja.pissani@duocuc.cl. Estas no son funciones administrativas del tenant.
+Los identificadores de `config/entra-public.json` son públicos, no secretos. La SPA usa authorization code + PKCE, sessionStorage gestionado por MSAL y acquireTokenSilent con fallback interactivo. No requiere contraseña de aplicación, certificado ni permisos Microsoft Graph. Las asignaciones de aplicación son User para <correo-redactado> y Admin para <correo-redactado>. Estas no son funciones administrativas del tenant.
 
 Para repetir la batería de 51 comprobaciones HTTP consolidada en FASE 3, detener antes el modo Entra y elegir explícitamente el modo local:
 

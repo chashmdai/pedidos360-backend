@@ -20,5 +20,5 @@
     "--no-cli-pager"
   ],
   "exitCode": 254,
-  "output": "\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the GetProducts operation: User: arn:aws:sts::002996184293:assumed-role/voclabs/user3301432=BENJAMIN__TORREJON is not authorized to perform: pricing:GetProducts because no identity-based policy allows the pricing:GetProducts action"
+  "output": "\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the GetProducts operation: User: arn:aws:sts::002996184293:assumed-role/voclabs/[session] is not authorized to perform: pricing:GetProducts because no identity-based policy allows the pricing:GetProducts action"
 }

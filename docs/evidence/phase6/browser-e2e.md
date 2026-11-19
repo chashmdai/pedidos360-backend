@@ -5,7 +5,7 @@ SPA `http://localhost:5173` en modo cloud, API base `https://7k2zyh0t0d.execute-
 ## Observado
 
 1. Iniciar sesión navegó a Microsoft y volvió a Pedidos360 autenticado. En esta ejecución no fue necesario solicitar contraseña/MFA al usuario; no se declara una aprobación MFA nueva.
-2. Mi sesión mostró `be.torrejons@duocuc.cl`, rol **User**, scopes **Catalog.Read, Orders.Read, Orders.Create**, tenant/issuer propios, audience `114f7b58-b207-4d46-9d6e-f491c3a0c0e0`, azp de la SPA y versión 2.0. Son datos devueltos por el BFF que valida el bearer, no claims confiados al navegador.
+2. Mi sesión mostró `<correo-redactado>`, rol **User**, scopes **Catalog.Read, Orders.Read, Orders.Create**, tenant/issuer propios, audience `114f7b58-b207-4d46-9d6e-f491c3a0c0e0`, azp de la SPA y versión 2.0. Son datos devueltos por el BFF que valida el bearer, no claims confiados al navegador.
 3. Comprobar Admin mostró **HTTP 403**. CloudWatch y el access log BFF registran ese resultado.
 4. Catálogo mostró Café de especialidad ($8.990) y Taza de cerámica ($12.990). Formulario: café cantidad 2, taza cantidad 1; estimado $30.970. Se pulsó Registrar una sola vez; el botón quedó deshabilitado durante el envío.
 5. Mis pedidos mostró **9F82F14F**, estado Registrado, dos líneas y total **$30.970**, fecha visible 06-09-2026 16:49:22 UTC−03. Recargar la pestaña recuperó el mismo pedido.

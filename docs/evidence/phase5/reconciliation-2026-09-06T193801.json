@@ -3,7 +3,7 @@
   "identity": {
     "UserId": "AROAQBMUWETSUWMBK4NYT:user3301432=BENJAMIN__TORREJON",
     "Account": "002996184293",
-    "Arn": "arn:aws:sts::002996184293:assumed-role/voclabs/user3301432=BENJAMIN__TORREJON"
+    "Arn": "arn:aws:sts::002996184293:assumed-role/voclabs/[session]"
   },
   "resources": {
     "vpc": {

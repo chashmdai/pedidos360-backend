@@ -2,9 +2,9 @@
 
 El usuario autorizó expresamente sustituir la prueba con Jazmín por Admin temporal y retirarlo al terminar. La creación devolvió la asignación `66Z1wyq49kSr4P4y15AcPvvpgMerYCZPnZlrBkgQDMc`; sus datos están en `../evidence/entra/09-temporary-admin.response.json`. El token real mostró Admin+User y la consulta administrativa respondió 200. La asignación temporal se retiró el 2026-09-06 a las 04:32:26 UTC. Graph confirmó que las dos asignaciones originales permanecen exactamente iguales; ver `../evidence/entra/10-removal-verification.json`.
 
-El usuario informó que no tiene la contraseña de ja.pissani@duocuc.cl. No se solicita esa contraseña, no se modifica esa identidad y no se altera su asignación Admin ya aprobada.
+El usuario informó que no tiene la contraseña de <correo-redactado>. No se solicita esa contraseña, no se modifica esa identidad y no se altera su asignación Admin ya aprobada.
 
-Se propone sustituir la prueba real de dos cuentas por una prueba de la misma cuenta en dos estados de autorización: User, ya verificado con 403, y User+Admin temporal, para comprobar 200. La identidad titular será be.torrejons@duocuc.cl. El informe distinguirá esta variante de un login real con Jazmín, que no se habrá probado.
+Se propone sustituir la prueba real de dos cuentas por una prueba de la misma cuenta en dos estados de autorización: User, ya verificado con 403, y User+Admin temporal, para comprobar 200. La identidad titular será <correo-redactado>. El informe distinguirá esta variante de un login real con Jazmín, que no se habrá probado.
 
 Operaciones exactas, solo después de aprobación explícita:
 

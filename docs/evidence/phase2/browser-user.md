@@ -9,7 +9,7 @@ Observación directa mediante navegador Codex y árbol de accesibilidad. Este re
 
 | Campo | Valor observado |
 |---|---|
-| Cuenta | be.torrejons@duocuc.cl |
+| Cuenta | <correo-redactado> |
 | Rol | User |
 | Scopes | Catalog.Read, Orders.Create, Orders.Read |
 | Tenant | 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 |

@@ -21,7 +21,7 @@
     "at": "2026-09-06T09:57:54.5867631Z",
     "exitCode": 254,
     "count": null,
-    "error": "\r\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the ListServices operation: User: arn:aws:sts::002996184293:assumed-role/voclabs/user3301432=BENJAMIN__TORREJON is not authorized to perform: servicediscovery:ListServices on resource: arn:aws:servicediscovery:us-east-1:002996184293:*/* because no identity-based policy allows the servicediscovery:ListServices action\r\n"
+    "error": "\r\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the ListServices operation: User: arn:aws:sts::002996184293:assumed-role/voclabs/[session] is not authorized to perform: servicediscovery:ListServices on resource: arn:aws:servicediscovery:us-east-1:002996184293:*/* because no identity-based policy allows the servicediscovery:ListServices action\r\n"
   },
   {
     "region": "us-east-1",
@@ -221,7 +221,7 @@
     "at": "2026-09-06T14:35:47.7627084Z",
     "exitCode": 254,
     "count": null,
-    "error": "\r\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the ListServices operation: User: arn:aws:sts::002996184293:assumed-role/voclabs/user3301432=BENJAMIN__TORREJON is not authorized to perform: servicediscovery:ListServices on resource: arn:aws:servicediscovery:us-west-2:002996184293:*/* because no identity-based policy allows the servicediscovery:ListServices action\r\n"
+    "error": "\r\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the ListServices operation: User: arn:aws:sts::002996184293:assumed-role/voclabs/[session] is not authorized to perform: servicediscovery:ListServices on resource: arn:aws:servicediscovery:us-west-2:002996184293:*/* because no identity-based policy allows the servicediscovery:ListServices action\r\n"
   },
   {
     "region": "us-west-2",

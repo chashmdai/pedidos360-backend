@@ -10,7 +10,7 @@ Al retomar, la SPA ya estaba autenticada con Benjamin. `/sesion` mostró solo `U
 
 | Dato observado y aceptado por el BFF | Valor |
 |---|---|
-| Identidad | be.torrejons@duocuc.cl |
+| Identidad | <correo-redactado> |
 | Roles | User; sin Admin |
 | Scopes | Catalog.Read · Orders.Create · Orders.Read |
 | Versión | 2.0 |
@@ -48,6 +48,6 @@ Son redirecciones del router React; no se describen como HTTP 302. La seguridad 
 - Admin temporal: GET administrativo 200 en BFF y Orders a las 01:30:40; POST pedido 201 en ambos a las 01:31:36; recuperación 200. Detalle en `browser-admin-temporary.md`.
 - User restaurado: `/me` 200 y Admin 403 con token renovado; códigos registrados arriba.
 - `entra-runtime-http.json`: 23 comprobaciones aprobadas a las 09:31:33 UTC; discovery/JWKS oficiales, health, rechazos JWT y CORS. El archivo conserva la última repetición a las 09:38:28 UTC al restaurar Entra después de las pruebas locales. No usa un token válido de Microsoft; la evidencia autenticada es la del navegador.
-- La sesión real de ja.pissani@duocuc.cl **no se ejecutó** por falta de disponibilidad de sus credenciales/MFA. Graph acredita su asignación Admin. El comportamiento funcional Admin se probó mediante la variante temporal expresamente autorizada.
+- La sesión real de <correo-redactado> **no se ejecutó** por falta de disponibilidad de sus credenciales/MFA. Graph acredita su asignación Admin. El comportamiento funcional Admin se probó mediante la variante temporal expresamente autorizada.
 
 FASE 2 queda cerrada con ese límite de evidencia aceptado por el usuario. No se realizó ninguna operación AWS.
