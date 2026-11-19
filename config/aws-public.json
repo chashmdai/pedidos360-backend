@@ -1,7 +1,7 @@
 {
-  "account": "002996184293",
+  "account": "647660738152",
   "region": "us-east-1",
-  "apiId": "7k2zyh0t0d",
-  "apiEndpoint": "https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com",
-  "apiBaseUrl": "https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com/api/v1"
+  "apiId": "az3h2vqgsi",
+  "apiEndpoint": "https://az3h2vqgsi.execute-api.us-east-1.amazonaws.com",
+  "apiBaseUrl": "https://az3h2vqgsi.execute-api.us-east-1.amazonaws.com/api/v1"
 }

@@ -50,7 +50,8 @@ elif args.action=='reset-tunnel':
     if process.exists():
         command=(process/'cmdline').read_bytes().split(b'\0')
         assert process.stat().st_uid==os.getuid() and os.getpgid(pid)==pid
-        assert b'start-session' in command and instance.encode() in command and command[0].decode()==aws.CLI
+        # argv[0] may be the interpreter of a script-based aws CLI (e.g. /usr/bin/python on Arch).
+        assert b'start-session' in command and instance.encode() in command and aws.CLI.encode() in command[:2]
         os.killpg(pid,signal.SIGTERM)
     print('Stopped only the registered local EP4 SSM tunnel; no AWS resource modified')
 elif args.action=='tunnel':
