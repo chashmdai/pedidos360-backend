@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-19T14:30:38.295048+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "55e17ccf-de3a-4771-924a-e2a0fb9dce41",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "logs",
+    "args": [
+      "pedidos360-orders",
+      "PUBLISH_CONFIRMED|PUBLISH_DEFERRED",
+      "-10min"
+    ],
+    "at": "2026-11-19T14:30:34Z",
+    "steps": [
+      {
+        "cmd": "journalctl -u pedidos360-orders --since -10min -o cat | grep -E 'PUBLISH_CONFIRMED|PUBLISH_DEFERRED' | tail -40",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "2026-11-19T14:22:48.864Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=73060681-f4b4-4ac9-a49c-3e5c9294c07d orderId=9c59571d-d8db-4fe1-a5c4-39804bf4309d topic=pedidos360.orders.registered.v1 partition=1 offset=1\n2026-11-19T14:22:48.922Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=f50fe464-ad95-42a1-89f8-45312f3f1f35 orderId=9c59571d-d8db-4fe1-a5c4-39804bf4309d\n2026-11-19T14:22:53.925Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=040b91f0-d8c7-43ec-9851-37fdfbec3736 orderId=e1bb7872-07d6-4f8c-bd67-facf50d66ce8 topic=pedidos360.orders.registered.v1 partition=0 offset=1\n2026-11-19T14:22:53.964Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=1f62550e-4487-41fb-ae7d-5b1941df89b2 orderId=e1bb7872-07d6-4f8c-bd67-facf50d66ce8\n2026-11-19T14:29:33.312Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=7265f7a5-93d1-4d18-b241-6de33ad77446 orderId=a4b808ee-71f5-414a-91e5-657ea2e720c5\n2026-11-19T14:29:33.336Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=2baefa66-3fe3-4c94-a619-2ba3dd0c4592 orderId=a4b808ee-71f5-414a-91e5-657ea2e720c5 topic=pedidos360.orders.registered.v1 partition=2 offset=2"
+      }
+    ]
+  },
+  "error": ""
+}

@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-19T14:33:38.208441+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "7da3053e-8b67-4cc6-97cc-b07219f4f391",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "groups",
+    "args": [
+      "pedidos360-sales-dashboard"
+    ],
+    "at": "2026-11-19T14:33:35Z",
+    "steps": [
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard",
+        "exit": 0,
+        "seconds": 3.1,
+        "out": "\nGROUP                      TOPIC                               PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                            HOST            CLIENT-ID\npedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 0          -               0               -               sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0\npedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 2          4               4               0               sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0\npedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 1          5               5               0               sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0"
+      },
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard --members --verbose",
+        "exit": 0,
+        "seconds": 2.2,
+        "out": "\nGROUP                      CONSUMER-ID                                            HOST            CLIENT-ID         #PARTITIONS     ASSIGNMENT\npedidos360-sales-dashboard sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0 3               (0,1,2)"
+      }
+    ]
+  },
+  "error": ""
+}

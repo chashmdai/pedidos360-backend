@@ -1,0 +1,38 @@
+{
+  "at": "2026-11-19T14:33:15.899359+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "edc6c79f-2b8d-4fbc-932f-412d991001d3",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "restart-stream",
+    "args": [],
+    "at": "2026-11-19T14:33:12Z",
+    "steps": [
+      {
+        "cmd": "systemctl restart pedidos360-sales-stream",
+        "exit": 0,
+        "seconds": 23.3,
+        "out": ""
+      },
+      {
+        "cmd": "wait for 127.0.0.1:8186/actuator/health UP",
+        "exit": 0,
+        "out": "{\"groups\":[\"liveness\",\"readiness\"],\"status\":\"UP\"}"
+      },
+      {
+        "cmd": "systemctl is-active pedidos360-sales-stream",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "active"
+      },
+      {
+        "cmd": "curl -s http://127.0.0.1:8186/actuator/health",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "{\"groups\":[\"liveness\",\"readiness\"],\"status\":\"UP\"}"
+      }
+    ]
+  },
+  "error": ""
+}

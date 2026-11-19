@@ -1,0 +1,39 @@
+{
+  "at": "2026-11-19T14:31:53.839331+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "509bf2a7-b614-46b8-8f3d-fcdd61e87fda",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "start-broker",
+    "args": [],
+    "at": "2026-11-19T14:31:52Z",
+    "steps": [
+      {
+        "cmd": "docker start kafka-2",
+        "exit": 0,
+        "seconds": 0.3,
+        "out": "kafka-2"
+      },
+      {
+        "cmd": "docker inspect kafka-2 (health)",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "healthy"
+      },
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1",
+        "exit": 0,
+        "seconds": 2.4,
+        "out": "Topic: pedidos360.orders.registered.v1\tTopicId: 3Bcle8goRxeU1Cbx9SFxQA\tPartitionCount: 3\tReplicationFactor: 3\tConfigs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=604800000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000\n\tTopic: pedidos360.orders.registered.v1\tPartition: 0\tLeader: 2\tReplicas: 2,1,3\tIsr: 1,3,2\tElr: N/A\tLastKnownElr: N/A\n\tTopic: pedidos360.orders.registered.v1\tPartition: 1\tLeader: 3\tReplicas: 3,2,1\tIsr: 3,1,2\tElr: N/A\tLastKnownElr: N/A\n\tTopic: pedidos360.orders.registered.v1\tPartition: 2\tLeader: 1\tReplicas: 1,3,2\tIsr: 1,3,2\tElr: N/A\tLastKnownElr: N/A"
+      },
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1",
+        "exit": 0,
+        "seconds": 2.2,
+        "out": "Topic: pedidos360.sales.product-metrics.v1\tTopicId: 8SxeYCbcQMKkhz9UYPXDOw\tPartitionCount: 3\tReplicationFactor: 3\tConfigs: min.insync.replicas=2,cleanup.policy=compact,max.message.bytes=1048576,min.cleanable.dirty.ratio=0.1,unclean.leader.election.enable=false,delete.retention.ms=86400000,segment.ms=3600000\n\tTopic: pedidos360.sales.product-metrics.v1\tPartition: 0\tLeader: 1\tReplicas: 1,2,3\tIsr: 1,3,2\tElr: N/A\tLastKnownElr: N/A\n\tTopic: pedidos360.sales.product-metrics.v1\tPartition: 1\tLeader: 2\tReplicas: 2,3,1\tIsr: 3,1,2\tElr: N/A\tLastKnownElr: N/A\n\tTopic: pedidos360.sales.product-metrics.v1\tPartition: 2\tLeader: 3\tReplicas: 3,1,2\tIsr: 3,1,2\tElr: N/A\tLastKnownElr: N/A"
+      }
+    ]
+  },
+  "error": ""
+}

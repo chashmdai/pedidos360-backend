@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-19T14:33:50.839276+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "3bfcf44d-ba48-468c-a295-0c0b71bf1063",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "logs",
+    "args": [
+      "pedidos360-sales-stream",
+      "DASHBOARD_REBUILD|Started SalesStream|VIEW_UPDATED|STALE_VERSION",
+      "-5min"
+    ],
+    "at": "2026-11-19T14:33:47Z",
+    "steps": [
+      {
+        "cmd": "journalctl -u pedidos360-sales-stream --since -5min -o cat | grep -E 'DASHBOARD_REBUILD|Started SalesStream|VIEW_UPDATED|STALE_VERSION' | tail -40",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "2026-11-19T14:29:33.415Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=2baefa66-3fe3-4c94-a619-2ba3dd0c4592 group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=3 attempt=1 result=VIEW_UPDATED version=3\n2026-11-19T14:33:10.289Z  INFO 187832 --- [sales-stream-service] [           main] c.d.p.sales.SalesStreamApplication       : Started SalesStreamApplication in 17.504 seconds (process running for 19.852)\n2026-11-19T14:33:13.487Z  INFO 187832 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.s.SalesDashboardListener       : DASHBOARD_REBUILD group=pedidos360-sales-dashboard partitions=[pedidos360.sales.product-metrics.v1-0, pedidos360.sales.product-metrics.v1-2, pedidos360.sales.product-metrics.v1-1] from=beginning\n2026-11-19T14:33:13.742Z  INFO 187832 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=0 attempt=1 result=VIEW_UPDATED version=1\n2026-11-19T14:33:13.807Z  INFO 187832 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1 attempt=1 result=VIEW_UPDATED version=2\n2026-11-19T14:33:13.832Z  INFO 187832 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2\n2026-11-19T14:33:13.845Z  INFO 187832 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=2baefa66-3fe3-4c94-a619-2ba3dd0c4592 group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=3 attempt=1 result=VIEW_UPDATED version=3\n2026-11-19T14:33:13.880Z  INFO 187832 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=0 attempt=1 result=VIEW_UPDATED version=1\n2026-11-19T14:33:13.900Z  INFO 187832 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=1 attempt=1 result=VIEW_UPDATED version=2\n2026-11-19T14:33:13.916Z  INFO 187832 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2\n2026-11-19T14:33:13.935Z  INFO 187832 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=73060681-f4b4-4ac9-a49c-3e5c9294c07d group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=3 attempt=1 result=VIEW_UPDATED version=3\n2026-11-19T14:33:13.947Z  INFO 187832 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=040b91f0-d8c7-43ec-9851-37fdfbec3736 group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=4 attempt=1 result=VIEW_UPDATED version=4"
+      }
+    ]
+  },
+  "error": ""
+}
