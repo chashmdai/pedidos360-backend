@@ -1,0 +1,14 @@
+{
+  "at": "2026-11-19T12:58:07.655331+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "2f6222b3-1e8f-42bf-b00d-7fb3816ea151",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "hostUsers": "pedidos360-bff:999\npedidos360-catalog:997\npedidos360-orders:995\npedidos360-sales-stream:994\npedidos360-receipts:993\npedidos360-insights:992\npedidos360-rabbit-admin:988\npedidos360-kafka-admin:987",
+    "rabbitUid": "uid=0(root) gid=0(root) groups=0(root)",
+    "rabbitMounts": "volume:/var/lib/docker/volumes/pedidos360-ep4-rabbit-1-data/_data->/var/lib/rabbitmq bind:/opt/pedidos360/current/docker/rabbitmq/ep4-entrypoint.sh->/opt/pedidos360/ep4-entrypoint.sh bind:/opt/pedidos360/current/docker/rabbitmq/ep4.conf->/etc/rabbitmq/rabbitmq.conf bind:/etc/pedidos360/ep4/rabbit-admin-password->/run/secrets/rabbit_admin_password bind:/etc/pedidos360/ep4/rabbit-cookie->/run/secrets/rabbit_cookie",
+    "userns": "[name=apparmor name=seccomp,profile=builtin name=cgroupns]"
+  },
+  "error": ""
+}

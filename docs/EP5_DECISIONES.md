@@ -127,9 +127,11 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
 - Las evidencias de AWS se ejecutan con `deploy/ep5-evidence.py` (acciones fijas y revisadas) mediante SSM Run Command. La salida cruda queda en `docs/evidence/ep5/aws/raw-*.json`. `scripts/ep5-evidence-report.py` genera `E-XX-<nombre>.txt` en el formato de la sección 15.2, con resultado esperado, observado y diferencias. Las herramientas CLI de Kafka llevan `-e KAFKA_HEAP_OPTS="-Xmx128m"` (D-06).
 - Las partes "Kafka UI" de E-03, E-04, E-05 y E-08 se registran como texto desde la API de Kafka UI (`/api/clusters/...`), con sesión LOGIN_FORM abierta en la propia instancia. Es la misma información que muestran sus pantallas, y la contraseña no sale del host.
 - E-14 en AWS (`scripts/ep5-admin-evidence.py`) usa reenvío de puertos SSM a kafka-admin (8187) y un access token de Entra que el usuario deja en un archivo 0600 fuera del repositorio. El script lo borra al terminar y nunca lo imprime. Solo crea, modifica y elimina `pedidos360.lab.demo`.
-- E-19 mide la memoria de cada servicio con `systemctl show -p MemoryCurrent,MemoryPeak` y no con `ps` por usuario. El UID del usuario de los contenedores RabbitMQ coincide con el de `pedidos360-bff` en el host, y `ps` atribuía esos procesos al BFF. Es solo una coincidencia de numeración (cada contenedor tiene su propio espacio de usuarios y sus procesos no tienen acceso a los archivos del BFF), pero se evita para que la evidencia no confunda.
+- E-19 mide la memoria de cada servicio con `systemctl show -p MemoryCurrent,MemoryPeak` y no con `ps` por usuario. `ps` atribuía los procesos de RabbitMQ a `pedidos360-bff` porque la imagen de RabbitMQ usa el UID 999, que en el host es el usuario de sistema `pedidos360-bff` (Docker sin `userns-remap` comparte los UID con el host). Revisado el 2026-11-19 (`docs/evidence/ep5/aws/uid-check.json`): el contenedor solo monta su volumen de datos, su configuración y sus dos secretos, y `/var/lib/docker/volumes` es solo de root. Por eso el BFF no accede a los datos de RabbitMQ ni el contenedor a los archivos del BFF. Riesgo residual bajo, heredado de EP4. Se resolvería con UIDs de servicio fuera del rango de las imágenes o con `userns-remap`; queda como pendiente y no se cambia antes de la entrega.
 
 ## Pendientes
+
+- Separar el UID 999 (imagen RabbitMQ) del usuario de sistema `pedidos360-bff` en la EC2 (ver Fase 6, E-19).
 
 - `npm audit` informa 4 vulnerabilidades (2 moderadas, 2 altas) en dependencias del frontend;
   por indicación del usuario no se tratan en esta iteración.
