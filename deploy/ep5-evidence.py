@@ -186,8 +186,11 @@ elif action == "outbox":   # E-07: order_stream_outbox by orderId (optional) or 
 elif action == "sql":   # read-only, fixed allowlist of statements
     queries = {
         "outbox-columns": ("orders", "SHOW COLUMNS FROM order_stream_outbox"),
-        "outbox": ("orders", "SELECT * FROM order_stream_outbox ORDER BY 1 DESC LIMIT 10"),
-        "orders": ("orders", "SELECT * FROM purchase_orders ORDER BY created_at DESC LIMIT 10"),
+        "outbox": ("orders", "SELECT event_id, order_id, created_at, published_at, attempts, last_error_code FROM order_stream_outbox ORDER BY created_at DESC LIMIT 10"),
+        "rabbit-outbox": ("orders", "SELECT event_id, order_id, created_at, published_at, attempts, last_error_code FROM order_event_outbox ORDER BY created_at DESC LIMIT 10"),
+        # Never select owner_subject (Entra oid of the user).
+        "orders": ("orders", "SELECT o.id, o.status, o.created_at, i.product_name, i.quantity, i.unit_price, i.currency "
+                             "FROM purchase_orders o JOIN order_items i ON i.order_id = o.id ORDER BY o.created_at DESC, i.id LIMIT 30"),
         "products": ("catalog", "SELECT id, name, price, currency, stock FROM products"),
         "streams-tables": ("streams", "SHOW TABLES"),
         "sales": ("streams", "SELECT * FROM product_sales_daily ORDER BY 1"),

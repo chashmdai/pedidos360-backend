@@ -131,6 +131,7 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
 
 ## Pendientes
 
+- **404 de `/favicon.ico` en la consola del navegador** (informado por el usuario el 2026-11-19, bloque 1 de E-07/E-17). `pedidos360-frontend/index.html` no declara `<link rel="icon">` ni hay carpeta `public/`. Por eso el navegador pide `/favicon.ico` en la raíz del dominio de API Gateway, donde no hay ruta (solo `/app` y `/app/{proxy+}` son públicas), y responde 404; `/app/favicon.ico` también da 404. No afecta la funcionalidad. Corrección propuesta: declarar el ícono en `index.html` como SVG embebido (data URI) o servirlo bajo `/app/`, sin abrir rutas nuevas en API Gateway. Requiere recompilar el frontend e instalar un release nuevo; se hará después de las evidencias para no cambiar el release a mitad de la Fase 6.
 - Separar el UID 999 (imagen RabbitMQ) del usuario de sistema `pedidos360-bff` en la EC2 (ver Fase 6, E-19).
 
 - `npm audit` informa 4 vulnerabilidades (2 moderadas, 2 altas) en dependencias del frontend;

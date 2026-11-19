@@ -1,0 +1,37 @@
+{
+  "at": "2026-11-19T14:08:40.616094+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "06486be6-935c-4f6a-97ce-6f357d85857c",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "topic-tail",
+    "args": [
+      "pedidos360.orders.registered.v1",
+      "3",
+      "d9d1058b-145c-4396-8f4a-87e03a9a2e61"
+    ],
+    "at": "2026-11-19T14:08:38Z",
+    "steps": [
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 0 --offset earliest --timeout-ms 8000 --property print.key=true ... ",
+        "exit": 0,
+        "seconds": 10.4,
+        "out": "\n(0 matching records in partition 0; last 3 shown)"
+      },
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 1 --offset earliest --timeout-ms 8000 --property print.key=true ... ",
+        "exit": 0,
+        "seconds": 10.3,
+        "out": "\n(0 matching records in partition 1; last 3 shown)"
+      },
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 2 --offset earliest --timeout-ms 8000 --property print.key=true ... ",
+        "exit": 0,
+        "seconds": 10.9,
+        "out": "CreateTime:1795097142769\tPartition:2\tOffset:0\tNO_HEADERS\td9d1058b-145c-4396-8f4a-87e03a9a2e61\t{\"schemaVersion\":1,\"eventId\":\"4e172649-cccf-4f45-88a1-1ca5bbe0d10b\",\"orderId\":\"d9d1058b-145c-4396-8f4a-87e03a9a2e61\",\"tenantId\":\"72fd0b5a-8a6a-4cff-89f6-bde961f7e250\",\"occurredAt\":\"2026-11-19T14:05:40.597505Z\",\"currency\":\"CLP\",\"total\":30970.00,\"itemCount\":2,\"items\":[{\"productId\":\"10000000-0000-0000-0000-000000000001\",\"productName\":\"Caf\u00e9 de especialidad\",\"quantity\":2,\"unitPrice\":8990.00,\"lineTotal\":17980.00},{\"productId\":\"10000000-0000-0000-0000-000000000002\",\"productName\":\"Taza de cer\u00e1mica\",\"quantity\":1,\"unitPrice\":12990.00,\"lineTotal\":12990.00}]}\n(1 matching records in partition 2; last 3 shown)"
+      }
+    ]
+  },
+  "error": ""
+}

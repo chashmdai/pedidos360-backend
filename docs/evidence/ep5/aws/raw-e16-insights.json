@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-19T14:08:54.142902+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "f1fb122d-3dd8-484f-a05f-dee73663cd6c",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "logs",
+    "args": [
+      "pedidos360-insights",
+      "ACK|NACK|REJECT",
+      "-1h"
+    ],
+    "at": "2026-11-19T14:08:50Z",
+    "steps": [
+      {
+        "cmd": "journalctl -u pedidos360-insights --since -1h -o cat | grep -E 'ACK|NACK|REJECT' | tail -40",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "2026-11-19T14:05:42.457Z  INFO 29641 --- [order-insights-service] [ sales-orders-1] c.d.p.i.i.ManualProjectionConsumer       : ACK flow=sales eventId=3053af70-9ccd-46ed-be8d-96560a2d6184 orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61 result=PROJECTION_STORED attempt=1\n2026-11-19T14:05:42.459Z  INFO 29641 --- [order-insights-service] [ audit-orders-1] c.d.p.i.i.ManualProjectionConsumer       : ACK flow=audit eventId=3053af70-9ccd-46ed-be8d-96560a2d6184 orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61 result=PROJECTION_STORED attempt=1"
+      }
+    ]
+  },
+  "error": ""
+}

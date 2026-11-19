@@ -1,0 +1,39 @@
+{
+  "at": "2026-11-19T14:09:04.738035+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "42786776-800d-4009-808b-3f082c233ccd",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "rabbit",
+    "args": [],
+    "at": "2026-11-19T14:09:03Z",
+    "steps": [
+      {
+        "cmd": "docker exec pedidos360-ep4-rabbit-1 rabbitmqctl -q cluster_status",
+        "exit": 0,
+        "seconds": 1.4,
+        "out": "Basics\n\nCluster name: pedidos360-ep4\nTotal CPU cores available cluster-wide: 4\n\nCluster Tags\n\n(none)\n\nDisk Nodes\n\nrabbit@pedidos360-ep4-rabbit-1\nrabbit@pedidos360-ep4-rabbit-2\n\nRunning Nodes\n\nrabbit@pedidos360-ep4-rabbit-1\nrabbit@pedidos360-ep4-rabbit-2\n\nVersions\n\nrabbit@pedidos360-ep4-rabbit-1: RabbitMQ 4.2.9 on Erlang 27.3.4.19\nrabbit@pedidos360-ep4-rabbit-2: RabbitMQ 4.2.9 on Erlang 27.3.4.19\n\nCPU Cores\n\nNode: rabbit@pedidos360-ep4-rabbit-1, available CPU cores: 2\nNode: rabbit@pedidos360-ep4-rabbit-2, available CPU cores: 2\n\nMaintenance status\n\nNode: rabbit@pedidos360-ep4-rabbit-1, status: not under maintenance\nNode: rabbit@pedidos360-ep4-rabbit-2, status: not under maintenance\n\nAlarms\n\n(none)\n\nNetwork Partitions\n\n(none)\n\nListeners\n\nNode: rabbit@pedidos360-ep4-rabbit-1, interface: [::], port: 15672, protocol: http, purpose: HTTP API\nNode: rabbit@pedidos360-ep4-rabbit-1, interface: [::], port: 15692, protocol: http/prometheus, purpose: Prometheus exporter API over HTTP\nNode: rabbit@pedidos360-ep4-rabbit-1, interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication\nNode: rabbit@pedidos360-ep4-rabbit-1, interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0\nNode: rabbit@pedidos360-ep4-rabbit-2, interface: [::], port: 15672, protocol: http, purpose: HTTP API\nNode: rabbit@pedidos360-ep4-rabbit-2, interface: [::], port: 15692, protocol: http/prometheus, purpose: Prometheus exporter API over HTTP\nNode: rabbit@pedidos360-ep4-rabbit-2, interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication\nNode: rabbit@pedidos360-ep4-rabbit-2, interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0\n\nFeature flags\n\nFlag: classic_mirrored_queue_version, state: enabled\nFlag: classic_queue_type_delivery_support, state: enabled\nFlag: detailed_queues_endpoint, state: enabled\nFlag: direct_exchange_routing_v2, state: enabled\nFlag: drop_unroutable_metric, state: enabled\nFlag: empty_basic_get_metric, state: enabled\nFlag: feature_flags_v2, state: enabled\nFlag: implicit_default_bindings, state: enabled\nFlag: khepri_db, state: enabled\nFlag: listener_records_in_ets, state: enabled\nFlag: maintenance_mode_status, state: enabled\nFlag: message_containers, state: enabled\nFlag: message_containers_deaths_v2, state: enabled\nFlag: quorum_queue, state: enabled\nFlag: quorum_queue_non_voters, state: enabled\nFlag: rabbit_exchange_type_local_random, state: enabled\nFlag: rabbitmq_4.0.0, state: enabled\nFlag: rabbitmq_4.1.0, state: enabled\nFlag: rabbitmq_4.2.0, state: enabled\nFlag: restart_streams, state: enabled\nFlag: stream_filtering, state: enabled\nFlag: stream_queue, state: enabled\nFlag: stream_sac_coordinator_unblock_group, state: enabled\nFlag: stream_single_active_consumer, state: enabled\nFlag: stream_update_config_command, state: enabled\nFlag: tracking_records_in_ets, state: enabled\nFlag: user_limits, state: enabled\nFlag: virtual_host_metadata, state: enabled"
+      },
+      {
+        "cmd": "docker exec pedidos360-ep4-rabbit-1 rabbitmqctl -q -p pedidos360-ep4 list_queues name type messages_ready messages_unacknowledged consumers",
+        "exit": 0,
+        "seconds": 1.5,
+        "out": "name\ttype\tmessages_ready\tmessages_unacknowledged\tconsumers\npedidos360.sales.failed.v1\tclassic\t0\t0\t0\npedidos360.audit.order-registered.v1\tclassic\t0\t0\t1\npedidos360.receipts.failed.v1\tclassic\t0\t0\t0\npedidos360.sales.order-registered.v1\tclassic\t0\t0\t1\npedidos360.audit.failed.v1\tclassic\t0\t0\t0\npedidos360.receipts.order-registered.v1\tclassic\t0\t0\t1"
+      },
+      {
+        "cmd": "docker exec pedidos360-ep4-rabbit-1 rabbitmqctl -q -p pedidos360-ep4 list_exchanges name type",
+        "exit": 0,
+        "seconds": 1.3,
+        "out": "name\ttype\n\tdirect\namq.direct\tdirect\namq.fanout\tfanout\namq.headers\theaders\namq.match\theaders\namq.rabbitmq.trace\ttopic\namq.topic\ttopic\npedidos360.audit.errors.v1\tdirect\npedidos360.orders.events.v1\tdirect\npedidos360.orders.insights.v1\ttopic\npedidos360.receipts.errors.v1\tdirect\npedidos360.sales.errors.v1\tdirect"
+      },
+      {
+        "cmd": "docker exec pedidos360-ep4-rabbit-1 rabbitmqctl -q -p pedidos360-ep4 list_bindings source_name destination_name routing_key",
+        "exit": 0,
+        "seconds": 1.6,
+        "out": "source_name\tdestination_name\trouting_key\n\tpedidos360.sales.failed.v1\tpedidos360.sales.failed.v1\n\tpedidos360.audit.order-registered.v1\tpedidos360.audit.order-registered.v1\n\tpedidos360.receipts.failed.v1\tpedidos360.receipts.failed.v1\n\tpedidos360.sales.order-registered.v1\tpedidos360.sales.order-registered.v1\n\tpedidos360.audit.failed.v1\tpedidos360.audit.failed.v1\n\tpedidos360.receipts.order-registered.v1\tpedidos360.receipts.order-registered.v1\npedidos360.audit.errors.v1\tpedidos360.audit.failed.v1\taudit.failed.v1\npedidos360.orders.events.v1\tpedidos360.orders.insights.v1\torder.registered.v1\npedidos360.receipts.errors.v1\tpedidos360.receipts.failed.v1\treceipt.failed.v1\npedidos360.sales.errors.v1\tpedidos360.sales.failed.v1\tsales.failed.v1\npedidos360.orders.insights.v1\tpedidos360.audit.order-registered.v1\torder.registered.*\npedidos360.orders.events.v1\tpedidos360.receipts.order-registered.v1\torder.registered.v1\npedidos360.orders.insights.v1\tpedidos360.sales.order-registered.v1\t*.registered.v1"
+      }
+    ]
+  },
+  "error": ""
+}

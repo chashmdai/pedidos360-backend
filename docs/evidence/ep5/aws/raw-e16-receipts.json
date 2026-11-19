@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-19T14:08:47.482107+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "02527252-e172-49de-b5ca-356222642d3a",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "logs",
+    "args": [
+      "pedidos360-receipts",
+      "ACK|NACK|REJECT",
+      "-1h"
+    ],
+    "at": "2026-11-19T14:08:43Z",
+    "steps": [
+      {
+        "cmd": "journalctl -u pedidos360-receipts --since -1h -o cat | grep -E 'ACK|NACK|REJECT' | tail -40",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "2026-11-19T14:05:42.304Z  INFO 29194 --- [receipts-service] [eceipt-orders-1] c.d.p.r.infrastructure.ReceiptListener   : ACK eventId=3053af70-9ccd-46ed-be8d-96560a2d6184 orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61 result=RECEIPT_STORED attempt=1 redelivered=false"
+      }
+    ]
+  },
+  "error": ""
+}

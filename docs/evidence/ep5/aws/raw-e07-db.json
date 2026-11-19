@@ -1,0 +1,30 @@
+{
+  "at": "2026-11-19T14:07:43.055354+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "bd5de28a-6e2d-4bc5-93f9-7e86665a2528",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "sql",
+    "args": [
+      "orders",
+      "rabbit-outbox"
+    ],
+    "at": "2026-11-19T14:07:39Z",
+    "steps": [
+      {
+        "cmd": "mysql (pedidos360_orders_app, TLS VERIFY_IDENTITY) -e \"SELECT o.id, o.status, o.created_at, i.product_name, i.quantity, i.unit_price, i.currency FROM purchase_orders o JOIN order_items i ON i.order_id = o.id ORDER BY o.created_at DESC, i.id LIMIT 30\"",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "+--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+\n| id                                   | status     | created_at                 | product_name          | quantity | unit_price | currency |\n+--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+\n| d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Caf\u00e9 de especialidad  |        2 |    8990.00 | CLP      |\n| d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Taza de cer\u00e1mica      |        1 |   12990.00 | CLP      |\n+--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+"
+      },
+      {
+        "cmd": "mysql (pedidos360_orders_app, TLS VERIFY_IDENTITY) -e \"SELECT event_id, order_id, created_at, published_at, attempts, last_error_code FROM order_event_outbox ORDER BY created_at DESC LIMIT 10\"",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "+--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+\n| event_id                             | order_id                             | created_at                 | published_at               | attempts | last_error_code |\n+--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+\n| 3053af70-9ccd-46ed-be8d-96560a2d6184 | d9d1058b-145c-4396-8f4a-87e03a9a2e61 | 2026-11-19 14:05:41.048738 | 2026-11-19 14:05:41.911426 |        1 | NULL            |\n+--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+"
+      }
+    ]
+  },
+  "error": ""
+}

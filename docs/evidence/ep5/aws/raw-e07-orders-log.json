@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-19T14:07:56.726160+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "9be6bb43-f2bd-423a-9072-b37f4957e96b",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "logs",
+    "args": [
+      "pedidos360-orders",
+      "PUBLISH_CONFIRMED|PUBLISH_DEFERRED",
+      "-1h"
+    ],
+    "at": "2026-11-19T14:07:53Z",
+    "steps": [
+      {
+        "cmd": "journalctl -u pedidos360-orders --since -1h -o cat | grep -E 'PUBLISH_CONFIRMED|PUBLISH_DEFERRED' | tail -40",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "2026-11-19T14:05:41.916Z  INFO 27232 --- [orders-service] [   scheduling-1] c.d.p.o.i.messaging.OutboxPublisher      : PUBLISH_CONFIRMED eventId=3053af70-9ccd-46ed-be8d-96560a2d6184 orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61\n2026-11-19T14:05:43.411Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61 topic=pedidos360.orders.registered.v1 partition=2 offset=0"
+      }
+    ]
+  },
+  "error": ""
+}
