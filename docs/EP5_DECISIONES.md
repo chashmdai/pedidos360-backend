@@ -12,6 +12,8 @@ se anota aquí para actualizar luego el informe. Las decisiones EP3/EP4 previas 
 | D-02 | Identificadores EP4: EC2 `i-0818fdfafcfb7cb31`, RDS `pedidos360-mysql` existente, HTTP API `7k2zyh0t0d`, VPC Link y ALB existentes. | Todos los recursos se recrean con **IDs nuevos**, que se registrarán en `docs/evidence/ep5/IDS_NUEVOS.md`. Los IDs antiguos en documentos y journals EP4 se conservan como históricos. | Cuenta nueva (D-01). | 2, 13, E-01, E-17 y cualquier evidencia que cite un ID |
 | D-03 | Entorno local de pruebas: **WSL2** (E-18) y usuario `codex`. | **CachyOS (Arch Linux) nativo**, usuario operador regular; Java 25.0.5 Temurin, Maven 3.9.16 (wrapper), Node 26.13, Docker 29.9 + Compose 5.7. | Cambio de máquina de desarrollo. | E-18 (entorno), 18 |
 | D-04 | (Implícito) Node 24.20.0 según `.nvmrc`. | Las pruebas y el build del frontend se ejecutan con Node 26.13; resultado idéntico (11 pruebas, build correcto). `.nvmrc` no se modifica. | Versión disponible en la máquina; sin incompatibilidades observadas. | E-18 |
+| D-05 | `compose.kafka.yaml` usa "un volumen nombrado por nodo" (4.1). | Cada broker tiene un volumen; cada nodo ZooKeeper tiene **dos** (`…-zookeeper-N-data` y `…-zookeeper-N-log`). | La imagen `cp-zookeeper` fija `dataDir=/var/lib/zookeeper/data` y `dataLogDir=/var/lib/zookeeper/log`, ambos declarados `VOLUME`. Un único volumen con `subpath` falla en un volumen nuevo (Docker exige que el subdirectorio exista) y montarlo en el directorio padre deja el log de transacciones en un volumen anónimo. | 4.1 (texto) |
+| D-06 | Procedimientos E-03/E-05/E-06/E-08/E-11: `docker exec kafka-1 kafka-…`. | Mismos comandos, pero ejecutados con `-e KAFKA_HEAP_OPTS=-Xmx128m` (lo hace `scripts/ep5-kafka.sh`). | Las CLI arrancan una JVM dentro del contenedor del broker y heredan `-Xms512m -Xmx512m` (tabla 5). Medido en local: el comando literal sube el contenedor de ~300 a 442 MiB (límite 896 MiB) con el broker en reposo; con el broker cargado el margen se reduce. | E-03, E-05, E-06, E-08, E-11 (procedimiento) |
 
 ## Adaptación a Linux nativo (Fase 1)
 
@@ -43,6 +45,30 @@ comportamiento cuando se usan los valores por defecto anteriores.
 usuario `codex`, o dependen de Windows (PowerShell, Git Credential Manager). Documentan cómo se
 produjeron las evidencias EP3 y no forman parte de la cadena EP5. Tampoco se modifican los
 generadores de evidencias/PDF de EP4 (`ep4-capture.py`, `ep4-report.py`, `ep4-delivery-check.py`).
+
+## Fase 2A: plataforma Kafka, contratos y productor de Orders
+
+**Versiones fijadas** (por tag y digest del manifiesto multi-arquitectura):
+
+| Imagen | Versión | Digest |
+|---|---|---|
+| confluentinc/cp-zookeeper | 7.9.10 (Apache ZooKeeper 3.8.6) | sha256:1a870111c6e861f1e6015094fac902779981edb5cb1d2ad6b7437d2a6b8ba064 |
+| confluentinc/cp-kafka | 7.9.10 (Apache Kafka 3.9) | sha256:07c3d60362e67c296f7f34b690b1240e5ecdcde4a84f5e73cab320fb4041f58c |
+| kafbat/kafka-ui | v1.5.0 | sha256:7cda86a33344160309fdb65146332e4da65db81a945614f2fe32e210803f6fd1 |
+
+Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el último parche 7.9.x con más de dos semanas de publicación. Clientes: spring-kafka 4.1.1 y kafka-clients 4.2.1, gestionados por Spring Boot 4.1.1 (serie 4.x, compatible con brokers 3.9). Testcontainers usa la misma imagen cp-kafka 7.9.10.
+
+**Decisiones de implementación** (no contradicen el informe):
+
+- Healthchecks sin JVM adicional: ZooKeeper está healthy solo si `srvr` informa `Mode: leader|follower` (quórum). Un broker está healthy si ambos listeners aceptan conexiones y su nodo efímero `/brokers/ids/<id>` existe (consulta `dump` en ZooKeeper). 4lw habilitados: `srvr,ruok,dump`. Los `VOLUME` de secretos no usados se montan como tmpfs para no crear volúmenes anónimos.
+- Kafka UI: `AUTH_TYPE=LOGIN_FORM` con usuario y contraseña en `$PEDIDOS_EP5_CONFIG_DIR/kafka-ui.env` (0600, generado por `ep5-kafka.sh ui up`, nunca impreso). `/actuator/health` es público (para el healthcheck); el resto redirige a `/login`.
+- `OrderPersistence` llama ahora a **todos** los `OrderEventRecorder` disponibles (`orderedStream()` en lugar de `ifAvailable`): el registrador RabbitMQ y el de streaming escriben en la misma transacción del pedido. Con un solo registrador el comportamiento EP3/EP4 es idéntico.
+- `spring.task.scheduling.pool.size=2` en Orders: el relay Kafka y el publicador RabbitMQ no comparten un único hilo del scheduler, de modo que un Kafka lento no retrasa RabbitMQ.
+- `KafkaOutboxRelay` envía el lote de forma asíncrona y espera las confirmaciones con un límite total de 35 s (`pedidos.kafka.relay.confirm-timeout-ms`, mayor que `delivery.timeout.ms=30000`). Si `send()` falla de forma síncrona (sin metadatos del clúster), el resto del lote se aplaza sin reintentarlo en el mismo ciclo. La propiedad de productor de la tabla 10 no se amplía (no se fija `max.block.ms`).
+- Los records validan además coherencias que el informe implica: `lineTotal = unitPrice × quantity`, `total = Σ lineTotal`, `itemCount = |items|`, productos únicos y `metricKey` igual a sus componentes. Toda violación lanza `StreamContractException` (no reintentable).
+- Prueba existente ajustada: `OrdersIntegrationTest` esperaba 2 migraciones Flyway; ahora espera 3 por `V3__order_stream_outbox.sql` (exigida por el informe). Es el único cambio en pruebas EP3/EP4.
+- Si Kafka no está disponible al arrancar Orders, KafkaAdmin registra el error y el servicio arranca igual (unos 10 s más lento); los eventos quedan en la outbox.
+- `scripts/dev.sh start entra --with-kafka` activa la outbox de streaming de Orders contra el Compose local.
 
 ## Pendientes conocidos para la Fase 4 (no resueltos todavía)
 
