@@ -1,0 +1,248 @@
+openapi: 3.1.0
+info:
+  title: Pedidos360 kafka-admin-service
+  version: 1.0.0
+  description: >-
+    EP5. Administración REST de Kafka sobre AdminClient (informe, sección 10 y tabla 14). Escucha solo en
+    127.0.0.1:8187 (acceso operativo en AWS por reenvío de puertos SSM). Cada operación exige JWT válido de
+    Microsoft Entra con rol Admin Y scope Orders.Read. Crear, ampliar particiones y eliminar se restringe a tópicos
+    con prefijo pedidos360.lab.; los tópicos de negocio, sus DLT y los internos (__*) están protegidos (409).
+    PATCH de configuraciones acepta solo la lista blanca retention.ms, cleanup.policy, min.insync.replicas,
+    segment.ms y max.message.bytes, con valores acotados. Errores como application/problem+json (ProblemDetails).
+servers:
+  - url: http://127.0.0.1:8187/api/v1/admin/kafka
+    description: Loopback de la EC2 (o local); no se publica por API Gateway
+security:
+  - bearerAuth: []
+paths:
+  /cluster:
+    get:
+      operationId: getCluster
+      summary: Identificador del clúster, brokers y controlador
+      responses:
+        '200': { description: Clúster, content: { application/json: { schema: { $ref: '#/components/schemas/Cluster' } } } }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '503': { $ref: '#/components/responses/Unavailable' }
+  /topics:
+    get:
+      operationId: listTopics
+      summary: Tópicos con particiones y réplicas (excluye internos salvo includeInternal=true)
+      parameters:
+        - { name: includeInternal, in: query, required: false, schema: { type: boolean, default: false } }
+      responses:
+        '200':
+          description: Tópicos ordenados por nombre
+          content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/TopicSummary' } } } }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '503': { $ref: '#/components/responses/Unavailable' }
+    post:
+      operationId: createTopic
+      summary: Crea un tópico de laboratorio (prefijo pedidos360.lab.)
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/CreateTopic' } } }
+      responses:
+        '201': { description: Tópico creado, content: { application/json: { schema: { $ref: '#/components/schemas/TopicDetail' } } } }
+        '400': { $ref: '#/components/responses/Invalid' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '409': { $ref: '#/components/responses/Conflict' }
+        '503': { $ref: '#/components/responses/Unavailable' }
+  /topics/{name}:
+    parameters: [ { $ref: '#/components/parameters/TopicName' } ]
+    get:
+      operationId: getTopic
+      summary: Particiones, líder, réplicas, ISR y configuración efectiva
+      responses:
+        '200': { description: Detalle, content: { application/json: { schema: { $ref: '#/components/schemas/TopicDetail' } } } }
+        '400': { $ref: '#/components/responses/Invalid' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '503': { $ref: '#/components/responses/Unavailable' }
+    delete:
+      operationId: deleteTopic
+      summary: Elimina un tópico de laboratorio
+      responses:
+        '204': { description: Eliminado }
+        '400': { $ref: '#/components/responses/Invalid' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+        '503': { $ref: '#/components/responses/Unavailable' }
+  /topics/{name}/configs:
+    parameters: [ { $ref: '#/components/parameters/TopicName' } ]
+    patch:
+      operationId: updateTopicConfigs
+      summary: Modifica configuraciones con incrementalAlterConfigs (lista blanca)
+      description: Aplica a tópicos de laboratorio y de negocio; no a tópicos internos (409). min.insync.replicas no puede superar el factor de replicación.
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/UpdateConfigs' } } }
+      responses:
+        '200': { description: Configuración efectiva resultante, content: { application/json: { schema: { $ref: '#/components/schemas/TopicDetail' } } } }
+        '400': { $ref: '#/components/responses/Invalid' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+        '503': { $ref: '#/components/responses/Unavailable' }
+  /topics/{name}/partitions:
+    parameters: [ { $ref: '#/components/parameters/TopicName' } ]
+    post:
+      operationId: increasePartitions
+      summary: Aumenta el número de particiones de un tópico de laboratorio (solo aumento)
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/IncreasePartitions' } } }
+      responses:
+        '200': { description: Detalle con las nuevas particiones, content: { application/json: { schema: { $ref: '#/components/schemas/TopicDetail' } } } }
+        '400': { $ref: '#/components/responses/Invalid' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+        '503': { $ref: '#/components/responses/Unavailable' }
+  /consumer-groups:
+    get:
+      operationId: listConsumerGroups
+      summary: Grupos con estado y número de miembros
+      responses:
+        '200': { description: Grupos, content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/GroupSummary' } } } } }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '503': { $ref: '#/components/responses/Unavailable' }
+  /consumer-groups/{groupId}:
+    parameters:
+      - { name: groupId, in: path, required: true, schema: { type: string, pattern: '^[a-zA-Z0-9._-]{1,249}$' } }
+    get:
+      operationId: getConsumerGroup
+      summary: Miembros, asignación, offset confirmado, offset final y lag por partición
+      responses:
+        '200': { description: Detalle, content: { application/json: { schema: { $ref: '#/components/schemas/GroupDetail' } } } }
+        '400': { $ref: '#/components/responses/Invalid' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '503': { $ref: '#/components/responses/Unavailable' }
+components:
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer, bearerFormat: JWT }
+  parameters:
+    TopicName:
+      name: name
+      in: path
+      required: true
+      schema: { type: string, pattern: '^[a-zA-Z0-9._-]{1,249}$' }
+  responses:
+    Unauthorized: { description: Bearer ausente o JWT inválido (firma, issuer, audience, tid, azp, ver, exp u oid). }
+    Forbidden: { description: JWT válido sin rol Admin o sin scope Orders.Read. }
+    Invalid: { description: Parámetros inválidos (nombre, rangos, lista blanca, réplicas mayores al número de brokers, reducción de particiones)., content: { application/problem+json: { schema: { $ref: '#/components/schemas/Problem' } } } }
+    NotFound: { description: Tópico o grupo inexistente., content: { application/problem+json: { schema: { $ref: '#/components/schemas/Problem' } } } }
+    Conflict: { description: Tópico existente, o tópico protegido (negocio, DLT, interno o fuera de pedidos360.lab.)., content: { application/problem+json: { schema: { $ref: '#/components/schemas/Problem' } } } }
+    Unavailable: { description: El clúster Kafka no respondió dentro del tiempo límite., content: { application/problem+json: { schema: { $ref: '#/components/schemas/Problem' } } } }
+  schemas:
+    Problem:
+      type: object
+      properties: { type: { type: string }, title: { type: string }, status: { type: integer }, detail: { type: string }, instance: { type: string } }
+    Broker:
+      type: object
+      required: [id, host, port]
+      properties: { id: { type: integer }, host: { type: string }, port: { type: integer }, rack: { type: [string, 'null'] } }
+    Cluster:
+      type: object
+      required: [clusterId, controller, brokers]
+      properties:
+        clusterId: { type: string }
+        controller: { $ref: '#/components/schemas/Broker' }
+        brokers: { type: array, items: { $ref: '#/components/schemas/Broker' } }
+    TopicSummary:
+      type: object
+      required: [name, partitions, replicationFactor, internal]
+      properties: { name: { type: string }, partitions: { type: integer }, replicationFactor: { type: integer }, internal: { type: boolean } }
+    TopicDetail:
+      type: object
+      required: [name, internal, protectedTopic, replicationFactor, partitions, configs]
+      properties:
+        name: { type: string }
+        internal: { type: boolean }
+        protectedTopic: { type: boolean, description: 'true para tópicos de negocio, DLT, internos o fuera del prefijo de laboratorio' }
+        replicationFactor: { type: integer }
+        partitions:
+          type: array
+          items:
+            type: object
+            required: [partition, leader, replicas, isr]
+            properties:
+              partition: { type: integer }
+              leader: { type: [integer, 'null'], description: 'id del broker líder; null si la partición no tiene líder' }
+              replicas: { type: array, items: { type: integer } }
+              isr: { type: array, items: { type: integer } }
+        configs:
+          type: object
+          description: Configuración efectiva no sensible, por nombre
+          additionalProperties:
+            type: object
+            required: [value, source]
+            properties: { value: { type: [string, 'null'] }, source: { type: string, examples: [DYNAMIC_TOPIC_CONFIG, STATIC_BROKER_CONFIG, DEFAULT_CONFIG] } }
+    CreateTopic:
+      type: object
+      required: [name, partitions, replicationFactor]
+      properties:
+        name: { type: string, pattern: '^pedidos360\.lab\.[a-zA-Z0-9._-]+$', examples: [pedidos360.lab.demo] }
+        partitions: { type: integer, minimum: 1, maximum: 12 }
+        replicationFactor: { type: integer, minimum: 1, maximum: 3 }
+        configs: { $ref: '#/components/schemas/WhitelistedConfigs' }
+    UpdateConfigs:
+      type: object
+      required: [configs]
+      properties: { configs: { $ref: '#/components/schemas/WhitelistedConfigs' } }
+      examples: [ { configs: { retention.ms: '86400000' } } ]
+    IncreasePartitions:
+      type: object
+      required: [partitions]
+      properties: { partitions: { type: integer, minimum: 1, maximum: 12, description: Debe ser mayor que el número actual } }
+    WhitelistedConfigs:
+      type: object
+      minProperties: 1
+      additionalProperties: false
+      properties:
+        retention.ms: { type: string, description: '-1 o 60000..31536000000' }
+        cleanup.policy: { type: string, enum: [delete, compact, 'compact,delete', 'delete,compact'] }
+        min.insync.replicas: { type: string, description: '1..3 y no mayor que el factor de replicación' }
+        segment.ms: { type: string, description: '60000..604800000' }
+        max.message.bytes: { type: string, description: '1024..10485760' }
+    GroupSummary:
+      type: object
+      required: [groupId, state, members, assignor]
+      properties: { groupId: { type: string }, state: { type: string, examples: [STABLE, EMPTY] }, members: { type: integer }, assignor: { type: [string, 'null'] } }
+    GroupDetail:
+      type: object
+      required: [groupId, state, assignor, coordinator, members, partitions, totalLag]
+      properties:
+        groupId: { type: string }
+        state: { type: string }
+        assignor: { type: [string, 'null'], examples: [cooperative-sticky] }
+        coordinator: { $ref: '#/components/schemas/Broker' }
+        members:
+          type: array
+          items:
+            type: object
+            required: [memberId, clientId, host, assignment]
+            properties: { memberId: { type: string }, clientId: { type: string }, host: { type: string }, assignment: { type: array, items: { type: string, description: 'tópico-partición' } } }
+        partitions:
+          type: array
+          items:
+            type: object
+            required: [topic, partition, committedOffset, logEndOffset, lag, memberId]
+            properties:
+              topic: { type: string }
+              partition: { type: integer }
+              committedOffset: { type: [integer, 'null'], description: null si el grupo aún no confirma offsets en la partición }
+              logEndOffset: { type: integer }
+              lag: { type: [integer, 'null'], description: logEndOffset - committedOffset }
+              memberId: { type: [string, 'null'], description: Miembro asignado; null si no hay miembro }
+        totalLag: { type: integer }
