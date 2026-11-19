@@ -56,7 +56,7 @@ class OrdersIntegrationTest {
         assertEquals(404,TestHttp.call(port,"GET","/api/v1/pedidos/"+id,null,TOKENS.token("bob","Orders.Read")).statusCode());
         assertEquals("[]",TestHttp.call(port,"GET","/api/v1/pedidos",null,TOKENS.token("bob","Orders.Read")).body());
         assertEquals(2,jdbc.queryForObject("SELECT COUNT(*) FROM order_items WHERE order_id=?",Integer.class,id));
-        assertEquals(2,jdbc.queryForObject("SELECT COUNT(*) FROM flyway_schema_history WHERE success=1",Integer.class));
+        assertEquals(3,jdbc.queryForObject("SELECT COUNT(*) FROM flyway_schema_history WHERE success=1",Integer.class)); // V1 orders, V2 RabbitMQ outbox, V3 stream outbox (EP5)
     }
     @Test void missingScopeAndInvalidRequestCannotCreateOrder() throws Exception {
         assertEquals(403,TestHttp.call(port,"POST","/api/v1/pedidos","{\"items\":[]}",TOKENS.token("reader","Orders.Create")).statusCode());

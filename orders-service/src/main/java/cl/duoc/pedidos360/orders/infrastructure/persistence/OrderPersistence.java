@@ -23,7 +23,8 @@ public class OrderPersistence implements OrderRepository {
             line.unitPrice=item.unitPrice().amount(); line.currency=item.unitPrice().currency(); line.quantity=item.quantity(); entity.items.add(line);
         }
         var saved = map(repository.saveAndFlush(entity));
-        events.ifAvailable(recorder -> recorder.record(saved));
+        // RabbitMQ (EP3) and Kafka (EP5) outboxes, each optional, in the same transaction as the order.
+        events.orderedStream().forEach(recorder -> recorder.record(saved));
         return saved;
     }
     public List<Order> findByTenant(String tenant) {
