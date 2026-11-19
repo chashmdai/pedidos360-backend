@@ -1,23 +1,66 @@
 # Pedidos360 backend
 
-## EP5 - operación en Linux nativo (en curso)
+## EP5/EP6 - streaming de eventos con Apache Kafka
 
-Desde EP5 el desarrollo se ejecuta en Linux nativo (CachyOS), no en WSL2. Arranque local con RabbitMQ EP4:
+Aplicación cloud: **https://az3h2vqgsi.execute-api.us-east-1.amazonaws.com/app/** (cuenta AWS Academy nueva 647660738152; requiere el laboratorio encendido). Vista nueva: **Ventas en vivo**.
+
+Kafka complementa a RabbitMQ sin reemplazarlo: el contrato `OrderRegisteredV1`, las colas, los exchanges y la outbox `order_event_outbox` de EP4 no cambian.
+
+- **Clúster:** 3 nodos ZooKeeper y 3 brokers Confluent 7.9.10 en `compose.kafka.yaml`, y Kafka UI (kafbat v1.5.0) en `compose.kafka-ui.yaml`. Imágenes fijadas por digest y puertos solo en loopback.
+- **Tópicos:** `pedidos360.orders.registered.v1` (delete, 7 días) y `pedidos360.sales.product-metrics.v1` (compactado), ambos de 3 particiones y 3 réplicas con `min.insync.replicas=2`, más sus `.DLT`.
+- **Orders:** publica `OrderRegisteredStreamV1` mediante una segunda outbox transaccional (`order_stream_outbox`, `KafkaOutboxRelay`, `acks=all`, productor idempotente).
+- **`sales-stream-service` (8186):** tres grupos.
+  - `pedidos360-sales-aggregator` (×3): acumulados por producto y día, idempotentes por `eventId`, publicados en el tópico compactado con `version`.
+  - `pedidos360-order-monitor`: alertas de alto valor.
+  - `pedidos360-sales-dashboard`: vista en memoria reconstruida desde el inicio del tópico compactado.
+  - Errores de contrato al DLT sin reintentos; errores transitorios con 2 reintentos (1 s y 2 s).
+  - `GET /api/v1/ventas/en-vivo`, filtrado por `tid`, a través del BFF y de API Gateway con `Orders.Read`.
+- **`kafka-admin-service` (8187):** tópicos, configuraciones y grupos; rol Admin + `Orders.Read`; protege los tópicos de negocio. Contrato en `contracts/kafka-admin-openapi.yaml`.
+- **Pruebas:** 82 Java (`./mvnw clean verify`, Testcontainers con Kafka y MySQL) y 20 React. Las 41 de EP3/EP4 se mantienen.
+
+Documentos: [informe EP5/EP6](docs/INFORME_EP5_EP6.md) · [decisiones y desviaciones](docs/EP5_DECISIONES.md) · [checkpoint AWS](docs/EP5_AWS_CHECKPOINT.md) · [evidencias E-01..E-19](docs/evidence/ep5/) · [IDs nuevos](docs/evidence/ep5/IDS_NUEVOS.md).
+
+### Operación local en Linux nativo
+
+Desde EP5 el desarrollo se ejecuta en Linux nativo (CachyOS), no en WSL2. Las referencias a WSL de las secciones EP3/EP4 son históricas. Los scripts `scripts/ep3*.sh|py` (incluido `ep3-publish.py`) se conservan **sin modificar como históricos**: exigen WSL con el usuario `codex` o Windows.
 
 ```bash
-PEDIDOS360_MYSQL_PORT=13306 bash scripts/setup-local.sh   # elegir otro puerto si 13306 está ocupado
+PEDIDOS360_MYSQL_PORT=13307 bash scripts/setup-local.sh   # elegir un puerto libre
 bash scripts/mysql.sh up -d --wait
-./mvnw clean verify
+./mvnw clean verify                     # con Kafka y RabbitMQ locales apagados: Testcontainers levanta los suyos
 (cd ../pedidos360-frontend && npm ci && npm test)
-python3 scripts/ep4-broker.py up
-bash scripts/dev.sh start entra --with-rabbit
+python3 scripts/ep4-broker.py up        # RabbitMQ EP4 (2 nodos)
+bash scripts/ep5-kafka.sh up            # 3 ZooKeeper + 3 brokers
+bash scripts/ep5-kafka.sh topics create
+bash scripts/ep5-kafka.sh ui up         # Kafka UI en http://127.0.0.1:8090 (credenciales en ~/.config/pedidos360/ep5/kafka-ui.env, 0600)
+bash scripts/dev.sh start entra --with-rabbit --with-kafka
 ```
 
-Los scripts `scripts/ep3*.sh|py` (incluido `ep3-publish.py`) se conservan **sin modificar como históricos**: exigen WSL con el usuario `codex` o Windows y solo documentan cómo se obtuvieron las evidencias EP3. Adaptaciones y desviaciones del informe EP5/EP6: [EP5_DECISIONES.md](docs/EP5_DECISIONES.md).
+Comandos de inspección: `bash scripts/ep5-kafka.sh zk-status`, `topics describe`, `topics configs` y `groups describe`. Las herramientas CLI de Kafka se ejecutan con `docker exec -e KAFKA_HEAP_OPTS=-Xmx128m ...` para no superar el `mem_limit` del broker. Para cuidar la memoria local, mantener apagado el Compose de Kafka durante `clean verify`. `bash scripts/ep5-kafka.sh down` conserva los volúmenes.
 
-## EP4 - versión cloud verificada
+### Despliegue y operación en AWS
 
-Frontend desplegado: **https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com/app/**. La SPA se aloja en la EC2 propia y llega por HTTPS al Gateway, VPC Link, ALB interno y BFF existentes. Las siete rutas API conservan JWT/scopes. La disponibilidad depende de que el laboratorio esté encendido.
+Toda la operación es por AWS Systems Manager: sin par de claves y sin regla de entrada 22. La cadena es idempotente y registra cada escritura en `docs/evidence/ep5/aws/deployment-journal.json`. El destino está en `config/aws-target.json`; los secretos van a `~/.config/pedidos360/aws-647660738152/` (0700/0600), nunca a Git.
+
+```bash
+python3 scripts/aws_deploy.py network && python3 scripts/aws_deploy.py database    # VPC, SG, RDS privado con TLS
+python3 scripts/aws_deploy.py compute && python3 scripts/aws_deploy.py gateway     # EC2 t3.large, ALB interno, VPC Link, HTTP API
+bash scripts/ep5-build.sh                       # backend verify + SPA para /app/
+python3 scripts/ep5-release.py                  # release con manifiesto SHA-256
+bash scripts/ep4.sh transfer setup              # una vez: clave de transferencia restringida
+bash scripts/ep4.sh transfer tunnel && bash scripts/ep4.sh transfer upload "$(cat ~/.config/pedidos360/aws-647660738152/current-bundle)"
+bash scripts/ep4.sh transfer reset-tunnel
+python3 scripts/ep5-install-release.py          # swap, Docker, RDS, RabbitMQ, Kafka, Kafka UI y 8 servicios escalonados
+python3 scripts/aws_deploy.py status && python3 scripts/ep5-verify-gateway.py
+```
+
+- **Al renovar el laboratorio:** actualizar las tres credenciales y ejecutar `python3 scripts/aws_deploy.py status`. Si la EC2 se reinició, systemd levanta solo toda la pila en orden: Compose de RabbitMQ y Kafka, Kafka UI y los servicios con espera de salud.
+- **Evidencias en la instancia:** `python3 scripts/ep4-ssm.py deploy/ep5-evidence.py --argument <acción> --output raw-<x>.json`. Las acciones son fijas y revisadas. `scripts/ep5-evidence-report.py` genera el archivo `E-XX`.
+- **Kafka UI y kafka-admin desde el equipo local:** `aws ssm start-session --target <instancia> --document-name AWS-StartPortForwardingSession --parameters '{"portNumber":["8090"],"localPortNumber":["18090"]}'` (8187 para kafka-admin). La contraseña de Kafka UI está en `/etc/pedidos360/ep5/kafka-ui.env` en la instancia (0600 root) y se lee dentro de una sesión SSM.
+
+## EP4 - versión cloud verificada (histórica)
+
+Frontend desplegado en la cuenta de EP4, que agotó sus créditos (histórico; la versión vigente está en la sección EP5): **https://7k2zyh0t0d.execute-api.us-east-1.amazonaws.com/app/**. La SPA se aloja en la EC2 propia y llega por HTTPS al Gateway, VPC Link, ALB interno y BFF existentes. Las siete rutas API conservan JWT/scopes. La disponibilidad depende de que el laboratorio esté encendido.
 
 La iteración añade un clúster RabbitMQ real de dos nodos en Docker Compose sobre esa EC2, tres colas con tres DLQ y enrutamiento direct/topic. Mantiene Orders -> outbox -> Receipts y suma auditoría y resumen diario por moneda en `order-insights-service`. Son seis servicios Spring; las colas classic no replican mensajes y ambos nodos comparten host, por lo que **no es HA**.
 
