@@ -21,6 +21,15 @@ class BffLiveSalesRouteTest {
     static final AtomicReference<String> BEARER = new AtomicReference<>();
     static final String BODY = "{\"fecha\":\"2026-11-24\",\"productos\":[],\"alertas\":[]}";
     static final HttpServer SALES = sales();
+    static final java.nio.file.Path SPA = spa();
+
+    static java.nio.file.Path spa() {
+        try {
+            var directory = java.nio.file.Files.createTempDirectory("pedidos360-spa-live-");
+            java.nio.file.Files.writeString(directory.resolve("index.html"), "<!doctype html><title>Live SPA</title>");
+            return directory;
+        } catch (Exception e) { throw new IllegalStateException(e); }
+    }
 
     static HttpServer sales() {
         try {
@@ -43,9 +52,16 @@ class BffLiveSalesRouteTest {
         r.add("pedidos.security.issuer", TOKENS::issuer); r.add("pedidos.security.audience", () -> TestTokens.AUDIENCE);
         r.add("pedidos.security.jwks", () -> TOKENS.issuer() + "/jwks");
         r.add("pedidos.sales-stream-url", () -> "http://127.0.0.1:" + SALES.getAddress().getPort());
+        r.add("pedidos.spa.enabled", () -> "true"); r.add("pedidos.spa.directory", SPA::toString);
     }
 
     @AfterAll static void cleanup() { SALES.stop(0); TOKENS.close(); }
+
+    @Test void deepLinkToTheLiveViewServesTheSpaIndex() throws Exception {
+        var page = TestHttp.call(port, "GET", "/app/ventas-en-vivo", null, null);
+        assertEquals(200, page.statusCode(), "reloading /app/ventas-en-vivo must not return 404");
+        assertTrue(page.body().contains("Live SPA"));
+    }
 
     @Test void requiresOrdersReadAndForwardsBearerToSalesStream() throws Exception {
         String path = "/api/v1/ventas/en-vivo";

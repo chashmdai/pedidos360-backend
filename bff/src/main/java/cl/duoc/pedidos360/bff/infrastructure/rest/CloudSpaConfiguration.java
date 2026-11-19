@@ -24,7 +24,7 @@ public class CloudSpaConfiguration implements WebMvcConfigurer {
                     Resource resource=super.getResource(path,root);
                     if (resource!=null && resource.isReadable() && !path.isBlank()) return resource;
                     // Only known SPA routes fall back to HTML. Missing assets never return a misleading 200.
-                    if (path.isEmpty() || path.matches("catalogo|pedidos|nuevo|sesion|administracion"))
+                    if (path.isEmpty() || path.matches("catalogo|pedidos|nuevo|sesion|administracion|ventas-en-vivo"))
                         return super.getResource("index.html",root);
                     return null;
                 }
