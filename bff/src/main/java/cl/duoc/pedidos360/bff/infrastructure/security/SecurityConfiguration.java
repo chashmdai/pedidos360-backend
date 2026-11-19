@@ -60,6 +60,7 @@ public class SecurityConfiguration {
                     new WebExpressionAuthorizationManager("hasAuthority('SCOPE_Orders.Read') and hasRole('Admin')"))
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/productos", "/api/v1/productos/**").hasAuthority("SCOPE_Catalog.Read")
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/pedidos", "/api/v1/pedidos/**").hasAuthority("SCOPE_Orders.Read")
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/ventas/en-vivo").hasAuthority("SCOPE_Orders.Read")
                 .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/v1/pedidos").access(
                     new WebExpressionAuthorizationManager("hasAuthority('SCOPE_Orders.Create') and hasAuthority('SCOPE_Catalog.Read')"))
                 .anyRequest().denyAll())

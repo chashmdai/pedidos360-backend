@@ -15,8 +15,10 @@ import org.springframework.web.client.RestClient;
 public class BffController {
     private final RestClient catalog;
     private final RestClient orders;
-    public BffController(@Value("${pedidos.catalog-url}") String catalogUrl,@Value("${pedidos.orders-url}") String ordersUrl) {
-        this.catalog=client(catalogUrl); this.orders=client(ordersUrl);
+    private final RestClient salesStream;
+    public BffController(@Value("${pedidos.catalog-url}") String catalogUrl,@Value("${pedidos.orders-url}") String ordersUrl,
+                         @Value("${pedidos.sales-stream-url}") String salesStreamUrl) {
+        this.catalog=client(catalogUrl); this.orders=client(ordersUrl); this.salesStream=client(salesStreamUrl);
     }
     private RestClient client(String url) {
         var factory=new JdkClientHttpRequestFactory(HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).followRedirects(HttpClient.Redirect.NEVER).build());
@@ -28,6 +30,11 @@ public class BffController {
     @GetMapping("/pedidos") ResponseEntity<byte[]> orders(@AuthenticationPrincipal Jwt jwt) { return forward(orders,HttpMethod.GET,"/api/v1/pedidos",null,jwt); }
     @GetMapping("/pedidos/{id}") ResponseEntity<byte[]> order(@PathVariable UUID id,@AuthenticationPrincipal Jwt jwt) { return forward(orders,HttpMethod.GET,"/api/v1/pedidos/"+id,null,jwt); }
     @GetMapping("/admin/pedidos") ResponseEntity<byte[]> administration(@AuthenticationPrincipal Jwt jwt) { return forward(orders,HttpMethod.GET,"/api/v1/admin/pedidos",null,jwt); }
+    // EP5: aggregated live sales per tenant; never cached by the browser or intermediaries.
+    @GetMapping("/ventas/en-vivo") ResponseEntity<byte[]> liveSales(@AuthenticationPrincipal Jwt jwt) {
+        var response=forward(salesStream,HttpMethod.GET,"/api/v1/ventas/en-vivo",null,jwt);
+        return ResponseEntity.status(response.getStatusCode()).headers(response.getHeaders()).cacheControl(CacheControl.noStore()).body(response.getBody());
+    }
     @PostMapping("/pedidos") ResponseEntity<byte[]> create(@RequestBody String body,@AuthenticationPrincipal Jwt jwt) { return forward(orders,HttpMethod.POST,"/api/v1/pedidos",body,jwt); }
     private ResponseEntity<byte[]> forward(RestClient client,HttpMethod method,String path,String body,Jwt jwt) {
         var request=client.method(method).uri(path).headers(headers -> headers.setBearerAuth(jwt.getTokenValue()));
