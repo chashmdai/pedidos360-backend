@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-19T14:24:07.927765+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "610f40e2-85de-4eb3-a124-49eab390edcc",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "groups",
+    "args": [
+      "pedidos360-sales-aggregator"
+    ],
+    "at": "2026-11-19T14:24:05Z",
+    "steps": [
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator",
+        "exit": 0,
+        "seconds": 2.8,
+        "out": "\nGROUP                       TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID\npedidos360-sales-aggregator pedidos360.orders.registered.v1 1          1               2               1               -               -               -\npedidos360-sales-aggregator pedidos360.orders.registered.v1 2          2               2               0               -               -               -\npedidos360-sales-aggregator pedidos360.orders.registered.v1 0          1               2               1               -               -               -\nConsumer group 'pedidos360-sales-aggregator' has no active members."
+      },
+      {
+        "cmd": "docker exec -e KAFKA_HEAP_OPTS=\"-Xmx128m\" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose",
+        "exit": 0,
+        "seconds": 2.2,
+        "out": "\nGROUP           CONSUMER-ID     HOST            CLIENT-ID       #PARTITIONS     ASSIGNMENT\n\nConsumer group 'pedidos360-sales-aggregator' has no active members."
+      }
+    ]
+  },
+  "error": ""
+}

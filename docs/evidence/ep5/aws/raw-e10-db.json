@@ -1,0 +1,37 @@
+{
+  "at": "2026-11-19T14:25:17.274415+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "58bb83d5-0fb4-4fc8-9cdb-ed2bbbe4409d",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "action": "sql",
+    "args": [
+      "orders",
+      "sales",
+      "processed"
+    ],
+    "at": "2026-11-19T14:25:13Z",
+    "steps": [
+      {
+        "cmd": "mysql (pedidos360_orders_app, TLS VERIFY_IDENTITY) -e \"SELECT o.id, o.status, o.created_at, i.product_name, i.quantity, i.unit_price, i.currency FROM purchase_orders o JOIN order_items i ON i.order_id = o.id ORDER BY o.created_at DESC, i.id LIMIT 30\"",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "+--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+\n| id                                   | status     | created_at                 | product_name          | quantity | unit_price | currency |\n+--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+\n| e1bb7872-07d6-4f8c-bd67-facf50d66ce8 | REGISTERED | 2026-11-19 14:22:53.515292 | Caf\u00e9 de especialidad  |        1 |    8990.00 | CLP      |\n| 9c59571d-d8db-4fe1-a5c4-39804bf4309d | REGISTERED | 2026-11-19 14:22:48.315330 | Caf\u00e9 de especialidad  |        1 |    8990.00 | CLP      |\n| 79a3d04a-9721-4cd2-956c-5e7386921647 | REGISTERED | 2026-11-19 14:13:50.994696 | Caf\u00e9 de especialidad  |        3 |    8990.00 | CLP      |\n| 79a3d04a-9721-4cd2-956c-5e7386921647 | REGISTERED | 2026-11-19 14:13:50.994696 | Taza de cer\u00e1mica      |        2 |   12990.00 | CLP      |\n| d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Caf\u00e9 de especialidad  |        2 |    8990.00 | CLP      |\n| d9d1058b-145c-4396-8f4a-87e03a9a2e61 | REGISTERED | 2026-11-19 14:05:40.597505 | Taza de cer\u00e1mica      |        1 |   12990.00 | CLP      |\n+--------------------------------------+------------+----------------------------+-----------------------+----------+------------+----------+"
+      },
+      {
+        "cmd": "mysql (pedidos360_streams_app, TLS VERIFY_IDENTITY) -e \"SELECT * FROM product_sales_daily ORDER BY 1\"",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "+--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+\n| tenant_id                            | product_id                           | business_date | currency | product_name          | units_sold | orders_count | revenue  | version | last_event_id                        | updated_at                 |\n+--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+\n| 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 | 10000000-0000-0000-0000-000000000001 | 2026-11-19    | CLP      | Caf\u00e9 de especialidad  |          7 |            4 | 62930.00 |       4 | 040b91f0-d8c7-43ec-9851-37fdfbec3736 | 2026-11-19 14:24:42.413477 |\n| 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 | 10000000-0000-0000-0000-000000000002 | 2026-11-19    | CLP      | Taza de cer\u00e1mica      |          3 |            2 | 38970.00 |       2 | f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a | 2026-11-19 14:13:51.868827 |\n+--------------------------------------+--------------------------------------+---------------+----------+-----------------------+------------+--------------+----------+---------+--------------------------------------+----------------------------+"
+      },
+      {
+        "cmd": "mysql (pedidos360_streams_app, TLS VERIFY_IDENTITY) -e \"SELECT COUNT(*) AS processed_events FROM processed_stream_event\"",
+        "exit": 0,
+        "seconds": 0.0,
+        "out": "+------------------+\n| processed_events |\n+------------------+\n|                4 |\n+------------------+"
+      }
+    ]
+  },
+  "error": ""
+}
