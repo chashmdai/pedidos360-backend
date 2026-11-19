@@ -4,7 +4,7 @@
   <parent><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-parent</artifactId><version>4.1.1</version><relativePath/></parent>
   <groupId>cl.duoc.pedidos360</groupId><artifactId>pedidos360-backend</artifactId><version>0.1.0-SNAPSHOT</version><packaging>pom</packaging>
   <name>Pedidos360 backend</name>
-  <modules><module>messaging-support</module><module>catalog-service</module><module>orders-service</module><module>bff</module><module>receipts-service</module><module>rabbit-admin-service</module><module>order-insights-service</module></modules>
+  <modules><module>messaging-support</module><module>kafka-support</module><module>catalog-service</module><module>orders-service</module><module>bff</module><module>receipts-service</module><module>rabbit-admin-service</module><module>order-insights-service</module></modules>
   <properties><java.version>25</java.version></properties>
   <dependencies>
     <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-webmvc</artifactId></dependency>

@@ -9,3 +9,7 @@ Los tests `CatalogIntegrationTest`, `OrdersIntegrationTest` y `BffContractTest` 
 El POST recibe exclusivamente identificadores y cantidades. Orders consulta Catalog, fija snapshots de nombre/precio/moneda y obtiene el propietario desde `tid` + `oid` del JWT validado. El precio y el propietario enviados por el cliente no son fuentes de verdad.
 
 El estado `REGISTERED` significa solicitud registrada. No confirma pago, reserva de stock ni una operación comercial completada. Stock es referencial. Un reintento de POST puede crear otro pedido; no hay reintento automático ni garantía de idempotencia en este bloque.
+
+## Contratos de streaming (EP5)
+
+`order-registered-stream-v1.schema.json` y `product-sales-metric-v1.schema.json` (JSON Schema 2020-12) describen los eventos Kafka `OrderRegisteredStreamV1` y `ProductSalesMetricV1`. Sus records Java están en `kafka-support`, junto con los nombres y parámetros de los tópicos (`pedidos-kafka.properties`). Son contratos técnicos de transporte, no un modelo de dominio compartido. `JsonSchemaConsistencyTest` verifica que los campos obligatorios de cada schema coincidan con los componentes del record y que sus ejemplos sean válidos.

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/chashmdai/pedidos360-backend/contracts/order-registered-stream-v1.schema.json",
+  "title": "OrderRegisteredStreamV1",
+  "description": "Pedido registrado para streaming. Tópico pedidos360.orders.registered.v1, clave = orderId. JSON sin encabezados de tipo Java. No incluye oid, nombre, correo ni tokens. Reglas adicionales validadas por el record Java: lineTotal = unitPrice × quantity, total = Σ lineTotal, itemCount = |items| y productos únicos.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schemaVersion", "eventId", "orderId", "tenantId", "occurredAt", "currency", "total", "itemCount", "items"],
+  "properties": {
+    "schemaVersion": { "const": 1, "description": "Versión del contrato; otra versión se rechaza (DLT)." },
+    "eventId": { "type": "string", "format": "uuid", "description": "Identidad del evento; base de la idempotencia." },
+    "orderId": { "type": "string", "format": "uuid", "description": "Clave del mensaje; correlación con el pedido y con RabbitMQ." },
+    "tenantId": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "occurredAt": { "type": "string", "format": "date-time", "description": "ISO-8601 en UTC; define el día UTC del acumulado." },
+    "currency": { "type": "string", "pattern": "^[A-Z]{3}$", "description": "ISO 4217." },
+    "total": { "$ref": "#/$defs/amount" },
+    "itemCount": { "type": "integer", "minimum": 1, "maximum": 50 },
+    "items": {
+      "type": "array", "minItems": 1, "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["productId", "productName", "quantity", "unitPrice", "lineTotal"],
+        "properties": {
+          "productId": { "type": "string", "format": "uuid" },
+          "productName": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "quantity": { "type": "integer", "minimum": 1, "maximum": 1000 },
+          "unitPrice": { "$ref": "#/$defs/amount" },
+          "lineTotal": { "$ref": "#/$defs/amount" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "amount": { "type": "number", "minimum": 0, "multipleOf": 0.01, "description": "Decimal no negativo, dos decimales." }
+  },
+  "examples": [{
+    "schemaVersion": 1,
+    "eventId": "6f1c2b0e-8d4a-4f7b-9e21-3c5a7d9b1e40",
+    "orderId": "b2e4c6a8-1f3d-4b5a-8c7e-9d0f2a4b6c81",
+    "tenantId": "72fd0b5a-8a6a-4cff-89f6-bde961f7e250",
+    "occurredAt": "2026-11-24T14:05:12.345678Z",
+    "currency": "CLP",
+    "total": 30970.00,
+    "itemCount": 2,
+    "items": [
+      { "productId": "10000000-0000-0000-0000-000000000001", "productName": "Café de especialidad", "quantity": 1, "unitPrice": 18990.00, "lineTotal": 18990.00 },
+      { "productId": "10000000-0000-0000-0000-000000000002", "productName": "Taza de cerámica", "quantity": 2, "unitPrice": 5990.00, "lineTotal": 11980.00 }
+    ]
+  }]
+}
