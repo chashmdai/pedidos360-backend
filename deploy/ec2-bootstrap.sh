@@ -24,8 +24,10 @@ export DEBIAN_FRONTEND=noninteractive
 # Verify HTTPS apt before continuing; stop (no bootstrap-complete marker) if it cannot update.
 ok=0
 for attempt in 1 2 3 4 5; do
-  if apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update 2>&1 | tee /var/lib/pedidos360-provision/apt-update.log \
-     | grep -qE '^(Err|W: Failed)'; then sleep $((attempt * 10)); else ok=1; break; fi
+  log=/var/lib/pedidos360-provision/apt-update.log
+  if apt-get -o Acquire::Retries=3 -o Acquire::https::Timeout=20 update > "$log" 2>&1 \
+     && ! grep -qE '^(Err:|W: (Failed|Some index files failed))' "$log"; then ok=1; break; fi
+  sleep $((attempt * 10))
 done
 [ "$ok" = 1 ] || { echo "apt-get update over HTTPS failed; see /var/lib/pedidos360-provision/apt-update.log" >&2; exit 1; }
 grep -qE '^(Hit|Get):.*https://(archive|security)\.ubuntu\.com' /var/lib/pedidos360-provision/apt-update.log
