@@ -1,59 +1,59 @@
 {
-  "at": "2026-11-19T14:53:19.486915+00:00",
+  "at": "2026-11-19T16:51:03.761786+00:00",
   "endpoint": "https://az3h2vqgsi.execute-api.us-east-1.amazonaws.com",
-  "release": "ep5-20261119T144015Z",
+  "release": "ep5-20261119T163823Z",
   "checks": [
     {
       "path": "/app/",
       "status": 200,
       "expected": 200,
       "syntheticInvalidBearer": false,
-      "requestId": "HF8HChcEoAMEM1g=",
+      "requestId": "HGNW1jJgIAMEYXg=",
       "contentType": "text/html;charset=UTF-8",
-      "sha256": "a16f5b688ac86f9612ad86b9632bfc372a2c5557a5674f0af654e957b12ed7ca"
+      "sha256": "359890ededb59516711b07fc13dc20aa4e35f7564a0e6c5809d5a08a0fbeb904"
     },
     {
       "path": "/app",
       "status": 200,
       "expected": 200,
       "syntheticInvalidBearer": false,
-      "requestId": "HF8HHhGvoAMEMyA=",
+      "requestId": "HGNW6jtIoAMEMUA=",
       "contentType": "text/html;charset=UTF-8",
-      "sha256": "a16f5b688ac86f9612ad86b9632bfc372a2c5557a5674f0af654e957b12ed7ca"
+      "sha256": "359890ededb59516711b07fc13dc20aa4e35f7564a0e6c5809d5a08a0fbeb904"
     },
     {
       "path": "/app/ventas-en-vivo",
       "status": 200,
       "expected": 200,
       "syntheticInvalidBearer": false,
-      "requestId": "HF8HLiXvoAMEYJg=",
+      "requestId": "HGNW-howIAMEMIw=",
       "contentType": "text/html",
-      "sha256": "a16f5b688ac86f9612ad86b9632bfc372a2c5557a5674f0af654e957b12ed7ca"
+      "sha256": "359890ededb59516711b07fc13dc20aa4e35f7564a0e6c5809d5a08a0fbeb904"
     },
     {
-      "path": "/app/assets/index-JQdkrOhp.js",
+      "path": "/app/assets/index-CU0J0v--.js",
       "status": 200,
       "expected": 200,
       "syntheticInvalidBearer": false,
-      "requestId": "HF8HPjzXIAMEMQw=",
+      "requestId": "HGNXCgokIAMEMFA=",
       "contentType": "text/javascript",
-      "sha256": "8257942d97a6a40bc1ae8cc915d1dcc5b62eb01e7912755620551e4875073963"
+      "sha256": "82a19be8c003898255cad9efef9fbfb66a247af3aeb147bcd199e27d4678e0b2"
     },
     {
-      "path": "/app/assets/index-BnPrCUl4.css",
+      "path": "/app/assets/index-B6PkhYy0.css",
       "status": 200,
       "expected": 200,
       "syntheticInvalidBearer": false,
-      "requestId": "HF8HahYYoAMEY4Q=",
+      "requestId": "HGNXMjGwIAMEYQg=",
       "contentType": "text/css",
-      "sha256": "a9dc5fca975148852de12732e105838756ffdfccc36fedaa96477ffb5f8ca251"
+      "sha256": "9aad33eaa49463d7b422349f44c7968c29509e9793885094431969fb751a5679"
     },
     {
       "path": "/api/v1/productos",
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": false,
-      "requestId": "HF8Hfg0eIAMEMNA=",
+      "requestId": "HGNXRjVHIAMEMag=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -62,7 +62,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": true,
-      "requestId": "HF8HjjvQoAMEYhQ=",
+      "requestId": "HGNXVj2FoAMEMuA=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -71,7 +71,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": false,
-      "requestId": "HF8HnhbioAMEYYw=",
+      "requestId": "HGNXZjqdoAMEMjg=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -80,7 +80,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": true,
-      "requestId": "HF8Hrim3IAMEYNQ=",
+      "requestId": "HGNXdiNXIAMEMKg=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -89,7 +89,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": false,
-      "requestId": "HF8HvjfbIAMEMLQ=",
+      "requestId": "HGNXhjG2IAMEMhw=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -98,7 +98,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": true,
-      "requestId": "HF8HyhtDIAMEM1g=",
+      "requestId": "HGNXlgjtIAMEMkQ=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -107,7 +107,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": false,
-      "requestId": "HF8H2glIoAMEYDw=",
+      "requestId": "HGNXphlAIAMEYzA=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -116,7 +116,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": true,
-      "requestId": "HF8H6glbIAMEMzw=",
+      "requestId": "HGNXtj-JIAMEYgA=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     }

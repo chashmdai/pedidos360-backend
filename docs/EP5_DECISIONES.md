@@ -153,6 +153,8 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
   - **Portapapeles:** en GNOME, `wl-copy --clear` no surte efecto (Mutter conserva la selección), así que la consola copia un valor vacío y lo verifica con `wl-paste`. Si no lo logra, avisa.
   - **Probada contra AWS:** estado, levantar con el sistema arriba, túneles (login a Kafka UI con la credencial copiada, Management 200, kafka-admin 401 sin token, puertos cerrados y portapapeles vacío al terminar), un ciclo detener/iniciar de sales-stream desde el menú (con el aviso al salir) y `describir`. Los errores de credenciales se probaron con un archivo temporal de claves falsas. No se probó `levantar` con la EC2 o el RDS detenidos.
 
+- **Pulido visual del frontend (2026-11-19):** la dirección, la paleta, la tipografía y los recursos eliminados están en `pedidos360-frontend/docs/DISENO_FRONTEND.md`. Se instaló como el release ep5-20261119T163823Z: solo cambian `frontend/` y `deployment.json`, y los 8 JAR son idénticos al release anterior según el manifiesto SHA-256. Se repitió la etapa 9 completa: target healthy, 5 rutas SPA en 200 con hash igual al manifiesto y 8 sondas en 401. No hizo falta volver al release anterior.
+
 ## Pendientes
 
 - Separar el UID 999 (imagen RabbitMQ) del usuario de sistema `pedidos360-bff` en la EC2 (ver Fase 6, E-19).
