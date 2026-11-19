@@ -2,7 +2,7 @@
 set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
 source "$root/scripts/ep4-env.sh"
-test "$(id -un)" = codex
+test "$(id -u)" != 0 || { echo "Run as the regular operator user, not root." >&2; exit 1; }
 mkdir -p "$root/docs/evidence/ep4"
 case "${1:-all}" in backend|all)
  cd "$root"

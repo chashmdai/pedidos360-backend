@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-test "$(id -un)" = codex
+test "$(id -u)" != 0 || { echo "Run as the regular operator user, not root." >&2; exit 1; }
 root="$(cd "$(dirname "$0")/.." && pwd)"
 source "$root/scripts/ep4-env.sh"
 if [ ! -x "$AWS_CLI" ]; then

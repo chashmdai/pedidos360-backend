@@ -24,7 +24,7 @@
   </plugins></build>
   <profiles>
     <profile>
-      <id>native-wsl-output</id>
+      <id>external-build-root</id>
       <activation><property><name>pedidos.build.root</name></property></activation>
       <build><directory>${pedidos.build.root}/${project.artifactId}</directory></build>
     </profile>

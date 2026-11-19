@@ -1,6 +1,7 @@
 """Approved Pedidos360 lab deployment; explicit stages and durable, non-secret journal.
 
-Run in WSL. AWS_CLI may point to the Windows aws.exe authenticated by the operator.
+Runs on native Linux with the system aws CLI (AWS_CLI overrides it). The legacy WSL
+mode with a Windows aws.exe is still accepted and translated with wslpath.
 Never retries an interrupted/failed write: inspect AWS and reconcile the journal first.
 No deletion, shared-resource changes or credentials/profile configuration.
 """
@@ -48,7 +49,7 @@ def call(service, operation, payload=None):
             path = Path(filename)
             with os.fdopen(fd, "w") as stream:
                 json.dump(payload, stream)
-            filename = subprocess.check_output(["wslpath", "-w", filename], text=True).strip() if CLI.endswith(".exe") else filename
+            filename = subprocess.check_output(["wslpath", "-w", filename], text=True).strip() if CLI.endswith(".exe") and shutil.which("wslpath") else filename
             command += ["--cli-input-json", "file://" + filename]
         result = subprocess.run(command, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=120)
         if result.returncode:
