@@ -101,13 +101,17 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
 - Reutiliza solo clases existentes (`page`, `section-title`, `section-rule`, `order-list`, `order`, `badge`, `empty`, `loading-state`, `config-status`); `style.css` no cambia (el hash del CSS de producción es idéntico al de la línea base).
 - Pruebas Vitest sin dependencias nuevas: el sondeo se prueba con temporizadores falsos y la vista con `react-dom/server`.
 
-## Pendientes conocidos para la Fase 4 (no resueltos todavía)
+## Fase 4: cadena de despliegue para la cuenta nueva (preparada, sin ejecutar)
 
-- `aws_deploy.py`, `entra_config.py` y `config/aws-public.json` fijan la cuenta `002996184293`
-  y el journal `docs/evidence/phase5/`; el despliegue en la cuenta nueva usará un journal nuevo.
-- `aws_deploy.py` compute: AMI, `ClientToken`, tipo `t3.medium` y disco de 20 GiB deben
-  ajustarse a t3.large y ≥ 30 GiB.
-- `deploy/ep4-install.py` presupone los `.env` creados por `deploy/install-release.py` (fase 5):
-  en la cuenta nueva hay que encadenar ambos instaladores antes del instalador EP5.
+- `config/aws-target.json` fija el destino: cuenta 647660738152, journal y evidencias en `docs/evidence/ep5/aws/`, t3.large, raíz de 30 GiB, AMI `ami-0719278fd447e399f` (Ubuntu 24.04, Canonical, 20261118) y MySQL 8.4.11. `aws_deploy.py`, `entra_config.py`, `ep4-ssm.py` y `ep4-transfer.py` lo leen; los secretos van a `~/.config/pedidos360/aws-647660738152/`.
+- `compute` ya no importa un par de claves ni abre SSH temporal desde la IP del operador (en EP4 se abrió y luego se cerró). Todo el acceso es por SSM; la AMI se valida por dueño y nombre antes de lanzar.
+- `gateway` crea en una sola etapa las 8 rutas JWT (incluida `GET /api/v1/ventas/en-vivo` con `Orders.Read`) y las 2 rutas GET públicas de la SPA, que en EP4 añadía `ep4-gateway.py`.
+- `deploy/ep5-install.py` consolida en un instalador idempotente lo que en EP4 hacían `install-release.py`, `ep4-host-prepare.py` y `ep4-install.py`, más EP5: swap, Docker, esquema `pedidos360_streams`, Kafka y Kafka UI, y los 8 servicios con los heaps de la tabla 16. El arranque escalonado usa `After=` en cadena y un `ExecStartPost` que espera `/actuator/health` UP antes de iniciar el siguiente. Las unidades Compose (`pedidos360-rabbit-cluster`, `-kafka-cluster`, `-kafka-ui`) arrancan antes.
+- Los heaps de receipts, rabbit-admin e insights pasan de 128 MiB (EP4) a 192 MiB, según la tabla 16.
+- La identidad guardada en evidencias omite el nombre de sesión del ARN (contiene el correo de quien abrió el laboratorio).
+- Detalle de recursos, seguridad, orden y costo: [EP5_AWS_CHECKPOINT.md](EP5_AWS_CHECKPOINT.md).
+
+## Pendientes
+
 - `npm audit` informa 4 vulnerabilidades (2 moderadas, 2 altas) en dependencias del frontend;
   por indicación del usuario no se tratan en esta iteración.

@@ -1,0 +1,165 @@
+{
+  "at": "2026-11-19T01:53:59.845709+00:00",
+  "results": {
+    "vpcs": {
+      "Vpcs": []
+    },
+    "keys": {
+      "KeyPairs": [
+        {
+          "KeyPairId": "key-0cff480ec450ee1ff",
+          "KeyType": "rsa",
+          "Tags": [],
+          "CreateTime": "2026-11-19T00:03:19.951000+00:00",
+          "KeyName": "vockey",
+          "KeyFingerprint": "c8:d6:ea:36:1e:2f:b5:c2:cb:82:bd:12:2d:6a:a5:ec:f3:89:0a:15"
+        }
+      ]
+    },
+    "rdsParameters": {
+      "DBParameterGroups": [
+        {
+          "DBParameterGroupName": "default.mariadb10.6",
+          "DBParameterGroupFamily": "mariadb10.6",
+          "Description": "Default parameter group for mariadb10.6",
+          "DBParameterGroupArn": "arn:aws:rds:us-east-1:647660738152:pg:default.mariadb10.6"
+        },
+        {
+          "DBParameterGroupName": "default.mysql8.0",
+          "DBParameterGroupFamily": "mysql8.0",
+          "Description": "Default parameter group for mysql8.0",
+          "DBParameterGroupArn": "arn:aws:rds:us-east-1:647660738152:pg:default.mysql8.0"
+        },
+        {
+          "DBParameterGroupName": "default.mysql8.4",
+          "DBParameterGroupFamily": "mysql8.4",
+          "Description": "Default parameter group for mysql8.4",
+          "DBParameterGroupArn": "arn:aws:rds:us-east-1:647660738152:pg:default.mysql8.4"
+        }
+      ]
+    },
+    "rdsSubnets": {
+      "DBSubnetGroups": []
+    },
+    "vpcLinks": {
+      "Items": []
+    },
+    "logs": {
+      "logGroups": []
+    },
+    "instances": {
+      "Reservations": []
+    },
+    "rdsInstances": {
+      "DBInstances": []
+    },
+    "loadBalancers": {
+      "LoadBalancers": []
+    },
+    "apis": {
+      "Items": []
+    },
+    "ami": {
+      "Images": [
+        {
+          "PlatformDetails": "Linux/UNIX",
+          "UsageOperation": "RunInstances",
+          "BlockDeviceMappings": [
+            {
+              "Ebs": {
+                "DeleteOnTermination": true,
+                "SnapshotId": "snap-0f84ce36dd78995b0",
+                "VolumeSize": 8,
+                "VolumeType": "gp3",
+                "Encrypted": false
+              },
+              "DeviceName": "/dev/sda1"
+            },
+            {
+              "DeviceName": "/dev/sdb",
+              "VirtualName": "ephemeral0"
+            },
+            {
+              "DeviceName": "/dev/sdc",
+              "VirtualName": "ephemeral1"
+            }
+          ],
+          "Description": "Canonical, Ubuntu, 24.04, amd64 noble image",
+          "EnaSupport": true,
+          "Hypervisor": "xen",
+          "ImageOwnerAlias": "amazon",
+          "Name": "ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20261118",
+          "RootDeviceName": "/dev/sda1",
+          "RootDeviceType": "ebs",
+          "SriovNetSupport": "simple",
+          "VirtualizationType": "hvm",
+          "BootMode": "uefi-preferred",
+          "DeprecationTime": "2028-11-18T11:54:29.000Z",
+          "ImdsSupport": "v2.0",
+          "FreeTierEligible": true,
+          "ImageId": "ami-0719278fd447e399f",
+          "ImageLocation": "amazon/ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20261118",
+          "State": "available",
+          "OwnerId": "099720109477",
+          "CreationDate": "2026-11-18T11:54:29.000Z",
+          "Public": true,
+          "Architecture": "x86_64",
+          "ImageType": "machine"
+        }
+      ]
+    },
+    "rdsEngine": {
+      "DBEngineVersions": [
+        {
+          "Engine": "mysql",
+          "MajorEngineVersion": "8.4",
+          "EngineVersion": "8.4.11",
+          "DBParameterGroupFamily": "mysql8.4",
+          "DBEngineDescription": "MySQL Community Edition",
+          "DBEngineVersionDescription": "MySQL 8.4.11",
+          "ValidUpgradeTarget": [
+            {
+              "Engine": "mysql",
+              "EngineVersion": "8.4.13",
+              "Description": "MySQL 8.4.13",
+              "AutoUpgrade": false,
+              "IsMajorVersionUpgrade": false,
+              "SupportsIntegrations": true
+            },
+            {
+              "Engine": "mysql",
+              "EngineVersion": "9.7.4",
+              "Description": "MySQL 9.7.4",
+              "AutoUpgrade": false,
+              "IsMajorVersionUpgrade": true,
+              "SupportsIntegrations": false
+            }
+          ],
+          "ExportableLogTypes": [
+            "audit",
+            "error",
+            "general",
+            "iam-db-auth-error",
+            "slowquery"
+          ],
+          "SupportsLogExportsToCloudwatchLogs": true,
+          "SupportsReadReplica": true,
+          "SupportedFeatureNames": [],
+          "Status": "available",
+          "SupportsParallelQuery": false,
+          "SupportsGlobalDatabases": false,
+          "SupportsBabelfish": false,
+          "SupportsLimitlessDatabase": false,
+          "SupportsCertificateRotationWithoutRestart": true,
+          "SupportedCACertificateIdentifiers": [
+            "rds-ca-ecc384-g1",
+            "rds-ca-rsa4096-g1",
+            "rds-ca-rsa2048-g1"
+          ],
+          "SupportsLocalWriteForwarding": false,
+          "SupportsIntegrations": true
+        }
+      ]
+    }
+  }
+}

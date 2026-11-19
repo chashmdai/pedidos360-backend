@@ -21,7 +21,8 @@ def environment(cloud=False):
         aws = json.loads((ROOT / "config/aws-public.json").read_text())
         base_url = aws["apiBaseUrl"]
         url = urlparse(base_url)
-        if aws["account"] != "002996184293" or aws["region"] != "us-east-1" or url.scheme != "https" or url.hostname != f"{aws['apiId']}.execute-api.us-east-1.amazonaws.com" or url.path != "/api/v1" or url.query or url.fragment:
+        target = json.loads((ROOT / "config/aws-target.json").read_text())
+        if aws["account"] != target["account"] or aws["region"] != target["region"] or url.scheme != "https" or url.hostname != f"{aws['apiId']}.execute-api.us-east-1.amazonaws.com" or url.path != "/api/v1" or url.query or url.fragment:
             raise ValueError("Cloud frontend must use the verified Pedidos360 HTTP API")
     return {
         "JWT_TENANT_ID": tenant, "JWT_AUDIENCE": api, "JWT_CLIENT_ID": spa,

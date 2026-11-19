@@ -30,7 +30,7 @@ user=pwd.getpwnam('ubuntu')
 directory=Path(user.pw_dir)/'.ssh'
 directory.mkdir(exist_ok=True,mode=0o700)
 file=directory/'authorized_keys'
-key='''+repr('restrict,port-forwarding,permitopen="127.0.0.1:15674",permitopen="127.0.0.1:8183",permitopen="127.0.0.1:8184",permitopen="127.0.0.1:8185" '+public)+'''
+key='''+repr('restrict,port-forwarding,permitopen="127.0.0.1:15674",permitopen="127.0.0.1:8183",permitopen="127.0.0.1:8184",permitopen="127.0.0.1:8185",permitopen="127.0.0.1:8090",permitopen="127.0.0.1:8187" '+public)+'''
 old=file.read_text() if file.exists() else ''
 added=key not in old.splitlines()
 if added:
@@ -41,7 +41,7 @@ os.chown(directory,user.pw_uid,user.pw_gid)
 print(json.dumps({'hostKey':Path('/etc/ssh/ssh_host_ed25519_key.pub').read_text().strip(),'ownTransferKeyAdded':added,'publicSshIngressAdded':False}))
 ''')
     subprocess.run([sys.executable,str(ROOT/'scripts/ep4-ssm.py'),str(script),'--output','transfer-setup.json'],check=True)
-    result=json.loads((ROOT/'docs/evidence/ep4/transfer-setup.json').read_text())['output']
+    result=json.loads((aws.EVIDENCE/'transfer-setup.json').read_text())['output']
     key=result['hostKey'].split()
     HOST_KEY.write_text(f'[127.0.0.1]:{PORT} '+key[0]+' '+key[1]+'\n');HOST_KEY.chmod(0o600)
 elif args.action=='reset-tunnel':
@@ -69,8 +69,9 @@ elif args.action=='tunnel':
         except OSError:time.sleep(1)
     else:raise SystemExit('Tunnel did not become ready; inspect before retry')
 elif args.action=='upload':
-    assert args.bundle and args.bundle.is_file() and args.bundle.name.startswith('pedidos360-ep4-') and args.bundle.suffix=='.tgz'
+    assert args.bundle and args.bundle.is_file() and args.bundle.suffix=='.tgz'
+    stage={'pedidos360-ep4-':'/home/ubuntu/pedidos360-ep4-stage','pedidos360-ep5-':'/home/ubuntu/pedidos360-ep5-stage'}[args.bundle.name[:15]]
     options=['-i',str(PRIVATE/'deploy-key'),'-o','UserKnownHostsFile='+str(HOST_KEY),'-o','StrictHostKeyChecking=yes','-o','IdentitiesOnly=yes','-o','BatchMode=yes','-o','ConnectTimeout=15','-o','ServerAliveInterval=10','-o','ServerAliveCountMax=3']
-    subprocess.run(['ssh','-p',str(PORT),*options,'ubuntu@127.0.0.1','mkdir -p /home/ubuntu/pedidos360-ep4-stage'],check=True)
-    subprocess.run(['scp','-P',str(PORT),*options,str(args.bundle),'ubuntu@127.0.0.1:/home/ubuntu/pedidos360-ep4-stage/'],check=True)
+    subprocess.run(['ssh','-p',str(PORT),*options,'ubuntu@127.0.0.1','install -d -m 0700 '+stage],check=True)
+    subprocess.run(['scp','-P',str(PORT),*options,str(args.bundle),'ubuntu@127.0.0.1:'+stage+'/'],check=True)
     print('Uploaded '+args.bundle.name+' over SSM; no public SSH rule added')

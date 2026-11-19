@@ -19,11 +19,14 @@ import tempfile
 import urllib.request
 
 ROOT = Path(__file__).resolve().parent.parent
-REGION = "us-east-1"
-ACCOUNT = "002996184293"
+# Deployment target: config/aws-target.json (EP5, account 647660738152). The EP3/EP4 account
+# 002996184293 and its journal under docs/evidence/phase5 are historical and never modified here.
+TARGET = json.loads((ROOT / "config/aws-target.json").read_text())
+REGION = TARGET["region"]
+ACCOUNT = TARGET["account"]
 TAGS = {"Project": "Pedidos360", "Course": "DSY1107", "Environment": "lab"}
-EVIDENCE = ROOT / "docs/evidence/phase5"
-PRIVATE = Path.home() / ".config/pedidos360/aws"
+EVIDENCE = ROOT / TARGET["evidenceDir"]
+PRIVATE = Path(os.environ.get("PEDIDOS_AWS_PRIVATE_DIR", Path.home() / f".config/pedidos360/aws-{ACCOUNT}"))
 CLI = os.environ.get("AWS_CLI") or shutil.which("aws")
 JOURNAL = EVIDENCE / "deployment-journal.json"
 
@@ -129,7 +132,7 @@ def database():
     write("db-subnets", "rds", "create-db-subnet-group", {"DBSubnetGroupName": "pedidos360-db-subnets", "DBSubnetGroupDescription": "Pedidos360 private database subnets", "SubnetIds": subnets, "Tags": tags()})
     write("db-parameters", "rds", "create-db-parameter-group", {"DBParameterGroupName": "pedidos360-mysql84", "DBParameterGroupFamily": "mysql8.4", "Description": "Pedidos360 MySQL 8.4 mandatory TLS", "Tags": tags()})
     write("db-require-tls", "rds", "modify-db-parameter-group", {"DBParameterGroupName": "pedidos360-mysql84", "Parameters": [{"ParameterName": "require_secure_transport", "ParameterValue": "1", "ApplyMethod": "immediate"}]})
-    for name in ("master", "catalog-app", "catalog-migration", "orders-app", "orders-migration"):
+    for name in ("master", "catalog-app", "catalog-migration", "orders-app", "orders-migration", "streams-app", "streams-migration"):
         path = PRIVATE / (name + "-password")
         if not path.exists():
             if "rds" in state["steps"]:
@@ -140,7 +143,7 @@ def database():
     if not 8 <= len(master_password) <= 41:
         raise RuntimeError("RDS MySQL master password must contain 8 to 41 characters")
     write("rds", "rds", "create-db-instance", {
-        "DBInstanceIdentifier": "pedidos360-mysql", "DBInstanceClass": "db.t3.micro", "Engine": "mysql", "EngineVersion": "8.4.11",
+        "DBInstanceIdentifier": "pedidos360-mysql", "DBInstanceClass": "db.t3.micro", "Engine": "mysql", "EngineVersion": TARGET["rdsEngineVersion"],
         "AllocatedStorage": 20, "StorageType": "gp3", "StorageEncrypted": True,
         "MasterUsername": "pedidos360_master", "MasterUserPassword": master_password,
         "DBSubnetGroupName": "pedidos360-db-subnets", "DBParameterGroupName": "pedidos360-mysql84",
@@ -151,28 +154,19 @@ def database():
 
 
 def compute():
-    key = PRIVATE / "pedidos360-deploy"
-    if not key.exists():
-        if "ssh-key" in state["steps"]:
-            raise RuntimeError("Recorded SSH key exists but the local private key is missing; use SSM or recover the key")
-        subprocess.run(["ssh-keygen", "-q", "-t", "ed25519", "-N", "", "-C", "pedidos360-deploy", "-f", str(key)], check=True)
-    write("ssh-key", "ec2", "import-key-pair", {"KeyName": "pedidos360-deploy", "PublicKeyMaterial": base64.b64encode(key.with_suffix(".pub").read_bytes()).decode(), "TagSpecifications": spec("key-pair", "pedidos360-deploy")})
-    # Observe the current operator egress, never an invented or broad CIDR.
-    if "temporary-ssh" not in state["steps"]:
-        with urllib.request.urlopen("https://checkip.amazonaws.com", timeout=20) as stream:
-            address = ipaddress.IPv4Address(stream.read().decode().strip())
-        if not address.is_global:
-            raise RuntimeError("SSH operator address is not a public IPv4")
-        write("temporary-ssh", "ec2", "authorize-security-group-ingress", {"GroupId": response("app-sg")["GroupId"], "IpPermissions": [{"IpProtocol": "tcp", "FromPort": 22, "ToPort": 22, "IpRanges": [{"CidrIp": str(address) + "/32", "Description": "Pedidos360 temporary operator deployment"}]}]})
+    # EP5: no EC2 key pair and no SSH ingress. Administration and transfers go through SSM only.
+    image = call("ec2", "describe-images", {"ImageIds": [TARGET["amiId"]]})["Images"][0]
+    if image["OwnerId"] != TARGET["amiOwner"] or image["Name"] != TARGET["amiName"]:
+        raise RuntimeError("AMI does not match the reviewed Canonical Ubuntu 24.04 image")
     bootstrap = (ROOT / "deploy/ec2-bootstrap.sh").read_bytes()
     write("ec2", "ec2", "run-instances", {
-        "ImageId": "ami-025d99823a4caad37", "InstanceType": "t3.medium", "MinCount": 1, "MaxCount": 1,
-        "ClientToken": "pedidos360-002996184293-20260906-app-v1", "KeyName": "pedidos360-deploy",
+        "ImageId": TARGET["amiId"], "InstanceType": TARGET["instanceType"], "MinCount": 1, "MaxCount": 1,
+        "ClientToken": TARGET["clientToken"],
         "NetworkInterfaces": [{"DeviceIndex": 0, "SubnetId": response("public-b")["Subnet"]["SubnetId"], "Groups": [response("app-sg")["GroupId"]], "AssociatePublicIpAddress": True, "DeleteOnTermination": True}],
         "IamInstanceProfile": {"Arn": f"arn:aws:iam::{ACCOUNT}:instance-profile/LabInstanceProfile"},
         "MetadataOptions": {"HttpTokens": "required", "HttpEndpoint": "enabled", "HttpPutResponseHopLimit": 1},
         "CreditSpecification": {"CpuCredits": "standard"},
-        "BlockDeviceMappings": [{"DeviceName": "/dev/sda1", "Ebs": {"VolumeSize": 20, "VolumeType": "gp3", "Encrypted": True, "DeleteOnTermination": True}}],
+        "BlockDeviceMappings": [{"DeviceName": image["RootDeviceName"], "Ebs": {"VolumeSize": TARGET["rootVolumeGiB"], "VolumeType": "gp3", "Encrypted": True, "DeleteOnTermination": True}}],
         "TagSpecifications": spec("instance", "pedidos360-app") + spec("volume", "pedidos360-app-root"),
         "UserData": base64.b64encode(bootstrap).decode()})
 
@@ -198,9 +192,13 @@ def gateway():
         ("POST /api/v1/pedidos", ["Orders.Create"]),
         ("GET /api/v1/me", entra["scopes"]),
         ("GET /api/v1/admin/pedidos", ["Orders.Read"]),
+        ("GET /api/v1/ventas/en-vivo", ["Orders.Read"]),   # EP5
     ]
     for index, (route, scopes) in enumerate(routes):
         write("route-" + str(index), "apigatewayv2", "create-route", {"ApiId": api, "RouteKey": route, "AuthorizationType": "JWT", "AuthorizerId": authorizer, "AuthorizationScopes": scopes, "Target": "integrations/" + integration})
+    # Public static SPA files under /app/ (no business data); every /api/v1 route keeps the JWT authorizer.
+    for key in ("GET /app", "GET /app/{proxy+}"):
+        write("spa-" + key.split()[1], "apigatewayv2", "create-route", {"ApiId": api, "RouteKey": key, "AuthorizationType": "NONE", "Target": "integrations/" + integration})
     log_name = "/pedidos360/api-gateway"
     write("api-logs", "logs", "create-log-group", {"logGroupName": log_name, "tags": TAGS})
     write("api-logs-retention", "logs", "put-retention-policy", {"logGroupName": log_name, "retentionInDays": 7})
@@ -237,14 +235,16 @@ def main():
     PRIVATE.mkdir(parents=True, exist_ok=True, mode=0o700)
     EVIDENCE.mkdir(parents=True, exist_ok=True)
     global state
-    state = json.loads(JOURNAL.read_text()) if JOURNAL.exists() else {"account": ACCOUNT, "region": REGION, "approval": "User approved FASE 4 checkpoint and FASE 5 on 2026-09-06", "steps": {}}
+    state = json.loads(JOURNAL.read_text()) if JOURNAL.exists() else {"account": ACCOUNT, "region": REGION, "approval": TARGET["approval"], "steps": {}}
     if state["account"] != ACCOUNT or state["region"] != REGION:
         raise RuntimeError("Journal target mismatch")
     identity = call("sts", "get-caller-identity")
     if identity["Account"] != ACCOUNT or not identity["Arn"].startswith(f"arn:aws:sts::{ACCOUNT}:assumed-role/voclabs/"):
         raise RuntimeError("AWS account/role mismatch")
-    save(EVIDENCE / "identity-latest.json", {"at": now(), **identity})
-    print("Identity verified: " + identity["Arn"], flush=True)
+    # The session name embeds the lab user's e-mail: keep it out of evidence and output.
+    role_arn = identity["Arn"].rsplit("/", 1)[0] + "/[session]"
+    save(EVIDENCE / "identity-latest.json", {"at": now(), "Account": identity["Account"], "Arn": role_arn})
+    print("Identity verified: " + role_arn, flush=True)
     if args.stage == "preflight":
         results = {
             "vpcs": call("ec2", "describe-vpcs", {"Filters": [{"Name": "tag:Project", "Values": ["Pedidos360"]}]}),
@@ -253,6 +253,12 @@ def main():
             "rdsSubnets": call("rds", "describe-db-subnet-groups"),
             "vpcLinks": call("apigatewayv2", "get-vpc-links"),
             "logs": call("logs", "describe-log-groups", {"logGroupNamePrefix": "/pedidos360/"}),
+            "instances": call("ec2", "describe-instances", {"Filters": [{"Name": "tag:Project", "Values": ["Pedidos360"]}]}),
+            "rdsInstances": call("rds", "describe-db-instances"),
+            "loadBalancers": call("elbv2", "describe-load-balancers"),
+            "apis": call("apigatewayv2", "get-apis"),
+            "ami": call("ec2", "describe-images", {"ImageIds": [TARGET["amiId"]]}),
+            "rdsEngine": call("rds", "describe-db-engine-versions", {"Engine": "mysql", "EngineVersion": TARGET["rdsEngineVersion"]}),
         }
         save(EVIDENCE / "preflight-names.json", {"at": now(), "results": results})
         print(json.dumps(results, indent=2))

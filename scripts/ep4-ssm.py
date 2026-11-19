@@ -12,7 +12,7 @@ parser.add_argument('--output',default='instance-inspection.json')
 parser.add_argument('--argument',action='append',default=[])
 args=parser.parse_args()
 assert args.script.is_file()
-aws.PRIVATE.mkdir(parents=True,exist_ok=True,mode=0o700)
+aws.PRIVATE.mkdir(parents=True,exist_ok=True,mode=0o700);aws.EVIDENCE.mkdir(parents=True,exist_ok=True)
 identity=aws.call('sts','get-caller-identity')
 assert identity['Account']==aws.ACCOUNT and '/voclabs/' in identity['Arn']
 state=json.loads(aws.JOURNAL.read_text())
@@ -23,12 +23,13 @@ script=base64.b64encode(args.script.read_bytes()).decode()
 arguments=base64.b64encode(json.dumps([str(args.script),*args.argument]).encode()).decode()
 command="python3 -c \"import base64,sys,json; sys.argv=json.loads(base64.b64decode('"+arguments+"')); exec(compile(base64.b64decode('"+script+"'),'<pedidos360-ep4>','exec'))\""
 result=aws.call('ssm','send-command',{'InstanceIds':[instance],'DocumentName':'AWS-RunShellScript',
- 'Comment':'Pedidos360 EP4 explicit project script','TimeoutSeconds':600,
- 'Parameters':{'commands':[command],'executionTimeout':['600']}})
+ 'Comment':'Pedidos360 explicit project script','TimeoutSeconds':600,
+ 'Parameters':{'commands':[command],'executionTimeout':['1800']}})
 command_id=result['Command']['CommandId']
 print('SSM command '+command_id,flush=True)
-destination=aws.ROOT/'docs/evidence/ep4'/args.output
-assert destination.parent==aws.ROOT/'docs/evidence/ep4'
+# Evidence of the current deployment target (config/aws-target.json; EP5: docs/evidence/ep5/aws).
+destination=aws.EVIDENCE/args.output
+assert destination.parent==aws.EVIDENCE and '/' not in args.output
 while True:
     time.sleep(3)
     try: invocation=aws.call('ssm','get-command-invocation',{'CommandId':command_id,'InstanceId':instance})

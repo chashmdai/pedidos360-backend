@@ -1,0 +1,13 @@
+{
+  "account": "647660738152",
+  "region": "us-east-1",
+  "evidenceDir": "docs/evidence/ep5/aws",
+  "approval": "EP5 Fase 4: checkpoint pendiente de aprobación del usuario",
+  "instanceType": "t3.large",
+  "rootVolumeGiB": 30,
+  "amiId": "ami-0719278fd447e399f",
+  "amiName": "ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20261118",
+  "amiOwner": "099720109477",
+  "rdsEngineVersion": "8.4.11",
+  "clientToken": "pedidos360-647660738152-ep5-app-v1"
+}
