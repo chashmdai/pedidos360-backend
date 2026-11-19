@@ -20,7 +20,7 @@ Ninguna.
 
 Procedimiento y salida (sin secretos ni tokens)
 --- e06  @ 2026-11-19T12:52:59Z (SSM c0101abf-74cd-4e3a-beed-a483059afb8b) ---
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-configs --bootstrap-server kafka-1:29092 --entity-type topics --entity-name pedidos360.orders.registered.v1 --describe
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-configs --bootstrap-server kafka-1:29092 --entity-type topics --entity-name pedidos360.orders.registered.v1 --describe
     Dynamic configs for topic pedidos360.orders.registered.v1 are:
       cleanup.policy=delete sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:cleanup.policy=delete, DEFAULT_CONFIG:log.cleanup.policy=delete}
       max.message.bytes=1048576 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:max.message.bytes=1048576, DEFAULT_CONFIG:message.max.bytes=1048588}
@@ -28,7 +28,7 @@ $ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-configs --bootstrap-se
       retention.ms=604800000 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:retention.ms=604800000}
       segment.ms=86400000 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:segment.ms=86400000}
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-configs --bootstrap-server kafka-1:29092 --entity-type topics --entity-name pedidos360.sales.product-metrics.v1 --describe
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-configs --bootstrap-server kafka-1:29092 --entity-type topics --entity-name pedidos360.sales.product-metrics.v1 --describe
     Dynamic configs for topic pedidos360.sales.product-metrics.v1 are:
       cleanup.policy=compact sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:cleanup.policy=compact, DEFAULT_CONFIG:log.cleanup.policy=delete}
       delete.retention.ms=86400000 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:delete.retention.ms=86400000, DEFAULT_CONFIG:log.cleaner.delete.retention.ms=86400000}
@@ -37,7 +37,7 @@ $ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-configs --bootstrap-se
       min.insync.replicas=2 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:min.insync.replicas=2, STATIC_BROKER_CONFIG:min.insync.replicas=2, DEFAULT_CONFIG:min.insync.replicas=1}
       segment.ms=3600000 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:segment.ms=3600000}
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-configs --bootstrap-server kafka-1:29092 --entity-type topics --entity-name pedidos360.orders.registered.v1.DLT --describe
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-configs --bootstrap-server kafka-1:29092 --entity-type topics --entity-name pedidos360.orders.registered.v1.DLT --describe
     Dynamic configs for topic pedidos360.orders.registered.v1.DLT are:
       cleanup.policy=delete sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:cleanup.policy=delete, DEFAULT_CONFIG:log.cleanup.policy=delete}
       max.message.bytes=1048576 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:max.message.bytes=1048576, DEFAULT_CONFIG:message.max.bytes=1048588}
@@ -45,7 +45,7 @@ $ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-configs --bootstrap-se
       retention.ms=1209600000 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:retention.ms=1209600000}
       segment.ms=86400000 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:segment.ms=86400000}
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-configs --bootstrap-server kafka-1:29092 --entity-type topics --entity-name pedidos360.sales.product-metrics.v1.DLT --describe
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-configs --bootstrap-server kafka-1:29092 --entity-type topics --entity-name pedidos360.sales.product-metrics.v1.DLT --describe
     Dynamic configs for topic pedidos360.sales.product-metrics.v1.DLT are:
       cleanup.policy=delete sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:cleanup.policy=delete, DEFAULT_CONFIG:log.cleanup.policy=delete}
       max.message.bytes=1048576 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:max.message.bytes=1048576, DEFAULT_CONFIG:message.max.bytes=1048588}

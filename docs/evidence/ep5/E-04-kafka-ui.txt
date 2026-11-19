@@ -16,7 +16,7 @@ Resultado observado
 Contenedor kafka-ui (kafbat/kafka-ui:v1.5.0 fijado por digest) healthy, publicado solo en 127.0.0.1:8090. Inicio de sesión LOGIN_FORM correcto con las credenciales generadas en la instancia (no impresas). Clúster pedidos360 ONLINE, 3 brokers, 5 tópicos (los 4 de la sección 5 más __consumer_offsets, que la lista oculta por ser interno).
 
 Diferencias con el informe
-Ninguna.
+Ninguna en el resultado. La parte Kafka UI se registra como texto desde la API de Kafka UI (/api/clusters/...), con sesión LOGIN_FORM abierta en la propia instancia: es la misma información que muestra la pantalla al abrirla por reenvío de puertos SSM a 127.0.0.1:8090.
 
 Procedimiento y salida (sin secretos ni tokens)
 --- e04  @ 2026-11-19T12:52:32Z (SSM c20b82ca-3d44-4b39-b682-c550b8b82c4a) ---

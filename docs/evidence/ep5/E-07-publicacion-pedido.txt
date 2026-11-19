@@ -16,7 +16,7 @@ Resultado observado
 El usuario registró desde la SPA (sesión Entra, https://az3h2vqgsi.execute-api.us-east-1.amazonaws.com/app/) el pedido d9d1058b-145c-4396-8f4a-87e03a9a2e61 con 2 × Café de especialidad + 1 × Taza de cerámica (30.970 CLP) a las 14:05:40Z. API Gateway registró POST /api/v1/pedidos 201. order_stream_outbox: evento 4e172649-cccf-4f45-88a1-1ca5bbe0d10b con published_at 14:05:43.408 (1 intento, sin error). Log de orders-service (KafkaOutboxRelay): PUBLISH_CONFIRMED eventId=4e172649… orderId=d9d1058b… topic=pedidos360.orders.registered.v1 partition=2 offset=0. En el tópico, el mensaje de la partición 2, offset 0, tiene clave = orderId y un payload OrderRegisteredStreamV1 (schemaVersion 1, eventId, orderId, tenantId, occurredAt, currency CLP, total 30970.00, itemCount 2 y dos líneas con productId, productName, quantity, unitPrice y lineTotal), sin encabezados de tipo. Los tres grupos lo consumieron (CONSUME_OK) y el agregador publicó las métricas de ambos productos en version 1. El mismo pedido salió también por la outbox RabbitMQ (evento 3053af70…, ver E-16).
 
 Diferencias con el informe
-El mensaje se muestra con kafka-console-consumer (partición y offset explícitos, sin grupo de consumidores, heap acotado según D-06), filtrado por la clave orderId; es el mismo contenido que muestra Kafka UI → Messages. Para no exponer el oid del usuario, la consulta de purchase_orders no incluye owner_subject.
+Ninguna en el resultado. El mensaje se muestra con kafka-console-consumer (partición y offset explícitos, sin grupo de consumidores, heap acotado), filtrado por la clave orderId, en lugar de la pantalla Kafka UI → Messages; el contenido es el mismo. Para no exponer el oid del usuario, la consulta de purchase_orders no incluye owner_subject.
 
 Procedimiento y salida (sin secretos ni tokens)
 --- sql orders rabbit-outbox @ 2026-11-19T14:07:39Z (SSM bd5de28a-6e2d-4bc5-93f9-7e86665a2528) ---
@@ -49,15 +49,15 @@ $ journalctl -u pedidos360-orders --since -1h -o cat | grep -E 'PUBLISH_CONFIRME
     2026-11-19T14:05:43.411Z  INFO 27232 --- [orders-service] [   scheduling-2] c.d.p.o.i.streaming.KafkaOutboxRelay     : PUBLISH_CONFIRMED eventId=4e172649-cccf-4f45-88a1-1ca5bbe0d10b orderId=d9d1058b-145c-4396-8f4a-87e03a9a2e61 topic=pedidos360.orders.registered.v1 partition=2 offset=0
 
 --- topic-tail pedidos360.orders.registered.v1 3 d9d1058b-145c-4396-8f4a-87e03a9a2e61 @ 2026-11-19T14:08:38Z (SSM 06486be6-935c-4f6a-97ce-6f357d85857c) ---
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 0 --offset earliest --timeout-ms 8000 --property print.key=true ... 
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 0 --offset earliest --timeout-ms 8000 --property print.key=true ... 
     
     (0 matching records in partition 0; last 3 shown)
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 1 --offset earliest --timeout-ms 8000 --property print.key=true ... 
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 1 --offset earliest --timeout-ms 8000 --property print.key=true ... 
     
     (0 matching records in partition 1; last 3 shown)
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 2 --offset earliest --timeout-ms 8000 --property print.key=true ... 
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 2 --offset earliest --timeout-ms 8000 --property print.key=true ... 
     CreateTime:1795097142769	Partition:2	Offset:0	NO_HEADERS	d9d1058b-145c-4396-8f4a-87e03a9a2e61	{"schemaVersion":1,"eventId":"4e172649-cccf-4f45-88a1-1ca5bbe0d10b","orderId":"d9d1058b-145c-4396-8f4a-87e03a9a2e61","tenantId":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250","occurredAt":"2026-11-19T14:05:40.597505Z","currency":"CLP","total":30970.00,"itemCount":2,"items":[{"productId":"10000000-0000-0000-0000-000000000001","productName":"Café de especialidad","quantity":2,"unitPrice":8990.00,"lineTotal":17980.00},{"productId":"10000000-0000-0000-0000-000000000002","productName":"Taza de cerámica","quantity":1,"unitPrice":12990.00,"lineTotal":12990.00}]}
     (1 matching records in partition 2; last 3 shown)
 

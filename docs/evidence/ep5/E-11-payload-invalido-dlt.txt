@@ -16,11 +16,11 @@ Resultado observado
 Se envió a pedidos360.orders.registered.v1 un registro con clave e11-invalid-141647 y valor JSON inválido ('{"eventId": no-es-json'), que quedó en la partición 0, offset 0. sales-aggregator y order-monitor registraron de inmediato CONSUME_DLT eventId=unknown ... code=DESERIALIZATION_FAILED retried=false, sin ningún CONSUME_RETRY. pedidos360.orders.registered.v1.DLT recibió dos copias en la misma partición 0, una por cada grupo que falló (encabezado kafka_dlt-original-consumer-group). Los encabezados decodificados indican tópico original pedidos360.orders.registered.v1, partición 0, offset 0, timestamp original, excepción org.springframework.kafka.support.serializer.DeserializationException y mensaje 'failed to deserialize'. La partición no quedó bloqueada: el agregador confirmó el offset 1 en p0 y el siguiente pedido válido de esa partición (e1bb7872…, offset 1, durante E-10) se procesó con normalidad (CONSUME_OK ACCUMULATORS_UPDATED).
 
 Diferencias con el informe
-Hay una copia en el DLT por cada grupo que consume el tópico y falla (D-02/2B). El grupo de la vista no lee orders.registered.v1, por eso no aporta copia. Los encabezados numéricos de Spring (partición, offset, timestamp) son binarios y se muestran decodificados (int32/int64 big-endian).
+Ninguna. Como describe la sección 9, hay una copia en el DLT por cada grupo que falla (encabezado kafka_dlt-original-consumer-group). Los encabezados numéricos de Spring (partición, offset, timestamp) son binarios y se muestran decodificados (int32/int64 big-endian).
 
 Procedimiento y salida (sin secretos ni tokens)
 --- invalid  @ 2026-11-19T14:16:49Z (SSM dbc21238-725b-456c-9690-6db510aa4bc4) ---
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-producer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --property parse.key=true --property key.separator="|"   <<< 'e11-invalid-141647|{"eventId": no-es-json'
+$ docker exec -i -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-producer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --property parse.key=true --property key.separator="|"   <<< 'e11-invalid-141647|{"eventId": no-es-json'
 
 
 $ key
@@ -40,51 +40,51 @@ $ journalctl -u pedidos360-sales-stream --since -6min -o cat | grep -E 'CONSUME_
     2026-11-19T14:17:00.256Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=1 offset=2 attempt=1 result=STALE_VERSION_DISCARDED version=2
 
 --- dlt  @ 2026-11-19T14:19:39Z (SSM abb809f3-9e69-4a8b-ab69-f7000716a070) ---
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1.DLT --partition 0 --offset earliest --property print.headers=true ... (encabezados kafka_dlt-* decodificados)
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1.DLT --partition 0 --offset earliest --property print.headers=true ... (encabezados kafka_dlt-* decodificados)
     {"dltPartition": 0, "dltOffset": 0, "kafka_dlt-original-partition": 0, "kafka_dlt-original-offset": 0, "kafka_dlt-original-timestamp": 1795097809461, "kafka_dlt-original-topic": "pedidos360.orders.registered.v1", "kafka_dlt-original-consumer-group": "pedidos360-sales-aggregator", "kafka_dlt-exception-fqcn": "org.springframework.kafka.support.serializer.DeserializationException", "kafka_dlt-exception-cause-fqcn": "org.springframework.kafka.support.serializer.DeserializationException", "kafka_dlt-exception-message": "failed to deserialize", "kafka_dlt-exception-stacktrace": "org.springframework.kafka.support.serializer.DeserializationException: failed to deserialize", "key": "e11-invalid-141647", "value": "{\"eventId\": no-es-json"}
     {"dltPartition": 0, "dltOffset": 1, "kafka_dlt-original-partition": 0, "kafka_dlt-original-offset": 0, "kafka_dlt-original-timestamp": 1795097809461, "kafka_dlt-original-topic": "pedidos360.orders.registered.v1", "kafka_dlt-original-consumer-group": "pedidos360-order-monitor", "kafka_dlt-exception-fqcn": "org.springframework.kafka.support.serializer.DeserializationException", "kafka_dlt-exception-cause-fqcn": "org.springframework.kafka.support.serializer.DeserializationException", "kafka_dlt-exception-message": "failed to deserialize", "kafka_dlt-exception-stacktrace": "org.springframework.kafka.support.serializer.DeserializationException: failed to deserialize", "key": "e11-invalid-141647", "value": "{\"eventId\": no-es-json"}
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1.DLT --partition 1 --offset earliest --property print.headers=true ... (encabezados kafka_dlt-* decodificados)
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1.DLT --partition 1 --offset earliest --property print.headers=true ... (encabezados kafka_dlt-* decodificados)
     (sin registros)
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1.DLT --partition 2 --offset earliest --property print.headers=true ... (encabezados kafka_dlt-* decodificados)
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1.DLT --partition 2 --offset earliest --property print.headers=true ... (encabezados kafka_dlt-* decodificados)
     (sin registros)
 
 --- groups  @ 2026-11-19T14:25:07Z (SSM 300d8dd4-9e3f-428c-a5dc-c30378cafdae) ---
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator
     
     GROUP                       TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                             HOST            CLIENT-ID
     pedidos360-sales-aggregator pedidos360.orders.registered.v1 1          2               2               0               sales-aggregator-1-38c2b24d-6670-4ce6-ae9d-d6ee8aff9da7 /172.19.0.1     sales-aggregator-1
     pedidos360-sales-aggregator pedidos360.orders.registered.v1 0          2               2               0               sales-aggregator-0-d69f3495-d4c7-4f62-a3ff-5697bf58a023 /172.19.0.1     sales-aggregator-0
     pedidos360-sales-aggregator pedidos360.orders.registered.v1 2          2               2               0               sales-aggregator-2-c50de012-a114-41fc-8811-f647af5c5568 /172.19.0.1     sales-aggregator-2
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose
     
     GROUP                       CONSUMER-ID                                             HOST            CLIENT-ID          #PARTITIONS     ASSIGNMENT
     pedidos360-sales-aggregator sales-aggregator-1-38c2b24d-6670-4ce6-ae9d-d6ee8aff9da7 /172.19.0.1     sales-aggregator-1 1               (1)
     pedidos360-sales-aggregator sales-aggregator-0-d69f3495-d4c7-4f62-a3ff-5697bf58a023 /172.19.0.1     sales-aggregator-0 1               (0)
     pedidos360-sales-aggregator sales-aggregator-2-c50de012-a114-41fc-8811-f647af5c5568 /172.19.0.1     sales-aggregator-2 1               (2)
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor
     
     GROUP                    TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                          HOST            CLIENT-ID
     pedidos360-order-monitor pedidos360.orders.registered.v1 1          2               2               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
     pedidos360-order-monitor pedidos360.orders.registered.v1 2          2               2               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
     pedidos360-order-monitor pedidos360.orders.registered.v1 0          2               2               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor --members --verbose
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor --members --verbose
     
     GROUP                    CONSUMER-ID                                          HOST            CLIENT-ID       #PARTITIONS     ASSIGNMENT
     pedidos360-order-monitor order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0 3               (0,1,2)
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard
     
     GROUP                      TOPIC                               PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                            HOST            CLIENT-ID
     pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 0          -               0               -               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
     pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 2          3               3               0               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
     pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 1          5               5               0               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard --members --verbose
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard --members --verbose
     
     GROUP                      CONSUMER-ID                                            HOST            CLIENT-ID         #PARTITIONS     ASSIGNMENT
     pedidos360-sales-dashboard sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0 3               (0,1,2)

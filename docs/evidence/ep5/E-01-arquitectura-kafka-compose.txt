@@ -16,7 +16,7 @@ Resultado observado
 Seis contenedores en estado running y healthy: zookeeper-1..3 (confluentinc/cp-zookeeper:7.9.10) y kafka-1..3 (confluentinc/cp-kafka:7.9.10), imágenes fijadas por digest. Kafka solo publica 127.0.0.1:19092/19093/19094; ZooKeeper no publica puertos. 'up -d --wait' es idempotente: los contenedores ya estaban en ejecución (arrancados por la unidad systemd pedidos360-kafka-cluster tras el reinicio de la instancia) y quedaron Healthy.
 
 Diferencias con el informe
-La instancia es i-01bcf3ef9d3a64d4e en la cuenta nueva 647660738152 (el informe cita i-0818fdfafcfb7cb31); ver docs/evidence/ep5/IDS_NUEVOS.md y EP5_DECISIONES.md. Se añade --wait-timeout 300 al comando del informe para acotar la espera.
+Ninguna en el resultado. Se añade --wait-timeout 300 al comando del informe para acotar la espera.
 
 Procedimiento y salida (sin secretos ni tokens)
 --- e01  @ 2026-11-19T12:52:25Z (SSM ba8d7f11-dafc-45ac-accc-7f8fb57f7b61) ---

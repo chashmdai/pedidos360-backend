@@ -23,7 +23,7 @@ CONFIG = Path("/etc/pedidos360")
 ORDERS, METRICS, DLT = "pedidos360.orders.registered.v1", "pedidos360.sales.product-metrics.v1", ".DLT"
 GROUPS = ("pedidos360-sales-aggregator", "pedidos360-order-monitor", "pedidos360-sales-dashboard")
 HEAP = ["-e", "KAFKA_HEAP_OPTS=-Xmx128m", "-e", "KAFKA_OPTS=", "-e", "KAFKA_JMX_OPTS="]
-SHOWN_HEAP = '-e KAFKA_HEAP_OPTS="-Xmx128m"'
+SHOWN_HEAP = "-e KAFKA_HEAP_OPTS=-Xmx128m"   # as written in the report (D-06)
 ENV = dict(os.environ, PEDIDOS_EP4_CONFIG_DIR=str(CONFIG / "ep4"), PEDIDOS_EP5_CONFIG_DIR=str(CONFIG / "ep5"))
 UUID = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
 
@@ -42,7 +42,7 @@ def sh(shown, command, stdin=None, timeout=180):
 
 
 def kafka(shown_tail, *args, stdin=None, timeout=180):
-    return sh(f"docker exec {SHOWN_HEAP} kafka-1 {shown_tail}", ["docker", "exec", *(["-i"] if stdin else []), *HEAP, "kafka-1", *args],
+    return sh(f"docker exec {'-i ' if stdin else ''}{SHOWN_HEAP} kafka-1 {shown_tail}", ["docker", "exec", *(["-i"] if stdin else []), *HEAP, "kafka-1", *args],
               stdin=stdin, timeout=timeout)
 
 

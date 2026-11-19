@@ -142,6 +142,11 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
 
 - **Favicon (corregido el 2026-11-19):** el usuario informó un 404 de `/favicon.ico` en la consola. `index.html` no declaraba ícono, así que el navegador lo pedía en la raíz del dominio de API Gateway, donde no hay ruta. Ahora `index.html` declara un ícono SVG embebido (data URI, color `--accent`), sin abrir rutas nuevas en API Gateway; la prueba `src/indexHtml.test.ts` lo verifica. El release ep5-20261119T144015Z cambia solo el frontend: los JAR son del mismo build verificado. Se instaló con el instalador idempotente y la etapa 9 se repitió completa: target healthy, 5 rutas SPA con 200 y 8 sondas 401.
 
+- **Informe actualizado (2026-11-19 14:56Z):** se copió la versión nueva del usuario en `docs/INFORME_EP5_EP6.md`. Las 19 evidencias se contrastaron campo por campo con ella: título, objetivo, indicador, resultado esperado y procedimiento.
+  - El informe ahora usa los IDs nuevos y CachyOS, incorpora las copias del DLT por grupo y mide la memoria con `systemctl show`. E-14 pasa a ser solo local y suma el 401 sin token; E-18 y E-19 llevan las cifras medidas. Esas diferencias desaparecieron de los archivos.
+  - Cada `E-XX` lleva ahora el resultado esperado textual del informe nuevo y el comando escrito como en él (`-e KAFKA_HEAP_OPTS=-Xmx128m`, `docker exec -i` en E-11).
+  - Diferencias que siguen, todas sin efecto en el resultado: Kafka UI registrado desde su API (E-03, E-04, E-05, E-08), mensajes leídos con `kafka-console-consumer` (E-07, E-09), `--wait-timeout` (E-01), `./mvnw -B` (E-18), la republicación con la misma version (E-12), la compactación aún no ejecutada (E-15) y el tercer 401 (E-17).
+
 ## Pendientes
 
 - Separar el UID 999 (imagen RabbitMQ) del usuario de sistema `pedidos360-bff` en la EC2 (ver Fase 6, E-19).

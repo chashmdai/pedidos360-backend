@@ -16,14 +16,14 @@ Resultado observado
 Se leyó el registro ya procesado del pedido d9d1058b… (partición 2, offset 0, eventId 4e172649-cccf-4f45-88a1-1ca5bbe0d10b) y se republicó con la misma clave y el mismo payload (quedó en p2, offset 1). Resultado: CONSUME_DUPLICATE eventId=4e172649… group=pedidos360-sales-aggregator ... code=ALREADY_PROCESSED. product_sales_daily no cambió (Café 5/2/44.950 v2, Taza 3/2/38.970 v2) y processed_stream_event siguió en 2. order-monitor lo evaluó otra vez (NO_ALERT): el monitor no acumula. Por diseño, ante un duplicado el agregador republica el estado vigente con la misma version, para cubrir una publicación fallida después del commit. La vista descartó esas copias como STALE_VERSION_DISCARDED version=2, así que los acumulados no cambiaron.
 
 Diferencias con el informe
-Ninguna en el resultado. Se documenta además la republicación idempotente con la misma version, que la vista descarta.
+Ninguna en el resultado. Se documenta además que, ante el duplicado, el agregador republica el estado vigente con la misma version (recuperación ante una publicación fallida después del commit) y que la vista descarta esas copias (STALE_VERSION_DISCARDED).
 
 Procedimiento y salida (sin secretos ni tokens)
 --- replay 2 0 @ 2026-11-19T14:17:00Z (SSM 32c5dfa9-76a7-4201-87cf-ec8066f89c77) ---
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 2 --offset 0 --max-messages 1 --property print.key=true --property key.separator="|"
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --partition 2 --offset 0 --max-messages 1 --property print.key=true --property key.separator="|"
     d9d1058b-145c-4396-8f4a-87e03a9a2e61|{"schemaVersion":1,"eventId":"4e172649-cccf-4f45-88a1-1ca5bbe0d10b","orderId":"d9d1058b-145c-4396-8f4a-87e03a9a2e61","tenantId":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250","occurredAt":"2026-11-19T14:05:40.597505Z","currency":"CLP","total":30970.00,"itemCount":2,"items":[{"productId":"10000000-0000-0000-0000-000000000001","productName":"Café de especialidad","quantity":2,"unitPrice":8990.00,"lineTotal":17980.00},{"productId":"10000000-0000-0000-0000-000000000002","productName":"Taza de cerámica","quantity":1,"unitPrice":12990.00,"lineTotal":12990.00}]}
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-producer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --property parse.key=true --property key.separator="|"   <<< (mismo registro: misma clave y mismo payload)
+$ docker exec -i -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-producer --bootstrap-server kafka-1:29092 --topic pedidos360.orders.registered.v1 --property parse.key=true --property key.separator="|"   <<< (mismo registro: misma clave y mismo payload)
 
 
 $ eventId republicado

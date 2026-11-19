@@ -1,4 +1,4 @@
-"""Write docs/evidence/ep5/E-XX-<nombre>.txt (report section 15.2 format) from the raw outputs that
+"""Write docs/evidence/ep5/E-XX-<nombre>.txt (report section 15.2 format; expected results as in docs/INFORME_EP5_EP6.md) from the raw outputs that
 deploy/ep5-evidence.py produced on the EC2 (docs/evidence/ep5/aws/raw-*.json). Output is already redacted on the host;
 this script redacts again as a second barrier. Usage: ep5-evidence-report.py E-XX raw-a.json[||raw-b.json] "observed" ["deviation"]
 """
@@ -72,8 +72,7 @@ SPEC = {
     "E-14": ("kafka-admin", "Operaciones del microservicio administrador",
              "Ejercitar la administración de tópicos, configuraciones y grupos.",
              "EP5: administrador Kafka (6 %); administración de tópicos y grupos (6 %).",
-             "201, 200, 200, 200 y 204 en la secuencia; 409 para el tópico de negocio; 403 para el rol User; detalle de grupo con "
-             "offsets y lag por partición."),
+             "201, 200, 200, 200 y 204 en la secuencia; 409 para el tópico de negocio; 403 para el rol User; 401 sin token; detalle de grupo con offsets y lag por partición."),
     "E-15": ("reconstruccion-compactado", "Reconstrucción de la vista desde el tópico compactado",
              "Demostrar el uso de la compactación para recuperar estado.",
              "EP6: administración de Kafka (15 %); casos de uso (15 %).",
@@ -90,11 +89,10 @@ SPEC = {
     "E-18": ("pruebas-automatizadas", "Pruebas automatizadas",
              "Registrar el resultado de las pruebas de backend y frontend.",
              "EP5: el código compila, sigue buenas prácticas y responde a pruebas básicas.",
-             "Build exitoso; las pruebas Java y React aprueban sin fallos, errores ni omisiones, y la compilación de producción del "
-             "frontend finaliza correctamente."),
+             "Build exitoso: 82 pruebas Java y 20 pruebas React aprueban sin fallos, errores ni omisiones, y la compilación de producción del frontend finaliza correctamente."),
     "E-19": ("memoria-t3-large", "Uso de memoria en la instancia t3.large",
              "Contrastar el presupuesto de memoria con el consumo real.", "Dimensionamiento de la sección 13.",
-             "Memoria disponible positiva sin uso sostenido de intercambio; contenedores bajo su mem_limit; servicios systemd activos."),
+             "Unos 2.981 MiB disponibles y 0 B de intercambio en uso; todos los contenedores bajo su mem_limit (el más cercano, Kafka UI, al 75 %); los cuatro servicios de mayor carga suman 1.134 MiB y los cuatro de menor carga 713 MiB; las 11 unidades systemd activas."),
 }
 
 

@@ -20,25 +20,25 @@ Ninguna.
 
 Procedimiento y salida (sin secretos ni tokens)
 --- describe  @ 2026-11-19T14:26:28Z (SSM 66d65ae5-e73d-4e00-be68-953b14335221) ---
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1
     Topic: pedidos360.orders.registered.v1	TopicId: 3Bcle8goRxeU1Cbx9SFxQA	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=604800000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000
     	Topic: pedidos360.orders.registered.v1	Partition: 0	Leader: 2	Replicas: 2,1,3	Isr: 2,1,3	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.orders.registered.v1	Partition: 1	Leader: 3	Replicas: 3,2,1	Isr: 3,2,1	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.orders.registered.v1	Partition: 2	Leader: 1	Replicas: 1,3,2	Isr: 1,3,2	Elr: N/A	LastKnownElr: N/A
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1
     Topic: pedidos360.sales.product-metrics.v1	TopicId: 8SxeYCbcQMKkhz9UYPXDOw	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=compact,max.message.bytes=1048576,min.cleanable.dirty.ratio=0.1,unclean.leader.election.enable=false,delete.retention.ms=86400000,segment.ms=3600000
     	Topic: pedidos360.sales.product-metrics.v1	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,2,3	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.sales.product-metrics.v1	Partition: 1	Leader: 2	Replicas: 2,3,1	Isr: 2,3,1	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.sales.product-metrics.v1	Partition: 2	Leader: 3	Replicas: 3,1,2	Isr: 3,1,2	Elr: N/A	LastKnownElr: N/A
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1.DLT
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1.DLT
     Topic: pedidos360.orders.registered.v1.DLT	TopicId: z36Z9_odSpmvLVQokQWGJw	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=1209600000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000
     	Topic: pedidos360.orders.registered.v1.DLT	Partition: 0	Leader: 3	Replicas: 3,1,2	Isr: 3,1,2	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.orders.registered.v1.DLT	Partition: 1	Leader: 1	Replicas: 1,2,3	Isr: 1,2,3	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.orders.registered.v1.DLT	Partition: 2	Leader: 2	Replicas: 2,3,1	Isr: 2,3,1	Elr: N/A	LastKnownElr: N/A
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1.DLT
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1.DLT
     Topic: pedidos360.sales.product-metrics.v1.DLT	TopicId: BjEG--HOT2KCVH2dmRx1AQ	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=1209600000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000
     	Topic: pedidos360.sales.product-metrics.v1.DLT	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,2,3	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.sales.product-metrics.v1.DLT	Partition: 1	Leader: 2	Replicas: 2,3,1	Isr: 2,3,1	Elr: N/A	LastKnownElr: N/A
@@ -48,13 +48,13 @@ $ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-ser
 $ docker stop kafka-2
     kafka-2
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1
     Topic: pedidos360.orders.registered.v1	TopicId: 3Bcle8goRxeU1Cbx9SFxQA	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=604800000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000
     	Topic: pedidos360.orders.registered.v1	Partition: 0	Leader: 1	Replicas: 2,1,3	Isr: 1,3	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.orders.registered.v1	Partition: 1	Leader: 3	Replicas: 3,2,1	Isr: 3,1	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.orders.registered.v1	Partition: 2	Leader: 1	Replicas: 1,3,2	Isr: 1,3	Elr: N/A	LastKnownElr: N/A
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1
     Topic: pedidos360.sales.product-metrics.v1	TopicId: 8SxeYCbcQMKkhz9UYPXDOw	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=compact,max.message.bytes=1048576,min.cleanable.dirty.ratio=0.1,unclean.leader.election.enable=false,delete.retention.ms=86400000,segment.ms=3600000
     	Topic: pedidos360.sales.product-metrics.v1	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,3	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.sales.product-metrics.v1	Partition: 1	Leader: 3	Replicas: 2,3,1	Isr: 3,1	Elr: N/A	LastKnownElr: N/A
@@ -131,40 +131,40 @@ $ journalctl -u pedidos360-sales-stream --since -10min -o cat | grep -E 'CONSUME
     2026-11-19T14:29:33.415Z  INFO 174321 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=2baefa66-3fe3-4c94-a619-2ba3dd0c4592 group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=3 attempt=1 result=VIEW_UPDATED version=3
 
 --- groups  @ 2026-11-19T14:31:01Z (SSM 7f7c4907-a0e3-4a33-ab8c-b38df1badd70) ---
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator
     
     GROUP                       TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                             HOST            CLIENT-ID
     pedidos360-sales-aggregator pedidos360.orders.registered.v1 1          2               2               0               sales-aggregator-1-38c2b24d-6670-4ce6-ae9d-d6ee8aff9da7 /172.19.0.1     sales-aggregator-1
     pedidos360-sales-aggregator pedidos360.orders.registered.v1 0          2               2               0               sales-aggregator-0-d69f3495-d4c7-4f62-a3ff-5697bf58a023 /172.19.0.1     sales-aggregator-0
     pedidos360-sales-aggregator pedidos360.orders.registered.v1 2          3               3               0               sales-aggregator-2-c50de012-a114-41fc-8811-f647af5c5568 /172.19.0.1     sales-aggregator-2
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose
     
     GROUP                       CONSUMER-ID                                             HOST            CLIENT-ID          #PARTITIONS     ASSIGNMENT
     pedidos360-sales-aggregator sales-aggregator-1-38c2b24d-6670-4ce6-ae9d-d6ee8aff9da7 /172.19.0.1     sales-aggregator-1 1               (1)
     pedidos360-sales-aggregator sales-aggregator-0-d69f3495-d4c7-4f62-a3ff-5697bf58a023 /172.19.0.1     sales-aggregator-0 1               (0)
     pedidos360-sales-aggregator sales-aggregator-2-c50de012-a114-41fc-8811-f647af5c5568 /172.19.0.1     sales-aggregator-2 1               (2)
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor
     
     GROUP                    TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                          HOST            CLIENT-ID
     pedidos360-order-monitor pedidos360.orders.registered.v1 1          2               2               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
     pedidos360-order-monitor pedidos360.orders.registered.v1 2          3               3               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
     pedidos360-order-monitor pedidos360.orders.registered.v1 0          2               2               0               order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor --members --verbose
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor --members --verbose
     
     GROUP                    CONSUMER-ID                                          HOST            CLIENT-ID       #PARTITIONS     ASSIGNMENT
     pedidos360-order-monitor order-monitor-0-075e8bfc-fa03-45ba-a6ad-60c3d020cec8 /172.19.0.1     order-monitor-0 3               (0,1,2)
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard
     
     GROUP                      TOPIC                               PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                            HOST            CLIENT-ID
     pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 0          -               0               -               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
     pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 2          4               4               0               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
     pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 1          5               5               0               sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard --members --verbose
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard --members --verbose
     
     GROUP                      CONSUMER-ID                                            HOST            CLIENT-ID         #PARTITIONS     ASSIGNMENT
     pedidos360-sales-dashboard sales-dashboard-0-6f4bae1c-0dac-4e92-b284-d60bdde45cfc /172.19.0.1     sales-dashboard-0 3               (0,1,2)
@@ -176,13 +176,13 @@ $ docker start kafka-2
 $ docker inspect kafka-2 (health)
     healthy
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.orders.registered.v1
     Topic: pedidos360.orders.registered.v1	TopicId: 3Bcle8goRxeU1Cbx9SFxQA	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=delete,retention.ms=604800000,max.message.bytes=1048576,unclean.leader.election.enable=false,segment.ms=86400000
     	Topic: pedidos360.orders.registered.v1	Partition: 0	Leader: 2	Replicas: 2,1,3	Isr: 1,3,2	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.orders.registered.v1	Partition: 1	Leader: 3	Replicas: 3,2,1	Isr: 3,1,2	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.orders.registered.v1	Partition: 2	Leader: 1	Replicas: 1,3,2	Isr: 1,3,2	Elr: N/A	LastKnownElr: N/A
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-topics --bootstrap-server kafka-1:29092 --describe --topic pedidos360.sales.product-metrics.v1
     Topic: pedidos360.sales.product-metrics.v1	TopicId: 8SxeYCbcQMKkhz9UYPXDOw	PartitionCount: 3	ReplicationFactor: 3	Configs: min.insync.replicas=2,cleanup.policy=compact,max.message.bytes=1048576,min.cleanable.dirty.ratio=0.1,unclean.leader.election.enable=false,delete.retention.ms=86400000,segment.ms=3600000
     	Topic: pedidos360.sales.product-metrics.v1	Partition: 0	Leader: 1	Replicas: 1,2,3	Isr: 1,3,2	Elr: N/A	LastKnownElr: N/A
     	Topic: pedidos360.sales.product-metrics.v1	Partition: 1	Leader: 2	Replicas: 2,3,1	Isr: 3,1,2	Elr: N/A	LastKnownElr: N/A

@@ -10,13 +10,13 @@ Entorno
 Local (referencia): CachyOS nativo, rama ep5-kafka, clúster Compose de 3 ZooKeeper + 3 brokers y kafka-admin-service en 127.0.0.1:8187, con tokens del emisor JWT de desarrollo (fixture Admin + Orders.Read y fixture User + Orders.Read). La parte AWS (reenvío de puertos SSM a 127.0.0.1:8187 de la EC2 y token Entra con rol Admin, scripts/ep5-admin-evidence.py) no se ejecutó: el usuario decidió omitir el token Admin.
 
 Resultado esperado (informe)
-201, 200, 200, 200 y 204 en la secuencia; 409 para el tópico de negocio; 403 para el rol User; detalle de grupo con offsets y lag por partición.
+201, 200, 200, 200 y 204 en la secuencia; 409 para el tópico de negocio; 403 para el rol User; 401 sin token; detalle de grupo con offsets y lag por partición.
 
 Resultado observado
 Secuencia sobre pedidos360.lab.demo: POST /topics 201 (3 particiones, RF 3), GET /topics/{name} 200, PATCH /topics/{name}/configs 200 (retention.ms 3600000 → 7200000, vía incrementalAlterConfigs), POST /topics/{name}/partitions 200 (3 → 6) y DELETE /topics/{name} 204. DELETE y POST /partitions sobre pedidos360.orders.registered.v1 responden 409 (tópico de negocio protegido; datos preservados). Una configuración fuera de la lista blanca responde 400. El token de rol User recibe 403 en listar, crear y eliminar; sin token, 401. GET /consumer-groups/pedidos360-sales-aggregator 200, con estado STABLE, asignador cooperative-sticky, 3 miembros y, por partición, offset confirmado, log-end, lag y miembro. Las mismas 9 operaciones están verificadas contra el contrato OpenAPI y la tabla 14 (OpenApiContractTest) y por KafkaAdminIntegrationTest en E-18.
 
 Diferencias con el informe
-Solo hay referencia local. La ejecución en AWS por reenvío de puertos queda preparada (scripts/ep5-admin-evidence.py) pero no se hizo, porque el usuario omitió el token Admin de Entra. En AWS, kafka-admin-service está activo en 127.0.0.1:8187 (E-19) y solo es alcanzable por SSM.
+Ninguna. Se ejecutó en local con el fixture Admin, como indica el informe. La variante por reenvío de puertos en AWS (scripts/ep5-admin-evidence.py) queda preparada y no se ejecutó, porque el usuario omitió el token Admin de Entra.
 
 Procedimiento y salida (sin secretos ni tokens)
 --- docs/evidence/ep5/local/E-14-kafka-admin-local-referencia.txt ---

@@ -10,13 +10,13 @@ Entorno
 Local, CachyOS (Linux nativo), Java 25 (Temurin), Maven Wrapper, Docker con Testcontainers 2.0.5 (Kafka Confluent 7.9.10 y MySQL 8.4.11 efímeros); Node.js con npm. Rama ep5-kafka. Backend: build del 2026-11-19T04:00Z (scripts/ep5-build.sh), sin cambios de código posteriores. Frontend: build del 2026-11-19T14:39Z con el favicon embebido. Ambos forman el release ep5-20261119T144015Z instalado en AWS. El frontend se compila con VITE_APP_BASE_PATH=/app/ y la configuración pública de Entra para la nube.
 
 Resultado esperado (informe)
-Build exitoso; las pruebas Java y React aprueban sin fallos, errores ni omisiones, y la compilación de producción del frontend finaliza correctamente.
+Build exitoso: 82 pruebas Java y 20 pruebas React aprueban sin fallos, errores ni omisiones, y la compilación de producción del frontend finaliza correctamente.
 
 Resultado observado
 Backend: BUILD SUCCESS en los 11 módulos del reactor; 82 pruebas Java, 0 fallos, 0 errores, 0 omitidas (kafka-support 9, catalog 2, orders 11, bff 8, receipts 6, rabbit-admin 5, order-insights 14, sales-stream 18, kafka-admin 9). Las 41 pruebas previas de EP3/EP4 siguen aprobando dentro de ese total. Frontend: npm ci correcto, Vitest 5 archivos y 20 pruebas aprobadas (incluye la del ícono embebido), y tsc -b + vite build finalizan ('built in'). La advertencia de Vite sobre un chunk mayor de 500 kB es informativa y no es un error.
 
 Diferencias con el informe
-El informe indica WSL2; el entorno es CachyOS nativo (desviación registrada en EP5_DECISIONES.md, Fase 1). El informe escribe 'bash mvnw clean verify'; se usa ./mvnw -B clean verify (equivalente, modo batch).
+Ninguna en el resultado. El informe escribe 'bash mvnw clean verify'; se usa ./mvnw -B clean verify (equivalente, modo batch).
 
 Procedimiento y salida (sin secretos ni tokens)
 --- docs/evidence/ep5/build/backend-summary.txt ---

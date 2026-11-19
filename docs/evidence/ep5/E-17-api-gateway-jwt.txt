@@ -16,7 +16,7 @@ Resultado observado
 Las tres solicitudes sin token válido fueron rechazadas por el autorizador JWT de API Gateway (az3h2vqgsi, autorizador 0ue6up) con HTTP 401 y latency 0, sin llegar al backend: (1) sin Authorization (sonda de scripts/ep5-verify-gateway.py, 12:48:15.526Z); (2) con un bearer inválido (12:48:15.895Z); (3) solicitud repetida por el usuario desde la pestaña Red del navegador, que la reenvía sin el header Authorization (14:04:48.179Z). Las sondas también dieron 401 en /productos, /pedidos y /me, con y sin bearer inválido. Desde la SPA en /app/, con sesión institucional obtenida por authorization code con PKCE (MSAL), la vista hizo 534 consultas GET /api/v1/ventas/en-vivo con HTTP 200, y el usuario verificó en el navegador el 200 y el header Authorization: Bearer. Las 124 respuestas 502 corresponden a la detención controlada de sales-stream en E-10.
 
 Diferencias con el informe
-La API es az3h2vqgsi en la cuenta nueva (el informe cita 7k2zyh0t0d, de EP4). Además de los dos casos del informe, se registra un tercer 401 sin token (repetición desde DevTools). El 404 de GET /app/{proxy+} es la sonda manual de /app/favicon.ico (pendiente del favicon en EP5_DECISIONES.md).
+Ninguna en el resultado. Además de los dos casos del informe, se registra un tercer 401 sin token (solicitud repetida desde la pestaña Red del navegador). El 404 de GET /app/{proxy+} del log es la sonda manual de /app/favicon.ico, corregida después con el ícono embebido (release ep5-20261119T144015Z).
 
 Procedimiento y salida (sin secretos ni tokens)
 --- docs/evidence/ep5/aws/gateway-http.json ---

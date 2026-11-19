@@ -16,7 +16,7 @@ Resultado observado
 Con la vista 'Ventas en vivo' abierta, el usuario registró el pedido 79a3d04a-9721-4cd2-956c-5e7386921647 (3 × Café + 2 × Taza, 52.950 CLP) a las 14:13:50.995Z. Publicación en Kafka: 14:13:51.866 (partición 1, offset 0). order-monitor: ORDER_ALERT reasons=[HIGH_VALUE] total=52950.00 currency=CLP lines=2 (14:13:51.865). El agregador actualizó product_sales_daily a Café 5 u / 2 pedidos / 44.950,00 / version 2 y Taza 3 u / 2 pedidos / 38.970,00 / version 2, y publicó ambas métricas en product-metrics.v1 (version 1 → 2, offsets 0 → 1). La vista se actualizó a las 14:13:51.939 (0,94 s después del registro). La siguiente consulta de la SPA, a las 14:13:54.481 según el log de API Gateway, mostró los nuevos acumulados y la alerta de alto valor, unos 4 s después del POST (el sondeo es cada 3 s). El usuario confirmó la alerta en la vista.
 
 Diferencias con el informe
-Ninguna.
+Ninguna en el resultado. La métrica publicada se muestra con kafka-console-consumer en lugar de la pantalla de Kafka UI.
 
 Procedimiento y salida (sin secretos ni tokens)
 --- sql orders outbox sales processed @ 2026-11-19T14:15:21Z (SSM db70698b-20fb-4fcd-8a06-f41c8189db6c) ---
@@ -77,16 +77,16 @@ $ journalctl -u pedidos360-sales-stream --since -30min -o cat | grep -E 'CONSUME
     2026-11-19T14:13:51.961Z  INFO 28052 --- [sales-stream-service] [dashboard-0-C-1] c.d.p.s.i.streaming.ConsumptionLog       : CONSUME_OK eventId=f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a group=pedidos360-sales-dashboard topic=pedidos360.sales.product-metrics.v1 partition=2 offset=1 attempt=1 result=VIEW_UPDATED version=2
 
 --- topic-tail pedidos360.sales.product-metrics.v1 4 @ 2026-11-19T14:16:12Z (SSM f2ea99da-0e43-402f-84d8-2a226813775a) ---
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.sales.product-metrics.v1 --partition 0 --offset earliest --timeout-ms 8000 --property print.key=true ... 
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.sales.product-metrics.v1 --partition 0 --offset earliest --timeout-ms 8000 --property print.key=true ... 
     
     (0 matching records in partition 0; last 4 shown)
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.sales.product-metrics.v1 --partition 1 --offset earliest --timeout-ms 8000 --property print.key=true ... 
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.sales.product-metrics.v1 --partition 1 --offset earliest --timeout-ms 8000 --property print.key=true ... 
     CreateTime:1795097145281	Partition:1	Offset:0	NO_HEADERS	72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP	{"schemaVersion":1,"metricKey":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP","tenantId":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250","productId":"10000000-0000-0000-0000-000000000001","productName":"Café de especialidad","businessDate":"2026-11-19","currency":"CLP","unitsSold":2,"ordersCount":1,"revenue":17980.00,"version":1,"lastEventId":"4e172649-cccf-4f45-88a1-1ca5bbe0d10b","updatedAt":"2026-11-19T14:05:43.869197Z"}
     CreateTime:1795097631911	Partition:1	Offset:1	NO_HEADERS	72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP	{"schemaVersion":1,"metricKey":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000001:2026-11-19:CLP","tenantId":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250","productId":"10000000-0000-0000-0000-000000000001","productName":"Café de especialidad","businessDate":"2026-11-19","currency":"CLP","unitsSold":5,"ordersCount":2,"revenue":44950.00,"version":2,"lastEventId":"f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a","updatedAt":"2026-11-19T14:13:51.868827Z"}
     (2 matching records in partition 1; last 4 shown)
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.sales.product-metrics.v1 --partition 2 --offset earliest --timeout-ms 8000 --property print.key=true ... 
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-console-consumer --bootstrap-server kafka-1:29092 --topic pedidos360.sales.product-metrics.v1 --partition 2 --offset earliest --timeout-ms 8000 --property print.key=true ... 
     CreateTime:1795097145381	Partition:2	Offset:0	NO_HEADERS	72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP	{"schemaVersion":1,"metricKey":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP","tenantId":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250","productId":"10000000-0000-0000-0000-000000000002","productName":"Taza de cerámica","businessDate":"2026-11-19","currency":"CLP","unitsSold":1,"ordersCount":1,"revenue":12990.00,"version":1,"lastEventId":"4e172649-cccf-4f45-88a1-1ca5bbe0d10b","updatedAt":"2026-11-19T14:05:43.869197Z"}
     CreateTime:1795097631911	Partition:2	Offset:1	NO_HEADERS	72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP	{"schemaVersion":1,"metricKey":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250:10000000-0000-0000-0000-000000000002:2026-11-19:CLP","tenantId":"72fd0b5a-8a6a-4cff-89f6-bde961f7e250","productId":"10000000-0000-0000-0000-000000000002","productName":"Taza de cerámica","businessDate":"2026-11-19","currency":"CLP","unitsSold":3,"ordersCount":2,"revenue":38970.00,"version":2,"lastEventId":"f0cb80d8-2f5b-4ab2-8c35-6a3aaf03210a","updatedAt":"2026-11-19T14:13:51.868827Z"}
     (2 matching records in partition 2; last 4 shown)

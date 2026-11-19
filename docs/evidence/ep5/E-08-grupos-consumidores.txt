@@ -16,44 +16,44 @@ Resultado observado
 Los tres grupos están STABLE con asignador cooperative-sticky. pedidos360-sales-aggregator tiene 3 miembros (sales-aggregator-0..2) con una partición cada uno (0, 1 y 2). pedidos360-order-monitor tiene 1 miembro con las particiones 0, 1 y 2 de orders.registered.v1, y pedidos360-sales-dashboard 1 miembro con las particiones 0, 1 y 2 de product-metrics.v1. Lag 0 en todas las particiones con offsets confirmados, después de 5 pedidos, 1 registro inválido y 1 duplicado. Kafka UI → Consumers muestra lo mismo (members, state y consumerLag 0). La partición 0 de product-metrics.v1 aún no recibe claves, por eso no tiene offset confirmado ('-'): no es lag.
 
 Diferencias con el informe
-La partición vacía aparece con CURRENT-OFFSET '-' y no con 0, porque el grupo nunca confirmó un offset en ella.
+Ninguna en el resultado. La parte Kafka UI se registra como texto desde la API de Kafka UI (/api/clusters/...), con sesión LOGIN_FORM abierta en la propia instancia: es la misma información que muestra la pantalla al abrirla por reenvío de puertos SSM a 127.0.0.1:8090. Una partición sin mensajes aparece con CURRENT-OFFSET '-' y no con 0, porque el grupo aún no confirma offsets en ella; no es lag.
 
 Procedimiento y salida (sin secretos ni tokens)
 --- e08  @ 2026-11-19T14:35:24Z (SSM a5cd81c6-70d4-4808-bf07-15f3e54fa729) ---
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator
     
     GROUP                       TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                             HOST            CLIENT-ID
     pedidos360-sales-aggregator pedidos360.orders.registered.v1 2          3               3               0               sales-aggregator-2-fb8041cc-02f5-40e6-9a79-8a6439677170 /172.19.0.1     sales-aggregator-2
     pedidos360-sales-aggregator pedidos360.orders.registered.v1 0          2               2               0               sales-aggregator-0-b177a04b-2cf7-4551-9c9c-ac1c41fac377 /172.19.0.1     sales-aggregator-0
     pedidos360-sales-aggregator pedidos360.orders.registered.v1 1          2               2               0               sales-aggregator-1-9fb3d083-2bf3-43e9-9ae9-63e16bd5ff8a /172.19.0.1     sales-aggregator-1
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-aggregator --members --verbose
     
     GROUP                       CONSUMER-ID                                             HOST            CLIENT-ID          #PARTITIONS     ASSIGNMENT
     pedidos360-sales-aggregator sales-aggregator-2-fb8041cc-02f5-40e6-9a79-8a6439677170 /172.19.0.1     sales-aggregator-2 1               (2)
     pedidos360-sales-aggregator sales-aggregator-0-b177a04b-2cf7-4551-9c9c-ac1c41fac377 /172.19.0.1     sales-aggregator-0 1               (0)
     pedidos360-sales-aggregator sales-aggregator-1-9fb3d083-2bf3-43e9-9ae9-63e16bd5ff8a /172.19.0.1     sales-aggregator-1 1               (1)
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor
     
     GROUP                    TOPIC                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                          HOST            CLIENT-ID
     pedidos360-order-monitor pedidos360.orders.registered.v1 1          2               2               0               order-monitor-0-3817c6f8-9fc5-4270-a34e-56e6f393ef73 /172.19.0.1     order-monitor-0
     pedidos360-order-monitor pedidos360.orders.registered.v1 2          3               3               0               order-monitor-0-3817c6f8-9fc5-4270-a34e-56e6f393ef73 /172.19.0.1     order-monitor-0
     pedidos360-order-monitor pedidos360.orders.registered.v1 0          2               2               0               order-monitor-0-3817c6f8-9fc5-4270-a34e-56e6f393ef73 /172.19.0.1     order-monitor-0
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor --members --verbose
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-order-monitor --members --verbose
     
     GROUP                    CONSUMER-ID                                          HOST            CLIENT-ID       #PARTITIONS     ASSIGNMENT
     pedidos360-order-monitor order-monitor-0-3817c6f8-9fc5-4270-a34e-56e6f393ef73 /172.19.0.1     order-monitor-0 3               (0,1,2)
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard
     
     GROUP                      TOPIC                               PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                            HOST            CLIENT-ID
     pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 0          -               0               -               sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0
     pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 2          4               4               0               sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0
     pedidos360-sales-dashboard pedidos360.sales.product-metrics.v1 1          5               5               0               sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0
 
-$ docker exec -e KAFKA_HEAP_OPTS="-Xmx128m" kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard --members --verbose
+$ docker exec -e KAFKA_HEAP_OPTS=-Xmx128m kafka-1 kafka-consumer-groups --bootstrap-server kafka-1:29092 --describe --group pedidos360-sales-dashboard --members --verbose
     
     GROUP                      CONSUMER-ID                                            HOST            CLIENT-ID         #PARTITIONS     ASSIGNMENT
     pedidos360-sales-dashboard sales-dashboard-0-52fb9ef2-eb6e-4a47-8ef8-75a9736e4643 /172.19.0.1     sales-dashboard-0 3               (0,1,2)
