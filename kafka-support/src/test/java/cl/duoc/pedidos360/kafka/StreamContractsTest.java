@@ -32,6 +32,16 @@ class StreamContractsTest {
         assertThrows(UnsupportedOperationException.class, () -> event.items().add(item(P1, 1, "1.00")), "items are immutable");
     }
 
+    @Test void amountsAreCanonicalizedToTwoDecimals() {
+        // MySQL JSON columns return 8990.0 for 8990.00; the wire format always carries two decimals.
+        var item = new OrderRegisteredStreamV1.Item(P1, "Producto", 2, new BigDecimal("8990.0"), new BigDecimal("17980"));
+        assertEquals("8990.00", item.unitPrice().toPlainString());
+        assertEquals("17980.00", item.lineTotal().toPlainString());
+        var event = new OrderRegisteredStreamV1(1, UUID.randomUUID(), UUID.randomUUID(), "tenant", Instant.now(), "CLP",
+                new BigDecimal("17980.0"), 1, List.of(item));
+        assertEquals("17980.00", event.total().toPlainString());
+    }
+
     @Test void orderEventRejectsContractViolations() {
         var ok = List.of(item(P1, 1, "18990.00"));
         assertThrows(StreamContractException.class, () -> event(2, "18990.00", ok), "unknown schemaVersion");

@@ -35,5 +35,6 @@ public record ProductSalesMetricV1(int schemaVersion, String metricKey, String t
         require(unitsSold >= 0 && ordersCount >= 0, NAME, "unitsSold and ordersCount must be non-negative");
         require(amount(revenue), NAME, "revenue must be non-negative with two decimals");
         require(version >= 1, NAME, "version must be positive");
+        revenue = money(revenue);
     }
 }

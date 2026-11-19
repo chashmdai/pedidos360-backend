@@ -26,6 +26,8 @@ public record OrderRegisteredStreamV1(int schemaVersion, UUID eventId, UUID orde
             require(amount(unitPrice) && amount(lineTotal), NAME, "items[] amounts must be non-negative with two decimals");
             require(unitPrice.multiply(BigDecimal.valueOf(quantity)).compareTo(lineTotal) == 0, NAME,
                     "items[].lineTotal must equal unitPrice * quantity");
+            unitPrice = money(unitPrice);
+            lineTotal = money(lineTotal);
         }
     }
 
@@ -41,5 +43,6 @@ public record OrderRegisteredStreamV1(int schemaVersion, UUID eventId, UUID orde
         require(new HashSet<>(items.stream().map(Item::productId).toList()).size() == items.size(), NAME, "products must be unique");
         require(items.stream().map(Item::lineTotal).reduce(BigDecimal.ZERO, BigDecimal::add).compareTo(total) == 0, NAME,
                 "total must equal the sum of lineTotal");
+        total = money(total);
     }
 }

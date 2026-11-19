@@ -15,6 +15,9 @@ final class Contracts {
     static boolean isoCurrency(String value) { return value != null && value.matches("[A-Z]{3}"); }
 
     /** Non-negative decimal with at most two decimals that fits DECIMAL(19,2). */
+    /** Canonical two-decimal scale (e.g. MySQL JSON returns 8990.0 for 8990.00); call after amount() validated. */
+    static BigDecimal money(BigDecimal value) { return value.setScale(2, java.math.RoundingMode.UNNECESSARY); }
+
     static boolean amount(BigDecimal value) {
         return value != null && value.signum() >= 0 && value.scale() <= 2 && value.precision() - value.scale() <= 17;
     }
