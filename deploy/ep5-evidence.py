@@ -252,8 +252,10 @@ elif action == "rabbit":   # E-16: cluster, queues with DLQ and exchanges (read-
                             ["list_queues", "name", "type", "messages_ready", "messages_unacknowledged", "consumers"]),
                            ("list_exchanges name type", ["list_exchanges", "name", "type"]),
                            ("list_bindings source_name destination_name routing_key", ["list_bindings", "source_name", "destination_name", "routing_key"])):
-        steps.append(sh(f"docker exec pedidos360-ep4-rabbit-1 rabbitmqctl -q {shown}",
-                        ["docker", "exec", "pedidos360-ep4-rabbit-1", "rabbitmqctl", "-q", *command]))
+        configured = re.search(r"^RABBIT_VHOST=(.*)$", (CONFIG / "orders.env").read_text(), re.M).group(1).strip('"')
+        vhost = [] if command == ["cluster_status"] else ["-p", configured]   # vhost the services use (EP4: pedidos360-ep4)
+        steps.append(sh(f"docker exec pedidos360-ep4-rabbit-1 rabbitmqctl -q {' '.join(vhost)} {shown}".replace("  ", " "),
+                        ["docker", "exec", "pedidos360-ep4-rabbit-1", "rabbitmqctl", "-q", *vhost, *command]))
 else:
     raise SystemExit("Unknown action " + action)
 print(json.dumps({"action": action, "args": args, "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "steps": steps}, ensure_ascii=False))

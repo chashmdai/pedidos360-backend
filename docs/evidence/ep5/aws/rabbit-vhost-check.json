@@ -1,0 +1,64 @@
+{
+  "at": "2026-11-19T13:00:00.620382+00:00",
+  "instanceId": "i-01bcf3ef9d3a64d4e",
+  "commandId": "ae83116c-094f-4f8b-8d69-23ddbe673f5a",
+  "status": "Success",
+  "exitCode": 0,
+  "output": {
+    "vhosts": "name\npedidos360-ep4",
+    "queuesAll": "== pedidos360-ep4\nname\ttype\tconsumers\npedidos360.sales.failed.v1\tclassic\t0\npedidos360.audit.order-registered.v1\tclassic\t1\npedidos360.receipts.failed.v1\tclassic\t0\npedidos360.sales.order-registered.v1\tclassic\t1\npedidos360.audit.failed.v1\tclassic\t0\npedidos360.receipts.order-registered.v1\tclassic\t1",
+    "envKeys": {
+      "kafka-admin.env": [],
+      "bff.env": [],
+      "rabbit-admin.env": [
+        "RABBIT_ADMIN_PASSWORD",
+        "RABBIT_ADMIN_USER",
+        "RABBIT_MANAGEMENT_URL",
+        "RABBIT_VHOST"
+      ],
+      "receipts.env": [
+        "RABBIT_PASSWORD",
+        "RABBIT_USER",
+        "RABBIT_VHOST",
+        "SPRING_RABBITMQ_ADDRESSES",
+        "SPRING_RABBITMQ_DYNAMIC"
+      ],
+      "insights.env": [
+        "RABBIT_PASSWORD",
+        "RABBIT_USER",
+        "RABBIT_VHOST",
+        "SPRING_RABBITMQ_ADDRESSES",
+        "SPRING_RABBITMQ_DYNAMIC"
+      ],
+      "orders.env": [
+        "RABBIT_PASSWORD",
+        "RABBIT_USER",
+        "RABBIT_VHOST",
+        "SPRING_RABBITMQ_ADDRESSES",
+        "SPRING_RABBITMQ_DYNAMIC"
+      ],
+      "catalog.env": [],
+      "sales-stream.env": []
+    },
+    "vhostValues": {
+      "kafka-admin.env": [],
+      "bff.env": [],
+      "rabbit-admin.env": [
+        "\"pedidos360-ep4\""
+      ],
+      "receipts.env": [
+        "\"pedidos360-ep4\""
+      ],
+      "insights.env": [
+        "\"pedidos360-ep4\""
+      ],
+      "orders.env": [
+        "\"pedidos360-ep4\""
+      ],
+      "catalog.env": [],
+      "sales-stream.env": []
+    },
+    "receiptsLog": "Caused by: java.net.SocketException: Connection reset\n\tat com.rabbitmq.client.impl.Frame.readFrom(Frame.java:92) ~[amqp-client-5.30.0.jar!/:5.30.0]\n\tat com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:199) ~[amqp-client-5.30.0.jar!/:5.30.0]\n\tat com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:694) ~[amqp-client-5.30.0.jar!/:5.30.0]\n2026-11-19T12:44:28.972Z  INFO 7645 --- [receipts-service] [eceipt-orders-7] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5674, 127.0.0.1:5675]\n2026-11-19T12:44:28.994Z  INFO 7645 --- [receipts-service] [eceipt-orders-7] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#16a6dc21:8/SimpleConnection@4af2fa9c [delegate=amqp://pedidos360_ep4_consumer@127.0.0.1:5674/pedidos360-ep4, localPort=41650]\n2026-11-19T12:46:44.439Z  INFO 29194 --- [receipts-service] [           main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5674, 127.0.0.1:5675]\n2026-11-19T12:46:44.532Z  INFO 29194 --- [receipts-service] [           main] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#55adcf9e:0/SimpleConnection@7540160e [delegate=amqp://pedidos360_ep4_consumer@127.0.0.1:5674/pedidos360-ep4, localPort=34626]"
+  },
+  "error": ""
+}
