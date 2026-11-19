@@ -1,41 +1,41 @@
 {
-  "at": "2026-11-19T12:48:09.761699+00:00",
+  "at": "2026-11-19T14:53:19.486915+00:00",
   "endpoint": "https://az3h2vqgsi.execute-api.us-east-1.amazonaws.com",
-  "release": "ep5-20261119T040026Z",
+  "release": "ep5-20261119T144015Z",
   "checks": [
     {
       "path": "/app/",
       "status": 200,
       "expected": 200,
       "syntheticInvalidBearer": false,
-      "requestId": "HFpxri9UIAMEPdQ=",
+      "requestId": "HF8HChcEoAMEM1g=",
       "contentType": "text/html;charset=UTF-8",
-      "sha256": "f73043e2904c90028857ba2ab002e66566aac1a74e59add42be0304b9ec0edf9"
+      "sha256": "a16f5b688ac86f9612ad86b9632bfc372a2c5557a5674f0af654e957b12ed7ca"
     },
     {
       "path": "/app",
       "status": 200,
       "expected": 200,
       "syntheticInvalidBearer": false,
-      "requestId": "HFpxvjj_oAMEZpQ=",
+      "requestId": "HF8HHhGvoAMEMyA=",
       "contentType": "text/html;charset=UTF-8",
-      "sha256": "f73043e2904c90028857ba2ab002e66566aac1a74e59add42be0304b9ec0edf9"
+      "sha256": "a16f5b688ac86f9612ad86b9632bfc372a2c5557a5674f0af654e957b12ed7ca"
     },
     {
       "path": "/app/ventas-en-vivo",
       "status": 200,
       "expected": 200,
       "syntheticInvalidBearer": false,
-      "requestId": "HFpxziN5IAMEZxg=",
+      "requestId": "HF8HLiXvoAMEYJg=",
       "contentType": "text/html",
-      "sha256": "f73043e2904c90028857ba2ab002e66566aac1a74e59add42be0304b9ec0edf9"
+      "sha256": "a16f5b688ac86f9612ad86b9632bfc372a2c5557a5674f0af654e957b12ed7ca"
     },
     {
       "path": "/app/assets/index-JQdkrOhp.js",
       "status": 200,
       "expected": 200,
       "syntheticInvalidBearer": false,
-      "requestId": "HFpx3hpAoAMEPyg=",
+      "requestId": "HF8HPjzXIAMEMQw=",
       "contentType": "text/javascript",
       "sha256": "8257942d97a6a40bc1ae8cc915d1dcc5b62eb01e7912755620551e4875073963"
     },
@@ -44,7 +44,7 @@
       "status": 200,
       "expected": 200,
       "syntheticInvalidBearer": false,
-      "requestId": "HFpyEigqIAMEZNQ=",
+      "requestId": "HF8HahYYoAMEY4Q=",
       "contentType": "text/css",
       "sha256": "a9dc5fca975148852de12732e105838756ffdfccc36fedaa96477ffb5f8ca251"
     },
@@ -53,7 +53,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": false,
-      "requestId": "HFpyJgnnoAMEPdw=",
+      "requestId": "HF8Hfg0eIAMEMNA=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -62,7 +62,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": true,
-      "requestId": "HFpyNgmIoAMEPrw=",
+      "requestId": "HF8HjjvQoAMEYhQ=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -71,7 +71,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": false,
-      "requestId": "HFpyRgpmoAMEP9g=",
+      "requestId": "HF8HnhbioAMEYYw=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -80,7 +80,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": true,
-      "requestId": "HFpyUjLfIAMEZDg=",
+      "requestId": "HF8Hrim3IAMEYNQ=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -89,7 +89,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": false,
-      "requestId": "HFpyYiBmoAMEPTA=",
+      "requestId": "HF8HvjfbIAMEMLQ=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -98,7 +98,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": true,
-      "requestId": "HFpycgx1oAMEPsA=",
+      "requestId": "HF8HyhtDIAMEM1g=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -107,7 +107,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": false,
-      "requestId": "HFpyggzOIAMEPsA=",
+      "requestId": "HF8H2glIoAMEYDw=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     },
@@ -116,7 +116,7 @@
       "status": 401,
       "expected": 401,
       "syntheticInvalidBearer": true,
-      "requestId": "HFpyjjbmoAMEP2Q=",
+      "requestId": "HF8H6glbIAMEMzw=",
       "contentType": "application/json",
       "sha256": "3e7db788e384631f8a9f299d1797e6f8af6d16d643a1c91f9e83ae15212de45c"
     }

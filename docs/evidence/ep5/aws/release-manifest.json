@@ -1,6 +1,6 @@
 {
-  "release": "ep5-20261119T040026Z",
-  "at": "2026-11-19T04:00:27.400238+00:00",
+  "release": "ep5-20261119T144015Z",
+  "at": "2026-11-19T14:40:16.411207+00:00",
   "files": {
     "bff.jar": "24f7b892b951d2eeaba141ac595d72844b7ae9bca28ea706e8a258c9b72ab312",
     "catalog-service.jar": "4b198c780895d2772fb9b7f3b320bcce9c7f8cfa7c2de63a0bb6141bc1578107",
@@ -8,12 +8,12 @@
     "compose.kafka-ui.yaml": "c808900c5532e1757458cb0b97e0b775b4777cfb39a0b0c4316a584a3b34b6ef",
     "compose.kafka.yaml": "c39fd5d9b191b569db11a85f9931e24d098cf7828236bf938cc53e842fb3cf2a",
     "deploy/ep5-install.py": "12d32e97b9afddd90640727740738647562166e75812488006820dc6d32b86d9",
-    "deployment.json": "45a683fa3ff7630927e979a7beed92e9ae36f6ca2cf606ad2a5987cff1fe820d",
+    "deployment.json": "e44fb71344959f89d564901b9e6964432992b55cb2764c135f194c410dbb637b",
     "docker/rabbitmq/ep4-entrypoint.sh": "0049e816997a906d79339eaeab29fb41097e166ac4e454fec57f51658846b2eb",
     "docker/rabbitmq/ep4.conf": "a6e10994cdfed5cb17786ef903b312ad1b95973e51aba704346fc425954df858",
     "frontend/assets/index-BnPrCUl4.css": "a9dc5fca975148852de12732e105838756ffdfccc36fedaa96477ffb5f8ca251",
     "frontend/assets/index-JQdkrOhp.js": "8257942d97a6a40bc1ae8cc915d1dcc5b62eb01e7912755620551e4875073963",
-    "frontend/index.html": "f73043e2904c90028857ba2ab002e66566aac1a74e59add42be0304b9ec0edf9",
+    "frontend/index.html": "a16f5b688ac86f9612ad86b9632bfc372a2c5557a5674f0af654e957b12ed7ca",
     "kafka-admin-service.jar": "5a77a6d44cddb1685d84c374b1a9f8a420fba0d2e1effb39165b8762a0eceea1",
     "kafka-support/src/main/resources/pedidos-kafka.properties": "0bcb1e7e7da271a6ed4e892c7b4d6d884697863c5e6e235535ce93548ba318c6",
     "messaging-support/src/main/resources/pedidos-rabbit.properties": "d10d92534fc7c495544811bc8e9b74ea85d2ad442e548484747816570d184849",
@@ -25,10 +25,10 @@
     "scripts/ep4-broker.py": "46cba5f4830243a611be0aca069914af6883dbf2df8b51c099c04d758fa2f9c6",
     "scripts/ep5-kafka.sh": "a2ed6db1bed325bd516284715532534b9440b020f41f6db4d338bbc501f3bfb1"
   },
-  "archiveSha256": "db542bd7567049df6ceebc165687b79c0afbbd1408eb19ddb7ad549e3e6cc91c",
-  "archiveBytes": 373397799,
+  "archiveSha256": "bef2c6b152ba1bf10454a387a697be34d51bdb54ce2f5fb87788a2a8565c96af",
+  "archiveBytes": 373398024,
   "deployment": {
-    "release": "ep5-20261119T040026Z",
+    "release": "ep5-20261119T144015Z",
     "account": "647660738152",
     "region": "us-east-1",
     "instanceId": "i-01bcf3ef9d3a64d4e",

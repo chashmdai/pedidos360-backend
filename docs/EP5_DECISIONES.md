@@ -140,9 +140,10 @@ Se eligió 7.9.10 (2026-09-16) en lugar de 7.9.11 (2026-11-10) por ser el últim
 - Pedidos de la sesión (todos desde la SPA con Entra): D9D1058B (E-07), 79A3D04A (E-09, alto valor), 9C59571D y E1BB7872 (E-10), A4B808EE (E-13). Acumulado del día UTC 2026-11-19: Café 7 u / 4 pedidos / 62.930 CLP, Taza 4 u / 3 pedidos / 51.960 CLP.
 - La consulta de `purchase_orders` de las evidencias nunca selecciona `owner_subject` (oid de Entra del usuario). Un archivo crudo que lo contenía se borró antes de llegar a Git.
 
+- **Favicon (corregido el 2026-11-19):** el usuario informó un 404 de `/favicon.ico` en la consola. `index.html` no declaraba ícono, así que el navegador lo pedía en la raíz del dominio de API Gateway, donde no hay ruta. Ahora `index.html` declara un ícono SVG embebido (data URI, color `--accent`), sin abrir rutas nuevas en API Gateway; la prueba `src/indexHtml.test.ts` lo verifica. El release ep5-20261119T144015Z cambia solo el frontend: los JAR son del mismo build verificado. Se instaló con el instalador idempotente y la etapa 9 se repitió completa: target healthy, 5 rutas SPA con 200 y 8 sondas 401.
+
 ## Pendientes
 
-- **404 de `/favicon.ico` en la consola del navegador** (informado por el usuario el 2026-11-19, bloque 1 de E-07/E-17). `pedidos360-frontend/index.html` no declara `<link rel="icon">` ni hay carpeta `public/`. Por eso el navegador pide `/favicon.ico` en la raíz del dominio de API Gateway, donde no hay ruta (solo `/app` y `/app/{proxy+}` son públicas), y responde 404; `/app/favicon.ico` también da 404. No afecta la funcionalidad. Corrección propuesta: declarar el ícono en `index.html` como SVG embebido (data URI) o servirlo bajo `/app/`, sin abrir rutas nuevas en API Gateway. Requiere recompilar el frontend e instalar un release nuevo; se hará después de las evidencias para no cambiar el release a mitad de la Fase 6.
 - Separar el UID 999 (imagen RabbitMQ) del usuario de sistema `pedidos360-bff` en la EC2 (ver Fase 6, E-19).
 
 - `npm audit` informa 4 vulnerabilidades (2 moderadas, 2 altas) en dependencias del frontend;

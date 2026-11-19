@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-19T12:48:04.986755+00:00",
+  "at": "2026-11-19T14:53:14.520470+00:00",
   "ec2": {
     "Reservations": [
       {
@@ -186,7 +186,7 @@
       {
         "InstanceId": "i-01bcf3ef9d3a64d4e",
         "PingStatus": "Online",
-        "LastPingDateTime": "2026-11-19T09:45:29.689000-03:00",
+        "LastPingDateTime": "2026-11-19T11:50:29.709000-03:00",
         "AgentVersion": "3.3.4793.0",
         "IsLatestVersion": false,
         "PlatformType": "Linux",
@@ -258,7 +258,7 @@
         "PreferredMaintenanceWindow": "mon:08:06-mon:08:36",
         "UpgradeRolloutOrder": "second",
         "PendingModifiedValues": {},
-        "LatestRestorableTime": "2026-11-19T12:43:51+00:00",
+        "LatestRestorableTime": "2026-11-19T14:48:51+00:00",
         "MultiAZ": false,
         "EngineVersion": "8.4.11",
         "AutoMinorVersionUpgrade": false,
