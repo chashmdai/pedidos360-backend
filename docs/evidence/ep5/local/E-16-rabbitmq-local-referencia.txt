@@ -1,0 +1,68 @@
+Evidencia E-16 (REFERENCIA LOCAL, no AWS). Integración RabbitMQ EP4 sin cambios.
+Generada: 2026-11-19T00:27:56Z
+Entorno: CachyOS nativo, rama ep5-kafka (antes de cualquier cambio Kafka), modo Entra real; MySQL Docker 127.0.0.1:13307; clúster RabbitMQ EP4 de dos nodos (compose.ep4.yaml).
+Procedimiento: el usuario inició sesión con Microsoft Entra en http://localhost:5173 y registró un pedido desde la SPA; se inspeccionaron BD, logs, archivos de efecto y Management API.
+Sin secretos, tokens, oid ni nombre del usuario.
+
+== 1. HTTP (access log BFF y Orders: fecha método ruta estado duración-µs)
+  [18/Nov/2026:21:26:36 -0300] POST /api/v1/pedidos 201 431215
+  [18/Nov/2026:21:26:36 -0300] POST /api/v1/pedidos 201 410519
+
+== 2. Pedido y líneas (pedidos360_orders)
++--------------------------------------+------------+----------------------------+
+| id                                   | status     | created_at                 |
++--------------------------------------+------------+----------------------------+
+| f76e0320-1229-4db0-9dec-f407dc103e4a | REGISTERED | 2026-11-19 00:26:36.440157 |
++--------------------------------------+------------+----------------------------+
++-----------------------+----------+------------+----------+
+| product_name          | quantity | unit_price | currency |
++-----------------------+----------+------------+----------+
+| Café de especialidad  |        1 |    8990.00 | CLP      |
++-----------------------+----------+------------+----------+
+
+== 3. Outbox RabbitMQ (order_event_outbox)
++--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+| event_id                             | order_id                             | created_at                 | published_at               | attempts | last_error_code |
++--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+| 44246d9a-2378-486d-9a39-1aac37277694 | f76e0320-1229-4db0-9dec-f407dc103e4a | 2026-11-19 00:26:36.554083 | 2026-11-19 00:26:37.240450 |        1 | NULL            |
++--------------------------------------+--------------------------------------+----------------------------+----------------------------+----------+-----------------+
+
+== 4. Logs: publicación confirmada y ACK de los tres consumidores
+  2026-11-18T21:26:37.338-03:00 [receipts-service] ACK eventId=44246d9a-2378-486d-9a39-1aac37277694 orderId=f76e0320-1229-4db0-9dec-f407dc103e4a result=RECEIPT_STORED attempt=1 redelivered=false
+  2026-11-18T21:26:37.335-03:00 [order-insights-service] ACK flow=sales eventId=44246d9a-2378-486d-9a39-1aac37277694 orderId=f76e0320-1229-4db0-9dec-f407dc103e4a result=PROJECTION_STORED attempt=1
+  2026-11-18T21:26:37.335-03:00 [order-insights-service] ACK flow=audit eventId=44246d9a-2378-486d-9a39-1aac37277694 orderId=f76e0320-1229-4db0-9dec-f407dc103e4a result=PROJECTION_STORED attempt=1
+  2026-11-18T21:26:37.241-03:00 [orders-service] PUBLISH_CONFIRMED eventId=44246d9a-2378-486d-9a39-1aac37277694 orderId=f76e0320-1229-4db0-9dec-f407dc103e4a
+
+== 5. Archivos de efecto durables (comprobante, auditoría, resumen; cada uno conserva el mismo evento, por eso coincide el hash)
+  receipts/44246d9a-2378-486d-9a39-1aac37277694.json sha256=04951b8b63c1c363…
+  projections/audit/44246d9a-2378-486d-9a39-1aac37277694.json sha256=04951b8b63c1c363…
+  projections/sales/44246d9a-2378-486d-9a39-1aac37277694.json sha256=04951b8b63c1c363…
+
+== 6. Clúster RabbitMQ
+  running_nodes: ['rabbit@pedidos360-ep4-rabbit-1', 'rabbit@pedidos360-ep4-rabbit-2']
+  partitions: {}
+
+== 7. Colas (vhost pedidos360-ep4) tras el pedido
+  pedidos360.audit.failed.v1                 node=pedidos360-ep4-rabbit-1 consumers=0 ready+unacked=0 dlx=-
+  pedidos360.audit.order-registered.v1       node=pedidos360-ep4-rabbit-1 consumers=1 ready+unacked=0 dlx=pedidos360.audit.errors.v1
+  pedidos360.receipts.failed.v1              node=pedidos360-ep4-rabbit-1 consumers=0 ready+unacked=0 dlx=-
+  pedidos360.receipts.order-registered.v1    node=pedidos360-ep4-rabbit-1 consumers=1 ready+unacked=0 dlx=pedidos360.receipts.errors.v1
+  pedidos360.sales.failed.v1                 node=pedidos360-ep4-rabbit-1 consumers=0 ready+unacked=0 dlx=-
+  pedidos360.sales.order-registered.v1       node=pedidos360-ep4-rabbit-1 consumers=1 ready+unacked=0 dlx=pedidos360.sales.errors.v1
+
+== 8. Exchanges y bindings
+  pedidos360.audit.errors.v1 -[audit.failed.v1]-> pedidos360.audit.failed.v1 (queue)
+  pedidos360.orders.events.v1 -[order.registered.v1]-> pedidos360.orders.insights.v1 (exchange)
+  pedidos360.orders.events.v1 -[order.registered.v1]-> pedidos360.receipts.order-registered.v1 (queue)
+  pedidos360.orders.insights.v1 -[order.registered.*]-> pedidos360.audit.order-registered.v1 (queue)
+  pedidos360.orders.insights.v1 -[*.registered.v1]-> pedidos360.sales.order-registered.v1 (queue)
+  pedidos360.receipts.errors.v1 -[receipt.failed.v1]-> pedidos360.receipts.failed.v1 (queue)
+  pedidos360.sales.errors.v1 -[sales.failed.v1]-> pedidos360.sales.failed.v1 (queue)
+  exchanges: pedidos360.audit.errors.v1(direct), pedidos360.orders.events.v1(direct), pedidos360.orders.insights.v1(topic), pedidos360.receipts.errors.v1(direct), pedidos360.sales.errors.v1(direct)
+
+== 9. Conexiones por usuario y nodo
+   pedidos360_ep4_consumer -> rabbit@pedidos360-ep4-rabbit-1
+   pedidos360_ep4_consumer -> rabbit@pedidos360-ep4-rabbit-1
+   pedidos360_ep4_producer -> rabbit@pedidos360-ep4-rabbit-2
+
+Resultado: HTTP 201; outbox publicada en el primer intento; PUBLISH_CONFIRMED; comprobante, auditoría y resumen con ACK; clúster de dos nodos sin particiones; tres colas con su DLQ; exchange direct enlazado al topic.
