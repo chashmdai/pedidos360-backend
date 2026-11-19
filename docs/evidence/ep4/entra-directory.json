@@ -165,14 +165,14 @@
     },
     {
       "appRoleId": "f3e611c1-d961-4826-988f-8390258993ad",
-      "principalId": "c375a6eb-b82a-44f6-abe0-fe32d7901c3e",
+      "principalId": "<oid-usuario-redactado>",
       "resourceId": "6a0b43df-3afe-4b55-adac-e62ea93494ff"
     }
   ],
   "users": [
     {
       "accountEnabled": null,
-      "id": "c375a6eb-b82a-44f6-abe0-fe32d7901c3e",
+      "id": "<oid-usuario-redactado>",
       "userType": null
     },
     {

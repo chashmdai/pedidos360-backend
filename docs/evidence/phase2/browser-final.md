@@ -17,7 +17,7 @@ Al retomar, la SPA ya estaba autenticada con Benjamin. `/sesion` mostró solo `U
 | Audience | 114f7b58-b207-4d46-9d6e-f491c3a0c0e0 |
 | Cliente azp | b4ede06a-cde3-4982-8b79-56fab7264fdd |
 | Tenant | 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 |
-| oid | c375a6eb-b82a-44f6-abe0-fe32d7901c3e |
+| oid | <oid-usuario-redactado> |
 | Emisor | https://login.microsoftonline.com/72fd0b5a-8a6a-4cff-89f6-bde961f7e250/v2.0 |
 | Emitido / válido hasta | 06:25:50 / 07:44:09 |
 | Adquisición | Renovación solicitada · desde Microsoft |

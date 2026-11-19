@@ -3,6 +3,7 @@ import datetime as dt
 import json
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 
 current=Path('/opt/pedidos360/current').resolve()
@@ -27,7 +28,9 @@ orders=[json.loads(line) for line in result.stdout.splitlines() if line]
 assert len(orders)==1,'Expected exactly the browser test order'
 order=orders[0]
 assert order['tenant']==manifest['entra']['tenantId']
-assert order['owner']=='c375a6eb-b82a-44f6-abe0-fe32d7901c3e'
+# Expected owner (Entra oid of the test user) is passed as the first argument; it is never stored in the repo.
+assert len(sys.argv)>1, 'Pass the expected owner oid: ep4-ssm.py deploy/collect-cloud-evidence.py --argument <oid>'
+assert order['owner']==sys.argv[1]
 assert order['status']=='REGISTERED' and order['total']==30970 and len(order['items'])==2
 assert sorted((item['price'],item['quantity'],item['currency']) for item in order['items'])==[(8990,2,'CLP'),(12990,1,'CLP')]
 logs={}

@@ -25,3 +25,23 @@ auth-state*.json
 *.har
 *.trace.zip
 tmp/
+
+# EP5 review (2026-11-19): JS tooling, release bundles, keystores, tokens and local outputs
+node_modules/
+dist/
+coverage/
+*.tgz
+*.tar.gz
+*.p12
+*.jks
+*.keystore
+*.crt
+id_*
+*-token
+*.token
+.aws/
+credentials
+*.credentials
+kafka-ui.env
+.DS_Store
+*.swp

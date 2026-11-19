@@ -13,7 +13,7 @@ Observación directa mediante navegador Codex y árbol de accesibilidad. Este re
 | Rol | User |
 | Scopes | Catalog.Read, Orders.Create, Orders.Read |
 | Tenant | 72fd0b5a-8a6a-4cff-89f6-bde961f7e250 |
-| oid propietario | c375a6eb-b82a-44f6-abe0-fe32d7901c3e |
+| oid propietario | <oid-usuario-redactado> |
 | sub | Og1Lm4w748Bak3hEJj_rQp-9xdeWVyGOFHg2pv4yoKo |
 | Audience API | 114f7b58-b207-4d46-9d6e-f491c3a0c0e0 |
 | Cliente azp | b4ede06a-cde3-4982-8b79-56fab7264fdd |
